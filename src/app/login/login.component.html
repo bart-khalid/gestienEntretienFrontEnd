@@ -4,22 +4,26 @@
 <!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <meta charset="utf-8">
   <title>Paper Stack</title>
 </head>
 <body>
 <div class="container" >
   <section id="content">
-    <form class="form-group" action="">
+    <form class="form-group" >
       <h1>Login </h1>
+      <h3 style="color: #ed1c24" class="alert-danger">{{errorMsg()}}  </h3>
+      <h3 style="color: forestgreen" class="badge-success">{{SuccessMsg()}} </h3>
       <div>
-        <input type="text" placeholder="Username" class="form-control" id="username" required/>
+        <input type="text" placeholder="Username" [(ngModel)]="login.username" class="form-control" name="user" id="username" required>
+
       </div>
       <div>
-        <input type="password" placeholder="Password" class="form-control"  id="password" required/>
+        <input type="password" placeholder="Password" [(ngModel)]="login.password" class="form-control" name="pass"  id="password" required>
       </div>
       <div>
-        <input type="submit" value="Log in" />
+        <input type="submit" (click)="connect(login.username,login.password)" value="Log in" />
         <a href="#">Lost your password?</a>
         <a href="#">Register</a>
       </div>
