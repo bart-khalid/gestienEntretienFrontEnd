@@ -9,7 +9,9 @@ import { AppComponent } from './app.component';
 
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { VehiculeComponent } from './components/vehicule/vehicule.component';
 
 
 
@@ -18,6 +20,8 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
 
     LoginComponent,
+
+    VehiculeComponent,
 
   ],
   imports: [
@@ -28,7 +32,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [LoginComponent]
 })
 export class AppModule {
 

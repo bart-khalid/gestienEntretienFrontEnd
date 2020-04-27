@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../controller/service/login.service';
-import {Login} from '../controller/model/login.model';
+import {LoginService} from '../../controller/service/login.service';
+import {Login} from '../../controller/model/login.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {Login} from '../controller/model/login.model';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   get login(): Login {
     return  this.loginService.login;
@@ -28,5 +29,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  public goTo() {
+    this.router.navigate(['appComponent']);
+}
 
 }

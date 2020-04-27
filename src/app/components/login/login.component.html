@@ -8,6 +8,10 @@
   <meta charset="utf-8">
   <title>Paper Stack</title>
 </head>
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+</nav>
+
 <body>
 <div class="container" >
   <section id="content">
@@ -15,17 +19,15 @@
       <h1>Login </h1>
       <h3 style="color: #ed1c24" class="alert-danger">{{errorMsg()}}  </h3>
       <h3 style="color: forestgreen" class="badge-success">{{SuccessMsg()}} </h3>
-      <div>
+      <div class="form-group">
         <input type="text" placeholder="Username" [(ngModel)]="login.username" class="form-control" name="user" id="username" required>
 
       </div>
-      <div>
+      <div class="form-group">
         <input type="password" placeholder="Password" [(ngModel)]="login.password" class="form-control" name="pass"  id="password" required>
       </div>
       <div>
-        <input type="submit" (click)="connect(login.username,login.password)" value="Log in" />
-        <a href="#">Lost your password?</a>
-        <a href="#">Register</a>
+        <input type="submit" (click)="connect(login.username,login.password); goTo()"  value="Log in" />
       </div>
     </form><!-- form -->
 
