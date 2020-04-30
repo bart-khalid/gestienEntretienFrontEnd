@@ -1,23 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {HttpClientModule} from '@angular/common/http';
+
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { LoginComponent } from './components/login/login.component';
 
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
-import { MaterielComponent } from './components/materiel/materiel.component';
-import { PrestationComponent } from './components/prestation/prestation.component';
-import { ReclamationComponent } from './components/reclamation/reclamation.component';
-import {CheckboxModule} from 'primeng';
+import {InputTextModule} from 'primeng/inputtext';
+import {
+  CalendarModule, CheckboxModule, DialogModule,
+  DropdownModule, FullCalendarModule,
+  InputTextareaModule,
+  MessageModule,
+  MessageService,
+  PanelModule, TableModule,
+  ToastModule
+} from 'primeng';
+import { BonsComponent } from './components/bons/bons.component';
+import { VehiculeListComponent } from './components/vehicule-list/vehicule-list.component';
+import {CarService} from "./controller/service/car.service";
+
 
 
 @NgModule({
+
+
   declarations: [
     AppComponent,
 
@@ -25,11 +38,9 @@ import {CheckboxModule} from 'primeng';
 
     VehiculeComponent,
 
-    MaterielComponent,
+    BonsComponent,
 
-    PrestationComponent,
-
-    ReclamationComponent,
+    VehiculeListComponent,
 
 
   ],
@@ -39,9 +50,22 @@ import {CheckboxModule} from 'primeng';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CheckboxModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    MessageModule,
+    PanelModule,
+    DropdownModule,
+    ToastModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    CalendarModule,
+    FullCalendarModule,
+    TableModule,
+    DialogModule,
+    CheckboxModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
