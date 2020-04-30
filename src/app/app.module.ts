@@ -6,13 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 import { LoginComponent } from './components/login/login.component';
 
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
-
+import { MaterielComponent } from './components/materiel/materiel.component';
+import { PrestationComponent } from './components/prestation/prestation.component';
+import { ReclamationComponent } from './components/reclamation/reclamation.component';
+import {CheckboxModule} from 'primeng';
 
 
 @NgModule({
@@ -23,16 +25,24 @@ import { VehiculeComponent } from './components/vehicule/vehicule.component';
 
     VehiculeComponent,
 
+    MaterielComponent,
+
+    PrestationComponent,
+
+    ReclamationComponent,
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    CheckboxModule
   ],
   providers: [],
-  bootstrap: [LoginComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 
