@@ -3,4 +3,10 @@ export class Car {
   year;
   brand;
   color;
+  matricule: string;
+  type: string;
+  utilite: string;
+  marque: string;
+  dateEntrerParc: Date;
+
 }

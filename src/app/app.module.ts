@@ -18,8 +18,8 @@ import {
   DropdownModule, FullCalendarModule,
   InputTextareaModule,
   MessageModule,
-  MessageService,
-  PanelModule, TableModule,
+  MessageService, MultiSelectModule,
+  PanelModule, SliderModule, TableModule,
   ToastModule
 } from 'primeng';
 import { BonsComponent } from './components/bons/bons.component';
@@ -64,6 +64,8 @@ import {CarService} from "./controller/service/car.service";
     TableModule,
     DialogModule,
     CheckboxModule,
+    MultiSelectModule,
+    SliderModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

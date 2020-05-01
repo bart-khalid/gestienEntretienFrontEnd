@@ -9,6 +9,7 @@ import {Car} from '../../controller/model/car';
 })
 export class VehiculeListComponent implements OnInit {
   value: boolean;
+  cancel: boolean;
   displayDialog: boolean;
 
   car: Car = new Car();
@@ -38,6 +39,7 @@ export class VehiculeListComponent implements OnInit {
     this.newCar = true;
     this.car = new Car();
     this.displayDialog = true;
+    this.cancel= true;
   }
 
   save() {
@@ -63,6 +65,7 @@ export class VehiculeListComponent implements OnInit {
     this.newCar = false;
     this.car = this.cloneCar(event.data);
     this.displayDialog = true;
+    this.cancel=false;
   }
 
   cloneCar(c: Car): Car {

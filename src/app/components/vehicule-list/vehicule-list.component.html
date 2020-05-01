@@ -1,9 +1,9 @@
 <p-table #dt [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
   <ng-template pTemplate="caption">
-    List of Cars
+   <h3 class="h3">Gestion des Véhicules</h3>
     <div style="text-align: right">
       <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target, 'contains')" style="width:auto">
+      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </div>
   </ng-template>
   <ng-template pTemplate="header" let-columns>
@@ -23,7 +23,7 @@
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
     <div style="text-align:left">
-      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter une Véhicule"></button>
     </div>
   </ng-template>
 </p-table>
@@ -84,8 +84,8 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
-      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>
