@@ -5,6 +5,8 @@ import {AppComponent} from './app.component';
 import {MaterielComponent} from './components/materiel/materiel.component';
 import {PrestationComponent} from './components/prestation/prestation.component';
 import {ReclamationComponent} from './components/reclamation/reclamation.component';
+import {VehiculeComponent} from './components/vehicule/vehicule.component';
+import {VehiculeListComponent} from './components/vehicule-list/vehicule-list.component';
 
 
 const routes: Routes = [
@@ -12,7 +14,9 @@ const routes: Routes = [
   { path: 'appComponent' , component: AppComponent},
   { path: 'materiel' , component: MaterielComponent},
   { path: 'prestation' , component: PrestationComponent},
-  { path: 'reclamation' , component: ReclamationComponent}
+  { path: 'reclamation' , component: ReclamationComponent},
+  { path: 'vehiculeComponent' , component: VehiculeComponent},
+  { path: 'vehiculeeComponent' , component: VehiculeListComponent}
 ];
 
 @NgModule({

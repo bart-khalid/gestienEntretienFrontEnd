@@ -22,9 +22,13 @@ import {
   PanelModule, TableModule,
   ToastModule
 } from 'primeng';
-import { BonsComponent } from './components/bons/bons.component';
+
 import { VehiculeListComponent } from './components/vehicule-list/vehicule-list.component';
-import {CarService} from "./controller/service/car.service";
+
+import {MaterielComponent} from './components/materiel/materiel.component';
+import {PrestationComponent} from './components/prestation/prestation.component';
+import {ReclamationComponent} from './components/reclamation/reclamation.component';
+import {BonsComponent} from './components/bons/bons.component';
 
 
 
@@ -39,6 +43,12 @@ import {CarService} from "./controller/service/car.service";
     VehiculeComponent,
 
     BonsComponent,
+
+    MaterielComponent,
+
+    PrestationComponent,
+
+    ReclamationComponent,
 
     VehiculeListComponent,
 

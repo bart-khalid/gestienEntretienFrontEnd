@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card bg-info" >
+        <div class="card-header">Save Prestation</div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-3"> <label>reference</label> </div>
+
+            <div class="form-group">
+              <div class="col-md-9">
+                <input type="text" placeholder="">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-3"> <label>Date prestation</label> </div>
+
+            <div class="form-group">
+              <div class="col-md-9">
+                <input type="date" placeholder="">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-3"> <label>type</label> </div>
+            <div class="form-group">
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p-checkbox [(ngModel)]="value" [binary]="true"></p-checkbox>Int
+                  </div>
+                  <div class="col-md-6">
+                <input type="checkbox" id="externe" value="Externe">Ext
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row" id="agent">
+            <div class="col-md-3"> <label>Agent si interne</label> </div>
+
+            <div class="form-group">
+              <div class="col-md-9">
+                <select type="text" class="btn btn-block custom-select">
+                  <option >Choose...</option>
+                  <option value="1">Agent 1</option>
+                  <option value="2" selected>Agent 2</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4"> <label>isReclamed</label> </div>
+
+
+            <div class="col-md-8">
+              <select class="btn btn-block custom-select">
+                <option >Choose...</option>
+                <option value="1">true</option>
+                <option value="2" selected>false</option>
+
+              </select>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6"> <label>Reference reclamation</label> </div>
+
+            <div class="form-group">
+              <div class="col-md-6">
+                <input type="text" placeholder="">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4"> <label>Locale</label> </div>
+
+
+            <div class="col-md-8">
+              <select class="btn btn-block custom-select" >
+                <option selected>Choose...</option>
+                <option value="1">sale 1</option>
+                <option value="2">sale 2</option>
+
+              </select>
+            </div>
+
+
+          </div>
+
+        </div>
+        <header class="card-footer">
+          <button class="btn btn-block">Save</button>
+        </header>
+      </div>
+    </div>
+  </div>
+</div>
