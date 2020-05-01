@@ -18,8 +18,8 @@ import {
   DropdownModule, FullCalendarModule,
   InputTextareaModule,
   MessageModule,
-  MessageService,
-  PanelModule, TableModule,
+  MessageService, MultiSelectModule,
+  PanelModule, SliderModule, TableModule,
   ToastModule
 } from 'primeng';
 
@@ -74,6 +74,8 @@ import {BonsComponent} from './components/bons/bons.component';
     TableModule,
     DialogModule,
     CheckboxModule,
+    MultiSelectModule,
+    SliderModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
