@@ -1,26 +1,93 @@
-<div class="card">
-  <div class="card-header">Save reclamation</div>
-  <div class="card-body">
-    <label>object</label>
-    <input type="text">
-    <label for="">type</label>
-    <select name="" id="" >
-      <option value="">mateiel</option>
-      <option value="">autre</option>
-    </select>
+<p-table #dt [columns]="cols" [value]="reclamations" selectionMode="single" [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+  <ng-template pTemplate="caption">
+    <h3 class="h3">Gestion Des Reclamation</h3>
+    <div style="text-align: right">
+      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
 
-    <label for="">locale</label>
-    <select name="" id="" >
-      <option value="">salle 1</option>
-    </select>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Reclamer !!"></button>
+    </div>
+  </ng-template>
+</p-table>
 
-    <label for="">Liste Materiel</label>
-    <select name="" id="">
-      <option value="">data show</option>
-    </select>
+<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '800px'}">
+  <div class="ui-g ui-fluid" *ngIf="reclamation">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="reclamation">Reference</label>
+      </div>
+      <div class="ui-g-8">
 
-    <label>description</label>
-    <textarea name="" id="" cols="100" rows="2"></textarea>
-  </div>
-  <div class="card-footer"></div>
-</div>
+        <input type="text"  pTooltip="Entrer une reference" tooltipPosition="top" pInputText id="reclamation"  [(ngModel)]="reclamation.reference" />
+
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="objet">Objet</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      </div>
+    </div>
+
+
+
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label >Locale</label>
+      </div>
+      <div class="ui-g-8">
+        <!--
+                  <select class="form-control btn-outline-secondary" id="locale"  [(ngModel)]="reclamation.nomLocale">
+                    <option  disabled style="color: #c4c6ca" selected>choisir un locale</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+-->
+        <p-dropdown [options]="locales" [(ngModel)]="selectedLocale" [filter]="true"></p-dropdown>
+
+              </div>
+            </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="description">Description</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea  pInputText id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      </div>
+    </div>
+
+          </div>
+          <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+              <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+              <button type="button" pButton icon="pi pi-check" (click)="save()" label="Enregistrer"></button>
+            </div>
+          </p-footer>
+        </p-dialog>

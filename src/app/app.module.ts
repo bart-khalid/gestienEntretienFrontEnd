@@ -14,13 +14,14 @@ import { LoginComponent } from './components/login/login.component';
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {
-  CalendarModule, CheckboxModule, DialogModule,
-  DropdownModule, FullCalendarModule,
-  InputTextareaModule,
-  MessageModule,
-  MessageService, MultiSelectModule,
-  PanelModule, SliderModule, TableModule,
-  ToastModule
+    AutoCompleteModule,
+    CalendarModule, CheckboxModule, DialogModule,
+    DropdownModule, FullCalendarModule,
+    InputTextareaModule,
+    MessageModule,
+    MessageService, MultiSelectModule, PaginatorModule,
+    PanelModule, SliderModule, TableModule,
+    ToastModule, TooltipModule
 } from 'primeng';
 
 import { VehiculeListComponent } from './components/vehicule-list/vehicule-list.component';
@@ -54,29 +55,32 @@ import {BonsComponent} from './components/bons/bons.component';
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    InputTextModule,
-    MessageModule,
-    PanelModule,
-    DropdownModule,
-    ToastModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    CalendarModule,
-    FullCalendarModule,
-    TableModule,
-    DialogModule,
-    CheckboxModule,
-    MultiSelectModule,
-    SliderModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        InputTextModule,
+        MessageModule,
+        PanelModule,
+        DropdownModule,
+        ToastModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        CalendarModule,
+        FullCalendarModule,
+        TableModule,
+        DialogModule,
+        CheckboxModule,
+        MultiSelectModule,
+        SliderModule,
+        TooltipModule,
+        AutoCompleteModule,
+        PaginatorModule,
+    ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })

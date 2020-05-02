@@ -7,6 +7,7 @@ import {PrestationComponent} from './components/prestation/prestation.component'
 import {ReclamationComponent} from './components/reclamation/reclamation.component';
 import {VehiculeComponent} from './components/vehicule/vehicule.component';
 import {VehiculeListComponent} from './components/vehicule-list/vehicule-list.component';
+import {BonsComponent} from './components/bons/bons.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'prestation' , component: PrestationComponent},
   { path: 'reclamation' , component: ReclamationComponent},
   { path: 'vehiculeComponent' , component: VehiculeComponent},
+  { path: 'bons' , component: BonsComponent},
   { path: 'vehiculeeComponent' , component: VehiculeListComponent}
 ];
 

@@ -2,3 +2,10 @@
 
 @import '~font-awesome/css/font-awesome.min.css';
 
+body {
+  background: url("https://images.pexels.com/photos/304664/pexels-photo-304664.jpeg?cs=srgb&dl=blue-close-up-concrete-crack-304664.jpg&fm=jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

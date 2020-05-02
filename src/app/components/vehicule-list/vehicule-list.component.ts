@@ -28,7 +28,7 @@ export class VehiculeListComponent implements OnInit {
     this.carService.getCarsSmall().then(cars => this.cars = cars);
 
     this.cols = [
-      { field: 'vin', header: 'Vin' },
+      { field: 'vin', header: '' },
       { field: 'year', header: 'Year' },
       { field: 'brand', header: 'Brand' },
       { field: 'color', header: 'Color' }
