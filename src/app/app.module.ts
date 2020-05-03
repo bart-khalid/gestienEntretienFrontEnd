@@ -17,7 +17,7 @@ import {
     AutoCompleteModule,
     CalendarModule, CheckboxModule, DialogModule,
     DropdownModule, FullCalendarModule,
-    InputTextareaModule,
+    InputTextareaModule, MenuModule,
     MessageModule,
     MessageService, MultiSelectModule, PaginatorModule,
     PanelModule, SliderModule, TableModule,
@@ -80,6 +80,7 @@ import {BonsComponent} from './components/bons/bons.component';
         TooltipModule,
         AutoCompleteModule,
         PaginatorModule,
+        MenuModule,
     ],
   providers: [MessageService],
   bootstrap: [AppComponent]

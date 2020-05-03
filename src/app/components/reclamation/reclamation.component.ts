@@ -3,6 +3,7 @@ import {Car} from '../../controller/model/car';
 import {CarService} from '../../controller/service/car.service';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
+import {MenuItem, SelectItem} from 'primeng';
 
 @Component({
   selector: 'app-reclamation',
@@ -14,6 +15,7 @@ export class ReclamationComponent implements OnInit {
   value: boolean;
   cancel: boolean;
   displayDialog: boolean;
+  displayDialogM: boolean;
 
   reclamation = new Reclamation();
 
@@ -21,63 +23,78 @@ export class ReclamationComponent implements OnInit {
 
   newReclamation: boolean;
 
-  reclamations = new Array<Reclamation>();
+
 
   cols: any[];
 
   locales: Array<any>;
-  selectedLocale: string;
-
   constructor(private reclamationService: ReclamationService) { }
 
-  ngOnInit() {
-    this.reclamationService.getReclamationsSmall().then(reclamations => this.reclamations = reclamations);
 
+  ngOnInit() {
+    this.reclamationService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
+      { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
-      { field: 'nomLocale', header: 'NomLocale' }
+      { field: 'nomLocale', header: 'Locale' },
+      { field: 'nomMateriel', header: 'NomMateriel' }
     ];
-
     this.locales = [
+      { value: '0', label: 'locale' },
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },
       { value: '3', label: 'Option 3' },
     ];
   }
-
   showDialogToAdd() {
     this.newReclamation = true;
     this.reclamation = new Reclamation();
     this.displayDialog = true;
+    this.displayDialogM = false;
+    this.cancel = true;
+  }
+
+  showDialogToAddM() {
+
+    this.newReclamation = true;
+    this.reclamation = new Reclamation();
+    this.displayDialogM = true;
+    this.displayDialog = false;
     this.cancel = true;
   }
 
   save() {
-    const reclaations = this.reclamations;
+    const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
-      reclaations.push(this.reclamation);
+      reclamations.push(this.reclamation);
       } else {
-      reclaations[this.reclamations.indexOf(this.selectedReclamation)] = this.reclamation;
+      reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
     }
-
-    this.reclamations = reclaations;
+    this.reclamationService.reclamationsFounded = reclamations;
     this.reclamation = null;
     this.displayDialog = false;
+    this.displayDialogM = false;
+
   }
 
   delete() {
-    const index = this.reclamations.indexOf(this.selectedReclamation);
-    this.reclamations = this.reclamations.filter((val, i) => i !== index);
+    const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
+    this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
     this.reclamation = null;
     this.displayDialog = false;
+    this.displayDialogM = false;
   }
 
   onRowSelect(event) {
     this.newReclamation = false;
     this.reclamation = this.cloneReclamation(event.data);
-    this.displayDialog = true;
+    if (this.reclamation.nomMateriel === '' || this.reclamation.nomMateriel == null) {
+      this.displayDialog = true;
+    } else {
+      this.displayDialogM = true;
+    }
     this.cancel = false;
   }
 
@@ -87,5 +104,9 @@ export class ReclamationComponent implements OnInit {
       reclamation[prop] = r[prop];
     }
     return reclamation;
+  }
+
+  get reclamationsFounded(): Reclamation[] {
+    return this.reclamationService.reclamationsFounded;
   }
 }

@@ -12,7 +12,6 @@ import {BonsComponent} from './components/bons/bons.component';
 
 const routes: Routes = [
   { path: 'login' , component: LoginComponent},
-  { path: 'appComponent' , component: AppComponent},
   { path: 'materiel' , component: MaterielComponent},
   { path: 'prestation' , component: PrestationComponent},
   { path: 'reclamation' , component: ReclamationComponent},
