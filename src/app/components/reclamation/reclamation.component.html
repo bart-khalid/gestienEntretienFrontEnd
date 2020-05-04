@@ -1,11 +1,19 @@
 <p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+
   <ng-template pTemplate="caption">
-    <h3 class="h3">Gestion Des Reclamation</h3>
-    <div style="text-align: right">
-      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    <div class="row">
+      <div class="col-md-8">
+    <h2 class="h3"><strong> Gestion Des Reclamation</strong></h2>
+      </div>
+      <div class="col-md-4">
+    <div style="text-align: center; align-items: center; align-content: center">
+      <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+    </div>
+    </div>
     </div>
   </ng-template>
+
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -26,7 +34,7 @@
     <div style="text-align:left">
 
 
-      <label for="items" style="font-size: large; color: #00aeef"><i>Reclamer :</i></label>&nbsp; &nbsp; &nbsp;
+      <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label>&nbsp; &nbsp; &nbsp;
         <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel" style="width: 150px" id="items"></button>&nbsp;
         <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre" style="width: 150px" id="items"></button>
 

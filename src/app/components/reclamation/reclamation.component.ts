@@ -35,11 +35,12 @@ export class ReclamationComponent implements OnInit {
     this.reclamationService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
+      { field: 'reclamentName', header: 'Reclament' },
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
       { field: 'nomLocale', header: 'Locale' },
-      { field: 'nomMateriel', header: 'NomMateriel' }
+      { field: 'nomMateriel', header: 'Materiel' }
     ];
     this.locales = [
       { value: '0', label: 'locale' },
@@ -68,6 +69,7 @@ export class ReclamationComponent implements OnInit {
   save() {
     const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
+      this.reclamationService.save(this.reclamation, 'khalid'),
       reclamations.push(this.reclamation);
       } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;

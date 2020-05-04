@@ -19,24 +19,39 @@ export class ReclamationService {
   public findAll() {
     this.http.get<Array<Reclamation>>(this.url).subscribe(
       data => {
-          this.reclamationsFounded = data;
+          this.reclamationsFounded = data.reverse();
           console.log('success');
           console.log('ha data : ' + data.length);
       }, error => {
-        console.log('erroror f link');
+        console.log('erroror in the link');
       }
     );
 
   }
 
+  public save(reclamation: Reclamation, username: string) {
+    this.http.post<number>(this.url + username, reclamation).subscribe(
+      data => {
+        if (data === -2) {
+          alert('user not found');
+        } else if (data === -1) {
+          alert('la reference existe deja');
+        } else {
+          console.log('reclamation saved');
+        }
+      }, error => {
+        console.log('error in the save link');
+      }
+    );
+  }
   public findAllR(): Array<Reclamation> {
     this.http.get<Array<Reclamation>>(this.url).subscribe(
       data => {
-          this.reclamationsFounded = data;
+          this.reclamationsFounded = data.reverse();
           console.log('success');
           console.log('ha data : ' + this.reclamationsFounded.length);
       }, error => {
-        console.log('erroror f link');
+        console.log('erroror in the link');
       }
     );
     return this.reclamationsFounded;
