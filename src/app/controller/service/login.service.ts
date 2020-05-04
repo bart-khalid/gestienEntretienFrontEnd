@@ -34,11 +34,11 @@ export class LoginService {
     }
  public errorMsg() {
    // tslint:disable-next-line:max-line-length
-    if (this.errorS === -1) { return 'this user is already existed'; }
-    else if (this.errorS === -2) { return 'username est obligatoire'; }
-    else if (this.errorS === -3) { return 'password est obligatoire'; }
+    if (this.errorS === -1) { return 'Cet Utilisateur existe déja'; }
+    else if (this.errorS === -2) { return 'Nom Utilisateur est obligatoire'; }
+    else if (this.errorS === -3) { return 'Mot de passe est obligatoire'; }
     else if (this.errorS === -3) { return 'Type est obligatoire'; }
-    if (this.errorC === -1 || this.errorC === -2) { return 'Verfier votre login ou mot de passe'; }
+    if (this.errorC === -1 || this.errorC === -2) { return 'Verfier votre Nom D\'Utilisateur ou Mot de passe'; }
  }
  public SuccessMsg() {
     if (this.errorS === 1) { return 'registered succefully'; }

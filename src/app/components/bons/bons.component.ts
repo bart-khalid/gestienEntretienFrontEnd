@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from "primeng";
-import {Car} from "../../controller/model/car";
-import {CarService} from "../../controller/service/car.service";
-import {FilterUtils} from "primeng/utils";
+import {SelectItem} from 'primeng';
+import {MessageService} from 'primeng/api';
+import {BonsC} from '../../controller/model/bons-c.model';
+import {FormGroup} from '@angular/forms';
+import {BonsR} from '../../controller/model/bons-r.model';
+import {BonsV} from '../../controller/model/bons-v.model';
 
 @Component({
   selector: 'app-bons',
@@ -10,75 +12,226 @@ import {FilterUtils} from "primeng/utils";
   styleUrls: ['./bons.component.css']
 })
 export class BonsComponent implements OnInit {
-  cars: Car[];
+  userform: FormGroup;
+  typebon: SelectItem[];
+  typeselecte: string;
+  colsR: any[];
+  colsV: any[];
+  colsC: any[];
+  cancelR: boolean;
+  cancelC: boolean;
+  cancelV: boolean;
+  displayDialogR: boolean;
+  displayDialogV: boolean;
+  displayDialogC: boolean;
+  submitted: boolean;
+  bonR = new BonsR();
+  bonV = new BonsV();
+  bonC = new BonsC();
+  selectedBonR: BonsR;
+  selectedBonV: BonsV;
+  selectedBonC: BonsC;
+  newbonR: boolean;
+  newbonC: boolean;
+  newbonV: boolean;
 
-  cols: any[];
+  bonsR = new Array<BonsR>();
+  bonsV = new Array<BonsV>();
+  bonsC = new Array<BonsC>();
+  fourniss : SelectItem[];
+  vehicule : SelectItem[];
 
-  brands: SelectItem[];
 
-  colors: SelectItem[];
 
-  yearFilter: number;
-
-  yearTimeout: any;
-
-  constructor(private carService: CarService) { }
-
-  ngOnInit() {
-    this.carService.getCarsSmall().then(cars => this.cars = cars);
-
-    this.brands = [
-      { label: 'All Brands', value: null },
-      { label: 'Audi', value: 'Audi' },
-      { label: 'BMW', value: 'BMW' },
-      { label: 'Fiat', value: 'Fiat' },
-      { label: 'Honda', value: 'Honda' },
-      { label: 'Jaguar', value: 'Jaguar' },
-      { label: 'Mercedes', value: 'Mercedes' },
-      { label: 'Renault', value: 'Renault' },
-      { label: 'VW', value: 'VW' },
-      { label: 'Volvo', value: 'Volvo' }
-    ];
-
-    this.colors = [
-      { label: 'White', value: 'White' },
-      { label: 'Green', value: 'Green' },
-      { label: 'Silver', value: 'Silver' },
-      { label: 'Black', value: 'Black' },
-      { label: 'Red', value: 'Red' },
-      { label: 'Maroon', value: 'Maroon' },
-      { label: 'Brown', value: 'Brown' },
-      { label: 'Orange', value: 'Orange' },
-      { label: 'Blue', value: 'Blue' }
-    ];
-
-    this.cols = [
-      { field: 'vin', header: 'Vin' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' }
-    ];
-
-    FilterUtils['custom'] = (value, filter): boolean => {
-      if (filter === undefined || filter === null || filter.trim() === '') {
-        return true;
-      }
-
-      if (value === undefined || value === null) {
-        return false;
-      }
-
-      return parseInt(filter) > value;
-    }
+  constructor(private messageService: MessageService) {
   }
 
-  onYearChange(event, dt) {
-    if (this.yearTimeout) {
-      clearTimeout(this.yearTimeout);
+  ngOnInit() {
+    this.vehicule=[
+      {label: 'Selectionnez une véhicule', value: null},
+      {label: 'V1', value: 'v1'},
+      {label: 'V2', value: 'v2'},
+      {label: 'V3', value: 'v3'}
+    ];
+
+    this.fourniss = [
+      {label: 'Selectionnez un fournisseur', value: null},
+      {label: 'fournisseur 1', value: 'f1'},
+      {label: 'fournisseur 2', value: 'f2'},
+      {label: 'fournisseur 3', value: 'f3'}
+    ];
+
+    this.typebon = [
+      {label: 'Selectionnez un type', value: null},
+      {label: 'Bon Carburant', value: 'Boncarburant'},
+      {label: 'Bon Réparation', value: 'Bonreparation'},
+      {label: 'Bon Vidange', value: 'Bonvidange'}
+    ];
+
+    this.colsR = [
+      {field: 'numbonR', header: 'Numero de Bon'},
+      {field: 'vehiculeR', header: 'Matricule Véhicule'},
+      {field: 'fournisseurR', header: 'Fournisseur'},
+      {field: 'descriptionR', header: 'Désignation'},
+      {field: 'prixunitaireR', header: 'Prix Unitaire'},
+      {field: 'quantiteR', header: 'Quantité'},
+      {field: 'datebonR', header: 'Date Bon'},
+      {field: 'totalbrutR', header: 'Total Brut'},
+      {field: 'montantvignetteR', header: 'Montant Vignette'}
+    ];
+    this.colsC = [
+      {field: 'numbonC', header: 'Numero de Bon'},
+      {field: 'vehiculeC', header: 'Matricule Véhicule'},
+      {field: 'fournisseurC', header: 'Fournisseur'},
+      {field: 'descriptionC', header: 'Désignation'},
+      {field: 'prixunitaireC', header: 'Prix Unitaire'},
+      {field: 'quantiteC', header: 'Quantité'},
+      {field: 'typeC', header: 'Type Carburant'},
+      {field: 'datebonC', header: 'Date Bon'},
+      {field: 'totalbrutC', header: 'Total Brut'},
+      {field: 'montantvignetteC', header: 'Montant Vignette'}
+    ];
+    this.colsV = [
+      {field: 'numbonV', header: 'Numero de Bon'},
+      {field: 'vehiculeV', header: 'Matricule Véhicule'},
+      {field: 'fournisseurV', header: 'Fournisseur'},
+      {field: 'descriptionV', header: 'Désignation'},
+      {field: 'typehuileV', header: 'Type huile'},
+      {field: 'kilometrageV', header: 'Kilométrage'},
+      {field: 'prixunitaireV', header: 'Prix Unitaire'},
+      {field: 'quantiteV', header: 'Quantité'},
+      {field: 'datebonV', header: 'Date Bon'},
+      {field: 'totalbrutV', header: 'Total Brut'},
+      {field: 'montantvignetteV', header: 'Montant Vignette'}
+    ];
+  }
+
+  showDialogToAddR() {
+    this.newbonR = true;
+    this.bonR = new BonsR();
+    this.displayDialogR = true;
+    this.cancelR = true;
+  }
+
+  showDialogToAddV() {
+    this.newbonV = true;
+    this.bonV = new BonsV();
+    this.displayDialogV = true;
+    this.cancelV = true;
+  }
+
+  showDialogToAddC() {
+    this.newbonC = true;
+    this.bonC = new BonsC();
+    this.displayDialogC = true;
+    this.cancelC = true;
+  }
+
+  saveR() {
+    const bonr = this.bonsR;
+    if (this.newbonR) {
+      bonr.push(this.bonR);
+    } else {
+      bonr[this.bonsR.indexOf(this.selectedBonR)] = this.bonR;
+    }
+    this.bonsR = bonr;
+    this.bonR = null;
+    this.displayDialogR = false;
+  }
+
+  saveC() {
+    const bonc = this.bonsC;
+    if (this.newbonC) {
+      bonc.push(this.bonC);
+    } else {
+      bonc[this.bonsC.indexOf(this.selectedBonC)] = this.bonC;
     }
 
-    this.yearTimeout = setTimeout(() => {
-      dt.filter(event.value, 'year', 'gt');
-    }, 250);
+    this.bonsC = bonc;
+    this.bonC = null;
+    this.displayDialogC = false;
+  }
+
+  saveV() {
+    const bonv = this.bonsV;
+    if (this.newbonV) {
+      bonv.push(this.bonV);
+    } else {
+      bonv[this.bonsV.indexOf(this.selectedBonV)] = this.bonV;
+    }
+
+    this.bonsV = bonv;
+    this.bonV = null;
+    this.displayDialogV = false;
+  }
+
+  deleteR() {
+    const index = this.bonsR.indexOf(this.selectedBonR);
+    this.bonsR = this.bonsR.filter((val, i) => i !== index);
+    this.bonR = null;
+    this.displayDialogR = false;
+  }
+
+  deleteV() {
+    const index = this.bonsV.indexOf(this.selectedBonV);
+    this.bonsV = this.bonsV.filter((val, i) => i !== index);
+    this.bonV = null;
+    this.displayDialogV = false;
+  }
+
+  deleteC() {
+    const index = this.bonsC.indexOf(this.selectedBonC);
+    this.bonsC = this.bonsC.filter((val, i) => i !== index);
+    this.bonC = null;
+    this.displayDialogC = false;
+  }
+
+  cloneBonC(b: BonsC): BonsC {
+    const bon = new BonsC();
+    for (const prop in b) {
+      bon[prop] = b[prop];
+    }
+    return bon;
+  }
+  cloneBonR(b: BonsR): BonsR {
+    const bon = new BonsR();
+    for (const prop in b) {
+      bon[prop] = b[prop];
+    }
+    return bon;
+  }
+  cloneBonV(b: BonsV): BonsV {
+    const bon = new BonsV();
+    for (const prop in b) {
+      bon[prop] = b[prop];
+    }
+    return bon;
+  }
+
+  onRowSelectR(event) {
+    this.newbonR = false;
+    this.bonR = this.cloneBonR(event.data);
+    this.displayDialogR = true;
+    this.cancelR = false;
+  }
+
+  onRowSelectC(event) {
+    this.newbonC = false;
+    this.bonC = this.cloneBonC(event.data);
+    this.displayDialogC = true;
+    this.cancelC = false;
+  }
+
+  onRowSelectV(event) {
+    this.newbonV = false;
+    this.bonV = this.cloneBonV(event.data);
+    this.displayDialogV = true;
+    this.cancelV = false;
+  }
+
+  validatec(bonc: string): boolean {
+
+     if (bonc !== '' || bonc !== null) { return true; }
+     else { return false ; }
   }
 }

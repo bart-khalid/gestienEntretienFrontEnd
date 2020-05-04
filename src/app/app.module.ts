@@ -24,7 +24,8 @@ import {
 } from 'primeng';
 import { BonsComponent } from './components/bons/bons.component';
 import { VehiculeListComponent } from './components/vehicule-list/vehicule-list.component';
-import {CarService} from "./controller/service/car.service";
+import { UsersComponent } from './components/users/users.component';
+import { FournisseurSVComponent } from './components/fournisseur-sv/fournisseur-sv.component';
 
 
 
@@ -41,6 +42,11 @@ import {CarService} from "./controller/service/car.service";
     BonsComponent,
 
     VehiculeListComponent,
+
+    UsersComponent,
+
+
+    FournisseurSVComponent,
 
 
   ],
