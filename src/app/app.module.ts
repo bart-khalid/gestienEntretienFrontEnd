@@ -14,18 +14,22 @@ import { LoginComponent } from './components/login/login.component';
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {
-  CalendarModule, CheckboxModule, DialogModule,
-  DropdownModule, FullCalendarModule,
-  InputTextareaModule,
-  MessageModule,
-  MessageService, MultiSelectModule,
-  PanelModule, SliderModule, TableModule,
-  ToastModule
+    AutoCompleteModule,
+    CalendarModule, CheckboxModule, DialogModule,
+    DropdownModule, FullCalendarModule,
+    InputTextareaModule, MenuModule,
+    MessageModule,
+    MessageService, MultiSelectModule, PaginatorModule,
+    PanelModule, SliderModule, TableModule,
+    ToastModule, TooltipModule
 } from 'primeng';
-import { BonsComponent } from './components/bons/bons.component';
+
 import { VehiculeListComponent } from './components/vehicule-list/vehicule-list.component';
-import { UsersComponent } from './components/users/users.component';
-import { FournisseurSVComponent } from './components/fournisseur-sv/fournisseur-sv.component';
+
+import {MaterielComponent} from './components/materiel/materiel.component';
+import {PrestationComponent} from './components/prestation/prestation.component';
+import {ReclamationComponent} from './components/reclamation/reclamation.component';
+import {BonsComponent} from './components/bons/bons.component';
 
 
 
@@ -41,38 +45,43 @@ import { FournisseurSVComponent } from './components/fournisseur-sv/fournisseur-
 
     BonsComponent,
 
+    MaterielComponent,
+
+    PrestationComponent,
+
+    ReclamationComponent,
+
     VehiculeListComponent,
 
-    UsersComponent,
-
-
-    FournisseurSVComponent,
-
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    InputTextModule,
-    MessageModule,
-    PanelModule,
-    DropdownModule,
-    ToastModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    CalendarModule,
-    FullCalendarModule,
-    TableModule,
-    DialogModule,
-    CheckboxModule,
-    MultiSelectModule,
-    SliderModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        InputTextModule,
+        MessageModule,
+        PanelModule,
+        DropdownModule,
+        ToastModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        CalendarModule,
+        FullCalendarModule,
+        TableModule,
+        DialogModule,
+        CheckboxModule,
+        MultiSelectModule,
+        SliderModule,
+        TooltipModule,
+        AutoCompleteModule,
+        PaginatorModule,
+        MenuModule,
+    ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })
