@@ -9,11 +9,11 @@
 </div>
 <p-panel  *ngIf="typeselecte=='Boncarburant' || typeselecte=='Bonreparation' || typeselecte=='Bonvidange' " style="text-align: center ; font-size:100px ">
   <p-table #dt [columns]="colsC" *ngIf="typeselecte=='Boncarburant'"  [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"  [lazy]="false" [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
-    <ng-template pTemplate="caption">
+    <ng-template pTemplate="caption" >
        <h3 class="h3">Bon Carburant</h3>
       <div style="text-align: right" >
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        <input type="text"  pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
       </div>
     </ng-template>
 

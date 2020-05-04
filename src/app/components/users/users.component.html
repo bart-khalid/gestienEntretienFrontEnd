@@ -40,7 +40,7 @@
           <input pInputText id="matricule"  [(ngModel)]="user.username" autofocus />
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="user.username"  text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="user.username == ''"  text="Champ Obligatoire"></p-message>
         </div>
       </div>
 

@@ -30,6 +30,8 @@ import {MaterielComponent} from './components/materiel/materiel.component';
 import {PrestationComponent} from './components/prestation/prestation.component';
 import {ReclamationComponent} from './components/reclamation/reclamation.component';
 import {BonsComponent} from './components/bons/bons.component';
+import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv.component';
+import {UsersComponent} from './components/users/users.component';
 
 
 
@@ -53,6 +55,9 @@ import {BonsComponent} from './components/bons/bons.component';
 
     VehiculeListComponent,
 
+    FournisseurSVComponent,
+
+    UsersComponent,
 
   ],
     imports: [
