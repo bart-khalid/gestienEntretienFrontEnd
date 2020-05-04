@@ -1,11 +1,12 @@
-<p-table #dt [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+<p-panel header="Gestion des Véhicules" style="text-align: center ; font-size:100px ">
+<p-table #dt [columns]="cols"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
-   <h3 class="h3">Gestion des Véhicules</h3>
-    <div style="text-align: right">
+    <div style="text-align: right" >
       <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
       <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </div>
   </ng-template>
+
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -15,7 +16,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
-    <tr [pSelectableRow]="rowData">
+    <tr [pSelectableRow]="rowData" >
       <td *ngFor="let col of columns">
         {{rowData[col.field]}}
       </td>
@@ -28,58 +29,53 @@
   </ng-template>
 </p-table>
 
-<p-dialog header="Car Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-  <div class="ui-g ui-fluid" *ngIf="car">
+<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+  <div class="ui-g ui-fluid" style="height: 450px" *ngIf="car">
+
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="vin">Vin</label>
+        <label for="matricule"> Matricule *:</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="vin" [(ngModel)]="car.vin" autofocus />
+        <input pInputText id="matricule"  [(ngModel)]="car.matricule" autofocus />
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="year">Year</label>
+        <label for="type">Type *:</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="car.year" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="brand">Brand</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="brand" [(ngModel)]="car.brand" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="color">Color</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="color" [(ngModel)]="car.color" />
+        <p-dropdown id="type" [options]="type" [(ngModel)]="car.type"></p-dropdown>
       </div>
     </div>
 
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="color">Checkbox</label>
+        <label for="marque">Marque *:</label>
       </div>
       <div class="ui-g-8">
-        <p-checkbox [(ngModel)]="value" [binary]="true"></p-checkbox>
+        <input pInputText id="marque" [(ngModel)]="car.marque" />
       </div>
     </div>
 
-    <div *ngIf="value" class="ui-g-12">
+    <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="color">success</label>
+        <label for="utilite">utilité *:</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="color" [(ngModel)]="car.color" />
+        <textarea id="utilite" pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
       </div>
     </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="date">Date Achat *:</label>
+      </div>
+      <div class="ui-g-8">
+        <p-calendar  id="date"  [(ngModel)]="car.dateEntrerParc" ></p-calendar>
+      </div>
+    </div>
+
+
 
   </div>
   <p-footer>
@@ -89,3 +85,4 @@
     </div>
   </p-footer>
 </p-dialog>
+</p-panel>

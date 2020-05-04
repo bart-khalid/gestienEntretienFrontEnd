@@ -17,10 +17,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   background: transparent;
 }
 body {
-  align-items: center;
   color: #000;
   font: 14px Arial;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 0;
   position: relative;
 }

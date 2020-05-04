@@ -37,7 +37,7 @@ export class VehiculeComponent implements OnInit {
 
   onSubmit(value: string) {
     this.submitted = true;
-    this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Voiture Enregistrée'});
+    this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
   }
 
   get diagnostic() { return JSON.stringify(this.userform.value); }
