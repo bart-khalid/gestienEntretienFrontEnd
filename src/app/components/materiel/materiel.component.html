@@ -1,80 +1,75 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-<div class="card bg-info" >
-  <div class="card-header">Save Materiel</div>
-  <div class="card-body">
+<p-toast [style]="{marginTop: '100px'}"></p-toast>
 
-    <div class="row">
-      <div class="col-md-3"> <label>fournisseur</label> </div>
-
-      <div class="form-group">
-        <div class="col-md-9">
-          <input type="text" placeholder="marque  mn base de donner mn b3d madkhlna dak lfr">
+<form [formGroup]="userform" (ngSubmit)="save(userform.value)">
+  <p-panel header="Enregistrer une nouvelle véhicule">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Fournisseur *:
+        </div>
+        <div class="ui-grid-col-6">
+          <input pInputText type="text" formControlName="fournisseur" placeholder="Required"/>
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['fournisseur'].valid&&userform.controls['fournisseur'].dirty"></p-message>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          nombreEntite *:
+        </div>
+        <div class="ui-grid-col-6">
+          <input pInputText type="text" formControlName="nombreEntite" placeholder="Required"/>
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['nombreEntite'].valid&&userform.controls['nombreEntite'].dirty"></p-message>
         </div>
       </div>
 
-    </div>
-
-    <div class="row">
-      <div class="col-md-3"> <label>Quantite</label> </div>
-
-      <div class="form-group">
-        <div class="col-md-9">
-          <input type="text" placeholder="Nbr EntiteToAdd">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          nom *:
+        </div>
+        <div class="ui-grid-col-6">
+          <textarea pInputTextarea type="text" formControlName="nom"></textarea>
+        </div>
+        <div class="ui-grid-col-4"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['utilite'].valid&&userform.controls['utilite'].dirty"></p-message>
         </div>
       </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col-md-3"> <label>Nom</label> </div>
-
-      <div class="form-group">
-        <div class="col-md-9">
-          <input type="text">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Date Achat *:
+        </div>
+        <div class="ui-grid-col-6">
+          <p-calendar dateFormat="dd-MM-yy" formControlName="dateachat" ></p-calendar>
+        </div>
+        <div class="ui-grid-col-4"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['dateachat'].valid&&userform.controls['dateachat'].dirty"></p-message>
         </div>
       </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col-md-4"> <label>Type</label> </div>
-
-
-        <div class="col-md-8">
-          <select class="btn btn-block custom-select">
-            <option selected>Choose...</option>
-            <option value="1">informatique</option>
-            <option value="2">Enseinement</option>
-
-          </select>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Type *:
         </div>
-
-
-    </div>
-
-    <div class="row">
-      <div class="col-md-4"> <label>Locale</label> </div>
-
-
-        <div class="col-md-8">
-          <select class="btn btn-block custom-select" >
-            <option selected>Choose...</option>
-            <option value="1">sale 1</option>
-            <option value="2">sale 2</option>
-
-          </select>
+        <div class="ui-grid-col-6">
+          <p-dropdown [options]="genders" formControlName="gender"></p-dropdown>
         </div>
-
-
-    </div>
-
-  </div>
-  <header class="card-footer">
-    <button class="btn btn-block">Save</button>
-  </header>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['gender'].valid&&userform.controls['gender'].dirty"></p-message>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+        <div class="ui-grid-col-6">
+          <button pButton type="submit" label="Enregistrer" [disabled]="!userform.valid"></button>
+        </div>
+        <div class="ui-grid-col-4"></div>
+      </div>
+      <div style="text-align:center;margin-top:20px;" *ngIf="submitted">
+        Voiture Enregistrée
+        <br>
+        {{diagnostic}}
       </div>
     </div>
-  </div>
-</div>
+  </p-panel>
+</form>
+
