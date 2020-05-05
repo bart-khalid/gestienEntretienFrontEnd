@@ -1,16 +1,16 @@
-<p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-8">
-    <h2 class="h3"><strong> Gestion Des Reclamation</strong></h2>
+        <h2 class="h3"><strong> Gestion Des Reclamation</strong></h2>
       </div>
       <div class="col-md-4">
-    <div style="text-align: center; align-items: center; align-content: center">
-      <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
-      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
-    </div>
-    </div>
+        <div style="text-align: center; align-items: center; align-content: center">
+          <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+          <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+        </div>
+      </div>
     </div>
   </ng-template>
 
@@ -20,7 +20,6 @@
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-      <th>Action</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -28,27 +27,28 @@
       <td *ngFor="let col of columns">
         {{rowData[col.field]}}
       </td>
-      <td style="text-align:center">
-        <span>Vu : </span>
-        <button  pButton type="button" icon="pi pi-check" class="ui-button-success" (click)="reclamationSeen(rowData)" style="right: 0;"></button>
-      </td>
     </tr>
   </ng-template>
 
-  <!--
   <ng-template pTemplate="summary" let-rowData>
-    <div style="text-align:left">
+    <div >
 
+      <div class="row">
 
-      <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label>&nbsp; &nbsp; &nbsp;
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel" style="width: 150px" id="items"></button>&nbsp;
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre" style="width: 150px" id="items"></button>
-
-
+        <div class="col-md-4">
+      <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label></div>
+        <div class="col-md-4">
+      <button class="btn btn-block"  pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
+        </div>
+        <div class="col-md-4">
+      <button  class="btn btn-block" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre"  id="items"></button>
+      </div>
+      </div>
     </div>
   </ng-template>
-  -->
 </p-table>
+
+<!-- dialog 1 -->
 
 <p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
@@ -72,9 +72,6 @@
     </div>
 
 
-
-
-
     <div class="ui-g-12">
       <div class="ui-g-4">
         <label >Locale</label>
@@ -83,8 +80,8 @@
 
         <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
 
-              </div>
-            </div>
+      </div>
+    </div>
 
     <div class="ui-g-12">
       <div class="ui-g-4">
@@ -95,14 +92,14 @@
       </div>
     </div>
 
-          </div>
-          <p-footer>
-            <div class="ui-dialog-buttonpane ui-helper-clearfix">
-              <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-              <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
-            </div>
-          </p-footer>
-        </p-dialog>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
+    </div>
+  </p-footer>
+</p-dialog>
 
 
 <!-- second dialog -->
@@ -173,4 +170,3 @@
     </div>
   </p-footer>
 </p-dialog>
-

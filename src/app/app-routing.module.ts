@@ -10,6 +10,7 @@ import {VehiculeListComponent} from './components/vehicule-list/vehicule-list.co
 import {BonsComponent} from './components/bons/bons.component';
 import {UsersComponent} from "./components/users/users.component";
 import {FournisseurSVComponent} from "./components/fournisseur-sv/fournisseur-sv.component";
+import {ReclamerComponent} from './components/reclamer/reclamer.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'vehiculeeComponent' , component: VehiculeComponent},
   { path: 'bon' , component: BonsComponent},
   { path: 'fournisseursv' , component: FournisseurSVComponent},
+  { path: 'reclamer' , component: ReclamerComponent},
 
 ];
 

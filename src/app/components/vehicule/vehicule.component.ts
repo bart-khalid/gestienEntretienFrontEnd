@@ -25,7 +25,7 @@ export class VehiculeComponent implements OnInit {
       matricule: new FormControl('', Validators.required),
       marque: new FormControl('', Validators.required),
     dateachat: new FormControl('', Validators.required),
-      utilite: new FormControl('',Validators.required),
+      utilite: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required)
     });
 

@@ -38,25 +38,24 @@ export class ReclamationService {
           alert('la reference existe deja');
         } else {
           console.log('reclamation saved');
+          this.findAll();
         }
       }, error => {
         console.log('error in the save link');
       }
     );
   }
-  public findAllR(): Array<Reclamation> {
-    this.http.get<Array<Reclamation>>(this.url).subscribe(
+
+  public reclamationSeen(reference: string) {
+    this.http.get<number>(this.url + reference).subscribe(
       data => {
-          this.reclamationsFounded = data.reverse();
-          console.log('success');
-          console.log('ha data : ' + this.reclamationsFounded.length);
+        console.log('success reclamation seen');
+        this.findAll();
       }, error => {
         console.log('erroror in the link');
       }
     );
-    return this.reclamationsFounded;
   }
-
 
   get reclamationsFounded(): Reclamation[] {
     if (this._reclamationsFounded == null) {

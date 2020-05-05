@@ -9,4 +9,5 @@ export class Reclamation {
   public nomMateriel: string;
   public reclamentName: string;
   public reclament = new Login();
+  public etat: string;
 }

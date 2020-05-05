@@ -1,4 +1,7 @@
-#bodycomp {
+#bodyComp {
   margin-left: 15px;
   margin-right: 15px;
+}
+.first {
+  border-top: 1.5px dashed #0a0c0c;
 }
