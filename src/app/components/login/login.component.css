@@ -19,8 +19,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body {
   color: #000;
   font: 14px Arial;
-  margin: 100px auto;
-  padding: 0;
   position: relative;
 }
 h1{ font-size:28px;}
@@ -46,7 +44,6 @@ form:after {
   clear: both;
   visibility: hidden;
 }
-.container { margin: 25px auto; position: relative; width: 900px; }
 #content {
   background: #f9f9f9;
   background: -moz-linear-gradient(to top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
