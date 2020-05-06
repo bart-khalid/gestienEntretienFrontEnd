@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MessageService, SelectItem} from 'primeng/api';
+import {Reclamation} from '../../controller/model/reclamation.model';
+import {ReclamationService} from '../../controller/service/reclamation.service';
 
 @Component({
   selector: 'app-materiel',
@@ -8,35 +8,102 @@ import {MessageService, SelectItem} from 'primeng/api';
   styleUrls: ['./materiel.component.css']
 })
 export class MaterielComponent implements OnInit {
-  userform: FormGroup;
+  value: boolean;
+  cancel: boolean;
+  displayDialog: boolean;
+  displayDialogM: boolean;
 
-  submitted: boolean;
+  reclamation = new Reclamation();
 
-  genders: SelectItem[];
+  selectedReclamation: Reclamation;
 
-  description: string;
+  newReclamation: boolean;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {}
+
+
+  cols: any[];
+
+  locales: Array<any>;
+  constructor(private reclamationService: ReclamationService) { }
+
 
   ngOnInit() {
-    this.userform = this.fb.group({
-      fournisseur: new FormControl('', Validators.required),
-      nombreEntite: new FormControl('', Validators.required),
-      nom: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required)
-    });
-
-    this.genders = [];
-    this.genders.push({label: 'Select Type', value: ''});
-    this.genders.push({label: 'Informatique', value: 'informatique'});
-    this.genders.push({label: 'Enseignement', value: 'enseignement'});
+    this.reclamationService.findAll();
+    this.cols = [
+      { field: 'reference', header: 'Reference' },
+      { field: 'marque', header: 'Marque' },
+      { field: 'nom', header: 'Nom' },
+      { field: 'dateAchat', header: 'DateAchat' },
+      { field: 'nbrEntite', header: 'NbrEntite' },
+      { field: 'type', header: 'Type' }
+    ];
+    this.locales = [
+      { value: '0', label: 'locale' },
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+    ];
+  }
+  showDialogToAdd() {
+    this.newReclamation = true;
+    this.reclamation = new Reclamation();
+    this.displayDialog = true;
+    this.displayDialogM = false;
+    this.cancel = true;
   }
 
-  save(value: string) {
-    this.submitted = true;
-    this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+  showDialogToAddM() {
+
+    this.newReclamation = true;
+    this.reclamation = new Reclamation();
+    this.displayDialogM = true;
+    this.displayDialog = false;
+    this.cancel = true;
   }
 
-  get diagnostic() { return JSON.stringify(this.userform.value); }
+  save() {
+    const reclamations = this.reclamationService.reclamationsFounded;
+    if (this.newReclamation) {
+      this.reclamationService.save(this.reclamation, 'khalid');
+      reclamations.push(this.reclamation);
+    } else {
+      reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
+    }
+    this.reclamationService.reclamationsFounded = reclamations;
+    this.reclamation = null;
+    this.displayDialog = false;
+    this.displayDialogM = false;
 
+  }
+
+  delete() {
+    const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
+    this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
+    this.reclamation = null;
+    this.displayDialog = false;
+    this.displayDialogM = false;
+  }
+
+  onRowSelect(event) {
+    this.newReclamation = false;
+    this.reclamation = this.cloneReclamation(event.data);
+    if (this.reclamation.nomMateriel === '' || this.reclamation.nomMateriel == null) {
+      this.displayDialog = true;
+    } else {
+      this.displayDialogM = true;
+    }
+    this.cancel = false;
+  }
+
+  cloneReclamation(r: Reclamation): Reclamation {
+    const reclamation = new Reclamation();
+    for (const prop in r) {
+      reclamation[prop] = r[prop];
+    }
+    return reclamation;
+  }
+
+  get reclamationsFounded(): Reclamation[] {
+    return this.reclamationService.reclamationsFounded;
+  }
 }

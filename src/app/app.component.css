@@ -1,9 +1,64 @@
 #bodyComp {
   margin-left: 15px;
   margin-right: 15px;
-}
-.first {
-  border-top: 1.5px dashed #0a0c0c;
+
+  /* make sure to cover the screen */
+  min-height: 75vh;
+
+  /* need a solid bg to hide the footer */
+
+
+  /* put on top */
+  position: relative;
+  z-index: 1;
+
+  font: 16px/1.4 system-ui, sans-serif;
+
+
 }
 
 
+/*
+footer {
+
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+*/
+
+
+footer {
+  /* place on the bottom */
+  z-index: 0;
+  position: sticky;
+  bottom: 0;
+
+
+
+  width: 100%;
+  background-color: #dae1e7;
+  padding: 50px;
+}
+
+#logo {
+  animation-name: myAnimation;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+
+  transition-property: transform;
+  transition-duration: 3s;
+
+}
+
+@keyframes myAnimation {
+  0% {color: white}
+  25% {color: chocolate}
+  50% {color: yellow}
+  75% {color: black}
+  100% {color: white}
+}
+
+#logo:hover {
+  transform: rotate3d(1,1,2,360deg);
+}

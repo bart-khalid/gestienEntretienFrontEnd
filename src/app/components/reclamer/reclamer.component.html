@@ -2,9 +2,12 @@
 
   <ng-template pTemplate="caption">
     <div class="row">
-      <div class="col-md-8">
-        <h2 class="h3"><strong> Gestion Des Reclamation</strong></h2>
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Gestion Des Reclamations</strong></h1>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
       <div class="col-md-4">
         <div style="text-align: center; align-items: center; align-content: center">
           <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
@@ -52,16 +55,7 @@
 
 <p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="reclamation">Reference</label>
-      </div>
-      <div class="ui-g-8">
 
-        <input type="text"  pTooltip="Entrer une reference" tooltipPosition="top" pInputText id="reclamation"  [(ngModel)]="reclamation.reference" />
-
-      </div>
-    </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
         <label for="objet">Objet</label>
@@ -106,16 +100,8 @@
 
 <p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="reclamation">Reference</label>
-      </div>
-      <div class="ui-g-8">
 
-        <input type="text"  pTooltip="Entrer une reference" tooltipPosition="top" pInputText id="reclamation"  [(ngModel)]="reclamation.reference" />
 
-      </div>
-    </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
         <label for="objet">Objet</label>

@@ -114,9 +114,9 @@ export class ReclamationComponent implements OnInit {
   }
 
   public reclamationSeen(reclamation: Reclamation) {
-    if (reclamation.etat === 'sous traitement') {
-      alert('la reclamation est deja sous traitement');
-    } else if (reclamation.etat === 'bien traitée') {
+    if (reclamation.etat === 'Sous Traitement') {
+      alert('la reclamation est deja Vu');
+    } else if (reclamation.etat === 'Bien Traitée') {
       alert('la reclamation est bien traité, vous pouvez pas faire cette action');
     } else {
       this.reclamationService.reclamationSeen(reclamation.reference);

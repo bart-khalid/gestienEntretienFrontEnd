@@ -1,75 +1,158 @@
-<p-toast [style]="{marginTop: '100px'}"></p-toast>
+<p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
-<form [formGroup]="userform" (ngSubmit)="save(userform.value)">
-  <p-panel header="Enregistrer une nouvelle véhicule">
-    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">
-          Fournisseur *:
-        </div>
-        <div class="ui-grid-col-6">
-          <input pInputText type="text" formControlName="fournisseur" placeholder="Required"/>
-        </div>
-        <div class="ui-grid-col-4">
-          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['fournisseur'].valid&&userform.controls['fournisseur'].dirty"></p-message>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">
-          nombreEntite *:
-        </div>
-        <div class="ui-grid-col-6">
-          <input pInputText type="text" formControlName="nombreEntite" placeholder="Required"/>
-        </div>
-        <div class="ui-grid-col-4">
-          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['nombreEntite'].valid&&userform.controls['nombreEntite'].dirty"></p-message>
-        </div>
-      </div>
-
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">
-          nom *:
-        </div>
-        <div class="ui-grid-col-6">
-          <textarea pInputTextarea type="text" formControlName="nom"></textarea>
-        </div>
-        <div class="ui-grid-col-4"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['utilite'].valid&&userform.controls['utilite'].dirty"></p-message>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">
-          Date Achat *:
-        </div>
-        <div class="ui-grid-col-6">
-          <p-calendar dateFormat="dd-MM-yy" formControlName="dateachat" ></p-calendar>
-        </div>
-        <div class="ui-grid-col-4"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['dateachat'].valid&&userform.controls['dateachat'].dirty"></p-message>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">
-          Type *:
-        </div>
-        <div class="ui-grid-col-6">
-          <p-dropdown [options]="genders" formControlName="gender"></p-dropdown>
-        </div>
-        <div class="ui-grid-col-4">
-          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['gender'].valid&&userform.controls['gender'].dirty"></p-message>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2"></div>
-        <div class="ui-grid-col-6">
-          <button pButton type="submit" label="Enregistrer" [disabled]="!userform.valid"></button>
-        </div>
-        <div class="ui-grid-col-4"></div>
-      </div>
-      <div style="text-align:center;margin-top:20px;" *ngIf="submitted">
-        Voiture Enregistrée
-        <br>
-        {{diagnostic}}
+  <ng-template pTemplate="caption">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Gestion Des Reclamation</strong></h1>
       </div>
     </div>
-  </p-panel>
-</form>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <div style="text-align: center; align-items: center; align-content: center">
+          <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+          <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="summary" let-rowData>
+    <div >
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label></div>
+        <div class="col-md-4">
+          <button class="btn btn-block"  pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
+        </div>
+        <div class="col-md-4">
+          <button  class="btn btn-block" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre"  id="items"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-table>
+
+<!-- dialog 1 -->
+
+<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
+  <div class="ui-g ui-fluid" *ngIf="reclamation">
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="objet">Objet</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      </div>
+    </div>
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label >Locale</label>
+      </div>
+      <div class="ui-g-8">
+
+        <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
+
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="description">Description</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea  pInputText id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      </div>
+    </div>
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+<!-- second dialog -->
+
+<p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
+  <div class="ui-g ui-fluid" *ngIf="reclamation">
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="objet">Objet</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      </div>
+    </div>
+
+
+
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label >Locale</label>
+      </div>
+      <div class="ui-g-8">
+
+        <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
+
+      </div>
+    </div>
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label >Materiel</label>
+      </div>
+      <div class="ui-g-8">
+
+        <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomMateriel" [filter]="true"></p-dropdown>
+
+      </div>
+    </div>
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="descriptionM">Description</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea  pInputText id="descriptionM" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      </div>
+    </div>
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
+    </div>
+  </p-footer>
+</p-dialog>

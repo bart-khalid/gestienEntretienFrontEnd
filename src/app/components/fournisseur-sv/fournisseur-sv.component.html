@@ -1,4 +1,4 @@
-<p-panel header="Gestion des Fournisseurs" style="text-align: center ; font-size:100px ">
+<p-panel header="Gestion des Fournisseurs" style="text-align: center ; font-size:100px">
   <p-table #dt [columns]="cols"  [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div style="text-align: right" >
