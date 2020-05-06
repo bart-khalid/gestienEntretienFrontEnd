@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
+import {Materiel} from '../../controller/model/materiel.model';
 
 @Component({
   selector: 'app-materiel',
@@ -13,9 +14,10 @@ export class MaterielComponent implements OnInit {
   displayDialog: boolean;
   displayDialogM: boolean;
 
-  reclamation = new Reclamation();
+  materiel = new Materiel();
+  materiels = new Array<Materiel>();
 
-  selectedReclamation: Reclamation;
+  selectedMatereil: Materiel;
 
   newReclamation: boolean;
 
@@ -23,7 +25,8 @@ export class MaterielComponent implements OnInit {
 
   cols: any[];
 
-  locales: Array<any>;
+  fournisseurs: Array<any>;
+  types: Array<any>;
   constructor(private reclamationService: ReclamationService) { }
 
 
@@ -37,73 +40,58 @@ export class MaterielComponent implements OnInit {
       { field: 'nbrEntite', header: 'NbrEntite' },
       { field: 'type', header: 'Type' }
     ];
-    this.locales = [
-      { value: '0', label: 'locale' },
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
+    this.fournisseurs = [
+      { value: '0', label: 'choose a fournisseur' },
+      { value: '1', label: 'fournisseur 1' },
+      { value: '2', label: 'fournisseur 2' },
+      { value: '3', label: 'fournisseur 3' },
+    ];
+
+    this.types = [
+      { value: '0', label: 'choose a type' },
+      { value: 'Informatique', label: 'Informatique ' },
+      { value: 'Enseignement', label: 'Enseignement ' }
     ];
   }
   showDialogToAdd() {
     this.newReclamation = true;
-    this.reclamation = new Reclamation();
+    this.materiel = new Materiel();
     this.displayDialog = true;
     this.displayDialogM = false;
     this.cancel = true;
   }
-
-  showDialogToAddM() {
-
-    this.newReclamation = true;
-    this.reclamation = new Reclamation();
-    this.displayDialogM = true;
-    this.displayDialog = false;
-    this.cancel = true;
-  }
-
   save() {
-    const reclamations = this.reclamationService.reclamationsFounded;
+    const materiels = this.materiels;
     if (this.newReclamation) {
-      this.reclamationService.save(this.reclamation, 'khalid');
-      reclamations.push(this.reclamation);
+      materiels.push(this.materiel);
     } else {
-      reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
+      materiels[this.materiels.indexOf(this.selectedMatereil)] = this.materiel;
     }
-    this.reclamationService.reclamationsFounded = reclamations;
-    this.reclamation = null;
+    this.materiels = materiels;
+    this.materiel = null;
     this.displayDialog = false;
-    this.displayDialogM = false;
-
   }
 
   delete() {
-    const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
-    this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
-    this.reclamation = null;
+    const index = this.materiels.indexOf(this.selectedMatereil);
+    this.materiels = this.materiels.filter((val, i) => i !== index);
+    this.materiel = null;
     this.displayDialog = false;
-    this.displayDialogM = false;
   }
 
   onRowSelect(event) {
     this.newReclamation = false;
-    this.reclamation = this.cloneReclamation(event.data);
-    if (this.reclamation.nomMateriel === '' || this.reclamation.nomMateriel == null) {
-      this.displayDialog = true;
-    } else {
-      this.displayDialogM = true;
-    }
+    this.materiel = this.cloneMatereil(event.data);
+    this.displayDialog = true;
     this.cancel = false;
   }
 
-  cloneReclamation(r: Reclamation): Reclamation {
-    const reclamation = new Reclamation();
+  cloneMatereil(r: Materiel): Materiel {
+    const reclamation = new Materiel();
     for (const prop in r) {
       reclamation[prop] = r[prop];
     }
     return reclamation;
   }
 
-  get reclamationsFounded(): Reclamation[] {
-    return this.reclamationService.reclamationsFounded;
-  }
 }

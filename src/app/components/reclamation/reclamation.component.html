@@ -32,8 +32,8 @@
         {{rowData[col.field]}}
       </td>
       <td style="text-align:center">
-        <span>Vu : </span>
-        <button  pButton type="button" icon="pi pi-check" class="ui-button-success" (click)="reclamationSeen(rowData)" style="right: 0;"></button>
+        <span><button  class="btn btn-block btn-outline-success"  (click)="reclamationSeen(rowData)">Vu : <i class="fa fa-eye"></i></button></span>
+
       </td>
     </tr>
   </ng-template>
