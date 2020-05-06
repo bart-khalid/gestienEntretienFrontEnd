@@ -14,9 +14,16 @@
 
   font: 16px/1.4 system-ui, sans-serif;
 
+  animation-name: contentAnimation;
+  animation-duration: 2s;
 
 }
 
+@keyframes contentAnimation {
+  0% {left: -1000px}
+
+  100% {left: 0}
+}
 
 /*
 footer {
@@ -61,4 +68,15 @@ footer {
 
 #logo:hover {
   transform: rotate3d(1,1,2,360deg);
+}
+
+#navbar {
+  animation-name: navbarAnimation;
+  animation-duration: 3s;
+}
+
+@keyframes navbarAnimation {
+  0% {top: -100px}
+
+  100% {top: 0}
 }
