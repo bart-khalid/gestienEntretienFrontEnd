@@ -33,6 +33,7 @@ import {BonsComponent} from './components/bons/bons.component';
 import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv.component';
 import {UsersComponent} from './components/users/users.component';
 import { ReclamerComponent } from './components/reclamer/reclamer.component';
+import { ListePrestataionsComponent } from './components/liste-prestataions/liste-prestataions.component';
 
 
 
@@ -61,6 +62,8 @@ import { ReclamerComponent } from './components/reclamer/reclamer.component';
     UsersComponent,
 
     ReclamerComponent,
+
+    ListePrestataionsComponent,
 
   ],
     imports: [
