@@ -1,3 +1,4 @@
+<p-toast [style]="{marginTop: '30%'}"></p-toast>
 <p-table #dt [columns]="cols" [value]="materiels" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedMatereil" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
@@ -70,13 +71,6 @@
       </div>
     </div>
 
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="nbrEntite">NbrEntite</label>
-      </div>
-      <div class="ui-g-8">
-        <input type="number" pTooltip="Nombre d'Entite à Ajouter" tooltipPosition="top" pInputText id="nbrEntite" [(ngModel)]="materiel.nbrEntite" />      </div>
-    </div>
 
     <div class="ui-g-12">
       <div class="ui-g-4">
@@ -95,7 +89,7 @@
         <label for="dateachat">Date d'Achat</label>
       </div>
       <div class="ui-g-8 ui-md-8" >
-        <p-calendar dateFormat="dd/mm/yy" id="dateachat" [(ngModel)]="materiel.dateAchat" showButtonBar="true"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" id="dateachat" [(ngModel)]="materiel.dateAchat" ></p-calendar>
         </div>
     </div>
 
@@ -104,7 +98,7 @@
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
+      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>

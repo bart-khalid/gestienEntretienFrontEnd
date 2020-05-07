@@ -14,14 +14,14 @@ import { LoginComponent } from './components/login/login.component';
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {
-    AutoCompleteModule,
-    CalendarModule, CheckboxModule, DialogModule,
-    DropdownModule, FullCalendarModule,
-    InputTextareaModule, MenuModule,
-    MessageModule,
-    MessageService, MultiSelectModule, PaginatorModule,
-    PanelModule, SliderModule, TableModule,
-    ToastModule, TooltipModule
+  AutoCompleteModule,
+  CalendarModule, CheckboxModule, DialogModule,
+  DropdownModule, FullCalendarModule,
+  InputTextareaModule, MenuModule,
+  MessageModule,
+  MessageService, MultiSelectModule, PaginatorModule,
+  PanelModule, SliderModule, TableModule, TabMenuModule,
+  ToastModule, TooltipModule
 } from 'primeng';
 
 import { VehiculeListComponent } from './components/vehicule-list/vehicule-list.component';
@@ -34,7 +34,8 @@ import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv
 import {UsersComponent} from './components/users/users.component';
 import { LocalComponent } from './components/local/local.component';
 import { LocaldetailComponent } from './components/localdetail/localdetail.component';
-import {ReclamerComponent} from "./components/reclamer/reclamer.component";
+import {ReclamerComponent} from './components/reclamer/reclamer.component';
+import { ActionsComponent } from './components/actions/actions.component';
 
 
 
@@ -68,34 +69,37 @@ import {ReclamerComponent} from "./components/reclamer/reclamer.component";
 
     ReclamerComponent,
 
+    ActionsComponent,
+
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        InputTextModule,
-        MessageModule,
-        PanelModule,
-        DropdownModule,
-        ToastModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        CalendarModule,
-        FullCalendarModule,
-        TableModule,
-        DialogModule,
-        CheckboxModule,
-        MultiSelectModule,
-        SliderModule,
-        TooltipModule,
-        AutoCompleteModule,
-        PaginatorModule,
-        MenuModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    MessageModule,
+    PanelModule,
+    DropdownModule,
+    ToastModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    CalendarModule,
+    FullCalendarModule,
+    TableModule,
+    DialogModule,
+    CheckboxModule,
+    MultiSelectModule,
+    SliderModule,
+    TooltipModule,
+    AutoCompleteModule,
+    PaginatorModule,
+    MenuModule,
+    TabMenuModule,
+  ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })

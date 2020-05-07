@@ -26,7 +26,7 @@ export class ReclamerComponent implements OnInit {
   cols: any[];
 
   locales: Array<any>;
-  constructor(private reclamationService: ReclamationService) { }
+  constructor(private reclamationService: ReclamationService, private messageService: MessageService) { }
 
 
   ngOnInit() {
@@ -70,8 +70,10 @@ export class ReclamerComponent implements OnInit {
     if (this.newReclamation) {
       this.reclamationService.save(this.reclamation, 'khalid');
       reclamations.push(this.reclamation);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     }
     this.reclamationService.reclamationsFounded = reclamations;
     this.reclamation = null;
@@ -86,6 +88,7 @@ export class ReclamerComponent implements OnInit {
     this.reclamation = null;
     this.displayDialog = false;
     this.displayDialogM = false;
+    this.messageService.add({severity: 'warn', summary: 'Deleted', detail: 'Opération Réussie'});
   }
 
   onRowSelect(event) {
