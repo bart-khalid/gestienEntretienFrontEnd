@@ -1,5 +1,5 @@
-<p-panel header="Gestion des Fournisseurs" style="text-align: center ; font-size:100px ">
-  <p-table #dt [columns]="cols" [responsive]="true" [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-panel header="Gestion des Locales" style="text-align: center ; font-size:100px ">
+  <p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div style="text-align: right" >
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -24,49 +24,39 @@
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter un Fournisseur"></button>
+        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter un Locale"></button>
       </div>
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
-    <div class="ui-g ui-fluid" style="height: 300px" *ngIf="fournisseur">
+  <p-dialog  header="Locales Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+    <div class="ui-g ui-fluid" style="height: 250px" *ngIf="local">
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="matricule"> Nom Fournisseur *:</label>
+          <label for="matricule"> Nom Locale *:</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText id="matricule"  [(ngModel)]="fournisseur.nomf" autofocus />
+          <input pInputText id="matricule"  [(ngModel)]="local.nomlocal" autofocus />
         </div>
       </div>
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="type">Adresse *:</label>
+          <label for="type">Type Locale *:</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText id="type"  [(ngModel)]="fournisseur.adressef"/>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="marque">Adresse Mail *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="marque" [(ngModel)]="fournisseur.emailf" />
+          <p-dropdown  id="type" [options]="typeslocal" [(ngModel)]="local.typelocal"></p-dropdown>
         </div>
       </div>
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="utilite">Numero de Telephone *:</label>
+          <label for="marque">Département *:</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText id="utilite"   [(ngModel)]="fournisseur.telephonef" />
+          <p-dropdown  id="marque" [options]="typesDepartement" [(ngModel)]="local.departement"></p-dropdown>
         </div>
       </div>
-
 
 
     </div>

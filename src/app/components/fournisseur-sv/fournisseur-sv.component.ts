@@ -31,14 +31,14 @@ export class FournisseurSVComponent implements OnInit {
 
   ngOnInit() {
     this.fournisseurs = [
-      { nom: 'shell', adresse: 'boulvard abdelkarim elkhatabi', email: 'shell@gmail.com', telephone: '0612134323' },
-      { nom: 'Afriqua', adresse: 'boulvard abdelkarim elkhatabi', email: 'afriqua@gmail.com', telephone: '0647382947' }
+      { nomf: 'shell', adressef: 'boulvard abdelkarim elkhatabi', emailf: 'shell@gmail.com', telephonef: '0612134323' },
+      { nomf: 'Afriqua', adressef: 'boulvard abdelkarim elkhatabi', emailf: 'afriqua@gmail.com', telephonef: '0647382947' }
     ];
     this.cols = [
-      {field: 'nom', header: 'Nom Fournisseur'},
-      {field: 'adresse', header: 'Adresse'},
-      {field: 'email', header: 'Adresse Mail'},
-      {field: 'telephone', header: 'Numero de Telephone'},
+      {field: 'nomf', header: 'Nom Fournisseur'},
+      {field: 'adressef', header: 'Adresse'},
+      {field: 'emailf', header: 'Adresse Mail'},
+      {field: 'telephonef', header: 'Numero de Telephone'},
     ];
   }
 

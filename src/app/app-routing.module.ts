@@ -8,8 +8,10 @@ import {ReclamationComponent} from './components/reclamation/reclamation.compone
 import {VehiculeComponent} from './components/vehicule/vehicule.component';
 import {VehiculeListComponent} from './components/vehicule-list/vehicule-list.component';
 import {BonsComponent} from './components/bons/bons.component';
-import {UsersComponent} from "./components/users/users.component";
-import {FournisseurSVComponent} from "./components/fournisseur-sv/fournisseur-sv.component";
+import {UsersComponent} from './components/users/users.component';
+import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv.component';
+import {LocalComponent} from "./components/local/local.component";
+import {LocaldetailComponent} from "./components/localdetail/localdetail.component";
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'vehiculeeComponent' , component: VehiculeComponent},
   { path: 'bon' , component: BonsComponent},
   { path: 'fournisseursv' , component: FournisseurSVComponent},
+  { path: 'local' , component: LocalComponent},
+  { path: 'localdetails' , component: LocaldetailComponent},
 
 ];
 

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Car} from "../../controller/model/car";
-import {Message, MessageService, SelectItem} from "primeng/api";
-import {FormBuilder} from "@angular/forms";
-import {Users} from "../../controller/model/users.model";
-import {LoginService} from "../../controller/service/login.service";
-import {UsersService} from "../../controller/service/users.service";
+import {Message, MessageService, SelectItem} from 'primeng/api';
+import {Users} from '../../controller/model/users.model';
+import {UsersService} from '../../controller/service/users.service';
 
 @Component({
   selector: 'app-users',
@@ -39,9 +36,12 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.cols = [
-      {field: 'username', header: 'Nom D\'Utilisateur'},
+      {field: 'nomu', header: 'Nom de la famille'} ,
+      {field: 'prenomu', header: 'Prénom'},
+      {field: 'telephoneu', header: 'Numero de Telephone'},
+      {field: 'username', header: 'Nom D\'utilisateur'},
       {field: 'password', header: 'Mot de passe'},
-      {field: 'typeu', header: 'Type'}
+      {field: 'typeu', header: 'Type utilisateur'}
     ];
     this.type = [];
     this.type.push({label: 'Selectionnez le Type', value: null});
@@ -57,11 +57,11 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  showSuccess() {
+  showSuccess(){
     this.msgs = [];
     this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
   }
-  onSubmit() {
+  onSubmit(){
     this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
   }
 

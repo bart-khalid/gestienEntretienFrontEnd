@@ -1,6 +1,6 @@
 export class FournisseurSV {
-  nom: string;
-  email: string;
-  adresse: string;
-  telephone: string;
+  nomf: string;
+  emailf: string;
+  adressef: string;
+  telephonef: string;
 }

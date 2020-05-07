@@ -1,0 +1,81 @@
+<p-panel header="Gestion des Locales détails" style="text-align: center ; font-size:100px ">
+  <p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right" >
+        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData" >
+        <td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter un materiel à un locale"></button>
+      </div>
+    </ng-template>
+  </p-table>
+
+  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+    <div class="ui-g ui-fluid" style="height: 400px" *ngIf="local">
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="type">Nom Matériel *:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown  id="type" [filter]="true" [options]="typesmateriel" [(ngModel)]="local.materiellocal"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="matricule"> Nom Locale *:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="matricule" [filter]="true" [options]="typeslocal"  [(ngModel)]="local.localassocie" autofocus ></p-dropdown>
+        </div>
+      </div>
+
+
+      <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="typ">Nombre d'entités *:</label>
+      </div>
+      <div class="ui-g-8">
+        <input  id="typ" pInputText  [(ngModel)]="local.nbrmateriel">
+      </div>
+    </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="marque">Date Achat du Matériel *:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar  id="marque"  [(ngModel)]="local.dateachat"></p-calendar>
+        </div>
+      </div>
+
+    </div>
+
+    <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+        <button type="button" pButton icon="pi pi-save" (click)="save()" label="Enregistrer"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</p-panel>
