@@ -33,6 +33,7 @@ export class LocaldetailComponent implements OnInit {
   constructor(private fb: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.onSubmit();
     this.cols = [
       {field: 'materiellocal', header: 'Materiel'},
       {field: 'localassocie', header: 'Locale'},
@@ -55,7 +56,7 @@ export class LocaldetailComponent implements OnInit {
     ];
   }
 
-  onSubmit(value: string) {
+  onSubmit() {
     this.submitted = true;
     this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
   }

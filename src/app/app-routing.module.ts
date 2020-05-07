@@ -12,6 +12,7 @@ import {UsersComponent} from './components/users/users.component';
 import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv.component';
 import {LocalComponent} from "./components/local/local.component";
 import {LocaldetailComponent} from "./components/localdetail/localdetail.component";
+import {ReclamerComponent} from "./components/reclamer/reclamer.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'fournisseursv' , component: FournisseurSVComponent},
   { path: 'local' , component: LocalComponent},
   { path: 'localdetails' , component: LocaldetailComponent},
+  { path: 'reclamer' , component: ReclamerComponent},
 
 ];
 

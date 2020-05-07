@@ -34,6 +34,7 @@ import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv
 import {UsersComponent} from './components/users/users.component';
 import { LocalComponent } from './components/local/local.component';
 import { LocaldetailComponent } from './components/localdetail/localdetail.component';
+import {ReclamerComponent} from "./components/reclamer/reclamer.component";
 
 
 
@@ -64,6 +65,8 @@ import { LocaldetailComponent } from './components/localdetail/localdetail.compo
     LocalComponent,
 
     LocaldetailComponent,
+
+    ReclamerComponent,
 
   ],
     imports: [
