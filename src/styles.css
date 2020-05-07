@@ -3,8 +3,7 @@
 @import '~font-awesome/css/font-awesome.min.css';
 
 body {
-  background:  no-repeat center center fixed;
-  background-color: #004a80;
+  background: url("assets/images/7.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

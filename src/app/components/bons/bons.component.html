@@ -1,19 +1,19 @@
-<h2 class="h2" style="text-align: center; color: grey">Gestion des Bons Parc Automobile</h2>
-<div class="ui-g-12" style="margin-left: 20%">
+<h2 class="h2" style="text-align: center; color: rgba(143,114,64,0.92)">Gestion des Bons Parc Automobile</h2>
+<div class="ui-g-12" style="margin-left: 10%">
   <div class="ui-g-4">
-    <label for="typee"><h5 class="h-50" style="color: #f92c35">Choisissez le type de bon a gérer *:</h5> </label>
+    <label for="typee" ><h5 class="h-50" style="color: #191622">Choisissez le type de bon a gérer *:</h5> </label>
   </div>
-  <div class="ui-g-8">
-    <p-dropdown id="typee" [options]="typebon" [(ngModel)]="typeselecte"></p-dropdown>
+  <div class="ui-g-8" style="width: auto">
+    <p-dropdown id="typee"  [options]="typebon" [(ngModel)]="typeselecte"></p-dropdown>
   </div>
 </div>
 <p-panel  *ngIf="typeselecte=='Boncarburant' || typeselecte=='Bonreparation' || typeselecte=='Bonvidange' " style="text-align: center ; font-size:100px ">
-  <p-table #dt [columns]="colsC" *ngIf="typeselecte=='Boncarburant'"  [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"  [lazy]="false" [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
+  <p-table #dt [columns]="colsC" *ngIf="typeselecte=='Boncarburant'"  [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"  [responsive]="true" [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption" >
        <h3 class="h3">Bon Carburant</h3>
       <div style="text-align: right" >
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text"  pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        <input type="text"  pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:30%">
       </div>
     </ng-template>
 
@@ -146,12 +146,12 @@
   </p-dialog>
 
 
-  <p-table #dtt [columns]="colsR" *ngIf="typeselecte=='Bonreparation'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonR" (onRowSelect)="onRowSelectR($event)" [paginator]="true" [rows]="10">
+  <p-table #dtt [columns]="colsR" [responsive]="true" *ngIf="typeselecte=='Bonreparation'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonR" (onRowSelect)="onRowSelectR($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <h3 class="h3">Bon Réparation</h3>
       <div style="text-align: right" >
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:30%">
       </div>
     </ng-template>
 
@@ -273,12 +273,12 @@
     </p-footer>
   </p-dialog>
 
-  <p-table #dttt [columns]="colsV" *ngIf="typeselecte=='Bonvidange'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonV" (onRowSelect)="onRowSelectV($event)" [paginator]="true" [rows]="10">
+  <p-table #dttt [columns]="colsV" [responsive]="true" *ngIf="typeselecte=='Bonvidange'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonV" (onRowSelect)="onRowSelectV($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <h3 class="h3">Bon Vidange</h3>
       <div style="text-align: right" >
         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dttt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dttt.filterGlobal($event.target.value, 'contains')" style="width:30%">
       </div>
     </ng-template>
 

@@ -32,8 +32,8 @@ import {ReclamationComponent} from './components/reclamation/reclamation.compone
 import {BonsComponent} from './components/bons/bons.component';
 import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv.component';
 import {UsersComponent} from './components/users/users.component';
-import { ReclamerComponent } from './components/reclamer/reclamer.component';
-import { ListePrestataionsComponent } from './components/liste-prestataions/liste-prestataions.component';
+import { LocalComponent } from './components/local/local.component';
+import { LocaldetailComponent } from './components/localdetail/localdetail.component';
 
 
 
@@ -61,9 +61,9 @@ import { ListePrestataionsComponent } from './components/liste-prestataions/list
 
     UsersComponent,
 
-    ReclamerComponent,
+    LocalComponent,
 
-    ListePrestataionsComponent,
+    LocaldetailComponent,
 
   ],
     imports: [

@@ -1,5 +1,5 @@
 <p-panel header="Gestion des Véhicules" style="text-align: center ; font-size:100px ">
-<p-table #dt [columns]="cols"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-table #dt [columns]="cols" [responsive]="true"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div style="text-align: right" >
       <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
