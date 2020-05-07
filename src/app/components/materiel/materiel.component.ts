@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Materiel} from '../../controller/model/materiel.model';
+import {MessageService} from 'primeng';
 
 @Component({
   selector: 'app-materiel',
@@ -12,14 +13,14 @@ export class MaterielComponent implements OnInit {
   value: boolean;
   cancel: boolean;
   displayDialog: boolean;
-  displayDialogM: boolean;
+
 
   materiel = new Materiel();
   materiels = new Array<Materiel>();
 
   selectedMatereil: Materiel;
 
-  newReclamation: boolean;
+  newMateriel: boolean;
 
 
 
@@ -27,7 +28,7 @@ export class MaterielComponent implements OnInit {
 
   fournisseurs: Array<any>;
   types: Array<any>;
-  constructor(private reclamationService: ReclamationService) { }
+  constructor(private reclamationService: ReclamationService, private messageService: MessageService) { }
 
 
   ngOnInit() {
@@ -54,18 +55,19 @@ export class MaterielComponent implements OnInit {
     ];
   }
   showDialogToAdd() {
-    this.newReclamation = true;
+    this.newMateriel = true;
     this.materiel = new Materiel();
     this.displayDialog = true;
-    this.displayDialogM = false;
     this.cancel = true;
   }
   save() {
     const materiels = this.materiels;
-    if (this.newReclamation) {
+    if (this.newMateriel) {
       materiels.push(this.materiel);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {
       materiels[this.materiels.indexOf(this.selectedMatereil)] = this.materiel;
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     }
     this.materiels = materiels;
     this.materiel = null;
@@ -77,10 +79,11 @@ export class MaterielComponent implements OnInit {
     this.materiels = this.materiels.filter((val, i) => i !== index);
     this.materiel = null;
     this.displayDialog = false;
+    this.messageService.add({severity: 'warn', summary: 'Deleted', detail: 'Opération Réussie'});
   }
 
   onRowSelect(event) {
-    this.newReclamation = false;
+    this.newMateriel = false;
     this.materiel = this.cloneMatereil(event.data);
     this.displayDialog = true;
     this.cancel = false;

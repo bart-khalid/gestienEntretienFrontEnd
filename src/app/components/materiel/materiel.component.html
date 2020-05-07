@@ -1,3 +1,4 @@
+<p-toast [style]="{marginTop: '30%'}"></p-toast>
 <p-table #dt [columns]="cols" [value]="materiels" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedMatereil" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
@@ -97,7 +98,7 @@
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
+      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>

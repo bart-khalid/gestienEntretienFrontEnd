@@ -49,10 +49,6 @@ footer {
 }
 
 #logo {
-  animation-name: myAnimation;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
-
   transition-property: transform;
   transition-duration: 4s;
 
@@ -60,8 +56,8 @@ footer {
 
 @keyframes myAnimation {
   0% {color: white}
-  25% {color: chocolate}
-  50% {color: yellow}
+  25% {color: saddlebrown}
+  50% {color: burlywood}
   75% {color: black}
   100% {color: white}
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FournisseurSV} from '../../controller/model/fournisseur-sv.model';
 import {Local} from '../../controller/model/local.model';
 import {FormBuilder} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
