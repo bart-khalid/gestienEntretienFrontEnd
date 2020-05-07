@@ -19,29 +19,43 @@ export class ReclamationService {
   public findAll() {
     this.http.get<Array<Reclamation>>(this.url).subscribe(
       data => {
-          this.reclamationsFounded = data;
+          this.reclamationsFounded = data.reverse();
           console.log('success');
           console.log('ha data : ' + data.length);
       }, error => {
-        console.log('erroror f link');
+        console.log('erroror in the link');
       }
     );
 
   }
 
-  public findAllR(): Array<Reclamation> {
-    this.http.get<Array<Reclamation>>(this.url).subscribe(
+  public save(reclamation: Reclamation, username: string) {
+    this.http.post<number>(this.url + username, reclamation).subscribe(
       data => {
-          this.reclamationsFounded = data;
-          console.log('success');
-          console.log('ha data : ' + this.reclamationsFounded.length);
+        if (data === -2) {
+          alert('user not found');
+        } else if (data === -1) {
+          alert('la reference existe deja');
+        } else {
+          console.log('reclamation saved');
+          this.findAll();
+        }
       }, error => {
-        console.log('erroror f link');
+        console.log('error in the save link');
       }
     );
-    return this.reclamationsFounded;
   }
 
+  public reclamationSeen(reference: string) {
+    this.http.get<number>(this.url + reference).subscribe(
+      data => {
+        console.log('success reclamation seen');
+        this.findAll();
+      }, error => {
+        console.log('erroror in the link');
+      }
+    );
+  }
 
   get reclamationsFounded(): Reclamation[] {
     if (this._reclamationsFounded == null) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Message, MessageService, SelectItem} from 'primeng/api';
-import {FournisseurSV} from '../../controller/model/fournisseur-sv.model';
+import {FournisseurSV} from '../../controller/model/fournisseur.model';
 import {FormBuilder} from '@angular/forms';
 
 @Component({

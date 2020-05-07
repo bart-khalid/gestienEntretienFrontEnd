@@ -1,10 +1,24 @@
-<nav class="navbar navbar-dark bg-transparent col-md-12"  >
-  <div class="col-md-4" style="text-align:center">
-  <a  class="navbar-brand" style="width: 102% ;" routerLink="" style="font-family: Delius"><h1><strong>Gestion Entretien</strong></h1> </a>
+<nav class="navbar navbar-dark bg-transparent" id="navbar" style="width: 100%" >
+  <div class="row" style="width: 103%">
+  <div class="col-md-4" style="text-align: center; width: 100%">
+  <a class="navbar-brand" id="logo" routerLink="login" style="font-family: Delius;padding-top: 10px; width: 100%"><h1><strong><span style="color: #0a0c0c">G</span>ESTION <span style="color: #0a0c0c">E</span>NTRETIEN</strong></h1> </a>
   </div>
-  <div class="col-md-8"><img src="../assets/baniere_fstg.jpg" alt="image" style="width: 103%; height: 80px"></div>
+  <div class="col-md-8" >
+    <img src="../assets/baniere_fstg.jpg" alt="image" style="width: 100%;right: 0; height: 80px">
+  </div>
+  </div>
 </nav>
-<div class="container">
-<router-outlet></router-outlet>
+<br>
 
+<body id="bodyComp">
+<router-outlet></router-outlet>
+</body>
+
+<br>
+
+<!-- fooooter to be changed after -->
+<div style="width: 100%;margin-right: 0.1px; margin-left: 0.1px">
+<footer class="footer" >
+<p style="text-align: center">Footer test</p>
+</footer>
 </div>

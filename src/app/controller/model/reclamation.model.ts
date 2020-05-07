@@ -1,3 +1,5 @@
+import {Login} from './login.model';
+
 export class Reclamation {
   public reference: string;
   public date: Date;
@@ -5,4 +7,7 @@ export class Reclamation {
   public description: string;
   public nomLocale: string;
   public nomMateriel: string;
+  public reclamentName: string;
+  public reclament = new Login();
+  public etat: string;
 }

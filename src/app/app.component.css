@@ -1,0 +1,82 @@
+#bodyComp {
+  margin-left: 15px;
+  margin-right: 15px;
+
+  /* make sure to cover the screen */
+  min-height: 75vh;
+
+  /* need a solid bg to hide the footer */
+
+
+  /* put on top */
+  position: relative;
+  z-index: 1;
+
+  font: 16px/1.4 system-ui, sans-serif;
+
+  animation-name: contentAnimation;
+  animation-duration: 3s;
+
+}
+
+@keyframes contentAnimation {
+  0% {left: -1000px}
+
+  100% {left: 0}
+}
+
+/*
+footer {
+
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+*/
+
+
+footer {
+  /* place on the bottom */
+  z-index: 0;
+  position: sticky;
+  bottom: 0;
+
+
+
+  width: 100%;
+  background-color: #dae1e7;
+  padding: 50px;
+}
+
+#logo {
+  animation-name: myAnimation;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+
+  transition-property: transform;
+  transition-duration: 4s;
+
+}
+
+@keyframes myAnimation {
+  0% {color: white}
+  25% {color: chocolate}
+  50% {color: yellow}
+  75% {color: black}
+  100% {color: white}
+}
+
+#logo:hover {
+  transform: rotate3d(2,0,0,360deg);
+}
+
+#navbar {
+  animation-name: navbarAnimation;
+  animation-duration: 3s;
+}
+
+@keyframes navbarAnimation {
+  0% {top: -100px}
+
+  100% {top: 0}
+}

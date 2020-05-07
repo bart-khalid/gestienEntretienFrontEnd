@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {Car} from '../../controller/model/car';
-import {CarService} from '../../controller/service/car.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MessageService, SelectItem} from 'primeng/api';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
-import {MenuItem, SelectItem} from 'primeng';
 
 @Component({
-  selector: 'app-reclamation',
-  templateUrl: './reclamation.component.html',
-  styleUrls: ['./reclamation.component.css']
+  selector: 'app-reclamer',
+  templateUrl: './reclamer.component.html',
+  styleUrls: ['./reclamer.component.css']
 })
-export class ReclamationComponent implements OnInit {
-
+export class ReclamerComponent implements OnInit {
   value: boolean;
   cancel: boolean;
   displayDialog: boolean;
@@ -70,9 +68,9 @@ export class ReclamationComponent implements OnInit {
   save() {
     const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
-      this.reclamationService.save(this.reclamation, 'khalid'),
+      this.reclamationService.save(this.reclamation, 'khalid');
       reclamations.push(this.reclamation);
-      } else {
+    } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
     }
     this.reclamationService.reclamationsFounded = reclamations;
@@ -111,15 +109,5 @@ export class ReclamationComponent implements OnInit {
 
   get reclamationsFounded(): Reclamation[] {
     return this.reclamationService.reclamationsFounded;
-  }
-
-  public reclamationSeen(reclamation: Reclamation) {
-    if (reclamation.etat === 'Sous Traitement') {
-      alert('la reclamation est deja Vu');
-    } else if (reclamation.etat === 'Bien Traitée') {
-      alert('la reclamation est bien traité, vous pouvez pas faire cette action');
-    } else {
-      this.reclamationService.reclamationSeen(reclamation.reference);
-    }
   }
 }
