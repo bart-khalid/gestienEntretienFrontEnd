@@ -44,8 +44,10 @@
 
 <!-- dialog 1 -->
 
-<p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
-  <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 30rem">
+<p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px', textAlign: 'center'}">
+  <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 450px">
+
+    <form>
 
     <div class="ui-g-12">
       <div class="ui-g-4">
@@ -89,10 +91,11 @@
         <label for="dateachat">Date d'Achat</label>
       </div>
       <div class="ui-g-8 ui-md-8" >
-        <p-calendar dateFormat="dd/mm/yy" id="dateachat" [(ngModel)]="materiel.dateAchat" ></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" showIcon="true" id="dateachat" [(ngModel)]="materiel.dateAchat" ></p-calendar>
         </div>
     </div>
 
+    </form>
 
   </div>
   <p-footer>

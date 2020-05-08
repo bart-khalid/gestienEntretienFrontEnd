@@ -14,6 +14,9 @@ import {FournisseurSVComponent} from './components/fournisseur-sv/fournisseur-sv
 import {ActionsComponent} from './components/actions/actions.component';
 import {LocaldetailComponent} from './components/localdetail/localdetail.component';
 import {LocalComponent} from './components/local/local.component';
+import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
+import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
+import {DocumentationComponent} from './components/documentation/documentation.component';
 
 
 const routes: Routes = [
@@ -23,16 +26,18 @@ const routes: Routes = [
   { path: 'reclamation' , component: ReclamationComponent},
   { path: 'vehiculeComponent' , component: VehiculeComponent},
   { path: 'bons' , component: BonsComponent},
-  { path: 'vehiculeeComponent' , component: VehiculeListComponent},
-  { path: 'appComponent' , component: AppComponent} ,
+  { path: 'vehicule' , component: VehiculeListComponent},
   { path: 'users' , component: UsersComponent} ,
   { path: 'vehiculeeComponent' , component: VehiculeComponent},
   { path: 'bon' , component: BonsComponent},
-  { path: 'fournisseursv' , component: FournisseurSVComponent},
+  { path: 'fournisseur' , component: FournisseurSVComponent},
   { path: 'reclamer' , component: ReclamerComponent},
   { path: 'actions' , component: ActionsComponent},
   { path: 'localDetail' , component: LocaldetailComponent},
   { path: 'local' , component: LocalComponent},
+  { path: 'prestationInterneListe' , component: PrestationInterneListeComponent},
+  { path: 'prestationExterneListe' , component: PrestationExterneListeComponent},
+  { path: 'documentation' , component: DocumentationComponent},
 
 ];
 

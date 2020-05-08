@@ -14,10 +14,11 @@ import { LoginComponent } from './components/login/login.component';
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {
+  AccordionModule,
   AutoCompleteModule,
-  CalendarModule, CheckboxModule, DialogModule,
+  CalendarModule, ChartModule, CheckboxModule, DialogModule,
   DropdownModule, FullCalendarModule,
-  InputTextareaModule, MenuModule,
+  InputTextareaModule, MenubarModule, MenuModule,
   MessageModule,
   MessageService, MultiSelectModule, PaginatorModule,
   PanelModule, SliderModule, TableModule, TabMenuModule,
@@ -36,6 +37,10 @@ import { LocalComponent } from './components/local/local.component';
 import { LocaldetailComponent } from './components/localdetail/localdetail.component';
 import {ReclamerComponent} from './components/reclamer/reclamer.component';
 import { ActionsComponent } from './components/actions/actions.component';
+import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
+import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
+import { DocumentationComponent } from './components/documentation/documentation.component';
+
 
 
 
@@ -71,6 +76,12 @@ import { ActionsComponent } from './components/actions/actions.component';
 
     ActionsComponent,
 
+    PrestationInterneListeComponent,
+
+    PrestationExterneListeComponent,
+
+    DocumentationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -99,6 +110,9 @@ import { ActionsComponent } from './components/actions/actions.component';
     PaginatorModule,
     MenuModule,
     TabMenuModule,
+    MenubarModule,
+    AccordionModule,
+    ChartModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
