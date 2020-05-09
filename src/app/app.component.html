@@ -9,10 +9,12 @@
   </div>
 </nav>
 <br>
-<p-tabMenu [model]="items">
-</p-tabMenu>
-<div style="padding: 0.5em;">
-</div>
+<p-menubar [model]="items">
+  <div>
+    <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;
+    <button pButton label="Logout" icon="pi pi-power-off" id="login" style="margin-left:.25em"></button>
+  </div>
+</p-menubar>
 <br>
 
 <body id="bodyComp">

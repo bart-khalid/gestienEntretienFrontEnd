@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   public goTo() {
-    this.router.navigate(['appComponent']);
+    this.router.navigate(['actions']);
 }
 
 }

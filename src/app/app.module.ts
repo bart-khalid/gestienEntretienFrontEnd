@@ -14,10 +14,11 @@ import { LoginComponent } from './components/login/login.component';
 import { VehiculeComponent } from './components/vehicule/vehicule.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {
+  AccordionModule,
   AutoCompleteModule,
-  CalendarModule, CheckboxModule, DialogModule,
+  CalendarModule, ChartModule, CheckboxModule, DialogModule,
   DropdownModule, FullCalendarModule,
-  InputTextareaModule, MenuModule,
+  InputTextareaModule, MenubarModule, MenuModule,
   MessageModule,
   MessageService, MultiSelectModule, PaginatorModule,
   PanelModule, SliderModule, TableModule, TabMenuModule,
@@ -36,7 +37,6 @@ import { LocalComponent } from './components/local/local.component';
 import { LocaldetailComponent } from './components/localdetail/localdetail.component';
 import {ReclamerComponent} from './components/reclamer/reclamer.component';
 import { ActionsComponent } from './components/actions/actions.component';
-import {DatePipe} from "@angular/common";
 
 
 
@@ -72,6 +72,12 @@ import {DatePipe} from "@angular/common";
 
     ActionsComponent,
 
+    PrestationInterneListeComponent,
+
+    PrestationExterneListeComponent,
+
+    DocumentationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -100,6 +106,9 @@ import {DatePipe} from "@angular/common";
     PaginatorModule,
     MenuModule,
     TabMenuModule,
+    MenubarModule,
+    AccordionModule,
+    ChartModule,
   ],
   providers: [MessageService, DatePipe],
   bootstrap: [AppComponent]
