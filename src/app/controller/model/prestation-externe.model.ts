@@ -1,7 +1,7 @@
 import {PresBonCommande} from './pres-bon-commande.model';
 import {PresBonLivraison} from './pres-bon-livraison.model';
 
-export class PrestationExterne{
+export class PrestationExterne {
  public reference: string;
  public typeEntretien: string;
  public date: Date;

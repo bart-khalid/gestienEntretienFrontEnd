@@ -47,8 +47,6 @@
 <p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px', textAlign: 'center'}">
   <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 450px">
 
-    <form>
-
     <div class="ui-g-12">
       <div class="ui-g-4">
         <label for="marque">Marque</label>
@@ -91,12 +89,19 @@
         <label for="dateachat">Date d'Achat</label>
       </div>
       <div class="ui-g-8 ui-md-8" >
-        <p-calendar dateFormat="dd/mm/yy" showIcon="true" id="dateachat" [(ngModel)]="materiel.dateAchat" ></p-calendar>
-        </div>
+        <p-calendar dateFormat="dd/mm/yy" showIcon="true" id="dateachat" [(ngModel)]="dateToConvert" ></p-calendar>
+
+        <!--
+        <mat-form-field>
+          <input matInput [matDatepicker]="myDatepicker" id="dateachat" [(ngModel)]="materiel.dateAchat">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+-->
     </div>
 
-    </form>
 
+    </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">

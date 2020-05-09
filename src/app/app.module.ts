@@ -40,6 +40,10 @@ import { ActionsComponent } from './components/actions/actions.component';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 
 
@@ -113,6 +117,9 @@ import { DocumentationComponent } from './components/documentation/documentation
     MenubarModule,
     AccordionModule,
     ChartModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

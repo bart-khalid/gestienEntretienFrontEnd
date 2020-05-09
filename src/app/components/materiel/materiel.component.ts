@@ -28,6 +28,8 @@ export class MaterielComponent implements OnInit {
 
   fournisseurs: Array<any>;
   types: Array<any>;
+
+  dateToConvert: string;
   constructor(private reclamationService: ReclamationService, private messageService: MessageService) { }
 
 
@@ -63,6 +65,8 @@ export class MaterielComponent implements OnInit {
   save() {
     const materiels = this.materiels;
     if (this.newMateriel) {
+
+      this.materiel.dateAchat = new Date(this.dateToConvert);
       materiels.push(this.materiel);
       this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {
@@ -89,12 +93,12 @@ export class MaterielComponent implements OnInit {
     this.cancel = false;
   }
 
-  cloneMatereil(r: Materiel): Materiel {
-    const reclamation = new Materiel();
-    for (const prop in r) {
-      reclamation[prop] = r[prop];
+  cloneMatereil(m: Materiel): Materiel {
+    const materiel = new Materiel();
+    for (const prop in m) {
+      materiel[prop] = m[prop];
     }
-    return reclamation;
+    return materiel;
   }
 
 }

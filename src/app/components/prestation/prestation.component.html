@@ -18,7 +18,7 @@
   </div>
 
     <!-- First dialog to add a prestation Interne -->
-    <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '60%', height:'90%'}" style="float: left">
+    <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%', height:'90%', float: 'left'}">
       <div class="ui-g ui-fluid" *ngIf="prestataionInterne" style="height: 100%">
 
         <div class="ui-g-12">
@@ -88,7 +88,7 @@
     </p-dialog>
 
     <!-- Second dialog to add a prestation Externe -->
-    <p-dialog header="Prestation Externe Details" [(visible)]="displayDialogE" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '60%', height:'90%'}" style="float: left">
+    <p-dialog header="Prestation Externe Details" [(visible)]="displayDialogE" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%', height:'90%', float: 'left'}">
       <div class="ui-g ui-fluid" *ngIf="prestataionExterne" style="height: 100%">
 
         <div class="ui-g-12">
@@ -139,6 +139,16 @@
             <input type="text" [(ngModel)]="prestataionExterne.nomPrestataire" pInputText id="nomPres">
           </div>
         </div>
+
+        <div class="ui-g-12">
+          <div class="ui-g-4">
+            <label for="numeroFac" style="color: #00aeef"><strong>Numero Facture</strong></label>
+          </div>
+          <div class="ui-g-8">
+            <input type="text" [(ngModel)]="prestataionExterne.numeroFac" pInputText id="numeroFac">
+          </div>
+        </div>
+
 
         <div class="ui-g-12">
           <div class="ui-g-4">

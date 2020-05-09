@@ -11,7 +11,7 @@
     <div class="col-md-4" style="text-align: center; align-items: center; align-content: center">
 
       <h3 style="color: #777777; text-align: center"><strong>Statistique des Prestations</strong></h3>
-      <p-chart type="bar" [data]="dataPrestations"></p-chart>
+      <p-chart type="doughnut" [data]="dataPrestations"></p-chart>
       <br>
       <button pButton icon="pi pi-refresh" label="rafraichir" ></button>
 
@@ -20,7 +20,7 @@
     <div class="col-md-4" style="text-align: center; align-items: center; align-content: center">
 
       <h3 style="color: #777777; text-align: center"><strong>Statistique des Bons</strong></h3>
-      <p-chart type="pie" [data]="dataBons"></p-chart>
+      <p-chart type="polarArea" [data]="dataBons"></p-chart>
       <br>
       <button pButton icon="pi pi-refresh" label="rafraichir" ></button>
 
@@ -34,7 +34,7 @@
     <div class="col-md-4" style="text-align: center; align-items: center; align-content: center">
 
       <h3 style="color: #777777; text-align: center"><strong>Statistique des Utilisateurs</strong></h3>
-      <p-chart type="pie" [data]="dataREclamations"></p-chart>
+      <p-chart type="doughnut" [data]="dataUtilisateur"></p-chart>
       <br>
       <button pButton icon="pi pi-refresh" label="rafraichir" ></button>
 
@@ -42,7 +42,7 @@
     <div class="col-md-4" style="text-align: center; align-items: center; align-content: center">
 
       <h3 style="color: #777777; text-align: center"><strong>Statistique des Vehicules</strong></h3>
-      <p-chart type="bar" [data]="dataPrestations"></p-chart>
+      <p-chart type="polarArea" [data]="dataVehicule"></p-chart>
       <br>
       <button pButton icon="pi pi-refresh" label="rafraichir" ></button>
 
@@ -51,7 +51,7 @@
     <div class="col-md-4" style="text-align: center; align-items: center; align-content: center">
 
       <h3 style="color: #777777; text-align: center"><strong>Statistique des Materiel</strong></h3>
-      <p-chart type="pie" [data]="dataBons"></p-chart>
+      <p-chart type="pie" [data]="dataMateriel"></p-chart>
       <br>
       <button pButton icon="pi pi-refresh" label="rafraichir" ></button>
 

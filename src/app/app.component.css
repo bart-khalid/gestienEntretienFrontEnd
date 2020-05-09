@@ -3,7 +3,8 @@
   margin-right: 15px;
 
   /* make sure to cover the screen */
-  min-height: 75vh;
+  min-height: 100vh;
+  height: 100%;
 
   /* need a solid bg to hide the footer */
 
@@ -37,11 +38,7 @@ footer {
 
 footer {
   /* place on the bottom */
-  z-index: 0;
   position: sticky;
-  bottom: 0;
-
-
 
   width: 100%;
   background-color: #dae1e7;
@@ -50,7 +47,7 @@ footer {
 
 #logo {
   transition-property: transform;
-  transition-duration: 4s;
+  transition-duration: 2s;
 
 }
 
@@ -76,3 +73,5 @@ footer {
 
   100% {top: 0}
 }
+
+
