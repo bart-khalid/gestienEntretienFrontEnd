@@ -23,6 +23,8 @@ export class FournisseurSVComponent implements OnInit {
 
   cols: any[];
 
+  txt = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+
   errorS: number ;
   errorC: number ;
 

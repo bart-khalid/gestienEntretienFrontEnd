@@ -26,8 +26,9 @@ export class VehiculeListComponent implements OnInit {
 
   type: SelectItem[];
 
+  errors: number;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService,private carService: CarService) { }
 
   ngOnInit() {
     this.cars = [
@@ -62,6 +63,12 @@ export class VehiculeListComponent implements OnInit {
   save() {
     const cars = this.cars;
     if (this.newCar) {
+      this.carService.save(this.car).subscribe(
+        data => {
+          this.errors = data;
+          console.log(this.errors);
+        } ,  error => console.log('error')
+      );
       cars.push(this.car);
     } else {
       cars[this.cars.indexOf(this.selectedCar)] = this.car;

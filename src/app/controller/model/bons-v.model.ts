@@ -9,6 +9,6 @@ export class BonsV {
   montantvignetteV: string;
   kilometrageV: bigint;
   typehuileV: string;
-  fournisseurV : string;
+  fournisseurV: string;
   numbonV: bigint;
 }

@@ -34,18 +34,13 @@ footer {
 }
 */
 
-
 footer {
   /* place on the bottom */
-  z-index: 0;
-  position: sticky;
-  bottom: 0;
-
-
+  z-index: 1;
+  position: relative;
 
   width: 100%;
-  background-color: #dae1e7;
-  padding: 50px;
+  background-color: rgba(166,219,244,0.92);
 }
 
 #logo {

@@ -1,10 +1,22 @@
-<p-panel header="Gestion des Locales détails" style="text-align: center ; font-size:100px ">
-  <p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-toast></p-toast>
+<p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h3" style="color: #004a80"><strong>Gestion des Locales détails</strong></h1>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
+      </div>
+
+
     </ng-template>
 
     <ng-template pTemplate="header" let-columns>
@@ -29,12 +41,12 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
-    <div class="ui-g ui-fluid" style="height: 400px" *ngIf="local">
+  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
+    <div class="ui-g ui-fluid" style="height: 420px;margin-top: 10%" *ngIf="local">
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="type">Nom Matériel *:</label>
+          <label for="type">Nom Matériel :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown  id="type" [filter]="true" [options]="typesmateriel" [(ngModel)]="local.materiellocal"></p-dropdown>
@@ -43,7 +55,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="matricule"> Nom Locale *:</label>
+          <label for="matricule"> Nom Locale :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown id="matricule" [filter]="true" [options]="typeslocal"  [(ngModel)]="local.localassocie" autofocus ></p-dropdown>
@@ -52,20 +64,11 @@
 
 
       <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="typ">Nombre d'entités *:</label>
-      </div>
-      <div class="ui-g-8">
-        <input  id="typ" pInputText  [(ngModel)]="local.nbrmateriel">
-      </div>
-    </div>
-
-      <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="marque">Date Achat du Matériel *:</label>
+          <label for="marque">Date Affectation :</label>
         </div>
         <div class="ui-g-8">
-          <p-calendar  id="marque"  [(ngModel)]="local.dateachat"></p-calendar>
+          <p-calendar ngClass="ui-calendar-custom" dateFormat="MM d, yy"  id="marque" [showIcon]="true"  [(ngModel)]="local.dateachat"></p-calendar>
         </div>
       </div>
 
@@ -74,8 +77,7 @@
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
         <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-save" (click)="save()" label="Enregistrer"></button>
+        <button type="button" pButton icon="pi pi-save" (click)="save();onSubmit()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>
-</p-panel>

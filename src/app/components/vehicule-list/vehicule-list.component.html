@@ -1,9 +1,18 @@
-<p-panel header="Gestion des Véhicules" style="text-align: center ; font-size:100px ">
 <p-table #dt [columns]="cols" [responsive]="true"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
-    <div style="text-align: right" >
-      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Gestion des Véhicules</strong></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <div style="text-align: center; align-items: center; align-content: center">
+          <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+          <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+        </div>
+      </div>
     </div>
   </ng-template>
 
@@ -29,12 +38,12 @@
   </ng-template>
 </p-table>
 
-<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
   <div class="ui-g ui-fluid" style="height: 450px" *ngIf="car">
 
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="matricule"> Matricule *:</label>
+        <label for="matricule"> Matricule :</label>
       </div>
       <div class="ui-g-8">
         <input pInputText id="matricule"  [(ngModel)]="car.matricule" autofocus />
@@ -42,7 +51,7 @@
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="type">Type *:</label>
+        <label for="type">Type :</label>
       </div>
       <div class="ui-g-8">
         <p-dropdown id="type" [options]="type" [(ngModel)]="car.type"></p-dropdown>
@@ -51,7 +60,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="marque">Marque *:</label>
+        <label for="marque">Marque :</label>
       </div>
       <div class="ui-g-8">
         <input pInputText id="marque" [(ngModel)]="car.marque" />
@@ -60,7 +69,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="utilite">utilité *:</label>
+        <label for="utilite">Utilité :</label>
       </div>
       <div class="ui-g-8">
         <textarea id="utilite" pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
@@ -68,10 +77,10 @@
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="date">Date Achat *:</label>
+        <label for="date">Date Achat :</label>
       </div>
       <div class="ui-g-8">
-        <p-calendar  id="date"  [(ngModel)]="car.dateEntrerParc" ></p-calendar>
+        <p-calendar  id="date" dateFormat="dd-mm-yy" showIcon="true" [(ngModel)]="car.dateEntrerParc" ></p-calendar>
       </div>
     </div>
 
@@ -85,4 +94,3 @@
     </div>
   </p-footer>
 </p-dialog>
-</p-panel>

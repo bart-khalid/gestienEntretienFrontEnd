@@ -36,6 +36,7 @@ import { LocalComponent } from './components/local/local.component';
 import { LocaldetailComponent } from './components/localdetail/localdetail.component';
 import {ReclamerComponent} from './components/reclamer/reclamer.component';
 import { ActionsComponent } from './components/actions/actions.component';
+import {DatePipe} from "@angular/common";
 
 
 
@@ -100,7 +101,7 @@ import { ActionsComponent } from './components/actions/actions.component';
     MenuModule,
     TabMenuModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

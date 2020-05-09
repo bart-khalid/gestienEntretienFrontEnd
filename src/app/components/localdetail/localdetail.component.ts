@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, PipeTransform} from '@angular/core';
 import {MessageService, SelectItem} from 'primeng/api';
 import {FormBuilder} from '@angular/forms';
 import {Localdetail} from '../../controller/model/localdetail.model';
+import {DatePipe, formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-localdetail',
@@ -30,7 +31,7 @@ export class LocaldetailComponent implements OnInit {
 
   errorS: number;
   errorC: number;
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.onSubmit();
@@ -38,7 +39,6 @@ export class LocaldetailComponent implements OnInit {
       {field: 'materiellocal', header: 'Materiel'},
       {field: 'localassocie', header: 'Locale'},
       {field: 'dateachat', header: 'Date Achat Materiel'},
-      {field: 'nbrmateriel', header: 'nombre Entités'},
     ];
 
     this.typeslocal = [
@@ -71,6 +71,9 @@ export class LocaldetailComponent implements OnInit {
   save() {
     const localls = this.locals;
     if (this.newLocal) {
+      console.log(this.local.dateachat);
+      const dd = this.datepipe.transform(this.local.dateachat, 'dd-MM-yyyy');
+      console.log(dd);
       localls.push(this.local);
     } else {
       localls[this.locals.indexOf(this.selectedLocal)] = this.local;
@@ -80,6 +83,8 @@ export class LocaldetailComponent implements OnInit {
     this.local = null;
     this.displayDialog = false;
   }
+
+
 
   delete() {
     const index = this.locals.indexOf(this.selectedLocal);

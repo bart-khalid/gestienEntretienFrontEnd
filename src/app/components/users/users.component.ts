@@ -30,7 +30,6 @@ export class UsersComponent implements OnInit {
 
   msgs: Message[] = [];
 
-
   constructor(private messageService: MessageService,private userService: UsersService) {
   }
 
@@ -62,7 +61,7 @@ export class UsersComponent implements OnInit {
     this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
   }
   onSubmit(){
-    this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+    this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
   }
 
   showDialogToAdd() {

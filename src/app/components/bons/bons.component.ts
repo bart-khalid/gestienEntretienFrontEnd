@@ -228,10 +228,4 @@ export class BonsComponent implements OnInit {
     this.displayDialogV = true;
     this.cancelV = false;
   }
-
-  validatec(bonc: string): boolean {
-
-     if (bonc !== '' || bonc !== null) { return true; }
-     else { return false ; }
-  }
 }

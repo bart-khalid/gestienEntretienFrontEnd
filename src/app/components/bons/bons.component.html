@@ -1,19 +1,29 @@
-<h2 class="h2" style="text-align: center">Gestion des Bons Parc Automobile</h2>
-<div class="ui-g-12" style="margin-left: 10%">
-  <div class="ui-g-4">
-    <label for="typee" ><h5 class="h-50" style="color: #191622">Choisissez le type de bon a gérer *:</h5> </label>
+<h2 class="h2" style="text-align: center; color: rgba(189,244,151,0.92)">Gestion des Bons Parc Automobile</h2><br>
+<div class="col-md-12" style="margin-left: 15%; ">
+  <div class="row">
+  <div class="col-md-4">
+    <label for="typee" ><h5 class="h-50" style="color: rgba(222,241,244,0.92)">Choisissez le type de bon a gérer *:</h5> </label>
   </div>
-  <div class="ui-g-8" style="width: auto">
+  <div class="col-md-8" style="width: auto">
     <p-dropdown id="typee"  [options]="typebon" [(ngModel)]="typeselecte"></p-dropdown>
   </div>
 </div>
-<p-panel  *ngIf="typeselecte=='Boncarburant' || typeselecte=='Bonreparation' || typeselecte=='Bonvidange' " style="text-align: center ; font-size:100px ">
+</div>
   <p-table #dt [columns]="colsC" *ngIf="typeselecte=='Boncarburant'"  [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"  [responsive]="true" [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption" >
-       <h3 class="h3">Bon Carburant</h3>
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text"  pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:30%">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h3" style="color: #004a80"><strong>Bon Carburant</strong></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
       </div>
     </ng-template>
 
@@ -40,7 +50,7 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Carburant Détails"   [(visible)]="displayDialogC" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+  <p-dialog  header="Bon Carburant Détails"   [(visible)]="displayDialogC" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonC">
 
       <div class="ui-g-12">
@@ -54,7 +64,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="mat">Matricule Véhicule *:</label>
+          <label for="mat">Matricule Véhicule :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [filter]="true" id="mat" [options]="vehicule" [(ngModel)]="bonC.vehiculeC" ></p-dropdown>
@@ -63,7 +73,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="four">Fournisseur *:</label>
+          <label for="four">Fournisseur :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [filter]="true" id="four" [options]="fourniss" [(ngModel)]="bonC.fournisseurC" ></p-dropdown>
@@ -72,7 +82,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="desig">Désignation *:</label>
+          <label for="desig">Désignation :</label>
         </div>
         <div class="ui-g-8">
           <textarea id="desig" pInputTextarea autoResize="autoResize" [(ngModel)]="bonC.descriptionC" ></textarea>
@@ -81,7 +91,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="pu">Prix Unitaire *:</label>
+          <label for="pu">Prix Unitaire :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="pu" [(ngModel)]="bonC.prixunitaireC" />
@@ -90,7 +100,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="type">Type Carburant *:</label>
+          <label for="type">Type Carburant :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="type"  [(ngModel)]="bonC.typeC" />
@@ -99,7 +109,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="qua">Quantité *:</label>
+          <label for="qua">Quantité :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="qua" [(ngModel)]="bonC.quantiteC" />
@@ -108,7 +118,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="date">Date Bon *:</label>
+          <label for="date">Date Bon :</label>
         </div>
         <div class="ui-g-8">
           <p-calendar id="date" dateFormat="dd.mm.yy"  [(ngModel)]="bonC.datebonC" ></p-calendar>
@@ -117,7 +127,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="tbrut">Total Brut *:</label>
+          <label for="tbrut">Total Brut :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="tbrut" [(ngModel)]="bonC.totalbrutC" />
@@ -126,7 +136,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="mtv">Montant Vignette *:</label>
+          <label for="mtv">Montant Vignette :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="mtv" [(ngModel)]="bonC.montantvignetteC" />
@@ -148,11 +158,21 @@
 
   <p-table #dtt [columns]="colsR" [responsive]="true" *ngIf="typeselecte=='Bonreparation'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonR" (onRowSelect)="onRowSelectR($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
-      <h3 class="h3">Bon Réparation</h3>
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:30%">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h3" style="color: #004a80"><strong>Bon Réparation</strong></h1>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
+      </div>
+
     </ng-template>
 
     <ng-template pTemplate="header" let-columns>
@@ -177,7 +197,7 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogR" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogR" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonR">
 
       <div class="ui-g-12">
@@ -191,7 +211,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="matr">Matricule Véhicule *:</label>
+          <label for="matr">Matricule Véhicule :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [filter]="true" id="matr" [options]="vehicule" [(ngModel)]="bonR.vehiculeR" ></p-dropdown>
@@ -200,7 +220,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="f">Fournisseur *:</label>
+          <label for="f">Fournisseur :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [filter]="true" id="f" [options]="fourniss" [(ngModel)]="bonR.fournisseurR" ></p-dropdown>
@@ -209,7 +229,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="design">Désignation *:</label>
+          <label for="design">Désignation :</label>
         </div>
         <div class="ui-g-8">
           <textarea id="design" pInputTextarea autoResize="autoResize" [(ngModel)]="bonR.descriptionR" ></textarea>
@@ -218,7 +238,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="pun">Prix Unitaire *:</label>
+          <label for="pun">Prix Unitaire :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="pun" [(ngModel)]="bonR.prixunitaireR" />
@@ -227,7 +247,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="quan">Quantité *:</label>
+          <label for="quan">Quantité :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="quan" [(ngModel)]="bonR.quantiteR" />
@@ -236,7 +256,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="dater">Date Bon *:</label>
+          <label for="dater">Date Bon :</label>
         </div>
         <div class="ui-g-8">
           <p-calendar id="dater"  [(ngModel)]="bonR.datebonR" ></p-calendar>
@@ -245,7 +265,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="tbrutr">Total Brut *:</label>
+          <label for="tbrutr">Total Brut :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="tbrutr" [(ngModel)]="bonR.totalbrutR" />
@@ -254,7 +274,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="mtvr">Montant Vignette *:</label>
+          <label for="mtvr">Montant Vignette :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="mtvr" [(ngModel)]="bonR.montantvignetteR" />
@@ -273,12 +293,19 @@
     </p-footer>
   </p-dialog>
 
-  <p-table #dttt [columns]="colsV" [responsive]="true" *ngIf="typeselecte=='Bonvidange'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonV" (onRowSelect)="onRowSelectV($event)" [paginator]="true" [rows]="10">
+  <p-table #dttt [columns]="colsV" [responsive]="true" *ngIf="typeselecte=='Bonvidange'"  [value]="bonsV" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonV" (onRowSelect)="onRowSelectV($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
-      <h3 class="h3">Bon Vidange</h3>
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dttt.filterGlobal($event.target.value, 'contains')" style="width:30%">
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Bon Vidange</strong></h1>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dttt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
       </div>
     </ng-template>
 
@@ -304,7 +331,7 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogV" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogV" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonV">
 
       <div class="ui-g-12">
@@ -318,7 +345,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="matrv">Matricule Véhicule *:</label>
+          <label for="matrv">Matricule Véhicule :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [filter]="true" id="matrv" [options]="vehicule" [(ngModel)]="bonV.vehiculeV" ></p-dropdown>
@@ -327,7 +354,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="fo">Fournisseur *:</label>
+          <label for="fo">Fournisseur :</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [filter]="true" id="fo" [options]="fourniss" [(ngModel)]="bonV.fournisseurV" ></p-dropdown>
@@ -336,7 +363,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="designa">Désignation *:</label>
+          <label for="designa">Désignation :</label>
         </div>
         <div class="ui-g-8">
           <textarea id="designa" pInputTextarea autoResize="autoResize" [(ngModel)]="bonV.descriptionV" ></textarea>
@@ -345,7 +372,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="ty">Type huile *:</label>
+          <label for="ty">Type huile :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="ty" [(ngModel)]="bonV.typehuileV" />
@@ -354,7 +381,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="kilo">Kilométrage *:</label>
+          <label for="kilo">Kilométrage :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="kilo" [(ngModel)]="bonV.kilometrageV" />
@@ -363,7 +390,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="puni">Prix Unitaire *:</label>
+          <label for="puni">Prix Unitaire :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="puni" [(ngModel)]="bonV.prixunitaireV" />
@@ -372,7 +399,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="quant">Quantité *:</label>
+          <label for="quant">Quantité :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="quant" [(ngModel)]="bonV.quantiteV" />
@@ -381,7 +408,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="daterv">Date Bon *:</label>
+          <label for="daterv">Date Bon :</label>
         </div>
         <div class="ui-g-8">
           <p-calendar id="daterv"  [(ngModel)]="bonV.datebonV" ></p-calendar>
@@ -391,7 +418,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="tbrutrv">Total Brut *:</label>
+          <label for="tbrutrv">Total Brut :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="tbrutrv" [(ngModel)]="bonV.totalbrutV" />
@@ -400,7 +427,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label for="mtvrv">Montant Vignette *:</label>
+          <label for="mtvrv">Montant Vignette :</label>
         </div>
         <div class="ui-g-8">
           <input pInputText id="mtvrv" [(ngModel)]="bonV.montantvignetteV" />
@@ -414,9 +441,8 @@
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
         <button *ngIf="!cancelV" type="button" pButton icon="pi pi-times" (click)="deleteV()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-check" [disabled]="" (click)="saveV()" label="Enregistrer"></button>
+        <button type="button" pButton icon="pi pi-check"  (click)="saveV()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>
 
-</p-panel>
