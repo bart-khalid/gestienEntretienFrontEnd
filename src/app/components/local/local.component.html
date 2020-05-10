@@ -42,33 +42,43 @@
   <p-dialog  header="Locales Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 250px" *ngIf="local">
 
+      <form>
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="matricule"> Nom Locale :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="matricule"  [(ngModel)]="local.nomlocal" autofocus />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="type">Type Locale :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown  id="type" [options]="typeslocal" [(ngModel)]="local.typelocal"></p-dropdown>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="marque">Département :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown  id="marque" [options]="typesDepartement" [(ngModel)]="local.departement"></p-dropdown>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
-
+      </form>
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">

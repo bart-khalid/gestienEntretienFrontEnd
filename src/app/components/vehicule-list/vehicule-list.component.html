@@ -39,52 +39,71 @@
 </p-table>
 
 <p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
-  <div class="ui-g ui-fluid" style="height: 450px" *ngIf="car">
+  <div class="ui-g ui-fluid" style="height: 350px" *ngIf="car">
+   <form [formGroup]="userform" >
 
-    <div class="ui-g-12">
-      <div class="ui-g-4">
+
+     <div class="ui-g-12">
+      <div class="ui-g-3">
         <label for="matricule"> Matricule :</label>
       </div>
-      <div class="ui-g-8">
-        <input pInputText id="matricule"  [(ngModel)]="car.matricule" autofocus />
+      <div class="ui-g-5">
+        <input pInputText id="matricule" formControlName="matricule"  [(ngModel)]="car.matricule" autofocus />
       </div>
-    </div>
+       <div class="ui-g-4">
+         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+       </div>
+     </div>
+
+
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="type">Type :</label>
       </div>
-      <div class="ui-g-8">
-        <p-dropdown id="type" [options]="type" [(ngModel)]="car.type"></p-dropdown>
+      <div class="ui-g-5">
+        <p-dropdown id="type" formControlName="type" [options]="type" [(ngModel)]="car.type"></p-dropdown>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="marque">Marque :</label>
       </div>
-      <div class="ui-g-8">
-        <input pInputText id="marque" [(ngModel)]="car.marque" />
+      <div class="ui-g-5">
+        <input pInputText formControlName="marque" id="marque" [(ngModel)]="car.marque" />
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="utilite">Utilité :</label>
       </div>
-      <div class="ui-g-8">
-        <textarea id="utilite" pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
+      <div class="ui-g-5">
+        <textarea id="utilite" formControlName="type" pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="date">Date Achat :</label>
       </div>
-      <div class="ui-g-8">
-        <p-calendar  id="date" dateFormat="dd-mm-yy" showIcon="true" [(ngModel)]="car.dateEntrerParc" ></p-calendar>
+      <div class="ui-g-5">
+        <input pInputText id="date"  type="date" [(ngModel)]="car.dateEntrerParc" />
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
-
+  </form>
 
   </div>
   <p-footer>

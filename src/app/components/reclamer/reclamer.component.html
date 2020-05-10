@@ -54,39 +54,49 @@
 
 <!-- dialog 1 -->
 
-<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
+<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px',textAlign:'center'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
 
+    <form>
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="objet">Objet</label>
+      <div class="ui-g-3">
+        <label for="objet">Objet :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
         <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label >Locale</label>
+      <div class="ui-g-3">
+        <label >Locale :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
 
         <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
 
       </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+      </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="description">Description</label>
+      <div class="ui-g-3">
+        <label for="description">Description :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
         <textarea  pInputText id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
       </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+      </div>
     </div>
-
+    </form>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -99,16 +109,19 @@
 
 <!-- second dialog -->
 
-<p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
+<p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px',textAlign:'center'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="object">Objet</label>
+      <div class="ui-g-3">
+        <label for="object">Objet :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
         <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="object" [(ngModel)]="reclamation.objet" />
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -117,35 +130,45 @@
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label >Locale</label>
+      <div class="ui-g-3">
+        <label >Locale :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
 
         <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
 
       </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+      </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label >Materiel</label>
+      <div class="ui-g-3">
+        <label >Materiel :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
 
         <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomMateriel" [filter]="true"></p-dropdown>
 
       </div>
+
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+      </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="descriptionM">Description</label>
+      <div class="ui-g-3">
+        <label for="descriptionM">Description :</label>
       </div>
-      <div class="ui-g-8">
-        <textarea  pInputText id="descriptionM" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      <div class="ui-g-5">
+        <textarea  pInputText  id="descriptionM" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 

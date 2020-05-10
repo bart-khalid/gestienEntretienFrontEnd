@@ -41,14 +41,19 @@
 
   <p-dialog  header="Utilisateur Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
 
-    <div class="ui-g ui-fluid"  *ngIf="user">
 
+
+    <div class="ui-g ui-fluid"  *ngIf="user">
+      <form>
       <div class="ui-g-12">
         <div class="ui-g-4">
           <label for="ma"> Nom :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-4">
           <input pInputText id="ma" [(ngModel)]="user.nomu" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -56,8 +61,11 @@
         <div class="ui-g-4">
           <label for="marqe"> Prénom :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-4">
           <input pInputText id="marqe" [(ngModel)]="user.prenomu" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -65,8 +73,11 @@
         <div class="ui-g-4">
           <label for="marqe"> Numero de Telephone :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-4">
           <input pInputText id="marqe" [(ngModel)]="user.telephoneu" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -79,7 +90,7 @@
           <input pInputText id="matricule"  [(ngModel)]="user.username"  />
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="!user.username&&user.username ==''" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -87,8 +98,11 @@
         <div class="ui-g-4">
           <label for="marque">Mot de passe :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-4">
           <input pInputText id="marque" [(ngModel)]="user.password" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -96,10 +110,14 @@
         <div class="ui-g-4">
           <label for="type">Type Utilisateur :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-4">
           <p-dropdown id="type" [options]="type" [(ngModel)]="user.typeu"></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
+      </form>
 
     </div>
     <p-footer>
@@ -108,4 +126,5 @@
         <button type="submit"  pButton icon="pi pi-check" (click)="save();onSubmit()" label="Enregistrer"></button>
       </div>
     </p-footer>
+
   </p-dialog>

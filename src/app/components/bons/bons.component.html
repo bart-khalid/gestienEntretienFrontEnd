@@ -50,102 +50,129 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Carburant Détails"   [(visible)]="displayDialogC" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
+  <p-dialog  header="Bon Carburant Détails"   [(visible)]="displayDialogC" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'60%',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonC">
-
+     <form>
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="numbonc"> Numero de Bon :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="numbonc"   [(ngModel)]="bonC.numbonC" autofocus />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="mat">Matricule Véhicule :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown [filter]="true" id="mat" [options]="vehicule" [(ngModel)]="bonC.vehiculeC" ></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="four">Fournisseur :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown [filter]="true" id="four" [options]="fourniss" [(ngModel)]="bonC.fournisseurC" ></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="desig">Désignation :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <textarea id="desig" pInputTextarea autoResize="autoResize" [(ngModel)]="bonC.descriptionC" ></textarea>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="pu">Prix Unitaire :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="pu" [(ngModel)]="bonC.prixunitaireC" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="type">Type Carburant :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="type"  [(ngModel)]="bonC.typeC" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="qua">Quantité :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="qua" [(ngModel)]="bonC.quantiteC" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="date">Date Bon :</label>
         </div>
-        <div class="ui-g-8">
-          <p-calendar id="date" dateFormat="dd.mm.yy"  [(ngModel)]="bonC.datebonC" ></p-calendar>
+        <div class="ui-g-5">
+          <input pInputText id="date"  type="date" [(ngModel)]="bonC.datebonC" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="tbrut">Total Brut :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="tbrut" [(ngModel)]="bonC.totalbrutC" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="mtv">Montant Vignette :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="mtv" [(ngModel)]="bonC.montantvignetteC" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
-
-
-
-
+     </form>
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -197,90 +224,121 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogR" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
+  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogR" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'60%',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonR">
 
+     <form>
+
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="numbonr"> Numero de Bon :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="numbonr"   [(ngModel)]="bonR.numbonR" autofocus />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="matr">Matricule Véhicule :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown [filter]="true" id="matr" [options]="vehicule" [(ngModel)]="bonR.vehiculeR" ></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="f">Fournisseur :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown [filter]="true" id="f" [options]="fourniss" [(ngModel)]="bonR.fournisseurR" ></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="design">Désignation :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <textarea id="design" pInputTextarea autoResize="autoResize" [(ngModel)]="bonR.descriptionR" ></textarea>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="pun">Prix Unitaire :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="pun" [(ngModel)]="bonR.prixunitaireR" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="quan">Quantité :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="quan" [(ngModel)]="bonR.quantiteR" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="dater">Date Bon :</label>
         </div>
-        <div class="ui-g-8">
-          <p-calendar id="dater"  [(ngModel)]="bonR.datebonR" ></p-calendar>
+        <div class="ui-g-5">
+          <input pInputText id="dater"  type="date" [(ngModel)]="bonR.datebonR" />
+
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="tbrutr">Total Brut :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="tbrutr" [(ngModel)]="bonR.totalbrutR" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="mtvr">Montant Vignette :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="mtvr" [(ngModel)]="bonR.montantvignetteR" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
+    </form>
 
 
 
@@ -331,111 +389,145 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogV" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
+  <p-dialog  header="Bon Vidange Détails"   [(visible)]="displayDialogV" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'60%',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonV">
 
+      <form>
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="numbonv"> Numero de Bon :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="numbonv"   [(ngModel)]="bonV.numbonV" autofocus />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="matrv">Matricule Véhicule :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown [filter]="true" id="matrv" [options]="vehicule" [(ngModel)]="bonV.vehiculeV" ></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="fo">Fournisseur :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown [filter]="true" id="fo" [options]="fourniss" [(ngModel)]="bonV.fournisseurV" ></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="designa">Désignation :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <textarea id="designa" pInputTextarea autoResize="autoResize" [(ngModel)]="bonV.descriptionV" ></textarea>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="ty">Type huile :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="ty" [(ngModel)]="bonV.typehuileV" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="kilo">Kilométrage :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="kilo" [(ngModel)]="bonV.kilometrageV" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="puni">Prix Unitaire :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="puni" [(ngModel)]="bonV.prixunitaireV" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="quant">Quantité :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="quant" [(ngModel)]="bonV.quantiteV" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="daterv">Date Bon :</label>
         </div>
-        <div class="ui-g-8">
-          <p-calendar id="daterv"  [(ngModel)]="bonV.datebonV" ></p-calendar>
+        <div class="ui-g-5">
+          <input pInputText id="daterv"  type="date" [(ngModel)]="bonV.datebonV" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="tbrutrv">Total Brut :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="tbrutrv" [(ngModel)]="bonV.totalbrutV" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="mtvrv">Montant Vignette :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input pInputText id="mtvrv" [(ngModel)]="bonV.montantvignetteV" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
 
-
+</form>
 
     </div>
     <p-footer>

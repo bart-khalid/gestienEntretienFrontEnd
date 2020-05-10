@@ -41,37 +41,50 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
-    <div class="ui-g ui-fluid" style="height: 420px;margin-top: 10%" *ngIf="local">
+  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'650px',textAlign:'center'}">
+    <div class="ui-g ui-fluid" style="height: 250px;" *ngIf="local">
 
+      <form>
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="type">Nom Matériel :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown  id="type" [filter]="true" [options]="typesmateriel" [(ngModel)]="local.materiellocal"></p-dropdown>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="matricule"> Nom Locale :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-dropdown id="matricule" [filter]="true" [options]="typeslocal"  [(ngModel)]="local.localassocie" autofocus ></p-dropdown>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="marque">Date Affectation :</label>
         </div>
-        <div class="ui-g-8">
-          <p-calendar ngClass="ui-calendar-custom" dateFormat="MM d, yy"  id="marque" [showIcon]="true"  [(ngModel)]="local.dateachat"></p-calendar>
+        <div class="ui-g-5">
+          <input pInputText id="marque"  type="date" [(ngModel)]="local.dateachat" />
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+
       </div>
 
+
+</form>
     </div>
 
     <p-footer>

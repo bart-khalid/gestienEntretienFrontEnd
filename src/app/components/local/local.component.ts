@@ -52,14 +52,14 @@ export class LocalComponent implements OnInit {
 
     this.typesDepartement = [
       {label: 'Selectionnez un type', value: null},
-      {label: 'Departement Informatique', value: 'Informatique'},
-      {label: 'Departement Physique', value: 'Physique'},
-      {label: 'Departement Chimie', value: 'Chimie'},
-      {label: 'Departement Mathématique', value: 'Mathématique'},
-      {label: 'Departement Biologie', value: 'Biologie'},
-      {label: 'Departement Géologie', value: 'Géologie'},
-      {label: 'Departement Tec', value: 'Tec'},
-      {label: 'Departement Génie Civil', value: 'Génie Civil'},
+      {label: 'Département Informatique', value: 'Informatique'},
+      {label: 'Département Physique', value: 'Physique'},
+      {label: 'Département Chimie', value: 'Chimie'},
+      {label: 'Département Mathématique', value: 'Mathématique'},
+      {label: 'Département Biologie', value: 'Biologie'},
+      {label: 'Département Géologie', value: 'Géologie'},
+      {label: 'Département Tec', value: 'Tec'},
+      {label: 'Département Génie Civil', value: 'Génie Civil'},
       {label: 'Autre', value: 'autre'},
     ];
   }

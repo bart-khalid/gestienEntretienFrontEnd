@@ -71,9 +71,6 @@ export class LocaldetailComponent implements OnInit {
   save() {
     const localls = this.locals;
     if (this.newLocal) {
-      console.log(this.local.dateachat);
-      const dd = this.datepipe.transform(this.local.dateachat, 'dd-MM-yyyy');
-      console.log(dd);
       localls.push(this.local);
     } else {
       localls[this.locals.indexOf(this.selectedLocal)] = this.local;

@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.cols = [
-      {field: 'nomu', header: 'Nom de la famille'} ,
+      {field: 'nomu', header: 'Nom '} ,
       {field: 'prenomu', header: 'Prénom'},
       {field: 'telephoneu', header: 'Numero de Telephone'},
       {field: 'username', header: 'Nom D\'utilisateur'},

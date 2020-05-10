@@ -20,65 +20,82 @@
     <!-- First dialog to add a prestation Interne -->
     <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '60%', height:'90%'}" style="float: left">
       <div class="ui-g ui-fluid" *ngIf="prestataionInterne" style="height: 100%">
-
+      <form>
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien</strong> </label>
+          <div class="ui-g-3">
+            <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien :</strong> </label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <p-dropdown id="typeEntretien" [options]="entretiens" [(ngModel)]="prestataionInterne.typeEntretien" [filter]="true"></p-dropdown>
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="date" style="color: #00aeef"><strong>Date</strong></label>
+          <div class="ui-g-3">
+            <label for="date" style="color: #00aeef"><strong>Date :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
 
-            <p-calendar [(ngModel)]="prestataionInterne.date" id="date"></p-calendar>
-
+            <input pInputText id="date"  type="date" [(ngModel)]="prestataionInterne.date" />
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
+          <div class="ui-g-3">
             <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <p-checkbox [(ngModel)]="prestataionInterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
             <label for="bonL" style="color: #00aeef"><strong>{{prestataionInterne.reclamed}}</strong></label>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
         <div class="ui-g-12" *ngIf="prestataionInterne.reclamed">
-          <div class="ui-g-4">
-            <label for="refReclamation">Reference de la reclamation</label>
+          <div class="ui-g-3">
+            <label for="refReclamation">Réference de la reclamation :</label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <input type="text" [(ngModel)]="prestataionInterne.referenceReclamation" pInputText id="refReclamation">
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="codeAgent" style="color: #00aeef"><strong>Code Agent</strong></label>
+          <div class="ui-g-3">
+            <label for="codeAgent" style="color: #00aeef"><strong>Code Agent :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <input type="text" [(ngModel)]="prestataionInterne.codeAgent" pInputText id="codeAgent">
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="nomAgent" style="color: #00aeef"><strong>Nom Agent</strong></label>
+          <div class="ui-g-3">
+            <label for="nomAgent" style="color: #00aeef"><strong>Nom Agent :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <input type="text" [(ngModel)]="prestataionInterne.nomAgent" pInputText id="nomAgent">
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
-
+      </form>
       </div>
       <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -90,72 +107,94 @@
     <!-- Second dialog to add a prestation Externe -->
     <p-dialog header="Prestation Externe Details" [(visible)]="displayDialogE" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '60%', height:'90%'}" style="float: left">
       <div class="ui-g ui-fluid" *ngIf="prestataionExterne" style="height: 100%">
-
+        <form>
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien</strong></label>
+          <div class="ui-g-3">
+            <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <p-dropdown id="typeEntretien" [options]="entretiens" [(ngModel)]="prestataionExterne.typeEntretien" [filter]="true"></p-dropdown>
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="dateP" style="color: #00aeef"><strong>Date</strong></label>
+          <div class="ui-g-3">
+            <label for="dateP" style="color: #00aeef"><strong>Date :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
 
-            <p-calendar [(ngModel)]="prestataionExterne.date" id="dateP"></p-calendar>
+            <input pInputText id="dateP"  type="date" [(ngModel)]="prestataionExterne.date" />
 
+
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
         <div class="ui-g-12">
           <div class="ui-g-4">
-            <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
+            <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est déja réclamée ?</strong></label>
           </div>
           <div class="ui-g-8">
             <p-checkbox [(ngModel)]="prestataionExterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
             <label for="bonL" style="color: #00aeef"><strong>{{prestataionExterne.reclamed}}</strong></label>
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
         <div class="ui-g-12" *ngIf="prestataionExterne.reclamed">
           <div class="ui-g-4">
-            <label for="refReclamation">Reference de la reclamation</label>
+            <label for="refReclamation">Réference de la reclamation :</label>
           </div>
           <div class="ui-g-8">
             <input type="text" [(ngModel)]="prestataionExterne.referenceReclamation" pInputText id="refReclamation">
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire</strong></label>
+          <div class="ui-g-3">
+            <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <input type="text" [(ngModel)]="prestataionExterne.nomPrestataire" pInputText id="nomPres">
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="montant" style="color: #00aeef"><strong>Montant Facture</strong></label>
+          <div class="ui-g-3">
+            <label for="montant" style="color: #00aeef"><strong>Montant Facture :</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <input type="number" [(ngModel)]="prestataionExterne.montantFac" pInputText id="montant">
           </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="bonc" style="color: #00aeef"><strong>Prestation A Un Bon Commande ?</strong></label>
+          <div class="ui-g-3">
+            <label for="bonc" style="color: #00aeef"><strong>Cette Prestation a un Bon Commande ?</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <p-checkbox [(ngModel)]="prestataionExterne.bonCommande" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
             <label for="bonL" style="color: #00aeef"><strong>{{prestataionExterne.bonCommande}}</strong></label>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
@@ -163,38 +202,50 @@
         <div  *ngIf="prestataionExterne.bonCommande" style="align-items: center; align-content: center; text-align: center">
 
         <div class="ui-g-12" >
-          <div class="ui-g-4">
-            <label for="numbonc">Numero Bon Commande</label>
+          <div class="ui-g-3">
+            <label for="numbonc">Numero Bon Commande :</label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <input type="number" pInputText [(ngModel)]="prestataionExterne.presBonCommande.numeroBonCommande" id="numbonC" >
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
-            <label for="dateBonc">Date Bon Commande</label>
+          <div class="ui-g-3">
+            <label for="dateBonc">Date Bon Commande :</label>
           </div>
-          <div class="ui-g-8">
-            <p-calendar  [(ngModel)]="prestataionExterne.presBonCommande.dateBonCommande" id="dateBonc" > </p-calendar>
+          <div class="ui-g-5">
+            <input pInputText id="dateBonc"  type="date" [(ngModel)]="prestataionExterne.presBonCommande.dateBonCommande" />
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
           <div class="ui-g-12">
-            <div class="ui-g-4">
-              <label for="montantC">Montant</label>
+            <div class="ui-g-3">
+              <label for="montantC">Montant :</label>
             </div>
-            <div class="ui-g-8">
+            <div class="ui-g-5">
               <input type="number" pInputText  [(ngModel)]="prestataionExterne.presBonCommande.montant" id="montantC" >
+            </div>
+            <div class="ui-g-4">
+              <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
             </div>
           </div>
 
           <div class="ui-g-12">
-            <div class="ui-g-4">
-              <label for="nomP">nom Prestataire</label>
+            <div class="ui-g-3">
+              <label for="nomP">Nom Prestataire :</label>
             </div>
-            <div class="ui-g-8">
+            <div class="ui-g-5">
               <input type="text" pInputText  [(ngModel)]="prestataionExterne.presBonCommande.nomPrestataire" id="nomP" >
+            </div>
+            <div class="ui-g-4">
+              <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
             </div>
           </div>
 
@@ -202,12 +253,15 @@
         <!-- fin items of bon Commande -->
 
         <div class="ui-g-12">
-          <div class="ui-g-4">
+          <div class="ui-g-3">
             <label for="bonL" style="color: #00aeef"><strong>Prestation A Un Bon Livraison ?</strong></label>
           </div>
-          <div class="ui-g-8">
+          <div class="ui-g-5">
             <p-checkbox [(ngModel)]="prestataionExterne.bonLivraison" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
             <label for="bonL" style="color: #00aeef"><strong>{{prestataionExterne.bonLivraison}}</strong></label>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
 
@@ -216,26 +270,32 @@
         <div  *ngIf="prestataionExterne.bonLivraison" style="align-items: center; align-content: center; text-align: center">
 
           <div class="ui-g-12" >
-            <div class="ui-g-4">
-              <label for="numbonL">Numero Bon Livraison</label>
+            <div class="ui-g-3">
+              <label for="numbonL">Numero Bon Livraison :</label>
             </div>
-            <div class="ui-g-8">
+            <div class="ui-g-5">
               <input type="number" pInputText [(ngModel)]="prestataionExterne.presBonLivraison.numeroBonLivraison" id="numbonL" >
             </div>
-          </div>
-
-          <div class="ui-g-12">
             <div class="ui-g-4">
-              <label for="dateBonL">Date Bon Livraison</label>
-            </div>
-            <div class="ui-g-8">
-              <p-calendar  [(ngModel)]="prestataionExterne.presBonLivraison.dateBonLivraison" id="dateBonL" > </p-calendar>
+              <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
             </div>
           </div>
 
           <div class="ui-g-12">
+            <div class="ui-g-3">
+              <label for="dateBonL">Date Bon Livraison :</label>
+            </div>
+            <div class="ui-g-5">
+              <input pInputText type="date" [(ngModel)]="prestataionExterne.presBonLivraison.dateBonLivraison" id="dateBonL" />
+            </div>
             <div class="ui-g-4">
-              <label for="montantL">Montant</label>
+              <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+            </div>
+          </div>
+
+          <div class="ui-g-12">
+            <div class="ui-g-4">
+              <label for="montantL">Montant :</label>
             </div>
             <div class="ui-g-8">
               <input type="number" pInputText  [(ngModel)]="prestataionExterne.presBonLivraison.montant" id="montantL" >
@@ -243,11 +303,14 @@
           </div>
 
           <div class="ui-g-12">
-            <div class="ui-g-4">
-              <label for="nomPL">nom Prestataire</label>
+            <div class="ui-g-3">
+              <label for="nomPL">Nom Prestataire :</label>
             </div>
-            <div class="ui-g-8">
+            <div class="ui-g-5">
               <input type="text" pInputText  [(ngModel)]="prestataionExterne.presBonLivraison.nomPrestataire" id="nomPL" >
+            </div>
+            <div class="ui-g-4">
+              <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
             </div>
           </div>
 
@@ -256,7 +319,7 @@
         <!-- fin items of bon Commande -->
 
 
-
+        </form>
       </div>
       <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
