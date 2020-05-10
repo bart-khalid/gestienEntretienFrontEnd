@@ -11,7 +11,10 @@ export class AppComponent implements OnInit{
 ngOnInit() {
   this.items = [
     {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
-    {label: 'Bons', icon: 'pi pi-ellipsis-v', routerLink: 'bons' },
+    {label: 'Bons', items: [
+        {label: 'Carburant', icon: 'pi pi-fw pi-pencil'},
+        {label: 'Vidange', icon: 'pi pi-fw pi-pencil'},
+        {label: 'Reparation', icon: 'pi pi-fw pi-pencil'}], icon: 'pi pi-ellipsis-v', routerLink: 'bons' },
     {label: 'Reclamations', items: [
         {label: 'Reclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
         {label: 'Reclamations', icon: 'pi pi-fw pi-pencil' , routerLink: 'reclamation'}

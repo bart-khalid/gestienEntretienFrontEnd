@@ -3,7 +3,8 @@
   margin-right: 15px;
 
   /* make sure to cover the screen */
-  min-height: 75vh;
+  min-height: 100vh;
+  height: 100%;
 
   /* need a solid bg to hide the footer */
 
@@ -34,18 +35,19 @@ footer {
 }
 */
 
+
 footer {
   /* place on the bottom */
-  z-index: 1;
-  position: relative;
+  position: sticky;
 
   width: 100%;
-  background-color: rgba(166,219,244,0.92);
+  background-color: #dae1e7;
+  padding: 50px;
 }
 
 #logo {
   transition-property: transform;
-  transition-duration: 4s;
+  transition-duration: 2s;
 
 }
 
@@ -71,3 +73,5 @@ footer {
 
   100% {top: 0}
 }
+
+

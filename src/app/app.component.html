@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-transparent" id="navbar" style="width: 100%" >
-  <div class="row" style="width: 100%">
-  <div class="col-md-4" style="text-align: center; width: 100% ;margin-top: 2%;">
-  <a  id="logo"  routerLink="login" style="font-family: Delius;color: white; width: 100%"><h2><strong>GESTION ENTRETIEN</strong></h2> </a>
+  <div class="row" style="width: 103%">
+  <div class="col-md-4" style="text-align: center; width: 100%">
+  <a class="navbar-brand" id="logo" routerLink="login" style="font-family: Delius;color: white;padding-top: 10px; width: 100%"><h1><strong><span style="">G</span>ESTION <span style="">E</span>NTRETIEN</strong></h1> </a>
   </div>
   <div class="col-md-8" >
     <img src="../assets/baniere_fstg.jpg" alt="image" style="width: 105%;right: 0; height: 90px">
@@ -9,9 +9,13 @@
   </div>
 </nav>
 <br>
+<div class="bodyCont">
 <p-menubar [model]="items">
   <div>
+
+    <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
     <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;
+
     <button pButton label="Logout" icon="pi pi-power-off" id="login" style="margin-left:.25em"></button>
   </div>
 </p-menubar>
@@ -21,6 +25,7 @@
 <router-outlet></router-outlet>
 </body>
 
+</div>
 <br>
 
 <!-- fooooter to be changed after -->

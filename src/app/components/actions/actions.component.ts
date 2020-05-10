@@ -28,34 +28,92 @@ export class ActionsComponent implements OnInit {
       ]
     };
 
+
     this.dataBons = {
-      labels: ['Carburant', 'Vidange', 'Reparation'],
+      datasets: [{
+        data: [
+          11,
+          16,
+          7
+
+        ],
+        backgroundColor: [
+
+          '#4BC0C0',
+
+          '#E7E9ED',
+          '#36A2EB'
+        ],
+        label: 'My dataset'
+      }],
+      labels: [
+        'Carburant',
+        'Vidange',
+        'Reparation'
+
+      ]
+    };
+
+
+    this.dataPrestations = {
+      labels: ['Interne', 'Externe'],
       datasets: [
         {
-          data : [8, 80, 65],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+          data : [50, 180],
+          backgroundColor: ['#FFCE56', '#4BC0C0'],
+          hoverBackgroundColor: ['#FFCE56', '#4BC0C0']
         },
       ]
     };
 
-    this.dataPrestations = {
-      labels: ['Prestations'],
+    this.dataUtilisateur = {
+      labels: ['Admin', 'Employe'],
       datasets: [
         {
-          label: 'Interne',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
-          data: [1]
+          data : [50, 80],
+          backgroundColor: ['#FF6384', '#36A2EB'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB']
         },
-        {
-          label: 'Externe',
-          backgroundColor: '#9CCC65',
-          borderColor: '#7CB342',
-          data: [5]
-        }
       ]
     };
+
+    this.dataMateriel = {
+      labels: ['Informatique', 'Enseignement'],
+      datasets: [
+        {
+          data : [50, 80],
+          backgroundColor: ['#FF6384', '#FFCE56'],
+          hoverBackgroundColor: ['#FF6384', '#FFCE56']
+        },
+      ]
+    };
+
+
+
+
+    this.dataVehicule = {
+      datasets: [{
+        data: [
+          2,
+          7
+
+        ],
+        backgroundColor: [
+
+          '#4BC0C0',
+
+          '#E7E9ED'
+        ],
+        label: 'My dataset'
+      }],
+      labels: [
+        'AutoBus',
+        'Voiture'
+
+      ]
+    };
+
+
 
   }
 }

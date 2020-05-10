@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PrestationExterne} from '../../controller/model/prestation-Externe.model';
+import {ReclamationService} from '../../controller/service/reclamation.service';
 
 @Component({
   selector: 'app-prestation-externe-liste',
@@ -7,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrestationExterneListeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private reclamationService: ReclamationService) { }
 
-  ngOnInit(): void {
+
+  ngOnInit() {
   }
-
 }
