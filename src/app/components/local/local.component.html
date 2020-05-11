@@ -1,4 +1,4 @@
-  <p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+  <p-table #dt [columns]="cols" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -42,7 +42,6 @@
   <p-dialog  header="Locales Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 250px" *ngIf="local">
 
-      <form>
       <div class="ui-g-12">
         <div class="ui-g-3">
           <label for="matricule"> Nom Locale :</label>
@@ -78,7 +77,6 @@
         </div>
       </div>
 
-      </form>
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">

@@ -1,4 +1,4 @@
-<p-table #dt [columns]="cols" [responsive]="true"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-table #dt [columns]="cols"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
@@ -38,17 +38,14 @@
   </ng-template>
 </p-table>
 
-<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
+<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'600px',textAlign:'center'}">
   <div class="ui-g ui-fluid" style="height: 350px" *ngIf="car">
-   <form [formGroup]="userform" >
-
-
      <div class="ui-g-12">
       <div class="ui-g-3">
         <label for="matricule"> Matricule :</label>
       </div>
       <div class="ui-g-5">
-        <input pInputText id="matricule" formControlName="matricule"  [(ngModel)]="car.matricule" autofocus />
+        <input pInputText id="matricule"   [(ngModel)]="car.matricule" autofocus />
       </div>
        <div class="ui-g-4">
          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -61,7 +58,7 @@
         <label for="type">Type :</label>
       </div>
       <div class="ui-g-5">
-        <p-dropdown id="type" formControlName="type" [options]="type" [(ngModel)]="car.type"></p-dropdown>
+        <p-dropdown id="type"  [options]="type" [(ngModel)]="car.type"></p-dropdown>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -73,7 +70,7 @@
         <label for="marque">Marque :</label>
       </div>
       <div class="ui-g-5">
-        <input pInputText formControlName="marque" id="marque" [(ngModel)]="car.marque" />
+        <input pInputText  id="marque" [(ngModel)]="car.marquev" />
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -85,7 +82,7 @@
         <label for="utilite">Utilité :</label>
       </div>
       <div class="ui-g-5">
-        <textarea id="utilite" formControlName="type" pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
+        <textarea id="utilite"   pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -103,9 +100,9 @@
       </div>
     </div>
 
-  </form>
-
   </div>
+
+
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>

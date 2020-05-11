@@ -59,9 +59,7 @@ footer {
   100% {color: white}
 }
 
-#logo:hover {
-  transform: rotate3d(2,0,0,360deg);
-}
+
 
 #navbar {
   animation-name: navbarAnimation;

@@ -17,6 +17,8 @@ import {LocalComponent} from './components/local/local.component';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import {DocumentationComponent} from './components/documentation/documentation.component';
+import {BonvComponent} from "./components/bonv/bonv.component";
+import {BonrComponent} from "./components/bonr/bonr.component";
 
 
 const routes: Routes = [
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path: 'prestationInterneListe' , component: PrestationInterneListeComponent},
   { path: 'prestationExterneListe' , component: PrestationExterneListeComponent},
   { path: 'documentation' , component: DocumentationComponent},
+  { path: 'bonv' , component: BonvComponent},
+  { path: 'bonr' , component: BonrComponent},
 
 ];
 

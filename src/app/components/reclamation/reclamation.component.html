@@ -56,7 +56,6 @@
 <p-dialog header="Réclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
 
-    <form>
     <div class="ui-g-12">
       <div class="ui-g-3">
         <label for="objet">Objet :</label>
@@ -98,7 +97,6 @@
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
-    </form>
           </div>
           <p-footer>
             <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -113,7 +111,6 @@
 
 <p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
-    <form >
     <div class="ui-g-12">
       <div class="ui-g-3">
         <label for="objet">Objet :</label>
@@ -171,7 +168,6 @@
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
-    </form>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">

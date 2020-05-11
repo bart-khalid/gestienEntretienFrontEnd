@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-<p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-table #dt [columns]="cols"  [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -44,7 +44,6 @@
   <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'650px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 250px;" *ngIf="local">
 
-      <form>
       <div class="ui-g-12">
         <div class="ui-g-3">
           <label for="type">Nom Matériel :</label>
@@ -84,7 +83,6 @@
       </div>
 
 
-</form>
     </div>
 
     <p-footer>

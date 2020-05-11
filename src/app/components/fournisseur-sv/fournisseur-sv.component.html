@@ -1,4 +1,4 @@
-  <p-table #dt [columns]="cols" [responsive]="true" [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+  <p-table #dt [columns]="cols"  [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -41,7 +41,6 @@
     <p-dialog  header="Fournisseur Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 300px" *ngIf="fournisseur">
 
-      <form>
 
       <div class="ui-g-12">
 
@@ -106,7 +105,6 @@
         </div>
       </div>
 
-      </form>
 
     </div>
 

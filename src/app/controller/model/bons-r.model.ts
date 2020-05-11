@@ -2,11 +2,11 @@ export class BonsR {
   // reparation
   vehiculeR: string;
   datebonR: Date;
-  descriptionR: string;
-  quantiteR: bigint;
-  prixunitaireR: bigint;
+  descriptionR: number;
+  quantiteR: number;
+  prixunitaireR: number;
   totalbrutR: string;
   montantvignetteR: string;
-  fournisseurR : string;
-  numbonR: bigint;
+  fournisseurR: string;
+  numbonR: number;
 }

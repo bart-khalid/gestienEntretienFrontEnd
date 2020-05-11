@@ -6,7 +6,7 @@
     <div class="card bg-transparent" id="cardToCenter">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-2" style="color: blue"><label for="ajouter"><h3><strong> Ajouter :</strong></h3> </label></div>
+        <div class="col-md-2" style="color: rgba(185,188,191,0.92)"><label for="ajouter"><h2><strong> Ajouter :</strong></h2> </label></div>
       <div class="col-md-5">
         <button class="btn btn-block btn-primary" pButton icon="pi pi-plus" id="ajouter" (click)="showDialogToAdd()" label="Prestation Interne"></button>
       </div>
@@ -20,7 +20,6 @@
     <!-- First dialog to add a prestation Interne -->
     <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '60%', height:'90%'}" style="float: left">
       <div class="ui-g ui-fluid" *ngIf="prestataionInterne" style="height: 100%">
-      <form>
         <div class="ui-g-12">
           <div class="ui-g-3">
             <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien :</strong> </label>
@@ -95,7 +94,6 @@
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
           </div>
         </div>
-      </form>
       </div>
       <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -107,7 +105,6 @@
     <!-- Second dialog to add a prestation Externe -->
     <p-dialog header="Prestation Externe Details" [(visible)]="displayDialogE" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '60%', height:'90%'}" style="float: left">
       <div class="ui-g ui-fluid" *ngIf="prestataionExterne" style="height: 100%">
-        <form>
         <div class="ui-g-12">
           <div class="ui-g-3">
             <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien :</strong></label>
@@ -319,7 +316,6 @@
         <!-- fin items of bon Commande -->
 
 
-        </form>
       </div>
       <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">

@@ -33,14 +33,32 @@ export class VehiculeListComponent implements OnInit {
   constructor(private fb: FormBuilder, private messageService: MessageService,private carService: CarService) { }
 
   ngOnInit() {
+
+   /* this.userform = this.fb.group({
+      matricule: new FormControl('', Validators.required),
+      marque: new FormControl('', Validators.required),
+      dateachat: new FormControl('', Validators.required),
+      utilite: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required)
+    });  */
+
     this.cars = [
-      { matricule: 'Apple', type: 'automobile', marque: '40%', utilite: '$54,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marque: '40', utilite: '5,406.00', dateEntrerParc: null }
+      { matricule: 'Apple', type: 'automobile', marquev: '40%', utilite: '$54,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
+
       ];
     this.cols = [
       { field: 'matricule', header: 'Matricule' },
       { field: 'type', header: 'Type' },
-      { field: 'marque', header: 'Marque' },
+      { field: 'marquev', header: 'Marque' },
       { field: 'utilite', header: 'Utilité' },
       { field: 'dateEntrerParc', header: 'Date Achat' }
     ];

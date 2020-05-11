@@ -3,11 +3,11 @@ export class BonsV {
   vehiculeV: string;
   datebonV: Date;
   descriptionV: string;
-  quantiteV: bigint;
-  prixunitaireV: bigint;
+  quantiteV: number;
+  prixunitaireV: number;
   totalbrutV: string;
   montantvignetteV: string;
-  kilometrageV: bigint;
+  kilometrageV: number;
   typehuileV: string;
   fournisseurV: string;
   numbonV: bigint;

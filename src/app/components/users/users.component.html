@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-<p-table #dt  [columns]="cols" [responsive]="true" [value]="users" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-table #dt  [columns]="cols"  [value]="users" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -44,7 +44,6 @@
 
 
     <div class="ui-g ui-fluid"  *ngIf="user">
-      <form>
       <div class="ui-g-12">
         <div class="ui-g-4">
           <label for="ma"> Nom :</label>
@@ -117,7 +116,6 @@
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
-      </form>
 
     </div>
     <p-footer>

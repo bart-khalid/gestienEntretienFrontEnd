@@ -41,6 +41,8 @@ import {DatePipe} from '@angular/common';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import {DocumentationComponent} from './components/documentation/documentation.component';
+import {BonrComponent} from "./components/bonr/bonr.component";
+import {BonvComponent} from "./components/bonv/bonv.component";
 
 
 
@@ -81,6 +83,10 @@ import {DocumentationComponent} from './components/documentation/documentation.c
     PrestationExterneListeComponent,
 
     DocumentationComponent,
+
+    BonrComponent,
+
+    BonvComponent,
 
   ],
   imports: [

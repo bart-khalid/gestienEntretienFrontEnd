@@ -1,6 +1,6 @@
 export class Localdetail {
+  referenceMT: string;
   materiellocal: string;
   localassocie: string;
-  nbrmateriel: number;
   dateachat: Date;
 }

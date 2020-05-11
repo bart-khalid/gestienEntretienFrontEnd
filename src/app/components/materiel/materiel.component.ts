@@ -3,6 +3,7 @@ import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {MessageService} from 'primeng';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-materiel',
@@ -22,6 +23,7 @@ export class MaterielComponent implements OnInit {
 
   newMateriel: boolean;
 
+  userform: FormGroup;
 
 
   cols: any[];
@@ -30,10 +32,17 @@ export class MaterielComponent implements OnInit {
   types: Array<any>;
 
   dateToConvert: string;
-  constructor(private reclamationService: ReclamationService, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder,private reclamationService: ReclamationService, private messageService: MessageService) { }
 
 
   ngOnInit() {
+    this.userform = this.fb.group({
+      nom: new FormControl('', Validators.required),
+      marque: new FormControl('', Validators.required),
+      dateachat: new FormControl('', Validators.required),
+      utilite: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required)
+    });
     this.reclamationService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
@@ -65,8 +74,6 @@ export class MaterielComponent implements OnInit {
   save() {
     const materiels = this.materiels;
     if (this.newMateriel) {
-
-      this.materiel.dateAchat = new Date(this.dateToConvert);
       materiels.push(this.materiel);
       this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {

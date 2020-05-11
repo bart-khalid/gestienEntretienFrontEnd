@@ -1,0 +1,164 @@
+<p-table #dtt [columns]="colsR"    [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonR" (onRowSelect)="onRowSelectR($event)" [paginator]="true" [rows]="10">
+  <ng-template pTemplate="caption">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Bon Réparation</strong></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <div style="text-align: center; align-items: center; align-content: center">
+          <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+          <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData" >
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAddR()" label="Ajouter un Bon Réparation"></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogR" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'60%',textAlign:'center'}">
+  <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonR">
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="numbonr"> Numero de Bon :</label>
+        </div>
+        <div class="ui-g-5">
+          <input pInputText id="numbonr"   [(ngModel)]="bonR.numbonR" autofocus />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="matr">Matricule Véhicule :</label>
+        </div>
+        <div class="ui-g-5">
+          <p-dropdown [filter]="true" id="matr" [options]="vehicule" [(ngModel)]="bonR.vehiculeR" ></p-dropdown>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="f">Fournisseur :</label>
+        </div>
+        <div class="ui-g-5">
+          <p-dropdown [filter]="true" id="f" [options]="fourniss" [(ngModel)]="bonR.fournisseurR" ></p-dropdown>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="design">Désignation :</label>
+        </div>
+        <div class="ui-g-5">
+          <textarea id="design" pInputTextarea autoResize="autoResize" [(ngModel)]="bonR.descriptionR" ></textarea>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="pun">Prix Unitaire :</label>
+        </div>
+        <div class="ui-g-5">
+          <input pInputText id="pun" [(ngModel)]="bonR.prixunitaireR" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="quan">Quantité :</label>
+        </div>
+        <div class="ui-g-5">
+          <input pInputText id="quan" [(ngModel)]="bonR.quantiteR" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="dater">Date Bon :</label>
+        </div>
+        <div class="ui-g-5">
+          <input pInputText id="dater"  type="date" [(ngModel)]="bonR.datebonR" />
+
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="tbrutr">Total Brut :</label>
+        </div>
+        <div class="ui-g-5">
+          <input pInputText id="tbrutr" [(ngModel)]="bonR.totalbrutR" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="mtvr">Montant Vignette :</label>
+        </div>
+        <div class="ui-g-5">
+          <input pInputText id="mtvr" [(ngModel)]="bonR.montantvignetteR" />
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button *ngIf="!cancelR" type="button" pButton icon="pi pi-times" (click)="deleteR()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check" [disabled]="" (click)="saveR()" label="Enregistrer"></button>
+    </div>
+  </p-footer>
+</p-dialog>
