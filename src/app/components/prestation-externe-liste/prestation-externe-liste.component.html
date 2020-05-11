@@ -1,1 +1,229 @@
-zfdlkezjflkjlkjlkj
+<p-table #dt [columns]="cols" [value]="prestationsExterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestationExteerne" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+
+  <ng-template pTemplate="caption">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Listes Des Prestataions Externes</strong></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <div style="text-align: center; align-items: center; align-content: center">
+          <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+          <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+      <td style="text-align:center">
+        <button  pButton icon="" class="btn btn-block btn-outline-success"></button>
+
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- dialogue to update or delete a prestation -->
+
+<p-dialog header="Prestation Externe Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%', height:'90%', float: 'left'}">
+  <div class="ui-g ui-fluid" *ngIf="prestationExterne" style="height: 100%">
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <p-dropdown id="typeEntretien" [options]="entretiens" [(ngModel)]="prestationExterne.typeEntretien" [filter]="true"></p-dropdown>
+      </div>
+    </div>
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="dateP" style="color: #00aeef"><strong>Date</strong></label>
+      </div>
+      <div class="ui-g-8">
+
+        <p-calendar [(ngModel)]="prestationExterne.date" id="dateP"></p-calendar>
+
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <p-checkbox [(ngModel)]="prestationExterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamed}}</strong></label>
+      </div>
+    </div>
+
+    <div class="ui-g-12" *ngIf="prestationExterne.reclamed">
+      <div class="ui-g-4">
+        <label for="refReclamation">Reference de la reclamation</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="prestationExterne.referenceReclamation" pInputText id="refReclamation">
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="prestationExterne.nomPrestataire" pInputText id="nomPres">
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="numeroFac" style="color: #00aeef"><strong>Numero Facture</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="prestationExterne.numeroFac" pInputText id="numeroFac">
+      </div>
+    </div>
+
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="montant" style="color: #00aeef"><strong>Montant Facture</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <input type="number" [(ngModel)]="prestationExterne.montantFac" pInputText id="montant">
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="bonc" style="color: #00aeef"><strong>Prestation A Un Bon Commande ?</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <p-checkbox [(ngModel)]="prestationExterne.bonCommande" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="bonC" style="color: #00aeef"><strong>{{prestationExterne.bonCommande}}</strong></label>
+      </div>
+    </div>
+
+    <!-- items of bon Commande -->
+    <div  *ngIf="prestationExterne.bonCommande" style="align-items: center; align-content: center; text-align: center">
+
+      <div class="ui-g-12" >
+        <div class="ui-g-4">
+          <label for="numbonc">Numero Bon Commande</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonCommande.numeroBonCommande" id="numbonC" >
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="dateBonc">Date Bon Commande</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar  [(ngModel)]="prestationExterne.presBonCommande.dateBonCommande" id="dateBonc" > </p-calendar>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="montantC">Montant</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonCommande.montant" id="montantC" >
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="nomP">nom Prestataire</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonCommande.nomPrestataire" id="nomP" >
+        </div>
+      </div>
+
+    </div>
+    <!-- fin items of bon Commande -->
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="bonL" style="color: #00aeef"><strong>Prestation A Un Bon Livraison ?</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <p-checkbox [(ngModel)]="prestationExterne.bonLivraison" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="bonL" style="color: #00aeef"><strong>{{prestationExterne.bonLivraison}}</strong></label>
+      </div>
+    </div>
+
+    <!-- items of bon Livrraison -->
+
+    <div  *ngIf="prestationExterne.bonLivraison" style="align-items: center; align-content: center; text-align: center">
+
+      <div class="ui-g-12" >
+        <div class="ui-g-4">
+          <label for="numbonL">Numero Bon Livraison</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonLivraison.numeroBonLivraison" id="numbonL" >
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="dateBonL">Date Bon Livraison</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar  [(ngModel)]="prestationExterne.presBonLivraison.dateBonLivraison" id="dateBonL" > </p-calendar>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="montantL">Montant</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonLivraison.montant" id="montantL" >
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="nomPL">nom Prestataire</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonLivraison.nomPrestataire" id="nomPL" >
+        </div>
+      </div>
+
+    </div>
+
+    <!-- fin items of bon Commande -->
+
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
+    </div>
+  </p-footer>
+</p-dialog>

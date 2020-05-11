@@ -7,7 +7,9 @@ import {MenuItem} from 'primeng';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  curentUserType = 'admin';
   items: MenuItem[];
+  itemsEmploye: MenuItem[];
 ngOnInit() {
   this.items = [
     {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
@@ -33,7 +35,7 @@ ngOnInit() {
         {label: 'Affecter Materiel', icon: 'pi pi-pencil', routerLink: 'localDetail'},
         {label: 'Vehicule', icon: 'pi pi-pencil', routerLink: 'vehicule'},
         {label: 'Fournisseur', icon: 'pi pi-pencil', routerLink: 'fournisseur'},
-        {label: 'Utilisateur', icon: 'pi pi-users', routerLink: 'users'},
+        {label: 'Personnel', items: [{label: 'Agent', icon: 'pi pi-user-edit', routerLink: 'agent'}, {label: 'Utilisateur', icon: 'pi pi-user-edit', routerLink: 'users'}], icon: 'pi pi-users'},
       ], icon: 'pi pi-fw pi-cog'},
 
     {separator: true},
@@ -44,5 +46,18 @@ ngOnInit() {
       ]
     }
   ];
+
+  this.itemsEmploye = [
+    {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
+    {label: 'Reclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
+    {separator: true},
+    {label: 'Aide',
+      icon: 'pi pi-fw pi-question',
+      items: [
+        {label: 'Documentations', icon: 'pi pi-info', routerLink: 'documentation'},
+      ]
+    }
+  ];
+
 }
 }

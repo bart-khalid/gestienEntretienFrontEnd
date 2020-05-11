@@ -66,7 +66,7 @@ export class MaterielComponent implements OnInit {
     const materiels = this.materiels;
     if (this.newMateriel) {
 
-      this.materiel.dateAchat = new Date(this.dateToConvert);
+
       materiels.push(this.materiel);
       this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {

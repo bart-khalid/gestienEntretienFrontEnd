@@ -43,6 +43,7 @@ import { DocumentationComponent } from './components/documentation/documentation
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
+import { AgentComponent } from './components/agent/agent.component';
 
 
 
@@ -85,6 +86,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     PrestationExterneListeComponent,
 
     DocumentationComponent,
+
+    AgentComponent,
 
   ],
   imports: [

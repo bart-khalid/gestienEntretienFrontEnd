@@ -17,6 +17,7 @@ import {LocalComponent} from './components/local/local.component';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import {DocumentationComponent} from './components/documentation/documentation.component';
+import {AgentComponent} from './components/agent/agent.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'prestationInterneListe' , component: PrestationInterneListeComponent},
   { path: 'prestationExterneListe' , component: PrestationExterneListeComponent},
   { path: 'documentation' , component: DocumentationComponent},
+  { path: 'agent' , component: AgentComponent},
 
 ];
 

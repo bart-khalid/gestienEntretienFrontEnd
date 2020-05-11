@@ -23,15 +23,21 @@ export class PrestationInterneListeComponent implements OnInit {
 
 
   cols: any[];
+  entretiens: any[];
   constructor(private reclamationService: ReclamationService) { }
 
 
   ngOnInit() {
     this.cols = [
       { field: 'reference', header: 'Reference' },
+      { field: 'typeEntretien', header: 'Entretien' },
       { field: 'date', header: 'Date' },
-      { field: 'reclamer', header: 'Reclamée ?' },
-      { field: 'nomAgent', header: 'Nom Agent' },
+      { field: 'reclamed', header: 'Reclamée ?' },
+      { field: 'nomAgent', header: 'Agent' },
+    ];
+    this.entretiens = [
+      {value: 'jardinage', label: 'Jardinage'},
+      {value: 'autre', label: 'Autre'}
     ];
   }
   showDialogToAdd() {
@@ -55,19 +61,19 @@ export class PrestationInterneListeComponent implements OnInit {
 
   delete() {
     const index = this.prestationsInternes.indexOf(this.selectedPrestation);
-    this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
+    this.prestationsInternes = this.prestationsInternes.filter((val, i) => i !== index);
     this.prestationInterne = null;
     this.displayDialog = false;
   }
 
   onRowSelect(event) {
     this.newPrestation = false;
-    this.prestationInterne = this.cloneReclamation(event.data);
+    this.prestationInterne = this.clonePrestation(event.data);
     this.displayDialog = true;
     this.cancel = false;
   }
 
-  cloneReclamation(p: PrestationInterne): PrestationInterne {
+  clonePrestation(p: PrestationInterne): PrestationInterne {
     const prestation = new PrestationInterne();
     for (const prop in p) {
       prestation[prop] = p[prop];
