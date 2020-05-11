@@ -1,0 +1,111 @@
+<p-toast [style]="{marginTop: '30%'}"></p-toast>
+<p-table #dt  [columns]="cols" [responsive]="true" [value]="agents" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedAgent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h3" style="color: #004a80"><strong>Gestion Des Agents</strong></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData" >
+        <td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+        <button type="button" pButton icon="pi pi-user-plus" (click)="showDialogToAdd()" label="Ajouter un utilisateur"></button>
+      </div>
+    </ng-template>
+  </p-table>
+
+  <p-dialog  header="Agent Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'60%'}">
+
+    <div class="ui-g ui-fluid"   *ngIf="agent">
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="codA"> codeAgent :</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="codA" [(ngModel)]="agent.codeAgent" />
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="nomA"> nom Agent :</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="nomA" [(ngModel)]="agent.nomAgent" />
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="date"> Date Entrée :</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar id="date" [(ngModel)]="agent.dateEntree" ></p-calendar>
+        </div>
+      </div>
+
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="matricule">Entreprise liée :</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="matricule"  [(ngModel)]="agent.entrepriseLiee" autofocus />
+        </div>
+
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="ad">Adresse Domicile:</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="ad" [(ngModel)]="agent.adresseDomicile" />
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="tel">Tele :</label>
+        </div>
+        <div class="ui-g-8">
+          <input type="text" pInputText id="tel" [(ngModel)]="agent.tel" />
+        </div>
+      </div>
+
+    </div>
+    <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button *ngIf="!cancel" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+        <button type="submit"  pButton icon="pi pi-save" (click)="save()" label="Enregistrer"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+
+

@@ -39,49 +39,73 @@
   </ng-template>
 </p-table>
 
+<!-- dialogue to update or delete a prestation -->
 
-<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
-  <div class="ui-g ui-fluid" *ngIf="prestationInterne">
+<p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%', height:'90%', float: 'left'}">
+  <div class="ui-g ui-fluid" *ngIf="prestationInterne" style="height: 100%">
 
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="objet">Objet</label>
+        <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien</strong> </label>
       </div>
       <div class="ui-g-8">
-        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="prestationInterne.typeEntretien" />
+        <p-dropdown id="typeEntretien" [options]="entretiens" [(ngModel)]="prestationInterne.typeEntretien" [filter]="true"></p-dropdown>
       </div>
     </div>
 
 
-
-
-
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label >Locale</label>
+        <label for="date" style="color: #00aeef"><strong>Date</strong></label>
       </div>
       <div class="ui-g-8">
 
-        <p-dropdown  [filter]="true"></p-dropdown>
+        <p-calendar [(ngModel)]="prestationInterne.date" id="date"></p-calendar>
 
       </div>
     </div>
 
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="description">Description</label>
+        <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
       <div class="ui-g-8">
-        <textarea  pInputText id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="prestationInterne.nomAgent" style="resize: none; height: 60px"></textarea>
+        <p-checkbox [(ngModel)]="prestationInterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="reclamer" style="color: #00aeef"><strong>{{prestationInterne.reclamed}}</strong></label>
+      </div>
+    </div>
+
+    <div class="ui-g-12" *ngIf="prestationInterne.reclamed">
+      <div class="ui-g-4">
+        <label for="refReclamation">Reference de la reclamation</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="prestationInterne.referenceReclamation" pInputText id="refReclamation">
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="codeAgent" style="color: #00aeef"><strong>Code Agent</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="prestationInterne.codeAgent" pInputText id="codeAgent">
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="nomAgent" style="color: #00aeef"><strong>Nom Agent</strong></label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="prestationInterne.nomAgent" pInputText id="nomAgent">
       </div>
     </div>
 
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-check"  (click)="save()" label="Enregistrer"></button>
+      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>
-

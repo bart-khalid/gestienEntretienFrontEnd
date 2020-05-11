@@ -54,7 +54,7 @@ export class PrestationComponent implements OnInit {
   save() {
     if (this.newPresInterne) {
       this.prestataionInterne = null;
-    } else if (this.newPresExterne){
+    } else if (this.newPresExterne) {
       this.prestataionExterne = null;
     }
     this.displayDialog = false;

@@ -19,6 +19,8 @@ import {PrestationExterneListeComponent} from './components/prestation-externe-l
 import {DocumentationComponent} from './components/documentation/documentation.component';
 import {BonvComponent} from "./components/bonv/bonv.component";
 import {BonrComponent} from "./components/bonr/bonr.component";
+import {AgentComponent} from './components/agent/agent.component';
+
 
 
 const routes: Routes = [
@@ -40,6 +42,7 @@ const routes: Routes = [
   { path: 'prestationInterneListe' , component: PrestationInterneListeComponent},
   { path: 'prestationExterneListe' , component: PrestationExterneListeComponent},
   { path: 'documentation' , component: DocumentationComponent},
+  { path: 'agent' , component: AgentComponent},
   { path: 'bonv' , component: BonvComponent},
   { path: 'bonr' , component: BonrComponent},
 
