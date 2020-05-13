@@ -50,13 +50,12 @@
         <label for="marque">Marque :</label>
       </div>
       <div class="ui-g-5">
-        <!--
-        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
-        -->
-        <p-dropdown id="marque" [options]="fournisseurs" [(ngModel)]="materiel.marque" [filter]="true"></p-dropdown>
+        <div class="form-group" [formGroup]="userform"  >
+        <p-dropdown id="marque" formControlName="marque" [options]="fournisseurs" [(ngModel)]="materiel.marque" [filter]="true"></p-dropdown>
+      </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        <p-message severity="error"  *ngIf="(userform.controls['marque'].touched &&!userform.controls['marque'].dirty  || userform.controls['marque'].value=='Choisissez un fournisseur')" text="Veuillez Choisir un fournisseur "></p-message>
       </div>
     </div>
 
@@ -80,37 +79,27 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="marque">Type :</label>
+
+        <label for="type">Type :</label>
       </div>
       <div class="ui-g-5">
-        <!--
-        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
-        -->
-        <p-dropdown id="type" [options]="types" [(ngModel)]="materiel.type" [filter]="true"></p-dropdown>
+        <div class="form-group" [formGroup]="userform"  >
+        <p-dropdown id="type" formControlName="type" [options]="types" [(ngModel)]="materiel.type" [filter]="true"></p-dropdown>
+      </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        <p-message severity="error" *ngIf="(userform.controls['type'].touched &&!userform.controls['type'].dirty  || userform.controls['type'].value=='Choisissez un Type')"
+                   text="Choisissez un type"></p-message>
       </div>
     </div>
 
-    <div class="ui-g-12">
-      <div class="ui-g-3 ui-md-3">
-        <label for="dateachat">Date d'Achat :</label>
-      </div>
-      <div class="ui-g-5 ui-md-5" >
-        <input pInputText id="dateachat"  type="date" [(ngModel)]="materiel.dateAchat" />
-        </div>
-      <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-      </div>
 
-    </div>
   </div>
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
+      <button *ngIf="!cancel" [disabled]=!userform.valid type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-save" [disabled]=!userform.valid (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 

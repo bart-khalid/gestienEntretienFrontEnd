@@ -3,7 +3,7 @@ import {FournisseurSV} from "./fournisseur.model";
 
 export class BonsC {
   // carburant
-  vehiculeC= new Car();
+  vehiculeC = new Car();
   datebonC: Date;
   descriptionC: string;
   quantiteC: number;

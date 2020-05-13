@@ -3,6 +3,7 @@ import {Users} from '../../controller/model/users.model';
 import {Message, MessageService, SelectItem} from 'primeng/api';
 import {UsersService} from '../../controller/service/users.service';
 import {Agent} from '../../controller/model/agent.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-agent',
@@ -25,15 +26,29 @@ export class AgentComponent implements OnInit {
 
   type: SelectItem[];
 
-  constructor(private messageService: MessageService) {
+  userform: FormGroup;
+
+
+  constructor(private fb: FormBuilder, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
+    this.userform = this.fb.group({
+      codeAgent: new FormControl('', Validators.required),
+      nomAgent: new FormControl('', Validators.required),
+      dateEntree: new FormControl('', Validators.required),
+      adresseDomicile: new FormControl('', Validators.required),
+      entrepriseLiee: new FormControl('', Validators.required),
+      telephone: new FormControl('',Validators.compose([Validators.required,
+        Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
+    });
+
     this.cols = [
       {field: 'codeAgent', header: 'Code Agent'} ,
       {field: 'nomAgent', header: 'Nom Agent'},
       {field: 'dateEntree', header: 'Date Enree'},
       {field: 'entrepriseLiee', header: 'Entreprise Liee'},
+      {field: 'adresseDomicile', header: 'Adresse domicile'},
       {field: 'tel', header: 'Telephone'}
     ];
   }

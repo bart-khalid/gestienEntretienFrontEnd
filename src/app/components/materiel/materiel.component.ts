@@ -34,13 +34,10 @@ export class MaterielComponent implements OnInit {
   dateToConvert: string;
   constructor(private fb: FormBuilder,private reclamationService: ReclamationService, private messageService: MessageService) { }
 
-
   ngOnInit() {
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),
       marque: new FormControl('', Validators.required),
-      dateachat: new FormControl('', Validators.required),
-      utilite: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required)
     });
     this.reclamationService.findAll();
@@ -53,14 +50,14 @@ export class MaterielComponent implements OnInit {
       { field: 'type', header: 'Type' }
     ];
     this.fournisseurs = [
-      { value: '0', label: 'choose a fournisseur' },
-      { value: '1', label: 'fournisseur 1' },
+      { value: '', label: 'Choisissez un fournisseur' },
+      { value: 'fournisseur 1', label: 'fournisseur 1' },
       { value: '2', label: 'fournisseur 2' },
       { value: '3', label: 'fournisseur 3' },
     ];
 
     this.types = [
-      { value: '0', label: 'choose a type' },
+      { value: '', label: 'Choisissez un Type' },
       { value: 'Informatique', label: 'Informatique ' },
       { value: 'Enseignement', label: 'Enseignement ' }
     ];

@@ -3,6 +3,7 @@ import {SelectItem} from "primeng";
 import {BonsR} from "../../controller/model/bons-r.model";
 import {MessageService} from "primeng/api";
 import {BonsV} from "../../controller/model/bons-v.model";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-bonv',
@@ -21,33 +22,54 @@ export class BonvComponent implements OnInit {
   bonsV = new Array<BonsV>();
   fourniss : SelectItem[];
   vehicule : SelectItem[];
-  constructor(private messageService: MessageService) { }
+  userform: FormGroup;
+
+
+  constructor(private fb: FormBuilder,private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.userform = this.fb.group({
+      numbonV: new FormControl('', Validators.required),
+      vehiculeV: new FormControl('', Validators.required),
+      fournisseurV: new FormControl('', Validators.required),
+      descriptionV: new FormControl('', Validators.required),
+      typehuileV: new FormControl('', Validators.required),
+      kilometrageV: new FormControl('', Validators.required),
+      prixunitaireV: new FormControl('', Validators.required),
+      quantiteV: new FormControl('', Validators.required),
+      datebonV: new FormControl('', Validators.required),
+      totalbrutV: new FormControl('', Validators.required),
+      montantvignetteV: new FormControl('', Validators.required),
+    });
+
+    this.colsV = [
+      {field: 'numbonV', header: 'Numero de Bon'},
+      {field: 'vehiculeV', header: 'Matricule Véhicule'},
+      {field: 'fournisseurV', header: 'Fournisseur'},
+      {field: 'descriptionV', header: 'Désignation'},
+      {field: 'typehuileV', header: 'Type huile'},
+      {field: 'kilometrageV', header: 'Kilométrage'},
+      {field: 'prixunitaireV', header: 'Prix Unitaire'},
+      {field: 'quantiteV', header: 'Quantité'},
+      {field: 'datebonV', header: 'Date Bon'},
+      {field: 'totalbrutV', header: 'Total Brut'},
+      {field: 'montantvignetteV', header: 'Montant Vignette'}
+    ];
+
     this.vehicule=[
-      {label: 'Selectionnez une véhicule', value: null},
+      {label: 'Selectionnez une véhicule', value: ''},
       {label: 'V1', value: 'v1'},
       {label: 'V2', value: 'v2'},
       {label: 'V3', value: 'v3'}
     ];
 
     this.fourniss = [
-      {label: 'Selectionnez un fournisseur', value: null},
+      {label: 'Selectionnez un fournisseur', value: ''},
       {label: 'fournisseur 1', value: 'f1'},
       {label: 'fournisseur 2', value: 'f2'},
       {label: 'fournisseur 3', value: 'f3'}
     ];
-    this.colsV = [
-      {field: 'numbonR', header: 'Numero de Bon'},
-      {field: 'vehiculeR', header: 'Matricule Véhicule'},
-      {field: 'fournisseurR', header: 'Fournisseur'},
-      {field: 'descriptionR', header: 'Désignation'},
-      {field: 'prixunitaireR', header: 'Prix Unitaire'},
-      {field: 'quantiteR', header: 'Quantité'},
-      {field: 'datebonR', header: 'Date Bon'},
-      {field: 'totalbrutR', header: 'Total Brut'},
-      {field: 'montantvignetteR', header: 'Montant Vignette'}
-    ];
+
   }
   showDialogToAddV() {
     this.newbonV = true;

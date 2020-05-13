@@ -3,7 +3,7 @@
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="h3" style="color: #004a80"><strong>Listes Des Prestataions Internes</strong></h1>
+        <h1 class="h3" style="color: #004a80"><strong>Liste Prestataions Internes</strong></h1>
       </div>
     </div>
     <div class="row">
@@ -41,27 +41,37 @@
 
 <!-- dialogue to update or delete a prestation -->
 
-<p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%', height:'90%', float: 'left'}">
-  <div class="ui-g ui-fluid" *ngIf="prestationInterne" style="height: 100%">
+<p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '660px'}">
+  <div class="ui-g ui-fluid" *ngIf="prestationInterne" >
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien</strong> </label>
+      <div class="ui-g-3">
+        <label for="typeEntretien" style="color: #00aeef"><strong>Type Entretien</strong> </label>
       </div>
-      <div class="ui-g-8">
-        <p-dropdown id="typeEntretien" [options]="entretiens" [(ngModel)]="prestationInterne.typeEntretien" [filter]="true"></p-dropdown>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <p-dropdown id="typeEntretien" formControlName="typeEntretien" [options]="entretiens" [(ngModel)]="prestationInterne.typeEntretien" [filter]="true"></p-dropdown>
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform.controls['typeEntretien'].touched &&!userform.controls['typeEntretien'].dirty  || userform.controls['typeEntretien'].value=='Choisir un type')"
+                   text="Veuillez choisir un type"></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="date" style="color: #00aeef"><strong>Date</strong></label>
       </div>
-      <div class="ui-g-8">
-
-        <p-calendar [(ngModel)]="prestationInterne.date" id="date"></p-calendar>
-
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText formControlName="date"  type="date" [(ngModel)]="prestationInterne.date" id="date"/>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['date'].hasError('required') && (userform.controls['date'].dirty || userform.controls['date'].touched) "
+                     text="Champ Obligatoire"></p-message>
+        </div>
       </div>
     </div>
 
@@ -69,43 +79,49 @@
       <div class="ui-g-4">
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-2">
         <p-checkbox [(ngModel)]="prestationInterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
         <label for="reclamer" style="color: #00aeef"><strong>{{prestationInterne.reclamed}}</strong></label>
+      </div>
+      <div class="ui-g-3"></div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12" *ngIf="prestationInterne.reclamed">
-      <div class="ui-g-4">
-        <label for="refReclamation">Reference de la reclamation</label>
+      <div class="ui-g-3">
+        <label for="refReclamation" style="color: #00aeef">Reference de la reclamation</label>
       </div>
-      <div class="ui-g-8">
-        <input type="text" [(ngModel)]="prestationInterne.referenceReclamation" pInputText id="refReclamation">
+      <div class="ui-g-5">
+        <p-dropdown type="text" [options]="reclamations" [(ngModel)]="prestationInterne.referenceReclamation" pInputText id="refReclamation"></p-dropdown>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="codeAgent" style="color: #00aeef"><strong>Code Agent</strong></label>
+      <div class="ui-g-3">
+        <label for="codeAgent" style="color: #00aeef"><strong>Agent</strong></label>
       </div>
-      <div class="ui-g-8">
-        <input type="text" [(ngModel)]="prestationInterne.codeAgent" pInputText id="codeAgent">
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <input type="text" formControlName="agent" [(ngModel)]="prestationInterne.codeAgent" pInputText id="codeAgent">
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform.controls['agent'].touched &&!userform.controls['agent'].dirty  || userform.controls['agent'].value=='Choisir un agent')"
+                   text="Veuillez choisir un agent"></p-message>
       </div>
     </div>
 
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="nomAgent" style="color: #00aeef"><strong>Nom Agent</strong></label>
-      </div>
-      <div class="ui-g-8">
-        <input type="text" [(ngModel)]="prestationInterne.nomAgent" pInputText id="nomAgent">
-      </div>
-    </div>
+
 
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
+      <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>

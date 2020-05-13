@@ -45,11 +45,14 @@
         <label for="matricule"> Matricule :</label>
       </div>
       <div class="ui-g-5">
-        <input pInputText id="matricule"   [(ngModel)]="car.matricule" autofocus />
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText id="matricule" formControlName="matricule"  [(ngModel)]="car.matricule" autofocus />
       </div>
-       <div class="ui-g-4">
-         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
        </div>
+       <div class="ui-g-4">
+         <p-message severity="error"  *ngIf="userform.controls['matricule'].hasError('required') && (userform.controls['matricule'].dirty || userform.controls['matricule'].touched) " text="Champ Obligatoire"></p-message>
+       </div>
+
      </div>
 
 
@@ -58,10 +61,13 @@
         <label for="type">Type :</label>
       </div>
       <div class="ui-g-5">
-        <p-dropdown id="type"  [options]="type" [(ngModel)]="car.type"></p-dropdown>
+        <div class="form-group" [formGroup]="userform"  >
+        <p-dropdown id="type" formControlName="type"  [options]="type" [(ngModel)]="car.type"></p-dropdown>
+      </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        <p-message severity="error" *ngIf="(userform.controls['type'].touched &&!userform.controls['type'].dirty  || userform.controls['type'].value=='Choisir un Type')"
+                   text="Choisissez un Type"></p-message>
       </div>
     </div>
 
@@ -70,10 +76,13 @@
         <label for="marque">Marque :</label>
       </div>
       <div class="ui-g-5">
-        <input pInputText  id="marque" [(ngModel)]="car.marquev" />
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText formControlName="marque" id="marque" [(ngModel)]="car.marquev" />
+      </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        <p-message severity="error" *ngIf="userform.controls['marque'].hasError('required') && (userform.controls['marque'].dirty || userform.controls['marque'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -82,21 +91,27 @@
         <label for="utilite">Utilité :</label>
       </div>
       <div class="ui-g-5">
-        <textarea id="utilite"   pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
+        <div class="form-group" [formGroup]="userform"  >
+        <textarea id="utilite" formControlName="utilite"  pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
+      </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        <p-message severity="error" *ngIf="userform.controls['utilite'].hasError('required') && (userform.controls['utilite'].dirty || userform.controls['utilite'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="date">Date Achat :</label>
+        <label for="date">Date Affectation :</label>
       </div>
       <div class="ui-g-5">
-        <input pInputText id="date"  type="date" [(ngModel)]="car.dateEntrerParc" />
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText id="date" formControlName="dateachat" type="date" [(ngModel)]="car.dateEntrerParc" />
+      </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        <p-message severity="error" *ngIf="userform.controls['dateachat'].hasError('required') && (userform.controls['dateachat'].dirty || userform.controls['dateachat'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -105,8 +120,8 @@
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Enregistrer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>

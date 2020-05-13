@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SelectItem} from "primeng";
 import {BonsR} from "../../controller/model/bons-r.model";
 import {MessageService} from "primeng/api";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-bonr',
@@ -9,6 +10,7 @@ import {MessageService} from "primeng/api";
   styleUrls: ['./bonr.component.css']
 })
 export class BonrComponent implements OnInit {
+  userform: FormGroup;
   typebon: SelectItem[];
   typeselecte: string;
   colsR: any[];
@@ -18,24 +20,22 @@ export class BonrComponent implements OnInit {
   selectedBonR: BonsR;
   newbonR: boolean;
   bonsR = new Array<BonsR>();
-  fourniss : SelectItem[];
-  vehicule : SelectItem[];
-  constructor(private messageService: MessageService) { }
+  fourniss: SelectItem[];
+  vehicule: SelectItem[];
+  constructor(private fb: FormBuilder,private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.vehicule=[
-      {label: 'Selectionnez une véhicule', value: null},
-      {label: 'V1', value: 'v1'},
-      {label: 'V2', value: 'v2'},
-      {label: 'V3', value: 'v3'}
-    ];
-
-    this.fourniss = [
-      {label: 'Selectionnez un fournisseur', value: null},
-      {label: 'fournisseur 1', value: 'f1'},
-      {label: 'fournisseur 2', value: 'f2'},
-      {label: 'fournisseur 3', value: 'f3'}
-    ];
+    this.userform = this.fb.group({
+      numbonR: new FormControl('', Validators.required),
+      vehiculeR: new FormControl('', Validators.required),
+      fournisseurR: new FormControl('', Validators.required),
+      descriptionR: new FormControl('', Validators.required),
+      prixunitaireR: new FormControl('', Validators.required),
+      quantiteR: new FormControl('', Validators.required),
+      datebonR: new FormControl('', Validators.required),
+      totalbrutR: new FormControl('', Validators.required),
+      montantvignetteR: new FormControl('', Validators.required),
+    });
     this.colsR = [
       {field: 'numbonR', header: 'Numero de Bon'},
       {field: 'vehiculeR', header: 'Matricule Véhicule'},
@@ -47,6 +47,20 @@ export class BonrComponent implements OnInit {
       {field: 'totalbrutR', header: 'Total Brut'},
       {field: 'montantvignetteR', header: 'Montant Vignette'}
     ];
+    this.vehicule =[
+      {label: 'Selectionnez une véhicule', value: ''},
+      {label: 'V1', value: 'v1'},
+      {label: 'V2', value: 'v2'},
+      {label: 'V3', value: 'v3'}
+    ];
+
+    this.fourniss = [
+      {label: 'Selectionnez un fournisseur', value: ''},
+      {label: 'fournisseur 1', value: 'f1'},
+      {label: 'fournisseur 2', value: 'f2'},
+      {label: 'fournisseur 3', value: 'f3'}
+    ];
+
   }
   showDialogToAddR() {
     this.newbonR = true;

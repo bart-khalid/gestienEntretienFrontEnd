@@ -34,16 +34,16 @@ export class VehiculeListComponent implements OnInit {
 
   ngOnInit() {
 
-   /* this.userform = this.fb.group({
+    this.userform = this.fb.group({
       matricule: new FormControl('', Validators.required),
       marque: new FormControl('', Validators.required),
       dateachat: new FormControl('', Validators.required),
       utilite: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required)
-    });  */
+    });
 
     this.cars = [
-      { matricule: 'Apple', type: 'automobile', marquev: '40%', utilite: '$54,406.00', dateEntrerParc: null },
+      { matricule: 'Apple', type: 'automobile', marquev: '40%', utilite: '$54,406.00', dateEntrerParc: new Date()},
       { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
       { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
       { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
@@ -53,7 +53,6 @@ export class VehiculeListComponent implements OnInit {
       { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
       { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
       { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-
       ];
     this.cols = [
       { field: 'matricule', header: 'Matricule' },
@@ -63,14 +62,14 @@ export class VehiculeListComponent implements OnInit {
       { field: 'dateEntrerParc', header: 'Date Achat' }
     ];
     this.type = [];
-    this.type.push({label: 'Select Type', value: ''});
+    this.type.push({label: 'Choisir un Type', value: ''});
     this.type.push({label: 'Automobile', value: 'automobile'});
     this.type.push({label: 'Bus', value: 'bus'});
   }
 
   onSubmit(value: string) {
     this.submitted = true;
-    this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+    this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
   }
 
   showDialogToAdd() {

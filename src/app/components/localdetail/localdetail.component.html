@@ -41,7 +41,7 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'650px',textAlign:'center'}">
+  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'650px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 250px;" *ngIf="local">
 
       <div class="ui-g-12">
@@ -49,10 +49,13 @@
           <label for="type">Nom Matériel :</label>
         </div>
         <div class="ui-g-5">
-          <p-dropdown  id="type" [filter]="true" [options]="typesmateriel" [(ngModel)]="local.materiellocal"></p-dropdown>
+          <div class="form-group" [formGroup]="userform"  >
+          <p-dropdown  id="type" formControlName="materiellocal" [filter]="true" [options]="typesmateriel" [(ngModel)]="local.materiellocal"></p-dropdown>
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='Selectionnez un materiel')"
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -61,23 +64,30 @@
           <label for="matricule"> Nom Locale :</label>
         </div>
         <div class="ui-g-5">
-          <p-dropdown id="matricule" [filter]="true" [options]="typeslocal"  [(ngModel)]="local.localassocie" autofocus ></p-dropdown>
+          <div class="form-group" [formGroup]="userform"  >
+          <p-dropdown id="matricule" formControlName="localassocie" [filter]="true" [options]="typeslocal"  [(ngModel)]="local.localassocie" autofocus ></p-dropdown>
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value=='Selectionnez un locale')"
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
 
       <div class="ui-g-12">
         <div class="ui-g-3">
+
           <label for="marque">Date Affectation :</label>
         </div>
+
         <div class="ui-g-5">
-          <input pInputText id="marque"  type="date" [(ngModel)]="local.dateachat" />
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="marque" formControlName="dateachat" type="date" [(ngModel)]="local.dateachat" />
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['dateachat'].hasError('required') && (userform.controls['dateachat'].dirty || userform.controls['dateachat'].touched) " text="Champ Obligatoire"></p-message>
         </div>
 
       </div>
@@ -87,8 +97,8 @@
 
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-save" (click)="save();onSubmit()" label="Enregistrer"></button>
+        <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+        <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save();onSubmit()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>

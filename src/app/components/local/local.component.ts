@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Local} from '../../controller/model/local.model';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
 
 @Component({
@@ -28,11 +28,20 @@ export class LocalComponent implements OnInit {
 
   typesDepartement: SelectItem[];
 
+  userform: FormGroup;
+
   errorS: number ;
   errorC: number ;
   constructor(private fb: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit(): void {
+
+    this.userform = this.fb.group({
+      nom: new FormControl('', Validators.required),
+      typelocal: new FormControl('', Validators.required),
+      departement: new FormControl('', Validators.required),
+    });
+
     this.cols = [
       {field: 'nomlocal', header: 'Nom Locale'},
       {field: 'typelocal', header: 'Type Locale'},
@@ -40,7 +49,7 @@ export class LocalComponent implements OnInit {
     ];
 
     this.typeslocal = [
-      {label: 'Selectionnez un type', value: null},
+      {label: 'Choisir un type', value: ''},
       {label: 'Amphi', value: 'Amphi'},
       {label: 'Salle', value: 'Salle'},
       {label: 'Laboratoire', value: 'Laboratoire'},
@@ -51,7 +60,7 @@ export class LocalComponent implements OnInit {
       ];
 
     this.typesDepartement = [
-      {label: 'Selectionnez un type', value: null},
+      {label: 'Choisir un type', value: ''},
       {label: 'Département Informatique', value: 'Informatique'},
       {label: 'Département Physique', value: 'Physique'},
       {label: 'Département Chimie', value: 'Chimie'},

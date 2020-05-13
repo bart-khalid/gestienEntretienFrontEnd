@@ -1,6 +1,9 @@
+import {Car} from "./car";
+import {FournisseurSV} from "./fournisseur.model";
+
 export class BonsV {
   // vidange
-  vehiculeV: string;
+  vehiculeV = new Car();
   datebonV: Date;
   descriptionV: string;
   quantiteV: number;
@@ -9,6 +12,6 @@ export class BonsV {
   montantvignetteV: string;
   kilometrageV: number;
   typehuileV: string;
-  fournisseurV: string;
-  numbonV: bigint;
+  fournisseurV = new FournisseurSV();
+  numbonV: number;
 }

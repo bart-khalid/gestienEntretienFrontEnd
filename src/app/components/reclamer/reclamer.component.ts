@@ -21,12 +21,15 @@ export class ReclamerComponent implements OnInit {
 
   newReclamation: boolean;
 
+  userform: FormGroup;
+  userform1: FormGroup;
 
 
   cols: any[];
 
   locales: Array<any>;
-  constructor(private reclamationService: ReclamationService, private messageService: MessageService) { }
+  materiels: Array<any>;
+  constructor(private fb: FormBuilder,private reclamationService: ReclamationService, private messageService: MessageService) { }
 
 
   ngOnInit() {
@@ -42,11 +45,33 @@ export class ReclamerComponent implements OnInit {
       { field: 'etat', header: 'Etat' }
     ];
     this.locales = [
-      { value: '0', label: 'locale' },
+      { value: '', label: 'Choisir un locale' },
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },
       { value: '3', label: 'Option 3' },
     ];
+
+    this.materiels = [
+      { value: '', label: 'Choisir un matériel' },
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+    ];
+
+    this.userform = this.fb.group({
+      objet: new FormControl('', Validators.required),
+      local: new FormControl('', Validators.required),
+      description : new FormControl('', Validators.required),
+    });
+
+
+    this.userform1 = this.fb.group({
+      objett: new FormControl('', Validators.required),
+      locale: new FormControl('', Validators.required),
+      mater: new FormControl('', Validators.required),
+      desc: new FormControl('', Validators.required),
+    });
+
   }
   showDialogToAdd() {
     this.newReclamation = true;

@@ -34,94 +34,114 @@
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter un utilisateur"></button>
+        <button type="button" pButton icon="pi pi-user-plus" (click)="showDialogToAdd()" label="Ajouter un utilisateur"></button>
       </div>
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Utilisateur Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
+  <p-dialog  header="Utilisateur Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px',textAlign:'center'}">
 
 
 
     <div class="ui-g ui-fluid"  *ngIf="user">
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="ma"> Nom :</label>
         </div>
-        <div class="ui-g-4">
-          <input pInputText id="ma" [(ngModel)]="user.nomu" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="ma" formControlName="nom" [(ngModel)]="user.nomu" />
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="marqe"> Prénom :</label>
-        </div>
-        <div class="ui-g-4">
-          <input pInputText id="marqe" [(ngModel)]="user.prenomu" />
-        </div>
-        <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['nom'].hasError('required') && (userform.controls['nom'].dirty || userform.controls['nom'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="marqee"> Prénom :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="marqee" formControlName="prenom" [(ngModel)]="user.prenomu" />
+          </div>
+        </div>
         <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['prenom'].hasError('required') && (userform.controls['prenom'].dirty || userform.controls['prenom'].touched) "
+                     text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
           <label for="marqe"> Numero de Telephone :</label>
         </div>
-        <div class="ui-g-4">
-          <input pInputText id="marqe" [(ngModel)]="user.telephoneu" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="marqe"  formControlName="telephone" [(ngModel)]="user.telephoneu" />
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['telephone'].hasError('required') && (userform.controls['telephone'].dirty || userform.controls['telephone'].touched) "
+                     text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['telephone'].hasError('pattern') && (userform.controls['telephone'].dirty || userform.controls['telephone'].touched) "
+                     text="Numero non valide"></p-message>
         </div>
       </div>
 
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="matricule"> Nom d'utilisateur :</label>
         </div>
-        <div class="ui-g-4">
-          <input pInputText id="matricule"  [(ngModel)]="user.username"  />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="matricule" formControlName="usernamee" [(ngModel)]="user.username"  />
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['usernamee'].hasError('required') && (userform.controls['usernamee'].dirty || userform.controls['usernamee'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="marque">Mot de passe :</label>
         </div>
-        <div class="ui-g-4">
-          <input pInputText id="marque" [(ngModel)]="user.password" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText formControlName="passwordd" id="marque" [(ngModel)]="user.password" />
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['passwordd'].hasError('required') && (userform.controls['passwordd'].dirty || userform.controls['passwordd'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="type">Type Utilisateur :</label>
         </div>
-        <div class="ui-g-4">
-          <p-dropdown id="type" [options]="type" [(ngModel)]="user.typeu"></p-dropdown>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <p-dropdown id="type" formControlName="type" [options]="type" [(ngModel)]="user.typeu"></p-dropdown>
+        </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="(userform.controls['type'].touched &&!userform.controls['type'].dirty  || userform.controls['type'].value=='Selectionnez le Type')"
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="submit"  pButton icon="pi pi-check" (click)="save();onSubmit()" label="Enregistrer"></button>
+        <button *ngIf="!cancel" type="button" [disabled]="!userform.valid" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+        <button type="submit"  pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="save();onSubmit()" label="Enregistrer"></button>
       </div>
     </p-footer>
 

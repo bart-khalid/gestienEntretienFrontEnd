@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Message, MessageService, SelectItem} from 'primeng/api';
 import {Users} from '../../controller/model/users.model';
 import {UsersService} from '../../controller/service/users.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-users',
@@ -28,12 +29,24 @@ export class UsersComponent implements OnInit {
    errorS: number ;
    errorC: number ;
 
+  userform: FormGroup;
+
   msgs: Message[] = [];
 
-  constructor(private messageService: MessageService,private userService: UsersService) {
+  constructor(private fb: FormBuilder,private messageService: MessageService,private userService: UsersService) {
   }
 
   ngOnInit(): void {
+    this.userform = this.fb.group({
+      nom: new FormControl('', Validators.required),
+      prenom: new FormControl('', Validators.required),
+      telephone: new FormControl('', Validators.compose([Validators.required,
+        Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
+      usernamee: new FormControl('', Validators.required),
+      passwordd: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required)
+    });
+
     this.cols = [
       {field: 'nomu', header: 'Nom '} ,
       {field: 'prenomu', header: 'Prénom'},
@@ -43,7 +56,7 @@ export class UsersComponent implements OnInit {
       {field: 'typeu', header: 'Type utilisateur'}
     ];
     this.type = [];
-    this.type.push({label: 'Selectionnez le Type', value: null});
+    this.type.push({label: 'Selectionnez le Type', value: ''});
     this.type.push({label: 'Administrateur', value: 'administrateur'});
     this.type.push({label: 'Employé', value: 'employe'});
 

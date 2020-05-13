@@ -17,14 +17,15 @@
     <div class="col-md-12">
     <form class="form-group" >
       <h1>Se Connecter </h1>
-      <h3 style="color: #ed1c24" class="alert-danger">{{errorMsg()}}  </h3>
-      <h3 style="color: forestgreen" class="badge-success">{{SuccessMsg()}} </h3>
+      <span style="color: #ed1c24" class="alert-danger">{{errorMsg()}}  </span>
+     <!-- <span style="color: forestgreen" class="badge-success">{{SuccessMsg()}} </span> -->
+
       <div class="form-group">
-        <input type="text" placeholder="Nom D'Utilisateur" [(ngModel)]="login.username" class="form-control" name="user" id="username" required="required">
+        <input type="text" placeholder="Nom d'utilisateur" [(ngModel)]="login.username" class="form-control" name="user" id="username" >
 
       </div>
       <div class="form-group">
-        <input type="password" placeholder="Mot de passe" [(ngModel)]="login.password" class="form-control" name="pass"  id="password" required="required">
+        <input type="password" placeholder="Mot de passe" [(ngModel)]="login.password" class="form-control" name="pass"  id="password" >
       </div>
       <div>
         <input type="submit" (click)="connect(login.username,login.password)"  value="Connecter" />

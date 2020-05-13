@@ -4,6 +4,7 @@ import {CarService} from '../../controller/service/car.service';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {MenuItem, SelectItem} from 'primeng';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-reclamation',
@@ -23,19 +24,24 @@ export class ReclamationComponent implements OnInit {
 
   newReclamation: boolean;
 
+  materiels: Array<any>;
+
+  userform: FormGroup;
+
+  userform1: FormGroup;
 
 
   cols: any[];
 
   locales: Array<any>;
-  constructor(private reclamationService: ReclamationService) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService) { }
 
 
   ngOnInit() {
     this.reclamationService.findAll();
     this.cols = [
-      { field: 'reference', header: 'Reference' },
-      { field: 'reclamentName', header: 'Reclament' },
+      { field: 'reference', header: 'Réference' },
+      { field: 'reclamentName', header: 'Réclament' },
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
@@ -43,12 +49,33 @@ export class ReclamationComponent implements OnInit {
       { field: 'nomMateriel', header: 'Materiel' },
       { field: 'etat', header: 'Etat' }
     ];
+    this.userform = this.fb.group({
+      objet: new FormControl('', Validators.required),
+      local: new FormControl('', Validators.required),
+      description : new FormControl('', Validators.required),
+    });
+
+    this.userform1 = this.fb.group({
+      objett: new FormControl('', Validators.required),
+      locale: new FormControl('', Validators.required),
+      mater: new FormControl('', Validators.required),
+      desc: new FormControl('', Validators.required),
+    });
+
     this.locales = [
-      { value: '0', label: 'locale' },
+      { value: '', label: 'Choisir un locale' },
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },
       { value: '3', label: 'Option 3' },
     ];
+
+    this.materiels = [
+      { value: '', label: 'Choisir un matériel' },
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+    ];
+
   }
   showDialogToAdd() {
     this.newReclamation = true;

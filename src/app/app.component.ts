@@ -17,10 +17,9 @@ ngOnInit() {
         {label: 'Carburant', icon: 'pi pi-fw pi-pencil', routerLink: 'bons'},
         {label: 'Vidange', icon: 'pi pi-fw pi-pencil', routerLink: 'bonv'},
         {label: 'Reparation', icon: 'pi pi-fw pi-pencil', routerLink: 'bonr'}], icon: 'pi pi-list' },
-    {label: 'Reclamations', items: [
-        {label: 'Reclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
-        {label: 'Reclamations', icon: 'pi pi-fw pi-pencil' , routerLink: 'reclamation'}
-      ], icon: 'pi pi-align-justify'},
+    {label: 'Réclamations', items: [
+        {label: 'Réclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
+        {label: 'Liste Réclamations', icon: 'pi pi-fw pi-pencil' , routerLink: 'reclamations'}], icon: 'pi pi-align-justify'},
     {label: 'Prestations', items: [
         {label: 'Ajouter', icon: 'pi pi-plus', routerLink: 'prestation'},
         {label: 'Listes', items: [

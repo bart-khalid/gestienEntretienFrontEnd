@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {PrestationInterne} from '../../controller/model/prestation-interne.model';
-import {MessageService} from 'primeng';
+import {MessageService, SelectItem} from 'primeng';
 import {PrestationExterne} from '../../controller/model/prestation-externe.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -15,6 +16,10 @@ export class PrestationComponent implements OnInit {
 
   cols: any[];
   entretiens: any[];
+  reclamations: SelectItem[];
+  agents: SelectItem[];
+  userform: FormGroup;
+  userform1: FormGroup;
 
   public displayDialog: boolean;
   public displayDialogE: boolean;
@@ -26,10 +31,25 @@ export class PrestationComponent implements OnInit {
   public prestataionInterne = new PrestationInterne();
   public prestataionExterne = new PrestationExterne();
 
-  constructor(private reclamationService: ReclamationService, private messageService: MessageService ) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService, private messageService: MessageService ) { }
 
   ngOnInit(): void {
     this.reclamationService.findAll();
+
+    this.userform = this.fb.group({
+      typeEntretien: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+      agent: new FormControl('', Validators.required),
+      });
+
+
+    this.userform1 = this.fb.group({
+      typeEntretienn: new FormControl('', Validators.required),
+      datee: new FormControl('', Validators.required),
+      nomprestataire: new FormControl('', Validators.required),
+      montant: new FormControl('', Validators.required),
+      });
+
     this.cols = [
       { field: 'reference', header: 'Reference' },
       { field: 'reclamentName', header: 'Reclament' },
@@ -37,7 +57,17 @@ export class PrestationComponent implements OnInit {
       { field: 'etat', header: 'Etat' }
     ];
     this.entretiens = [
+      { value: '', label: 'Choisir un type' },
       { value: 'jardinage', label: 'Jardinage' }
+    ];
+
+    this.reclamations = [
+      { value: '', label: 'Choisir une réclamation' },
+      { value: '1', label: 'recla 1' }
+    ];
+    this.agents = [
+      { value: '', label: 'Choisir un agent' },
+      { value: '1', label: 'agent 1' }
     ];
   }
 
