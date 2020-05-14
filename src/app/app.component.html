@@ -1,14 +1,13 @@
-<nav class="navbar navbar-dark bg-transparent" id="navbar" style="width: 100%" >
+<nav class="navbar navbar-dark bg-transparent" id="navbar" style="width: 100%;" >
   <div class="row" style="width: 103%">
   <div class="col-md-4" style="text-align: center; width: 100%">
-  <a class="navbar-brand" id="logo" routerLink="login" style="color: black;padding-top: 10px; width: 100%"><h1><strong><span style="">G</span>ESTION <span style="">E</span>NTRETIEN</strong></h1> </a>
+  <a class="navbar-brand" id="logo" routerLink="login" style="font-family: Delius;color: white;padding-top: 10px;margin-top: 25px; width: 100%"><h1 class="h1" ><strong style="font-size: 33px">GESTION ENTRETIEN</strong></h1> </a>
   </div>
-  <div class="col-md-8" >
-    <img src="../assets/baniere_fstg.jpg" alt="image" style="width: 100%;right: 0; height: 80px">
+  <div class="col-md-8" style="text-align: center; align-items: center;align-content: center; width: 100%" >
+    <img src="../assets/baniere_fstg.jpg" alt="image" style="width: 100%; height: 100px">
   </div>
   </div>
 </nav>
-<br>
 <div class="bodyCont">
 <p-menubar [model]="items" *ngIf="curentUserType === 'admin'">
   <div>
@@ -24,7 +23,7 @@
       <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
       <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;
 
-      <button pButton label="Logout" icon="pi pi-power-off" id="login" style="margin-left:.25em"></button>
+      <button pButton label="Logout" icon="pi pi-power-off" id="loginn" style="margin-left:.25em"></button>
     </div>
   </p-menubar>
 
@@ -40,8 +39,56 @@
 <br>
 
 <!-- fooooter to be changed after -->
-<div style="width: 100%;margin-right: 0.1px; margin-left: 0.1px">
-<footer class="footer" >
-<p style="text-align: center">Footer test</p>
+<footer class="page-footer font-small red pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h3  class="text-uppercase " style="color: rgba(191,128,0,0.92)"> Faculté des Sciences et Techniques
+          </h3>
+        <p> B.P 549, Av.Abdelkarim Elkhattabi, Guéliz Marrakech<br>
+          Tél : (+212) 524 43 34 04 <br> Fax: (+212) 524 43 31 70</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <img src="assets/logo-universite-cadi-ayyad-marrakech-uca.png" width="40%" alt="fstg logo">
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020,Tous les drois sont réservés:
+    <a href="http://www.fstg-marrakech.ac.ma/"> FSTG</a>
+  </div>
+  <!-- Copyright -->
+
 </footer>
-</div>

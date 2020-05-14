@@ -37,12 +37,12 @@ import { LocalComponent } from './components/local/local.component';
 import { LocaldetailComponent } from './components/localdetail/localdetail.component';
 import {ReclamerComponent} from './components/reclamer/reclamer.component';
 import { ActionsComponent } from './components/actions/actions.component';
+import {DatePipe} from '@angular/common';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
+import {BonrComponent} from './components/bonr/bonr.component';
+import {BonvComponent} from './components/bonv/bonv.component';
 import { AgentComponent } from './components/agent/agent.component';
 
 
@@ -87,8 +87,11 @@ import { AgentComponent } from './components/agent/agent.component';
 
     DocumentationComponent,
 
-    AgentComponent,
+    BonrComponent,
 
+    BonvComponent,
+
+    AgentComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,11 +123,8 @@ import { AgentComponent } from './components/agent/agent.component';
     MenubarModule,
     AccordionModule,
     ChartModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

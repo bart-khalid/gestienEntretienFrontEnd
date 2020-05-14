@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SelectItem} from 'primeng';
 import {MessageService} from 'primeng/api';
 import {BonsC} from '../../controller/model/bons-c.model';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BonsR} from '../../controller/model/bons-r.model';
 import {BonsV} from '../../controller/model/bons-v.model';
 
@@ -43,42 +43,37 @@ export class BonsComponent implements OnInit {
 
 
 
-  constructor(private messageService: MessageService) {
+  constructor(private fb: FormBuilder,private messageService: MessageService) {
   }
 
   ngOnInit() {
     this.vehicule=[
-      {label: 'Selectionnez une véhicule', value: null},
+      {label: 'Selectionnez une véhicule', value: ''},
       {label: 'V1', value: 'v1'},
       {label: 'V2', value: 'v2'},
       {label: 'V3', value: 'v3'}
     ];
 
     this.fourniss = [
-      {label: 'Selectionnez un fournisseur', value: null},
+      {label: 'Selectionnez un fournisseur', value: ''},
       {label: 'fournisseur 1', value: 'f1'},
       {label: 'fournisseur 2', value: 'f2'},
       {label: 'fournisseur 3', value: 'f3'}
     ];
 
-    this.typebon = [
-      {label: 'Selectionnez un type', value: null},
-      {label: 'Bon Carburant', value: 'Boncarburant'},
-      {label: 'Bon Réparation', value: 'Bonreparation'},
-      {label: 'Bon Vidange', value: 'Bonvidange'}
-    ];
 
-    this.colsR = [
-      {field: 'numbonR', header: 'Numero de Bon'},
-      {field: 'vehiculeR', header: 'Matricule Véhicule'},
-      {field: 'fournisseurR', header: 'Fournisseur'},
-      {field: 'descriptionR', header: 'Désignation'},
-      {field: 'prixunitaireR', header: 'Prix Unitaire'},
-      {field: 'quantiteR', header: 'Quantité'},
-      {field: 'datebonR', header: 'Date Bon'},
-      {field: 'totalbrutR', header: 'Total Brut'},
-      {field: 'montantvignetteR', header: 'Montant Vignette'}
-    ];
+    this.userform = this.fb.group({
+      numbonC: new FormControl('', Validators.required),
+      vehiculeC: new FormControl('', Validators.required),
+      fournisseurC: new FormControl('', Validators.required),
+      descriptionC: new FormControl('', Validators.required),
+      prixunitaireC: new FormControl('', Validators.required),
+      quantiteC: new FormControl('', Validators.required),
+      typeC: new FormControl('', Validators.required),
+      datebonC: new FormControl('', Validators.required),
+      totalbrutC: new FormControl('', Validators.required),
+      montantvignetteC: new FormControl('', Validators.required),
+    });
     this.colsC = [
       {field: 'numbonC', header: 'Numero de Bon'},
       {field: 'vehiculeC', header: 'Matricule Véhicule'},
@@ -91,6 +86,18 @@ export class BonsComponent implements OnInit {
       {field: 'totalbrutC', header: 'Total Brut'},
       {field: 'montantvignetteC', header: 'Montant Vignette'}
     ];
+    this.colsR = [
+      {field: 'numbonR', header: 'Numero de Bon'},
+      {field: 'vehiculeR', header: 'Matricule Véhicule'},
+      {field: 'fournisseurR', header: 'Fournisseur'},
+      {field: 'descriptionR', header: 'Désignation'},
+      {field: 'prixunitaireR', header: 'Prix Unitaire'},
+      {field: 'quantiteR', header: 'Quantité'},
+      {field: 'datebonR', header: 'Date Bon'},
+      {field: 'totalbrutR', header: 'Total Brut'},
+      {field: 'montantvignetteR', header: 'Montant Vignette'}
+    ];
+
     this.colsV = [
       {field: 'numbonV', header: 'Numero de Bon'},
       {field: 'vehiculeV', header: 'Matricule Véhicule'},
@@ -227,11 +234,5 @@ export class BonsComponent implements OnInit {
     this.bonV = this.cloneBonV(event.data);
     this.displayDialogV = true;
     this.cancelV = false;
-  }
-
-  validatec(bonc: string): boolean {
-
-     if (bonc !== '' || bonc !== null) { return true; }
-     else { return false ; }
   }
 }

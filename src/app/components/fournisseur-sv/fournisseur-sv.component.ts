@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Message, MessageService, SelectItem} from 'primeng/api';
 import {FournisseurSV} from '../../controller/model/fournisseur.model';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-fournisseur-sv',
@@ -22,6 +22,9 @@ export class FournisseurSVComponent implements OnInit {
   fournisseurs = new Array<FournisseurSV>();
 
   cols: any[];
+  userform: FormGroup;
+
+  txt = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   errorS: number ;
   errorC: number ;
@@ -30,6 +33,16 @@ export class FournisseurSVComponent implements OnInit {
   constructor(private fb: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.userform = this.fb.group({
+      nom: new FormControl('', Validators.required),
+      adresse: new FormControl('', Validators.required),
+      telephone: new FormControl('', Validators.compose([Validators.required,
+        Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
+      email: new FormControl('', Validators.compose([Validators.required,
+        Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/
+        )])),
+    });
+
     this.fournisseurs = [
       { nomf: 'shell', adressef: 'boulvard abdelkarim elkhatabi', emailf: 'shell@gmail.com', telephonef: '0612134323' },
       { nomf: 'Afriqua', adressef: 'boulvard abdelkarim elkhatabi', emailf: 'afriqua@gmail.com', telephonef: '0647382947' }

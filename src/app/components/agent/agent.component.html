@@ -39,71 +39,110 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Agent Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'60%'}">
+  <p-dialog  header="Agent Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'60%'}">
 
     <div class="ui-g ui-fluid"   *ngIf="agent">
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="codA"> codeAgent :</label>
+        <div class="ui-g-3">
+          <label for="codA"> Code Agent :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="codA" [(ngModel)]="agent.codeAgent" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText formControlName="codeAgent" id="codA" [(ngModel)]="agent.codeAgent" />
+        </div>
+        </div>
+        <div class="ui-g-4">
+            <p-message severity="error" *ngIf="userform.controls['codeAgent'].hasError('required') && (userform.controls['codeAgent'].dirty || userform.controls['codeAgent'].touched) "
+                       text="Champ Obligatoire"></p-message>
+          </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="nomA"> Nom Agent :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText formControlName="nomAgent" id="nomA" [(ngModel)]="agent.nomAgent" />
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['nomAgent'].hasError('required') && (userform.controls['nomAgent'].dirty || userform.controls['nomAgent'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="nomA"> nom Agent :</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="nomA" [(ngModel)]="agent.nomAgent" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="date"> Date Entrée :</label>
         </div>
-        <div class="ui-g-8">
-          <p-calendar id="date" [(ngModel)]="agent.dateEntree" ></p-calendar>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText type="date" formControlName="dateEntree" id="date" [(ngModel)]="agent.dateEntree" />
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['dateEntree'].hasError('required') && (userform.controls['dateEntree'].dirty || userform.controls['dateEntree'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="matricule">Entreprise liée :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="matricule"  [(ngModel)]="agent.entrepriseLiee" autofocus />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="matricule" formControlName="entrepriseLiee" [(ngModel)]="agent.entrepriseLiee" autofocus />
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['entrepriseLiee'].hasError('required') && (userform.controls['entrepriseLiee'].dirty || userform.controls['entrepriseLiee'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
 
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="ad">Adresse Domicile:</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="ad" [(ngModel)]="agent.adresseDomicile" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="ad" formControlName="adresseDomicile" [(ngModel)]="agent.adresseDomicile" />
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['adresseDomicile'].hasError('required') && (userform.controls['adresseDomicile'].dirty || userform.controls['adresseDomicile'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="tel">Telephone :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input type="text" formControlName="telephone" pInputText id="tel" [(ngModel)]="agent.tel" />
+        </div>
+        </div>
         <div class="ui-g-4">
-          <label for="tel">Tele :</label>
+          <p-message severity="error" *ngIf="userform.controls['telephone'].hasError('required') && (userform.controls['telephone'].dirty || userform.controls['telephone'].touched) "
+                     text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['telephone'].hasError('pattern') && (userform.controls['telephone'].dirty || userform.controls['telephone'].touched) "
+                     text="Numero non valide"></p-message>
         </div>
-        <div class="ui-g-8">
-          <input type="text" pInputText id="tel" [(ngModel)]="agent.tel" />
-        </div>
+
       </div>
 
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
-        <button type="submit"  pButton icon="pi pi-save" (click)="save()" label="Enregistrer"></button>
+        <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+        <button type="submit"  pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>

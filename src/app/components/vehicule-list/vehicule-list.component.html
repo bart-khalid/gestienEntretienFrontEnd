@@ -1,9 +1,18 @@
-<p-panel header="Gestion des Véhicules" style="text-align: center ; font-size:100px ">
-<p-table #dt [columns]="cols" [responsive]="true"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-table #dt [columns]="cols"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
-    <div style="text-align: right" >
-      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="h3" style="color: #004a80"><strong>Gestion des Véhicules</strong></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <div style="text-align: center; align-items: center; align-content: center">
+          <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+          <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+        </div>
+      </div>
     </div>
   </ng-template>
 
@@ -29,60 +38,90 @@
   </ng-template>
 </p-table>
 
-<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
-  <div class="ui-g ui-fluid" style="height: 450px" *ngIf="car">
+<p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'600px',textAlign:'center'}">
+  <div class="ui-g ui-fluid" style="height: 350px" *ngIf="car">
+     <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="matricule"> Matricule :</label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText id="matricule" formControlName="matricule"  [(ngModel)]="car.matricule" autofocus />
+      </div>
+       </div>
+       <div class="ui-g-4">
+         <p-message severity="error"  *ngIf="userform.controls['matricule'].hasError('required') && (userform.controls['matricule'].dirty || userform.controls['matricule'].touched) " text="Champ Obligatoire"></p-message>
+       </div>
+
+     </div>
+
 
     <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="type">Type :</label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <p-dropdown id="type" formControlName="type"  [options]="type" [(ngModel)]="car.type"></p-dropdown>
+      </div>
+      </div>
       <div class="ui-g-4">
-        <label for="matricule"> Matricule *:</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="matricule"  [(ngModel)]="car.matricule" autofocus />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="type">Type *:</label>
-      </div>
-      <div class="ui-g-8">
-        <p-dropdown id="type" [options]="type" [(ngModel)]="car.type"></p-dropdown>
-      </div>
-    </div>
-
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="marque">Marque *:</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText id="marque" [(ngModel)]="car.marque" />
-      </div>
-    </div>
-
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="utilite">utilité *:</label>
-      </div>
-      <div class="ui-g-8">
-        <textarea id="utilite" pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="date">Date Achat *:</label>
-      </div>
-      <div class="ui-g-8">
-        <p-calendar  id="date"  [(ngModel)]="car.dateEntrerParc" ></p-calendar>
+        <p-message severity="error" *ngIf="(userform.controls['type'].touched &&!userform.controls['type'].dirty  || userform.controls['type'].value=='Choisir un Type')"
+                   text="Choisissez un Type"></p-message>
       </div>
     </div>
 
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="marque">Marque :</label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText formControlName="marque" id="marque" [(ngModel)]="car.marquev" />
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform.controls['marque'].hasError('required') && (userform.controls['marque'].dirty || userform.controls['marque'].touched) "
+                   text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
 
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="utilite">Utilité :</label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <textarea id="utilite" formControlName="utilite"  pInputTextarea autoResize="autoResize" [(ngModel)]="car.utilite" ></textarea>
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform.controls['utilite'].hasError('required') && (userform.controls['utilite'].dirty || userform.controls['utilite'].touched) "
+                   text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="date">Date Affectation :</label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <input pInputText id="date" formControlName="dateachat" type="date" [(ngModel)]="car.dateEntrerParc" />
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform.controls['dateachat'].hasError('required') && (userform.controls['dateachat'].dirty || userform.controls['dateachat'].touched) "
+                   text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
 
   </div>
+
+
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Enregistrer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>
-</p-panel>

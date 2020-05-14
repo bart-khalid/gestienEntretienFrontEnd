@@ -1,3 +1,7 @@
+import {Agent} from './agent.model';
+import {Reclamation} from './reclamation.model';
+
+
 export class PrestationInterne {
   public reference: string;
   public typeEntretien: string;
@@ -5,7 +9,8 @@ export class PrestationInterne {
   public reclamed: boolean;
   public referenceReclamation: string;
   public nomAgent: string;
-  public codeAgent: string;
-  public nomlocale: string;
+  public Reclamation = new Reclamation();
+
+  public Agent = new Agent();
 
 }

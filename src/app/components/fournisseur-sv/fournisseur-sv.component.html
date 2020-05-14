@@ -1,9 +1,18 @@
-<p-panel header="Gestion des Fournisseurs" style="text-align: center ; font-size:100px ">
-  <p-table #dt [columns]="cols" [responsive]="true" [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+  <p-table #dt [columns]="cols"  [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h4" style="color: #004a80"><strong>Gestion des Fournisseurs</strong></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
       </div>
     </ng-template>
 
@@ -29,52 +38,99 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Véhicule Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+    <p-dialog  header="Fournisseur Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'600px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 300px" *ngIf="fournisseur">
 
+
       <div class="ui-g-12">
+
+        <div class="ui-g-3">
+          <label for="matricule"> Nom Fournisseur :</label>
+        </div>
+
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="matricule" formControlName="nom"  [(ngModel)]="fournisseur.nomf" autofocus />
+        </div>
+        </div>
+
         <div class="ui-g-4">
-          <label for="matricule"> Nom Fournisseur *:</label>
+          <p-message severity="error" *ngIf="userform.controls['nom'].hasError('required') && (userform.controls['nom'].dirty || userform.controls['nom'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="matricule"  [(ngModel)]="fournisseur.nomf" autofocus />
-        </div>
+
       </div>
+
+
       <div class="ui-g-12">
+
+        <div class="ui-g-3">
+          <label for="type">Adresse :</label>
+          </div>
+
+
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+        <input pInputText id="type" formControlName="adresse" [(ngModel)]="fournisseur.adressef"/>
+        </div>
+        </div>
         <div class="ui-g-4">
-          <label for="type">Adresse *:</label>
+          <p-message severity="error" *ngIf="userform.controls['adresse'].hasError('required') && (userform.controls['adresse'].dirty || userform.controls['adresse'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="type"  [(ngModel)]="fournisseur.adressef"/>
-        </div>
+
       </div>
 
       <div class="ui-g-12">
+
+        <div class="ui-g-3">
+          <label for="marque">Adresse Mail :</label>
+        </div>
+
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="marque" formControlName="email" [(ngModel)]="fournisseur.emailf" />
+        </div>
+        </div>
+
         <div class="ui-g-4">
-          <label for="marque">Adresse Mail *:</label>
+          <p-message severity="error" *ngIf="userform.controls['email'].hasError('required') && (userform.controls['email'].dirty || userform.controls['email'].touched) "
+                     text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['email'].hasError('pattern') && (userform.controls['email'].dirty || userform.controls['email'].touched) "
+                     text="Email non valide"></p-message>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="marque" [(ngModel)]="fournisseur.emailf" />
-        </div>
+
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="utilite">Numero de Telephone *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="utilite"   [(ngModel)]="fournisseur.telephonef" />
-        </div>
-      </div>
 
+        <div class="ui-g-3">
+          <label for="utilite">Numero de Telephone :</label>
+        </div>
+
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="utilite"  formControlName="telephone"   [(ngModel)]="fournisseur.telephonef" />
+        </div>
+        </div>
+
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['telephone'].hasError('required') && (userform.controls['telephone'].dirty || userform.controls['telephone'].touched) "
+                     text="Champ Obligatoire"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['telephone'].hasError('pattern') && (userform.controls['telephone'].dirty || userform.controls['telephone'].touched) "
+                     text="Numero non valide"></p-message>        </div>
+      </div>
 
 
     </div>
-    <p-footer>
+
+      <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-save" (click)="save()" label="Enregistrer"></button>
+        <button *ngIf="!cancel" type="button" [disabled]="!userform.valid" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+        <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>
-  </p-dialog>
-</p-panel>
+
+    </p-dialog>
+
+

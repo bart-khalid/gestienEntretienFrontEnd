@@ -19,11 +19,12 @@ export class ActionsComponent implements OnInit {
   ngOnInit() {
     this.dataREclamations = {
       labels: ['Crée', 'Sous Traitement', 'Bien traitée'],
+
       datasets: [
         {
           data : [1, 80, 3],
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         },
       ]
     };

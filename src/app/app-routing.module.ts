@@ -17,20 +17,22 @@ import {LocalComponent} from './components/local/local.component';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import {DocumentationComponent} from './components/documentation/documentation.component';
+import {BonvComponent} from "./components/bonv/bonv.component";
+import {BonrComponent} from "./components/bonr/bonr.component";
 import {AgentComponent} from './components/agent/agent.component';
+
 
 
 const routes: Routes = [
   { path: 'login' , component: LoginComponent},
   { path: 'materiel' , component: MaterielComponent},
   { path: 'prestation' , component: PrestationComponent},
-  { path: 'reclamation' , component: ReclamationComponent},
+  { path: 'reclamations' , component: ReclamationComponent},
   { path: 'vehiculeComponent' , component: VehiculeComponent},
   { path: 'bons' , component: BonsComponent},
   { path: 'vehicule' , component: VehiculeListComponent},
   { path: 'users' , component: UsersComponent} ,
   { path: 'vehiculeeComponent' , component: VehiculeComponent},
-  { path: 'bon' , component: BonsComponent},
   { path: 'fournisseur' , component: FournisseurSVComponent},
   { path: 'reclamer' , component: ReclamerComponent},
   { path: 'actions' , component: ActionsComponent},
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'prestationExterneListe' , component: PrestationExterneListeComponent},
   { path: 'documentation' , component: DocumentationComponent},
   { path: 'agent' , component: AgentComponent},
+  { path: 'bonv' , component: BonvComponent},
+  { path: 'bonr' , component: BonrComponent},
 
 ];
 

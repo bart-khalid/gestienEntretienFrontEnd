@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {PrestationInterne} from '../../controller/model/prestation-interne.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {SelectItem} from "primeng";
 
 @Component({
   selector: 'app-prestation-interne-liste',
@@ -20,24 +22,43 @@ export class PrestationInterneListeComponent implements OnInit {
 
   newPrestation: boolean;
 
+  userform: FormGroup;
 
+  reclamations: SelectItem[];
+  agents: SelectItem[];
 
   cols: any[];
   entretiens: any[];
-  constructor(private reclamationService: ReclamationService) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService) { }
 
 
   ngOnInit() {
+    this.userform = this.fb.group({
+      typeEntretien: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+      agent: new FormControl('', Validators.required),
+    });
+
     this.cols = [
       { field: 'reference', header: 'Reference' },
       { field: 'typeEntretien', header: 'Entretien' },
       { field: 'date', header: 'Date' },
-      { field: 'reclamed', header: 'Reclamée ?' },
-      { field: 'nomAgent', header: 'Agent' },
+      { field: 'reclamed', header: 'Réclamée ?' },
+      { field: 'codeAgent', header: 'Agent' },
     ];
     this.entretiens = [
-      {value: 'jardinage', label: 'Jardinage'},
-      {value: 'autre', label: 'Autre'}
+      { value: '', label: 'Choisir un type' },
+      { value: 'jardinage', label: 'Jardinage' },
+    ];
+
+    this.reclamations = [
+      { value: '', label: 'Choisir une réclamation' },
+      { value: '1', label: 'recla 1' }
+    ];
+
+    this.agents = [
+      { value: '', label: 'Choisir un agent' },
+      { value: '1', label: 'agent 1' }
     ];
   }
   showDialogToAdd() {

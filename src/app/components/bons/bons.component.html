@@ -1,19 +1,19 @@
-<h2 class="h2" style="text-align: center">Gestion des Bons Parc Automobile</h2>
-<div class="ui-g-12" style="margin-left: 10%">
-  <div class="ui-g-4">
-    <label for="typee" ><h5 class="h-50" style="color: #191622">Choisissez le type de bon a gérer *:</h5> </label>
-  </div>
-  <div class="ui-g-8" style="width: auto">
-    <p-dropdown id="typee"  [options]="typebon" [(ngModel)]="typeselecte"></p-dropdown>
-  </div>
-</div>
-<p-panel  *ngIf="typeselecte=='Boncarburant' || typeselecte=='Bonreparation' || typeselecte=='Bonvidange' " style="text-align: center ; font-size:100px ">
-  <p-table #dt [columns]="colsC" *ngIf="typeselecte=='Boncarburant'"  [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"  [responsive]="true" [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
+
+  <p-table #dt [columns]="colsC"   [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"   [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption" >
-       <h3 class="h3">Bon Carburant</h3>
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text"  pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:30%">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h3" style="color: #004a80"><strong>Bon Carburant</strong></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
       </div>
     </ng-template>
 
@@ -40,383 +40,172 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Bon Carburant Détails"   [(visible)]="displayDialogC" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+  <p-dialog  header="Bon Carburant Détails"   [(visible)]="displayDialogC" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'60%',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonC">
-
       <div class="ui-g-12">
-        <div class="ui-g-4">
+        <div class="ui-g-3">
           <label for="numbonc"> Numero de Bon :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="numbonc"   [(ngModel)]="bonC.numbonC" autofocus />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText id="numbonc"  formControlName="numbonC"  [(ngModel)]="bonC.numbonC" autofocus />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" severity="error" *ngIf="userform.controls['numbonC'].hasError('required') && (userform.controls['numbonC'].dirty || userform.controls['numbonC'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="mat">Matricule Véhicule *:</label>
+        <div class="ui-g-3">
+          <label for="matrv">Matricule Véhicule :</label>
         </div>
-        <div class="ui-g-8">
-          <p-dropdown [filter]="true" id="mat" [options]="vehicule" [(ngModel)]="bonC.vehiculeC" ></p-dropdown>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <p-dropdown [filter]="true" id="matrv" formControlName="vehiculeC" [options]="vehicule" [(ngModel)]="bonC.vehiculeC" ></p-dropdown>
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="(userform.controls['vehiculeC'].touched &&!userform.controls['vehiculeC'].dirty  || userform.controls['vehiculeC'].value=='Selectionnez une véhicule')"
+                     text="Veuillez choisir une véhicule"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="four">Fournisseur *:</label>
+        <div class="ui-g-3">
+          <label for="fo">Fournisseur :</label>
         </div>
-        <div class="ui-g-8">
-          <p-dropdown [filter]="true" id="four" [options]="fourniss" [(ngModel)]="bonC.fournisseurC" ></p-dropdown>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <p-dropdown [filter]="true" id="fo" formControlName="fournisseurC" [options]="fourniss" [(ngModel)]="bonC.fournisseurC" ></p-dropdown>
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="(userform.controls['fournisseurC'].touched &&!userform.controls['fournisseurC'].dirty  || userform.controls['fournisseurC'].value=='Selectionnez un fournisseur')"
+                     text="Veuillez choisir un fournisseur"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="desig">Désignation *:</label>
+        <div class="ui-g-3">
+          <label for="designa">Désignation :</label>
         </div>
-        <div class="ui-g-8">
-          <textarea id="desig" pInputTextarea autoResize="autoResize" [(ngModel)]="bonC.descriptionC" ></textarea>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <textarea id="designa" formControlName="descriptionC" pInputTextarea autoResize="autoResize" [(ngModel)]="bonC.descriptionC" ></textarea>
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['descriptionC'].hasError('required') && (userform.controls['descriptionC'].dirty || userform.controls['descriptionC'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="pu">Prix Unitaire *:</label>
+        <div class="ui-g-3">
+          <label for="ty">Type Carburant :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="pu" [(ngModel)]="bonC.prixunitaireC" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText id="ty" formControlName="typeC" [(ngModel)]="bonC.typeC" />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['typeC'].hasError('required') && (userform.controls['typeC'].dirty || userform.controls['typeC'].touched) "
+                     text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="puni">Prix Unitaire :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText id="puni" type="number" formControlName="prixunitaireC" [(ngModel)]="bonC.prixunitaireC" />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['prixunitaireC'].hasError('required') && (userform.controls['prixunitaireC'].dirty || userform.controls['prixunitaireC'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="type">Type Carburant *:</label>
+        <div class="ui-g-3">
+          <label for="quant">Quantité :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="type"  [(ngModel)]="bonC.typeC" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText id="quant"  type="number" formControlName="quantiteC" [(ngModel)]="bonC.quantiteC" />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['quantiteC'].hasError('required') && (userform.controls['quantiteC'].dirty || userform.controls['quantiteC'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="qua">Quantité *:</label>
+        <div class="ui-g-3">
+          <label for="daterv">Date Bon :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="qua" [(ngModel)]="bonC.quantiteC" />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText id="daterv" formControlName="datebonC"  type="date" [(ngModel)]="bonC.datebonC" />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['datebonC'].hasError('required') && (userform.controls['datebonC'].dirty || userform.controls['datebonC'].touched) "
+                     text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="tbrutrv">Total Brut :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText type="number" formControlName="totalbrutC" id="tbrutrv" [(ngModel)]="bonC.totalbrutC" />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['totalbrutC'].hasError('required') && (userform.controls['totalbrutC'].dirty || userform.controls['totalbrutC'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="date">Date Bon *:</label>
+        <div class="ui-g-3">
+          <label for="mtvrv">Montant Vignette :</label>
         </div>
-        <div class="ui-g-8">
-          <p-calendar id="date" dateFormat="dd.mm.yy"  [(ngModel)]="bonC.datebonC" ></p-calendar>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText type="number" formControlName="montantvignetteC" id="mtvrv" [(ngModel)]="bonC.montantvignetteC" />
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['montantvignetteC'].hasError('required') && (userform.controls['montantvignetteC'].dirty || userform.controls['montantvignetteC'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="tbrut">Total Brut *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="tbrut" [(ngModel)]="bonC.totalbrutC" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="mtv">Montant Vignette *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="mtv" [(ngModel)]="bonC.montantvignetteC" />
-        </div>
-      </div>
-
 
 
 
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancelC" type="button" pButton icon="pi pi-times" (click)="deleteC()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-check" [disabled]="" (click)="saveC()" label="Enregistrer"></button>
+        <button *ngIf="!cancelC" type="button" [disabled]="!userform.valid" pButton icon="pi pi-times" (click)="deleteC()" label="Supprimer"></button>
+        <button type="button" pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="saveC()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>
 
 
-  <p-table #dtt [columns]="colsR" [responsive]="true" *ngIf="typeselecte=='Bonreparation'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonR" (onRowSelect)="onRowSelectR($event)" [paginator]="true" [rows]="10">
-    <ng-template pTemplate="caption">
-      <h3 class="h3">Bon Réparation</h3>
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:30%">
-      </div>
-    </ng-template>
-
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{col.header}}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr [pSelectableRow]="rowData" >
-        <td *ngFor="let col of columns">
-          {{rowData[col.field]}}
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="summary" let-rowData>
-      <div style="text-align:left">
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAddR()" label="Ajouter un Bon Réparation"></button>
-      </div>
-    </ng-template>
-  </p-table>
-
-  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogR" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
-    <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonR">
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="numbonr"> Numero de Bon :</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="numbonr"   [(ngModel)]="bonR.numbonR" autofocus />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="matr">Matricule Véhicule *:</label>
-        </div>
-        <div class="ui-g-8">
-          <p-dropdown [filter]="true" id="matr" [options]="vehicule" [(ngModel)]="bonR.vehiculeR" ></p-dropdown>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="f">Fournisseur *:</label>
-        </div>
-        <div class="ui-g-8">
-          <p-dropdown [filter]="true" id="f" [options]="fourniss" [(ngModel)]="bonR.fournisseurR" ></p-dropdown>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="design">Désignation *:</label>
-        </div>
-        <div class="ui-g-8">
-          <textarea id="design" pInputTextarea autoResize="autoResize" [(ngModel)]="bonR.descriptionR" ></textarea>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="pun">Prix Unitaire *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="pun" [(ngModel)]="bonR.prixunitaireR" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="quan">Quantité *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="quan" [(ngModel)]="bonR.quantiteR" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="dater">Date Bon *:</label>
-        </div>
-        <div class="ui-g-8">
-          <p-calendar id="dater"  [(ngModel)]="bonR.datebonR" ></p-calendar>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="tbrutr">Total Brut *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="tbrutr" [(ngModel)]="bonR.totalbrutR" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="mtvr">Montant Vignette *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="mtvr" [(ngModel)]="bonR.montantvignetteR" />
-        </div>
-      </div>
 
 
-
-
-    </div>
-    <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancelR" type="button" pButton icon="pi pi-times" (click)="deleteR()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-check" [disabled]="" (click)="saveR()" label="Enregistrer"></button>
-      </div>
-    </p-footer>
-  </p-dialog>
-
-  <p-table #dttt [columns]="colsV" [responsive]="true" *ngIf="typeselecte=='Bonvidange'"  [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonV" (onRowSelect)="onRowSelectV($event)" [paginator]="true" [rows]="10">
-    <ng-template pTemplate="caption">
-      <h3 class="h3">Bon Vidange</h3>
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dttt.filterGlobal($event.target.value, 'contains')" style="width:30%">
-      </div>
-    </ng-template>
-
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{col.header}}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr [pSelectableRow]="rowData" >
-        <td *ngFor="let col of columns">
-          {{rowData[col.field]}}
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="summary" let-rowData>
-      <div style="text-align:left">
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAddV()" label="Ajouter un Bon Vidange"></button>
-      </div>
-    </ng-template>
-  </p-table>
-
-  <p-dialog  header="Bon Réparation Détails"   [(visible)]="displayDialogV" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
-    <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonV">
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="numbonv"> Numero de Bon :</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="numbonv"   [(ngModel)]="bonV.numbonV" autofocus />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="matrv">Matricule Véhicule *:</label>
-        </div>
-        <div class="ui-g-8">
-          <p-dropdown [filter]="true" id="matrv" [options]="vehicule" [(ngModel)]="bonV.vehiculeV" ></p-dropdown>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="fo">Fournisseur *:</label>
-        </div>
-        <div class="ui-g-8">
-          <p-dropdown [filter]="true" id="fo" [options]="fourniss" [(ngModel)]="bonV.fournisseurV" ></p-dropdown>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="designa">Désignation *:</label>
-        </div>
-        <div class="ui-g-8">
-          <textarea id="designa" pInputTextarea autoResize="autoResize" [(ngModel)]="bonV.descriptionV" ></textarea>
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="ty">Type huile *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="ty" [(ngModel)]="bonV.typehuileV" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="kilo">Kilométrage *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="kilo" [(ngModel)]="bonV.kilometrageV" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="puni">Prix Unitaire *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="puni" [(ngModel)]="bonV.prixunitaireV" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="quant">Quantité *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="quant" [(ngModel)]="bonV.quantiteV" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="daterv">Date Bon *:</label>
-        </div>
-        <div class="ui-g-8">
-          <p-calendar id="daterv"  [(ngModel)]="bonV.datebonV" ></p-calendar>
-        </div>
-      </div>
-
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="tbrutrv">Total Brut *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="tbrutrv" [(ngModel)]="bonV.totalbrutV" />
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="mtvrv">Montant Vignette *:</label>
-        </div>
-        <div class="ui-g-8">
-          <input pInputText id="mtvrv" [(ngModel)]="bonV.montantvignetteV" />
-        </div>
-      </div>
-
-
-
-
-    </div>
-    <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancelV" type="button" pButton icon="pi pi-times" (click)="deleteV()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-check" [disabled]="" (click)="saveV()" label="Enregistrer"></button>
-      </div>
-    </p-footer>
-  </p-dialog>
-
-</p-panel>

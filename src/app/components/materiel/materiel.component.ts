@@ -3,6 +3,7 @@ import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {MessageService} from 'primeng';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-materiel',
@@ -22,6 +23,7 @@ export class MaterielComponent implements OnInit {
 
   newMateriel: boolean;
 
+  userform: FormGroup;
 
 
   cols: any[];
@@ -30,10 +32,14 @@ export class MaterielComponent implements OnInit {
   types: Array<any>;
 
   dateToConvert: string;
-  constructor(private reclamationService: ReclamationService, private messageService: MessageService) { }
-
+  constructor(private fb: FormBuilder,private reclamationService: ReclamationService, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.userform = this.fb.group({
+      nom: new FormControl('', Validators.required),
+      marque: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required)
+    });
     this.reclamationService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
@@ -44,14 +50,14 @@ export class MaterielComponent implements OnInit {
       { field: 'type', header: 'Type' }
     ];
     this.fournisseurs = [
-      { value: '0', label: 'choose a fournisseur' },
-      { value: '1', label: 'fournisseur 1' },
+      { value: '', label: 'Choisissez un fournisseur' },
+      { value: 'fournisseur 1', label: 'fournisseur 1' },
       { value: '2', label: 'fournisseur 2' },
       { value: '3', label: 'fournisseur 3' },
     ];
 
     this.types = [
-      { value: '0', label: 'choose a type' },
+      { value: '', label: 'Choisissez un Type' },
       { value: 'Informatique', label: 'Informatique ' },
       { value: 'Enseignement', label: 'Enseignement ' }
     ];
@@ -65,8 +71,6 @@ export class MaterielComponent implements OnInit {
   save() {
     const materiels = this.materiels;
     if (this.newMateriel) {
-
-
       materiels.push(this.materiel);
       this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {

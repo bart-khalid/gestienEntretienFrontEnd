@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, PipeTransform} from '@angular/core';
 import {MessageService, SelectItem} from 'primeng/api';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Localdetail} from '../../controller/model/localdetail.model';
+import {DatePipe, formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-localdetail',
@@ -28,20 +29,30 @@ export class LocaldetailComponent implements OnInit {
 
   typesmateriel: SelectItem[];
 
+  userform: FormGroup;
+
+
   errorS: number;
   errorC: number;
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
+
+    this.userform = this.fb.group({
+      materiellocal: new FormControl('', Validators.required),
+      localassocie: new FormControl('', Validators.required),
+      dateachat: new FormControl('', Validators.required),
+    });
+
     this.cols = [
+      {field: 'referenceMT', header: 'Réference'},
       {field: 'materiellocal', header: 'Materiel'},
       {field: 'localassocie', header: 'Locale'},
       {field: 'dateachat', header: 'Date Achat Materiel'},
-      {field: 'nbrmateriel', header: 'nombre Entités'},
     ];
 
     this.typeslocal = [
-      {label: 'Selectionnez un locale', value: null},
+      {label: 'Selectionnez un locale', value: ''},
       {label: 'Amphi 1,Département autre', value: 'Amphi 1 Département autre'},
       {label: 'Salle 1,Département informatique', value: 'Salle 1 Département informatique'},
       {label: 'Laboratoire 2,Département biologie', value: 'Laboratoire 2 Département biologie'},
@@ -49,13 +60,13 @@ export class LocaldetailComponent implements OnInit {
     ];
 
     this.typesmateriel = [
-      {label: 'Selectionnez un materiel', value: null},
+      {label: 'Selectionnez un materiel', value: ''},
       {label: 'Projecteur ', value: 'Projecteur'},
       {label: 'Pc bureau', value: 'Pc bureau'},
     ];
   }
 
-  onSubmit(value: string) {
+  onSubmit() {
     this.submitted = true;
     this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
   }
@@ -79,6 +90,8 @@ export class LocaldetailComponent implements OnInit {
     this.local = null;
     this.displayDialog = false;
   }
+
+
 
   delete() {
     const index = this.locals.indexOf(this.selectedLocal);

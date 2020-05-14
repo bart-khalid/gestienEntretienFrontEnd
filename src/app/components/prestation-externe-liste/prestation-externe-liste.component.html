@@ -3,7 +3,7 @@
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="h3" style="color: #004a80"><strong>Listes Des Prestataions Externes</strong></h1>
+        <h1 class="h3" style="color: #004a80"><strong>Liste Prestataions Externes</strong></h1>
       </div>
     </div>
     <div class="row">
@@ -41,27 +41,37 @@
 
 <!-- dialogue to update or delete a prestation -->
 
-<p-dialog header="Prestation Externe Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%', height:'90%', float: 'left'}">
-  <div class="ui-g ui-fluid" *ngIf="prestationExterne" style="height: 100%">
+<p-dialog header="Prestation Externe Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '660 px'}">
+  <div class="ui-g ui-fluid" *ngIf="prestationExterne" >
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="typeEntretien" style="color: #00aeef"><strong>TypeEntretien</strong></label>
+      <div class="ui-g-3">
+        <label for="typeEntretien" style="color: #00aeef"><strong>Type Entretien :</strong></label>
       </div>
-      <div class="ui-g-8">
-        <p-dropdown id="typeEntretien" [options]="entretiens" [(ngModel)]="prestationExterne.typeEntretien" [filter]="true"></p-dropdown>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <p-dropdown id="typeEntretien" formControlName="typeEntretienn" [options]="entretiens" [(ngModel)]="prestationExterne.typeEntretien" [filter]="true"></p-dropdown>
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform1.controls['typeEntretienn'].touched &&!userform1.controls['typeEntretienn'].dirty  || userform1.controls['typeEntretienn'].value=='Choisir un type')"
+                   text="Veuillez choisir un type" ></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="dateP" style="color: #00aeef"><strong>Date</strong></label>
+      <div class="ui-g-3">
+        <label for="dateP" style="color: #00aeef"><strong>Date :</strong></label>
       </div>
-      <div class="ui-g-8">
-
-        <p-calendar [(ngModel)]="prestationExterne.date" id="dateP"></p-calendar>
-
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <input pInputText type="date" formControlName="datee" [(ngModel)]="prestationExterne.date" id="dateP"/>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error"  *ngIf="userform1.controls['datee'].hasError('required') && (userform1.controls['datee'].dirty || userform1.controls['datee'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -69,56 +79,82 @@
       <div class="ui-g-4">
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-2">
         <p-checkbox [(ngModel)]="prestationExterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
         <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamed}}</strong></label>
+      </div>
+      <div class="ui-g-3"></div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12" *ngIf="prestationExterne.reclamed">
-      <div class="ui-g-4">
-        <label for="refReclamation">Reference de la reclamation</label>
+      <div class="ui-g-3">
+        <label for="refReclamation" style="color: #00aeef">Reference de la reclamation :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
         <input type="text" [(ngModel)]="prestationExterne.referenceReclamation" pInputText id="refReclamation">
       </div>
-    </div>
-
-    <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire</strong></label>
-      </div>
-      <div class="ui-g-8">
-        <input type="text" [(ngModel)]="prestationExterne.nomPrestataire" pInputText id="nomPres">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="numeroFac" style="color: #00aeef"><strong>Numero Facture</strong></label>
+      <div class="ui-g-3">
+        <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire :</strong></label>
       </div>
-      <div class="ui-g-8">
-        <input type="text" [(ngModel)]="prestationExterne.numeroFac" pInputText id="numeroFac">
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <input type="text" formControlName="nomprestataire" [(ngModel)]="prestationExterne.nomPrestataire" pInputText id="nomPres">
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform1.controls['nomprestataire'].hasError('required') && (userform1.controls['nomprestataire'].dirty || userform1.controls['nomprestataire'].touched) "
+                   text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="numeroFac" style="color: #00aeef"><strong>Numero Facture :</strong></label>
+      </div>
+      <div class="ui-g-5">
+        <input type="text"  [(ngModel)]="prestationExterne.numeroFac" pInputText id="numeroFac">
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="montant" style="color: #00aeef"><strong>Montant Facture</strong></label>
+      <div class="ui-g-3">
+        <label for="montant" style="color: #00aeef"><strong>Montant Facture :</strong></label>
       </div>
-      <div class="ui-g-8">
-        <input type="number" [(ngModel)]="prestationExterne.montantFac" pInputText id="montant">
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <input type="number" formControlName="montant" [(ngModel)]="prestationExterne.montantFac" pInputText id="montant">
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform1.controls['montant'].hasError('required') && (userform1.controls['montant'].dirty || userform1.controls['montant'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="bonc" style="color: #00aeef"><strong>Prestation A Un Bon Commande ?</strong></label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-2">
         <p-checkbox [(ngModel)]="prestationExterne.bonCommande" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
         <label for="bonC" style="color: #00aeef"><strong>{{prestationExterne.bonCommande}}</strong></label>
+      </div>
+      <div class="ui-g-3"></div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -126,38 +162,50 @@
     <div  *ngIf="prestationExterne.bonCommande" style="align-items: center; align-content: center; text-align: center">
 
       <div class="ui-g-12" >
-        <div class="ui-g-4">
-          <label for="numbonc">Numero Bon Commande</label>
+        <div class="ui-g-3">
+          <label for="numbonc" style="color: #00aeef">Numero Bon Commande :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input type="number" pInputText [(ngModel)]="prestationExterne.presBonCommande.numeroBonCommande" id="numbonC" >
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="dateBonc">Date Bon Commande</label>
+        <div class="ui-g-3">
+          <label for="dateBonc" style="color: #00aeef">Date Bon Commande :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-calendar  [(ngModel)]="prestationExterne.presBonCommande.dateBonCommande" id="dateBonc" > </p-calendar>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="montantC">Montant</label>
+        <div class="ui-g-3">
+          <label for="montantC" style="color: #00aeef">Montant :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonCommande.montant" id="montantC" >
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="nomP">nom Prestataire</label>
+        <div class="ui-g-3">
+          <label for="nomP" style="color: #00aeef">Nom Prestataire :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonCommande.nomPrestataire" id="nomP" >
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -165,12 +213,16 @@
     <!-- fin items of bon Commande -->
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="bonL" style="color: #00aeef"><strong>Prestation A Un Bon Livraison ?</strong></label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-2">
         <p-checkbox [(ngModel)]="prestationExterne.bonLivraison" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
         <label for="bonL" style="color: #00aeef"><strong>{{prestationExterne.bonLivraison}}</strong></label>
+      </div>
+      <div class="ui-g-3"></div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -179,38 +231,50 @@
     <div  *ngIf="prestationExterne.bonLivraison" style="align-items: center; align-content: center; text-align: center">
 
       <div class="ui-g-12" >
-        <div class="ui-g-4">
-          <label for="numbonL">Numero Bon Livraison</label>
+        <div class="ui-g-3">
+          <label for="numbonL" style="color: #00aeef">Numero Bon Livraison :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input type="number" pInputText [(ngModel)]="prestationExterne.presBonLivraison.numeroBonLivraison" id="numbonL" >
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="dateBonL">Date Bon Livraison</label>
+        <div class="ui-g-3">
+          <label for="dateBonL" style="color: #00aeef">Date Bon Livraison :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <p-calendar  [(ngModel)]="prestationExterne.presBonLivraison.dateBonLivraison" id="dateBonL" > </p-calendar>
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="montantL">Montant</label>
+        <div class="ui-g-3">
+          <label for="montantL" style="color: #00aeef">Montant :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonLivraison.montant" id="montantL" >
         </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+        </div>
       </div>
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="nomPL">nom Prestataire</label>
+        <div class="ui-g-3">
+          <label for="nomPL" style="color: #00aeef">Nom Prestataire :</label>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-5">
           <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonLivraison.nomPrestataire" id="nomPL" >
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
@@ -223,7 +287,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
+      <button type="button" [disabled]="!userform1.valid" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>

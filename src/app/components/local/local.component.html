@@ -1,10 +1,20 @@
-<p-panel header="Gestion des Locales" style="text-align: center ; font-size:100px ">
-  <p-table #dt [columns]="cols" [responsive]="true" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+  <p-table #dt [columns]="cols" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
-      <div style="text-align: right" >
-        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="h3" style="color: #004a80"><strong>Gestion des Locales Fstg</strong></h1>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div style="text-align: center; align-items: center; align-content: center">
+            <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </div>
+      </div>
+
     </ng-template>
 
     <ng-template pTemplate="header" let-columns>
@@ -29,42 +39,58 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Locales Détails"   [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'600px'}">
+  <p-dialog  header="Locales Détails"  [responsive]="true" [(visible)]="displayDialog" [focusOnShow]="true"  showEffect="fade" [modal]="true"  [style]="{width:'650px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 250px" *ngIf="local">
 
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="matricule"> Nom Locale *:</label>
+        <div class="ui-g-3">
+          <label for="matricule"> Nom Locale :</label>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="matricule"  [(ngModel)]="local.nomlocal" autofocus />
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <input pInputText id="matricule" formControlName="nom"  [(ngModel)]="local.nomlocal" autofocus />
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="userform.controls['nom'].hasError('required') && (userform.controls['nom'].dirty || userform.controls['nom'].touched) "
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
       <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="type">Type Locale *:</label>
+        <div class="ui-g-3">
+          <label for="type">Type Locale :</label>
         </div>
-        <div class="ui-g-8">
-          <p-dropdown  id="type" [options]="typeslocal" [(ngModel)]="local.typelocal"></p-dropdown>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+          <p-dropdown  id="type" formControlName="typelocal" [options]="typeslocal" [(ngModel)]="local.typelocal"></p-dropdown>
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="(userform.controls['typelocal'].touched &&!userform.controls['typelocal'].dirty  || userform.controls['typelocal'].value =='Choisir un type')"
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
-      <div class="ui-g-12">
-        <div class="ui-g-4">
-          <label for="marque">Département *:</label>
+      <div class="ui-g-12" >
+        <div class="ui-g-3">
+          <label for="marque">Département :</label>
         </div>
-        <div class="ui-g-8">
-          <p-dropdown  id="marque" [options]="typesDepartement" [(ngModel)]="local.departement"></p-dropdown>
+        <div class="ui-g-5 " style="min-height: 100%" >
+          <div class="form-group"   [formGroup]="userform"  >
+          <p-dropdown id="marque" formControlName="departement" [options]="typesDepartement" [(ngModel)]="local.departement"></p-dropdown>
+        </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="(userform.controls['departement'].touched &&!userform.controls['departement'].dirty  || userform.controls['departement'].value=='Choisir un département')"
+                     text="Champ Obligatoire"></p-message>
         </div>
       </div>
-
 
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-save" (click)="save()" label="Enregistrer"></button>
+        <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+        <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>
-</p-panel>

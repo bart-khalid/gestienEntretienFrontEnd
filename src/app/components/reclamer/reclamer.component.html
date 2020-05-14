@@ -4,7 +4,7 @@
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="h3" style="color: #004a80"><strong>Gestion Des Reclamations</strong></h1>
+        <h1 class="h3" style="color: #004a80"><strong>Espace Reclamations</strong></h1>
       </div>
     </div>
     <div class="row">
@@ -45,7 +45,7 @@
       <button class="btn btn-block"  pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
         </div>
         <div class="col-md-4">
-      <button  class="btn btn-block" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre"  id="items"></button>
+      <button  class="btn btn-block" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre"  id="itemss"></button>
       </div>
       </div>
     </div>
@@ -54,44 +54,60 @@
 
 <!-- dialog 1 -->
 
-<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
+<p-dialog header="Reclamation Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '660px',textAlign:'center'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="objet">Objet</label>
+      <div class="ui-g-3">
+        <label for="objet">Objet :</label>
       </div>
-      <div class="ui-g-8">
-        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <input type="text" formControlName="objet"  pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform.controls['objet'].hasError('required') && (userform.controls['objet'].dirty || userform.controls['objet'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label >Locale</label>
+      <div class="ui-g-3">
+        <label >Locale :</label>
       </div>
-      <div class="ui-g-8">
-
-        <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
-
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <p-dropdown formControlName="local" [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform.controls['local'].touched &&!userform.controls['local'].dirty  || userform.controls['local'].value=='Choisir un locale')"
+                   text="Veuillez choisir un locale" ></p-message>
       </div>
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="description">Description</label>
+      <div class="ui-g-3">
+        <label for="description">Description :</label>
       </div>
-      <div class="ui-g-8">
-        <textarea  pInputText id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+        <textarea  pInputText formControlName="description" id="description"   [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform.controls['description'].hasError('required') && (userform.controls['description'].dirty || userform.controls['description'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>
@@ -99,16 +115,22 @@
 
 <!-- second dialog -->
 
-<p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '80%'}">
+<p-dialog header="Reclamation Details" [(visible)]="displayDialogM" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '660px',textAlign:'center'}">
   <div class="ui-g ui-fluid" *ngIf="reclamation">
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="objet">Objet</label>
+      <div class="ui-g-3">
+        <label for="object">Objet :</label>
       </div>
-      <div class="ui-g-8">
-        <input type="text" pTooltip="Donner l'objet de cette reclemetion" tooltipPosition="top" pInputText id="objet" [(ngModel)]="reclamation.objet" />
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <input type="text" formControlName="objett"   pInputText id="object" [(ngModel)]="reclamation.objet" />
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform1.controls['objett'].hasError('required') && (userform1.controls['objett'].dirty || userform1.controls['objett'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
@@ -117,43 +139,58 @@
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label >Locale</label>
+      <div class="ui-g-3">
+        <label >Locale :</label>
       </div>
-      <div class="ui-g-8">
-
-        <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
-
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <p-dropdown formControlName="locale" [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform1.controls['locale'].touched &&!userform1.controls['locale'].dirty  || userform1.controls['locale'].value=='Choisir un locale')"
+                   text="Veuillez choisir un locale" ></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label >Materiel</label>
+      <div class="ui-g-3">
+        <label >Materiel :</label>
       </div>
-      <div class="ui-g-8">
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <p-dropdown formControlName="mater" [options]="materiels" [(ngModel)]="reclamation.nomMateriel" [filter]="true"></p-dropdown>
+        </div>
+      </div>
 
-        <p-dropdown [options]="locales" [(ngModel)]="reclamation.nomMateriel" [filter]="true"></p-dropdown>
-
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform1.controls['mater'].touched &&!userform1.controls['mater'].dirty  || userform1.controls['mater'].value=='Choisir un matériel')"
+                   text="Veuillez choisir un matériel"></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label for="descriptionM">Description</label>
+      <div class="ui-g-3">
+        <label for="descriptionM">Description :</label>
       </div>
-      <div class="ui-g-8">
-        <textarea  pInputText id="descriptionM" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+        <textarea  formControlName="desc"  pInputText  id="descriptionM"   [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
+      </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform1.controls['desc'].hasError('required') && (userform1.controls['desc'].dirty || userform1.controls['desc'].touched) "
+                   text="Champ Obligatoire"></p-message>
       </div>
     </div>
 
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-save" [disabled]="!userform1.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>

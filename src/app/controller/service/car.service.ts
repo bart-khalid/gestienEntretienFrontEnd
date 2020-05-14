@@ -6,11 +6,10 @@ import {Car} from '../model/car';
   providedIn: 'root'
 })
 export class CarService {
-
+private url = 'http://localhost:8090/GestionEntretien/Vehicule/';
   constructor(private http: HttpClient) {}
 
-  getCarsSmall() {
-    return this.http.get<Car[]>('/showcase/resources/data/cars-small.json')
-      .toPromise()
-      .then(data => { return data; });
-  }}
+  public save(car: Car)  {
+   return  this.http.post<number>(this.url, car);
+  }
+ }
