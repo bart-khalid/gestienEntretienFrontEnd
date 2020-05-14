@@ -6,4 +6,6 @@ export class PrestationInterne {
   public referenceReclamation: string;
   public nomAgent: string;
   public codeAgent: string;
+  public nomlocale: string;
+
 }

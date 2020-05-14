@@ -30,6 +30,15 @@
           </div>
         </div>
 
+        <div class="ui-g-12">
+          <div class="ui-g-4">
+            <label for="nomloc" style="color: #00aeef"><strong>locale</strong> </label>
+          </div>
+          <div class="ui-g-8">
+            <p-dropdown id="nomloc" [options]="entretiens" [(ngModel)]="prestataionInterne.nomlocale" [filter]="true"></p-dropdown>
+          </div>
+        </div>
+
 
         <div class="ui-g-12">
           <div class="ui-g-4">
