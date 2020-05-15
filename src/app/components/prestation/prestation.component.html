@@ -40,7 +40,7 @@
             <label for="nomloc" style="color: #00aeef"><strong>locale</strong> </label>
           </div>
           <div class="ui-g-8">
-            <p-dropdown id="nomloc" [options]="entretiens" [(ngModel)]="prestataionInterne.nomlocale" [filter]="true"></p-dropdown>
+            <p-dropdown id="nomloc" [options]="entretiens" [filter]="true"></p-dropdown>
           </div>
         </div>
 
@@ -92,7 +92,7 @@
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown [options]="agents" formControlName="agent" [(ngModel)]="prestataionInterne.codeAgent"  id="codeAgent"></p-dropdown>
+            <p-dropdown [options]="agents" formControlName="agent" [(ngModel)]="prestataionInterne.Agent.codeAgent"  id="codeAgent"></p-dropdown>
           </div>
           </div>
           <div class="ui-g-4">

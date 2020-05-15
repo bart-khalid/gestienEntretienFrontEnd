@@ -4,7 +4,7 @@ import {CarService} from '../../controller/service/car.service';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {MenuItem, SelectItem} from 'primeng';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reclamation',
@@ -147,6 +147,6 @@ export class ReclamationComponent implements OnInit {
       alert('la reclamation est bien traité, vous pouvez pas faire cette action');
     } else {
       this.reclamationService.reclamationSeen(reclamation.reference);
+      }
     }
   }
-}

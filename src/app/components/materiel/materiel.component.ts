@@ -4,6 +4,7 @@ import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {MessageService} from 'primeng';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MaterielService} from '../../controller/service/materiel.service';
 
 @Component({
   selector: 'app-materiel',
@@ -32,7 +33,7 @@ export class MaterielComponent implements OnInit {
   types: Array<any>;
 
   dateToConvert: string;
-  constructor(private fb: FormBuilder,private reclamationService: ReclamationService, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private materielService: MaterielService, private messageService: MessageService, private reclamationService: ReclamationService) { }
 
   ngOnInit() {
     this.userform = this.fb.group({
@@ -72,6 +73,7 @@ export class MaterielComponent implements OnInit {
     const materiels = this.materiels;
     if (this.newMateriel) {
       materiels.push(this.materiel);
+      this.materielService.save(this.materiel);
       this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     } else {
       materiels[this.materiels.indexOf(this.selectedMatereil)] = this.materiel;

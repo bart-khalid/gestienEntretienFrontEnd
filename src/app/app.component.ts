@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng';
+import {hostViewClassName} from '@angular/compiler';
+import {inspect} from 'util';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   curentUserType = 'admin';
   items: MenuItem[];
   itemsEmploye: MenuItem[];
@@ -55,7 +58,7 @@ ngOnInit() {
       items: [
         {label: 'Documentations', icon: 'pi pi-info', routerLink: 'documentation'},
       ]
-    }
+    },
   ];
 
 }

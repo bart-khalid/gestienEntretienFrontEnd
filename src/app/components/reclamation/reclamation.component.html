@@ -83,12 +83,12 @@
         <div class="form-group" [formGroup]="userform"  >
         <p-dropdown formControlName="local" [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
         </div>
-              </div>
-      <div class="ui-g-4">
-        <p-message severity="error" *ngIf="(userform.controls['local'].touched &&!userform.controls['local'].dirty  || userform.controls['local'].value=='Choisir un locale')"
-                   text="Veuillez choisir un locale"></p-message>
       </div>
-            </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform.controls['local'].touched &&!userform.controls['local'].dirty  || userform.controls['local'].value=='Choisir un locale')" text="Veuillez choisir un locale"></p-message>
+      </div>
+    </div>
+
 
     <div class="ui-g-12">
       <div class="ui-g-3">

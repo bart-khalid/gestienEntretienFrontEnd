@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng';
 import {Router} from '@angular/router';
+import {inspect} from 'util';
+
 
 @Component({
   selector: 'app-actions',
@@ -18,7 +20,7 @@ export class ActionsComponent implements OnInit {
   constructor() { }
   ngOnInit() {
     this.dataREclamations = {
-      labels: ['Crée', 'Sous Traitement', 'Bien traitée'],
+      labels: ['Crée', 'Sous Traitement', 'Bien Traitée'],
 
       datasets: [
         {
