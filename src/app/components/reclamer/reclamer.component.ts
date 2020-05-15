@@ -29,7 +29,7 @@ export class ReclamerComponent implements OnInit {
 
   locales: Array<any>;
   materiels: Array<any>;
-  constructor(private fb: FormBuilder,private reclamationService: ReclamationService, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService, private messageService: MessageService) { }
 
 
   ngOnInit() {

@@ -1,3 +1,4 @@
+<!--
 <nav class="navbar navbar-dark bg-transparent" id="navbar" style="width: 100%;" >
   <div class="row" style="width: 103%">
   <div class="col-md-4" style="text-align: center; width: 100%">
@@ -8,8 +9,10 @@
   </div>
   </div>
 </nav>
+-->
+<nav style="text-align: center; align-content: center; align-items: center; background-color: #d4e7ed"><span style="align-items: center"><strong>Gestion Entretien</strong></span></nav>
 <div class="bodyCont">
-<p-menubar [model]="items" *ngIf="curentUserType === 'admin'">
+<p-menubar [model]="items" *ngIf="curentUserType === 'admin'" [style]="{backgroundColor: '#b1eae8'}" >
   <div>
     <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
     <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;
@@ -18,7 +21,7 @@
   </div>
 </p-menubar>
 
-  <p-menubar [model]="itemsEmploye" *ngIf="curentUserType === 'employe'">
+  <p-menubar [model]="itemsEmploye" *ngIf="curentUserType === 'employe'" [style]="{backgroundColor: '#b1eae8'}">
     <div>
       <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
       <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;
