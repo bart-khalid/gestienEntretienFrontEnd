@@ -1,5 +1,5 @@
-import {Car} from "./car";
-import {FournisseurSV} from "./fournisseur.model";
+import {Car} from './car';
+import {FournisseurSV} from './fournisseur.model';
 
 export class BonsR {
   // reparation
