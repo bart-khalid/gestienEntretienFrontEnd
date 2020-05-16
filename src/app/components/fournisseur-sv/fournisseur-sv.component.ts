@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Message, MessageService, SelectItem} from 'primeng/api';
-import {FournisseurSV} from '../../controller/model/fournisseur.model';
+import {FournisseurSV} from '../../controller/model/fournisseurSV.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FournisseurSVService} from '../../controller/service/fournisseur-sv.service';
 
 @Component({
   selector: 'app-fournisseur-sv',
@@ -30,9 +31,10 @@ export class FournisseurSVComponent implements OnInit {
   errorC: number ;
 
   msgs: Message[] = [];
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private fournisseurService: FournisseurSVService) { }
 
   ngOnInit() {
+    this.fournisseurService.findAll();
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),
       adresse: new FormControl('', Validators.required),
@@ -43,16 +45,13 @@ export class FournisseurSVComponent implements OnInit {
         )])),
     });
 
-    this.fournisseurs = [
-      { nomf: 'shell', adressef: 'boulvard abdelkarim elkhatabi', emailf: 'shell@gmail.com', telephonef: '0612134323' },
-      { nomf: 'Afriqua', adressef: 'boulvard abdelkarim elkhatabi', emailf: 'afriqua@gmail.com', telephonef: '0647382947' }
-    ];
     this.cols = [
       {field: 'nomf', header: 'Nom Fournisseur'},
       {field: 'adressef', header: 'Adresse'},
       {field: 'emailf', header: 'Adresse Mail'},
       {field: 'telephonef', header: 'Numero de Telephone'},
     ];
+    this.fournisseurService.findAll();
   }
 
   onSubmit(value: string) {
@@ -68,21 +67,26 @@ export class FournisseurSVComponent implements OnInit {
   }
 
   save() {
-    const fournisseurss = this.fournisseurs;
+    const fournisseurss = this.fournisseurService.foundedFourniseurs;
     if (this.newFournisseur) {
-      fournisseurss.push(this.fournisseur);
+      console.log(this.fournisseur);
+      this.fournisseurService.save(this.fournisseur);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Fournisseur Enregistré'});
     } else {
-      fournisseurss[this.fournisseurs.indexOf(this.selectedFournisseur)] = this.fournisseur;
+      fournisseurss[this.fournisseurService.foundedFourniseurs.indexOf(this.selectedFournisseur)] = this.fournisseur;
+      this.fournisseurService.update(this.fournisseur);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Fournisseur Modifié'});
     }
-
-    this.fournisseurs = fournisseurss;
+    this.fournisseurService.foundedFourniseurs = fournisseurss;
     this.fournisseur = null;
     this.displayDialog = false;
   }
 
   delete() {
-    const index = this.fournisseurs.indexOf(this.selectedFournisseur);
-    this.fournisseurs = this.fournisseurs.filter((val, i) => i !== index);
+    const index = this.fournisseurService.foundedFourniseurs.indexOf(this.selectedFournisseur);
+    this.fournisseurService.foundedFourniseurs = this.fournisseurService.foundedFourniseurs.filter((val, i) => i !== index);
+    this.fournisseurService.delete(this.selectedFournisseur.nomf, this.selectedFournisseur.adressef);
+    this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Fournisseur Supprimé'});
     this.fournisseur = null;
     this.displayDialog = false;
   }
@@ -102,5 +106,11 @@ export class FournisseurSVComponent implements OnInit {
     return four;
   }
 
+  public findAll() {
+    return this.fournisseurService.findAll();
+  }
 
+  get foundedFourniseurs(): FournisseurSV[] {
+    return this.fournisseurService.foundedFourniseurs;
+  }
 }

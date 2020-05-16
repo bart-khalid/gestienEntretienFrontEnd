@@ -1,4 +1,5 @@
-  <p-table #dt [columns]="cols"  [value]="fournisseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-toast [style]="{marginTop: '2%'}"></p-toast>
+<p-table #dt [columns]="cols"  [value]="foundedFourniseurs" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedFournisseur" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">

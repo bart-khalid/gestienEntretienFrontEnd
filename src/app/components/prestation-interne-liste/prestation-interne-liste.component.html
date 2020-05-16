@@ -50,7 +50,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <p-dropdown id="typeEntretien" formControlName="typeEntretien" [options]="entretiens" [(ngModel)]="prestationInterne.typeEntretien" [filter]="true"></p-dropdown>
+        <p-dropdown id="typeEntretien" formControlName="typeEntretien" [options]="entretiens" [(ngModel)]="prestationInterne.typeEntretienI" [filter]="true"></p-dropdown>
       </div>
       </div>
       <div class="ui-g-4">
@@ -66,7 +66,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <input pInputText formControlName="date"  type="date" [(ngModel)]="prestationInterne.date" id="date"/>
+        <input pInputText formControlName="date"  type="date" [(ngModel)]="prestationInterne.dateI" id="date"/>
         </div>
         <div class="ui-g-4">
           <p-message severity="error" *ngIf="userform.controls['date'].hasError('required') && (userform.controls['date'].dirty || userform.controls['date'].touched) "
@@ -80,8 +80,8 @@
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationInterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="reclamer" style="color: #00aeef"><strong>{{prestationInterne.reclamed}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationInterne.reclamedI" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="reclamer" style="color: #00aeef"><strong>{{prestationInterne.reclamedI}}</strong></label>
       </div>
       <div class="ui-g-3"></div>
       <div class="ui-g-4">
@@ -89,12 +89,12 @@
       </div>
     </div>
 
-    <div class="ui-g-12" *ngIf="prestationInterne.reclamed">
+    <div class="ui-g-12" *ngIf="prestationInterne.reclamedI">
       <div class="ui-g-3">
         <label for="refReclamation" style="color: #00aeef">Reference de la reclamation</label>
       </div>
       <div class="ui-g-5">
-        <p-dropdown type="text" [options]="reclamations" [(ngModel)]="prestationInterne.referenceReclamation" pInputText id="refReclamation"></p-dropdown>
+        <p-dropdown type="text" [options]="reclamations" [(ngModel)]="prestationInterne.referenceReclamationI" pInputText id="refReclamation"></p-dropdown>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -107,7 +107,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <input type="text" formControlName="agent" [(ngModel)]="prestationInterne.Agent.codeAgent" pInputText id="codeAgent">
+        <input type="text" formControlName="agent" [(ngModel)]="prestationInterne.agent.codeAgent" pInputText id="codeAgent">
       </div>
       </div>
       <div class="ui-g-4">

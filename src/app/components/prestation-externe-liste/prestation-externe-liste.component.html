@@ -50,7 +50,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <p-dropdown id="typeEntretien" formControlName="typeEntretienn" [options]="entretiens" [(ngModel)]="prestationExterne.typeEntretien" [filter]="true"></p-dropdown>
+        <p-dropdown id="typeEntretien" formControlName="typeEntretienn" [options]="entretiens" [(ngModel)]="prestationExterne.typeEntretienE" [filter]="true"></p-dropdown>
       </div>
       </div>
       <div class="ui-g-4">
@@ -66,7 +66,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <input pInputText type="date" formControlName="datee" [(ngModel)]="prestationExterne.date" id="dateP"/>
+        <input pInputText type="date" formControlName="datee" [(ngModel)]="prestationExterne.dateE" id="dateP"/>
         </div>
       </div>
       <div class="ui-g-4">
@@ -80,8 +80,8 @@
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationExterne.reclamed" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamed}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamedE}}</strong></label>
       </div>
       <div class="ui-g-3"></div>
       <div class="ui-g-4">
@@ -89,12 +89,12 @@
       </div>
     </div>
 
-    <div class="ui-g-12" *ngIf="prestationExterne.reclamed">
+    <div class="ui-g-12" *ngIf="prestationExterne.reclamedE">
       <div class="ui-g-3">
         <label for="refReclamation" style="color: #00aeef">Reference de la reclamation :</label>
       </div>
       <div class="ui-g-5">
-        <input type="text" [(ngModel)]="prestationExterne.referenceReclamation" pInputText id="refReclamation">
+        <input type="text" [(ngModel)]="prestationExterne.referenceReclamationE" pInputText id="refReclamation">
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -107,7 +107,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <input type="text" formControlName="nomprestataire" [(ngModel)]="prestationExterne.nomPrestataire" pInputText id="nomPres">
+        <input type="text" formControlName="nomprestataire" [(ngModel)]="prestationExterne.nomPrestataireE" pInputText id="nomPres">
       </div>
       </div>
       <div class="ui-g-4">
@@ -121,7 +121,7 @@
         <label for="numeroFac" style="color: #00aeef"><strong>Numero Facture :</strong></label>
       </div>
       <div class="ui-g-5">
-        <input type="text"  [(ngModel)]="prestationExterne.numeroFac" pInputText id="numeroFac">
+        <input type="text"  [(ngModel)]="prestationExterne.numeroFacE" pInputText id="numeroFac">
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -135,7 +135,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <input type="number" formControlName="montant" [(ngModel)]="prestationExterne.montantFac" pInputText id="montant">
+        <input type="number" formControlName="montant" [(ngModel)]="prestationExterne.montantFacE" pInputText id="montant">
       </div>
       </div>
       <div class="ui-g-4">
@@ -149,8 +149,8 @@
         <label for="bonc" style="color: #00aeef"><strong>Prestation A Un Bon Commande ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationExterne.bonCommande" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="bonC" style="color: #00aeef"><strong>{{prestationExterne.bonCommande}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationExterne.bonCommandeE" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="bonC" style="color: #00aeef"><strong>{{prestationExterne.bonCommandeE}}</strong></label>
       </div>
       <div class="ui-g-3"></div>
       <div class="ui-g-4">
@@ -159,14 +159,14 @@
     </div>
 
     <!-- items of bon Commande -->
-    <div  *ngIf="prestationExterne.bonCommande" style="align-items: center; align-content: center; text-align: center">
+    <div  *ngIf="prestationExterne.bonCommandeE" style="align-items: center; align-content: center; text-align: center">
 
       <div class="ui-g-12" >
         <div class="ui-g-3">
           <label for="numbonc" style="color: #00aeef">Numero Bon Commande :</label>
         </div>
         <div class="ui-g-5">
-          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonCommande.numeroBonCommande" id="numbonC" >
+          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -178,7 +178,7 @@
           <label for="dateBonc" style="color: #00aeef">Date Bon Commande :</label>
         </div>
         <div class="ui-g-5">
-          <p-calendar  [(ngModel)]="prestationExterne.presBonCommande.dateBonCommande" id="dateBonc" > </p-calendar>
+          <p-calendar  [(ngModel)]="prestationExterne.presBonCommandeE.dateBonCommande" id="dateBonc" > </p-calendar>
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -190,7 +190,7 @@
           <label for="montantC" style="color: #00aeef">Montant :</label>
         </div>
         <div class="ui-g-5">
-          <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonCommande.montant" id="montantC" >
+          <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonCommandeE.montantC" id="montantC" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -202,7 +202,7 @@
           <label for="nomP" style="color: #00aeef">Nom Prestataire :</label>
         </div>
         <div class="ui-g-5">
-          <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonCommande.nomPrestataire" id="nomP" >
+          <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonCommandeE.nomPrestataireC" id="nomP" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -217,8 +217,8 @@
         <label for="bonL" style="color: #00aeef"><strong>Prestation A Un Bon Livraison ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationExterne.bonLivraison" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="bonL" style="color: #00aeef"><strong>{{prestationExterne.bonLivraison}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationExterne.bonLivraisonE" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="bonL" style="color: #00aeef"><strong>{{prestationExterne.bonLivraisonE}}</strong></label>
       </div>
       <div class="ui-g-3"></div>
       <div class="ui-g-4">
@@ -228,14 +228,14 @@
 
     <!-- items of bon Livrraison -->
 
-    <div  *ngIf="prestationExterne.bonLivraison" style="align-items: center; align-content: center; text-align: center">
+    <div  *ngIf="prestationExterne.bonLivraisonE" style="align-items: center; align-content: center; text-align: center">
 
       <div class="ui-g-12" >
         <div class="ui-g-3">
           <label for="numbonL" style="color: #00aeef">Numero Bon Livraison :</label>
         </div>
         <div class="ui-g-5">
-          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonLivraison.numeroBonLivraison" id="numbonL" >
+          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -247,7 +247,7 @@
           <label for="dateBonL" style="color: #00aeef">Date Bon Livraison :</label>
         </div>
         <div class="ui-g-5">
-          <p-calendar  [(ngModel)]="prestationExterne.presBonLivraison.dateBonLivraison" id="dateBonL" > </p-calendar>
+          <p-calendar  [(ngModel)]="prestationExterne.presBonLivraisonE.dateBonLivraison" id="dateBonL" > </p-calendar>
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -259,7 +259,7 @@
           <label for="montantL" style="color: #00aeef">Montant :</label>
         </div>
         <div class="ui-g-5">
-          <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonLivraison.montant" id="montantL" >
+          <input type="number" pInputText  [(ngModel)]="prestationExterne.presBonLivraisonE.montantL" id="montantL" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -271,7 +271,7 @@
           <label for="nomPL" style="color: #00aeef">Nom Prestataire :</label>
         </div>
         <div class="ui-g-5">
-          <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonLivraison.nomPrestataire" id="nomPL" >
+          <input type="text" pInputText  [(ngModel)]="prestationExterne.presBonLivraisonE.nomPrestataireL" id="nomPL" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>

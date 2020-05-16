@@ -23,7 +23,7 @@ export class ReclamationService {
           console.log('success');
           console.log('ha data : ' + data.length);
       }, error => {
-        console.log('erroror in the link');
+        console.log('error in the link');
       }
     );
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {PrestationExterne} from '../../controller/model/prestation-Externe.model';
+import {PrestationExterne} from '../../controller/model/prestation-externee.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
-import {PrestationInterne} from '../../controller/model/prestation-interne.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-prestation-externe-liste',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Local} from '../../controller/model/local.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
+import {LocalService} from '../../controller/service/local.service';
 
 @Component({
   selector: 'app-local',
@@ -32,10 +33,10 @@ export class LocalComponent implements OnInit {
 
   errorS: number ;
   errorC: number ;
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private localService: LocalService) { }
 
   ngOnInit(): void {
-
+    this.localService.findAll();
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),
       typelocal: new FormControl('', Validators.required),
@@ -43,9 +44,11 @@ export class LocalComponent implements OnInit {
     });
 
     this.cols = [
-      {field: 'nomlocal', header: 'Nom Locale'},
-      {field: 'typelocal', header: 'Type Locale'},
-      {field: 'departement', header: 'Département'}
+      {field: 'reference', header: 'Reference'},
+      {field: 'nomLocal', header: 'Nom Locale'},
+      {field: 'typeLocal', header: 'Type Locale'},
+      {field: 'departement', header: 'Département'},
+      {field: 'nbrMateriel', header: 'Nombre Materiel affectés'}
     ];
 
     this.typeslocal = [
@@ -86,11 +89,15 @@ export class LocalComponent implements OnInit {
   }
 
   save() {
-    const localls = this.locals;
+    const localls = this.localService.foudedLocales;
     if (this.newLocal) {
       localls.push(this.local);
+      this.localService.save(this.local);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Locale Enregistré'});
     } else {
-      localls[this.locals.indexOf(this.selectedLocal)] = this.local;
+      localls[this.localService.foudedLocales.indexOf(this.selectedLocal)] = this.local;
+      this.localService.update(this.local);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Locale Modifié'});
     }
 
     this.locals = localls;
@@ -99,8 +106,10 @@ export class LocalComponent implements OnInit {
   }
 
   delete() {
-    const index = this.locals.indexOf(this.selectedLocal);
-    this.locals = this.locals.filter((val, i) => i !== index);
+    const index = this.localService.foudedLocales.indexOf(this.selectedLocal);
+    this.localService.foudedLocales = this.localService.foudedLocales.filter((val, i) => i !== index);
+    this.localService.delete(this.selectedLocal.reference);
+    this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Locale Supprimé'});
     this.local = null;
     this.displayDialog = false;
   }
@@ -120,4 +129,7 @@ export class LocalComponent implements OnInit {
     return local;
   }
 
+  get foudedLocales(): Local[] {
+    return this.localService.foudedLocales;
+  }
 }

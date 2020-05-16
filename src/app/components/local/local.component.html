@@ -1,4 +1,5 @@
-  <p-table #dt [columns]="cols" [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-toast [style]="{marginTop: '2%'}"></p-toast>
+  <p-table #dt [columns]="cols" [value]="foudedLocales" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -48,7 +49,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <input pInputText id="matricule" formControlName="nom"  [(ngModel)]="local.nomlocal" autofocus />
+          <input pInputText id="matricule" formControlName="nom"  [(ngModel)]="local.nomLocal" autofocus />
         </div>
         </div>
         <div class="ui-g-4">
@@ -62,7 +63,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown  id="type" formControlName="typelocal" [options]="typeslocal" [(ngModel)]="local.typelocal"></p-dropdown>
+          <p-dropdown  id="type" formControlName="typelocal" [options]="typeslocal" [(ngModel)]="local.typeLocal"></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">

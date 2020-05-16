@@ -7,19 +7,55 @@ import {Materiel} from '../model/materiel.model';
 })
 export class MaterielService {
 
-  private url: 'http://localhost:8090/GestionEntretien/materiel/'
+  private _foundedMateriels = new Array<Materiel>();
+  private url = 'http://localhost:8090/GestionEntretien/materiel/';
   constructor(private http: HttpClient) {}
+
   save(materiel: Materiel) {
-    this.http.post(this.url, materiel).subscribe(
+    this.http.post<number>(this.url, materiel).subscribe(
       data => {
-        if (data === 1) {
-          console.log('material saved');
-        } else {
-          console.log('matereil not saved');
-        }
+        this.findAll();
+        console.log('material saved');
       }, error => {
         console.log('error in the link ');
       }
     );
+  }
+  update(materiel: Materiel) {
+    this.http.put<number>(this.url + 'update', materiel).subscribe(
+      data => {
+        console.log('material updated');
+        this.findAll();
+      }, error => {
+        console.log('error in the link ');
+      }
+    );
+  }
+  delete(reference: string) {
+    this.http.delete<number>(this.url + 'deleteMateriel/' + reference).subscribe(
+      data => {
+        console.log('material deleted');
+      }, error => {
+        console.log('error in the link ');
+      }
+    );
+  }
+  public findAll() {
+    this.http.get<Array<Materiel>>(this.url).subscribe(
+      data => {
+        this._foundedMateriels = data.reverse();
+        console.log('data Materiel :' + data.length);
+      }, error => {
+        console.log('error in the link');
+      }
+    );
+  }
+
+  get foundedMateriels(): Materiel[] {
+    return this._foundedMateriels;
+  }
+
+  set foundedMateriels(value: Materiel[]) {
+    this._foundedMateriels = value;
   }
 }
