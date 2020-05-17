@@ -24,7 +24,7 @@ import {AgentComponent} from './components/agent/agent.component';
 
 
 const routes: Routes = [
-  { path: 'login' , component: LoginComponent},
+  { path: '' , component: LoginComponent},
   { path: 'materiel' , component: MaterielComponent},
   { path: 'prestation' , component: PrestationComponent},
   { path: 'reclamations' , component: ReclamationComponent},

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {MessageService} from 'primeng';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MaterielService} from '../../controller/service/materiel.service';
+import {FournisseurSVService} from '../../controller/service/fournisseur-sv.service';
+import {FournisseurSV} from '../../controller/model/fournisseurSV.model';
 
 @Component({
   selector: 'app-materiel',
@@ -29,34 +30,28 @@ export class MaterielComponent implements OnInit {
 
   cols: any[];
 
-  fournisseurs: Array<any>;
   types: Array<any>;
-
-  dateToConvert: string;
-  constructor(private fb: FormBuilder, private materielService: MaterielService, private messageService: MessageService, private reclamationService: ReclamationService) { }
+  constructor(private fb: FormBuilder,
+              private materielService: MaterielService,
+              private messageService: MessageService,
+              private fournisseurService: FournisseurSVService,
+              private reclamationService: ReclamationService) { }
 
   ngOnInit() {
+    this.materielService.findAll();
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),
       marque: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required)
     });
-    this.reclamationService.findAll();
+    this.fournisseurService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
       { field: 'marque', header: 'Marque' },
       { field: 'nom', header: 'Nom' },
-      { field: 'dateAchat', header: 'DateAchat' },
-      { field: 'nbrEntite', header: 'NbrEntite' },
-      { field: 'type', header: 'Type' }
+      { field: 'type', header: 'Type' },
+      { field: 'nbrEntite', header: 'NbrEntite' }
     ];
-    this.fournisseurs = [
-      { value: '', label: 'Choisissez un fournisseur' },
-      { value: 'fournisseur 1', label: 'fournisseur 1' },
-      { value: '2', label: 'fournisseur 2' },
-      { value: '3', label: 'fournisseur 3' },
-    ];
-
     this.types = [
       { value: '', label: 'Choisissez un Type' },
       { value: 'Informatique', label: 'Informatique ' },
@@ -70,26 +65,28 @@ export class MaterielComponent implements OnInit {
     this.cancel = true;
   }
   save() {
-    const materiels = this.materiels;
+    const materiels = this.materielService.foundedMateriels;
     if (this.newMateriel) {
       materiels.push(this.materiel);
       this.materielService.save(this.materiel);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+      this.messageService.add({severity: 'success', summary: 'Succé', detail: 'Materiel Enregistré'});
     } else {
-      materiels[this.materiels.indexOf(this.selectedMatereil)] = this.materiel;
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+      materiels[this.materielService.foundedMateriels.indexOf(this.selectedMatereil)] = this.materiel;
+      this.materielService.update(this.materiel);
+      this.messageService.add({severity: 'success', summary: 'Succé', detail: 'Materiel Modifier'});
     }
-    this.materiels = materiels;
+    this.materielService.foundedMateriels = materiels;
     this.materiel = null;
     this.displayDialog = false;
   }
 
   delete() {
-    const index = this.materiels.indexOf(this.selectedMatereil);
-    this.materiels = this.materiels.filter((val, i) => i !== index);
+    const index = this.materielService.foundedMateriels.indexOf(this.selectedMatereil);
+    this.materielService.foundedMateriels = this.materielService.foundedMateriels.filter((val, i) => i !== index);
+    this.materielService.delete(this.selectedMatereil.reference);
     this.materiel = null;
     this.displayDialog = false;
-    this.messageService.add({severity: 'warn', summary: 'Deleted', detail: 'Opération Réussie'});
+    this.messageService.add({severity: 'warn', summary: 'Succée', detail: 'Materiel Supprimé'});
   }
 
   onRowSelect(event) {
@@ -107,4 +104,10 @@ export class MaterielComponent implements OnInit {
     return materiel;
   }
 
+  get foundedFournisseurs() {
+    return this.fournisseurService.foundedFourniseurs;
+  }
+  get foundedMateriels() {
+    return this.materielService.foundedMateriels;
+  }
 }

@@ -3,7 +3,7 @@ import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {PrestationInterne} from '../../controller/model/prestation-interne.model';
 import {MessageService, SelectItem} from 'primeng';
-import {PrestationExterne} from '../../controller/model/prestation-externe.model';
+import {PrestationExterne} from '../../controller/model/prestation-externee.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 

@@ -1,5 +1,5 @@
 import {Car} from "./car";
-import {FournisseurSV} from "./fournisseur.model";
+import {FournisseurSV} from "./fournisseurSV.model";
 
 export class BonsV {
   // vidange

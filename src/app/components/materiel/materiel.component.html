@@ -1,5 +1,5 @@
-<p-toast [style]="{marginTop: '30%'}"></p-toast>
-<p-table #dt [columns]="cols" [value]="materiels" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedMatereil" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-toast [style]="{marginTop: '2%'}"></p-toast>
+<p-table #dt [columns]="cols" [value]="foundedMateriels" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedMatereil" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
     <div class="row">
@@ -44,65 +44,76 @@
 
 <!-- dialog 1 -->
 <p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" [modal]="true" showEffect="fade"   [style]="{width: '600px', textAlign: 'center'}">
-  <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 300px">
-    <div class="ui-g-12">
+  <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 300px" >
+
+
+    <div class="ui-g-12" >
       <div class="ui-g-3">
         <label for="marque">Marque :</label>
       </div>
-      <div class="ui-g-5">
-        <div class="form-group" [formGroup]="userform"  >
-        <p-dropdown id="marque" formControlName="marque" [options]="fournisseurs" [(ngModel)]="materiel.marque" [filter]="true"></p-dropdown>
-      </div>
-      </div>
-      <div class="ui-g-4">
-        <p-message severity="error"  *ngIf="(userform.controls['marque'].touched &&!userform.controls['marque'].dirty  || userform.controls['marque'].value=='Choisissez un fournisseur')" text="Veuillez Choisir un fournisseur "></p-message>
-      </div>
-    </div>
+      <div class="ui-g-5" >
+        <div class="form-group" [formGroup]="userform" >
+
+        <p-dropdown id="marque" formControlName="marque" [options]="foundedFournisseurs" optionLabel="nomf" [(ngModel)]="materiel.fournisseur" [filter]="true"></p-dropdown>
+
+          <!--
+                   <select class="btn btn-block btn-light" id="marque" formControlName="marque" [(ngModel)]="materiel.fournisseur" >
+                     <option value="0" selected disabled>choisir Fournisseur</option>
+
+                   </select>
+         -->
+                 </div>
+               </div>
+               <div class="ui-g-4">
+                 <p-message severity="error"  *ngIf="(userform.controls['marque'].touched &&!userform.controls['marque'].dirty  || userform.controls['marque'].value=='Choisissez un fournisseur')" text="Veuillez Choisir un fournisseur "></p-message>
+               </div>
+             </div>
 
 
-    <div class="ui-g-12">
-      <div class="ui-g-3">
-        <label for="nom">Nom :</label>
-      </div>
-      <div class="ui-g-5">
-        <div class="form-group" [formGroup]="userform"  >
 
-        <input type="text" formControlName="nom"  pTooltip="Nom du Materiel" tooltipPosition="top" pInputText id="nom" [(ngModel)]="materiel.nom" />
-      </div>
-      </div>
+             <div class="ui-g-12">
+               <div class="ui-g-3">
+                 <label for="nom">Nom :</label>
+               </div>
+               <div class="ui-g-5">
+                 <div class="form-group" [formGroup]="userform"  >
 
-      <div class="ui-g-4">
-        <p-message severity="error" *ngIf="userform.controls['nom'].hasError('required') && (userform.controls['nom'].dirty || userform.controls['nom'].touched) " text="Champ Obligatoire"></p-message>
-      </div>
-    </div>
+                 <input type="text" formControlName="nom"  pTooltip="Nom du Materiel" tooltipPosition="top" pInputText id="nom" [(ngModel)]="materiel.nom" />
+               </div>
+               </div>
 
-
-    <div class="ui-g-12">
-      <div class="ui-g-3">
-
-        <label for="type">Type :</label>
-      </div>
-      <div class="ui-g-5">
-        <div class="form-group" [formGroup]="userform"  >
-        <p-dropdown id="type" formControlName="type" [options]="types" [(ngModel)]="materiel.type" [filter]="true"></p-dropdown>
-      </div>
-      </div>
-      <div class="ui-g-4">
-        <p-message severity="error" *ngIf="(userform.controls['type'].touched &&!userform.controls['type'].dirty  || userform.controls['type'].value=='Choisissez un Type')"
-                   text="Choisissez un type"></p-message>
-      </div>
-    </div>
+               <div class="ui-g-4">
+                 <p-message severity="error" *ngIf="userform.controls['nom'].hasError('required') && (userform.controls['nom'].dirty || userform.controls['nom'].touched) " text="Champ Obligatoire"></p-message>
+               </div>
+             </div>
 
 
-  </div>
+             <div class="ui-g-12">
+               <div class="ui-g-3">
 
-  <p-footer>
-    <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]=!userform.valid type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-save" [disabled]=!userform.valid (click)="save()" label="Enregistrer"></button>
-    </div>
-  </p-footer>
+                 <label for="type">Type :</label>
+               </div>
+               <div class="ui-g-5">
+                 <div class="form-group" [formGroup]="userform"  >
+                 <p-dropdown id="type" formControlName="type" [options]="types" [(ngModel)]="materiel.type" ></p-dropdown>
+               </div>
+               </div>
+               <div class="ui-g-4">
+                 <p-message severity="error" *ngIf="(userform.controls['type'].touched &&!userform.controls['type'].dirty  || userform.controls['type'].value=='Choisissez un Type')"
+                            text="Choisissez un type"></p-message>
+               </div>
+             </div>
 
 
-</p-dialog>
+           </div>
+
+           <p-footer>
+             <div class="ui-dialog-buttonpane ui-helper-clearfix">
+               <button *ngIf="!cancel" [disabled]=!userform.valid type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+               <button type="button" pButton icon="pi pi-save" [disabled]=!userform.valid (click)="save()" label="Enregistrer"></button>
+             </div>
+           </p-footer>
+
+
+         </p-dialog>
 
