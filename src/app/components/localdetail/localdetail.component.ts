@@ -2,7 +2,11 @@ import {Component, OnInit, PipeTransform} from '@angular/core';
 import {MessageService, SelectItem} from 'primeng/api';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Localdetail} from '../../controller/model/localdetail.model';
-import {DatePipe, formatDate} from '@angular/common';
+import {LocaldetailService} from '../../controller/service/localdetail.service';
+import {MaterielService} from '../../controller/service/materiel.service';
+import {LocalService} from '../../controller/service/local.service';
+import {Materiel} from '../../controller/model/materiel.model';
+import {Local} from '../../controller/model/local.model';
 
 @Component({
   selector: 'app-localdetail',
@@ -25,44 +29,33 @@ export class LocaldetailComponent implements OnInit {
 
   cols: any[];
 
-  typeslocal: SelectItem[];
-
-  typesmateriel: SelectItem[];
 
   userform: FormGroup;
 
 
   errorS: number;
   errorC: number;
-  constructor(private fb: FormBuilder, private messageService: MessageService, public datepipe: DatePipe) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService,
+              private materielService: MaterielService,
+              private localService: LocalService,
+              private localdetailService: LocaldetailService) { }
 
   ngOnInit(): void {
+    this.localdetailService.findAll();
 
     this.userform = this.fb.group({
+      referencelocal: new FormControl('', Validators.required),
       materiellocal: new FormControl('', Validators.required),
       localassocie: new FormControl('', Validators.required),
       dateachat: new FormControl('', Validators.required),
     });
-
+    this.localService.findAll();
+    this.materielService.findAll();
     this.cols = [
-      {field: 'referenceMT', header: 'Réference'},
-      {field: 'materiellocal', header: 'Materiel'},
-      {field: 'localassocie', header: 'Locale'},
-      {field: 'dateachat', header: 'Date Achat Materiel'},
-    ];
-
-    this.typeslocal = [
-      {label: 'Selectionnez un locale', value: ''},
-      {label: 'Amphi 1,Département autre', value: 'Amphi 1 Département autre'},
-      {label: 'Salle 1,Département informatique', value: 'Salle 1 Département informatique'},
-      {label: 'Laboratoire 2,Département biologie', value: 'Laboratoire 2 Département biologie'},
-      {label: 'Amphi 3,Département autre', value: 'Amphi 3 Département autre'},
-    ];
-
-    this.typesmateriel = [
-      {label: 'Selectionnez un materiel', value: ''},
-      {label: 'Projecteur ', value: 'Projecteur'},
-      {label: 'Pc bureau', value: 'Pc bureau'},
+      {field: 'referenceML', header: 'Réference'},
+      {field: 'materielLocale', header: 'Materiel'},
+      {field: 'localeAssocie', header: 'Locale, Departement'},
+      {field: 'dateAffectation', header: 'Date Achat Materiel'},
     ];
   }
 
@@ -79,14 +72,19 @@ export class LocaldetailComponent implements OnInit {
   }
 
   save() {
-    const localls = this.locals;
+    const localls = this.localdetailService.foundedLocalDetails;
     if (this.newLocal) {
       localls.push(this.local);
+      console.log('ha howa ref dialhom bjoj : ' + this.local.materiel.reference + ', loacale :' + this.local.locale.reference);
+      this.localdetailService.save(this.local);
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Materiel Affecté'});
     } else {
-      localls[this.locals.indexOf(this.selectedLocal)] = this.local;
+      localls[this.localdetailService.foundedLocalDetails.indexOf(this.selectedLocal)] = this.local;
+      this.localdetailService.update(this.local);
+      this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Materiel Modifié'});
     }
 
-    this.locals = localls;
+    this.localdetailService.foundedLocalDetails = localls;
     this.local = null;
     this.displayDialog = false;
   }
@@ -94,8 +92,10 @@ export class LocaldetailComponent implements OnInit {
 
 
   delete() {
-    const index = this.locals.indexOf(this.selectedLocal);
-    this.locals = this.locals.filter((val, i) => i !== index);
+    const index = this.localdetailService.foundedLocalDetails.indexOf(this.selectedLocal);
+    this.localdetailService.foundedLocalDetails = this.localdetailService.foundedLocalDetails.filter((val, i) => i !== index);
+    this.localdetailService.delete(this.selectedLocal.referenceML);
+    this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Materiel Supprimé'});
     this.local = null;
     this.displayDialog = false;
   }
@@ -113,5 +113,14 @@ export class LocaldetailComponent implements OnInit {
       local[prop] = c[prop];
     }
     return local;
+  }
+  get foundedLocalDetails(): Localdetail[] {
+    return this.localdetailService.foundedLocalDetails;
+  }
+  get foundedMaterielToChoose(): Materiel[] {
+    return this.materielService.foundedMateriels;
+  }
+  get foundedLocalToChoose(): Local[] {
+    return this.localService.foudedLocales;
   }
 }

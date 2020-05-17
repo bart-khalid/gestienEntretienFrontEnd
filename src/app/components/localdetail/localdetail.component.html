@@ -1,5 +1,5 @@
-<p-toast></p-toast>
-<p-table #dt [columns]="cols"  [value]="locals" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-toast [style]="{marginTop: '2%'}"></p-toast>
+<p-table #dt [columns]="cols"  [value]="foundedLocalDetails" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -44,17 +44,33 @@
   <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'650px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 250px;" *ngIf="local">
 
+
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="ref">Reference Matériel :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <input pInputText  id="ref" formControlName="referencelocal"  [(ngModel)]="local.referenceML">
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="(userform.controls['referencelocal'].touched &&!userform.controls['referencelocal'].dirty  || userform.controls['referencelocal'].value=='')"
+                     text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
       <div class="ui-g-12">
         <div class="ui-g-3">
           <label for="type">Nom Matériel :</label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown  id="type" formControlName="materiellocal" [filter]="true" [options]="typesmateriel" [(ngModel)]="local.materiellocal"></p-dropdown>
+          <p-dropdown  id="type" formControlName="materiellocal" [options]="foundedMaterielToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.materiel" placeholder="choisir un materiel" [filter]="true" ></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='Selectionnez un materiel')"
+          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='')"
                      text="Champ Obligatoire"></p-message>
         </div>
       </div>
@@ -65,11 +81,11 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown id="matricule" formControlName="localassocie" [filter]="true" [options]="typeslocal"  [(ngModel)]="local.localassocie" autofocus ></p-dropdown>
+          <p-dropdown id="matricule" formControlName="localassocie" [filter]="true" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="choisir un locale" ></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value=='Selectionnez un locale')"
+          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value==''|| userform.controls['referencelocal'].value== null)"
                      text="Champ Obligatoire"></p-message>
         </div>
       </div>
@@ -78,12 +94,12 @@
       <div class="ui-g-12">
         <div class="ui-g-3">
 
-          <label for="marque">Date Affectation :</label>
+          <label for="date">Date Affectation :</label>
         </div>
 
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <input pInputText id="marque" formControlName="dateachat" type="date" [(ngModel)]="local.dateachat" />
+          <input pInputText id="date" formControlName="dateachat" type="date" [(ngModel)]="local.dateAffectation" />
         </div>
         </div>
         <div class="ui-g-4">
@@ -98,7 +114,7 @@
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
         <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save();onSubmit()" label="Enregistrer"></button>
+        <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>
   </p-dialog>

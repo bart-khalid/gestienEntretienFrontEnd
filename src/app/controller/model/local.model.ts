@@ -9,6 +9,8 @@ export class Local {
   departement: string;
   nbrMateriel: number;
 
+  public descriptionDropDown: string;
+
   public localDetails = new Array<Localdetail>();
   public prestationI = new Array<PrestationInterne>();
   public prestationE = new Array<PrestationExterne>();
