@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class UsersService {
   private urls = 'http://localhost:8090/GestionEntretien/Login/';
-  private urlu = 'http://localhost:8090/GestionEntretien/Login/update/';
+  private urlu = 'http://localhost:8090/GestionEntretien/Login/update';
   private urld = 'http://localhost:8090/GestionEntretien/Login/delete/';
   constructor(private http: HttpClient) { }
   public save(user: Users) {

@@ -60,10 +60,10 @@ export class UsersComponent implements OnInit {
     this.type.push({label: 'Administrateur', value: 'administrateur'});
     this.type.push({label: 'Employé', value: 'employe'});
 
-   this.find();
+    this.find();
   }
 
-  public find(){
+  public find() {
     this.userService.findAll().subscribe(
       data => {
         this.users = data;
@@ -99,8 +99,8 @@ export class UsersComponent implements OnInit {
             this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
             this.user = null;
             this.displayDialog = false;
-          } else {
-            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Opération echoué'});
+          } else if (this.errorS === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Utilisateur déja existe'});
           }
         }, error => {
           console.log('error');
@@ -108,9 +108,13 @@ export class UsersComponent implements OnInit {
       );
     } else {
     //  use[this.users.indexOf(this.selectedUser)] = this.user;
-      this.userService.update(use[this.users.indexOf(this.selectedUser)]).subscribe(
+      this.user = this.users[this.users.indexOf(this.selectedUser)];
+      this.userService.update(this.user).subscribe(
         data => {
           console.log(data);
+          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+          this.user = null;
+          this.displayDialog = false;
         }, error => {
           console.log('error update');
         }
