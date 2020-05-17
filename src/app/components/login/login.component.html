@@ -21,14 +21,14 @@
      <!-- <span style="color: forestgreen" class="badge-success">{{SuccessMsg()}} </span> -->
 
       <div class="form-group">
-        <input type="text" placeholder="Nom d'utilisateur" [(ngModel)]="login.username" class="form-control" name="user" id="username" >
+        <input type="text" placeholder="Nom d'utilisateur" [(ngModel)]="users.username" class="form-control" name="user" id="username" >
 
       </div>
       <div class="form-group">
-        <input type="password" placeholder="Mot de passe" [(ngModel)]="login.password" class="form-control" name="pass"  id="password" >
+        <input type="password" placeholder="Mot de passe" [(ngModel)]="users.password" class="form-control" name="pass"  id="password" >
       </div>
       <div>
-        <input type="submit" (click)="connect(login.username,login.password)"  value="Connecter" />
+        <input type="submit"  (click)="connect(users.username,users.password)"  value="Connecter" />
       </div>
     </form><!-- form -->
 

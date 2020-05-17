@@ -48,23 +48,27 @@ export class UsersComponent implements OnInit {
     });
 
     this.cols = [
-      {field: 'nomu', header: 'Nom '} ,
-      {field: 'prenomu', header: 'Prénom'},
-      {field: 'telephoneu', header: 'Numero de Telephone'},
+      {field: 'nom', header: 'Nom '} ,
+      {field: 'prenom', header: 'Prénom'},
+      {field: 'telephone', header: 'Numero de Telephone'},
       {field: 'username', header: 'Nom D\'utilisateur'},
       {field: 'password', header: 'Mot de passe'},
-      {field: 'typeu', header: 'Type utilisateur'}
+      {field: 'type', header: 'Type utilisateur'}
     ];
     this.type = [];
     this.type.push({label: 'Selectionnez le Type', value: ''});
     this.type.push({label: 'Administrateur', value: 'administrateur'});
     this.type.push({label: 'Employé', value: 'employe'});
 
+   this.find();
+  }
+
+  public find(){
     this.userService.findAll().subscribe(
       data => {
         this.users = data;
       },
-          error => {
+      error => {
         console.log('error find');
       });
   }
@@ -91,21 +95,28 @@ export class UsersComponent implements OnInit {
         data => {
           console.log(data);
           this.errorS = data;
+          if (this.errorS === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.user = null;
+            this.displayDialog = false;
+          } else {
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Opération echoué'});
+          }
         }, error => {
           console.log('error');
         }
       );
     } else {
-      use[this.users.indexOf(this.selectedUser)] = this.user;
+    //  use[this.users.indexOf(this.selectedUser)] = this.user;
+      this.userService.update(use[this.users.indexOf(this.selectedUser)]).subscribe(
+        data => {
+          console.log(data);
+        }, error => {
+          console.log('error update');
+        }
+      );
     }
-    this.users = use;
-
-    if (this.errorS === 1) {
-    this.user = null;
-    this.displayDialog = false;
-    } else {
-
-    }
+    this.find();
   }
 
 

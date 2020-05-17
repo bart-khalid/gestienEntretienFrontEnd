@@ -1,39 +1,27 @@
 import { Injectable } from '@angular/core';
 import {Login} from '../model/login.model';
 import {HttpClient} from '@angular/common/http';
+import {Users} from "../model/users.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private _login: Login;
+  private _user: Users;
   private errorS: number ;
   private errorC: number ;
   private url = 'http://localhost:8090/GestionEntretien/Login/';
-  get login(): Login {
-    if (this._login == null) {
-      this._login = new Login();
+
+  get user(): Users {
+    if (this._user == null) {
+      this._user = new Users();
     }
-    return this._login;
+    return this._user;
   }
+
   constructor(private http: HttpClient ) {}
 
-
-  public save() {
-        this.http.post<number>(this.url, this.login).subscribe(
-          data => {
-            console.log(data);
-            this.errorS = data;
-            if (data > 0) {
-              // window.location.href = 'http://localhost:4200/DeclarationIR';
-            }
-          }, error => {
-            console.log('error');
-          }
-        );
-    }
  public errorMsg() {
-   // tslint:disable-next-line:max-line-length
     if (this.errorS === -1) { return 'Cet Utilisateur existe déja'; }
     else if (this.errorS === -2) { return 'Nom Utilisateur est obligatoire'; }
     else if (this.errorS === -3) { return 'Mot de passe est obligatoire'; }
@@ -47,8 +35,12 @@ export class LoginService {
 
  public connect( usernamee: string , passwordd: string) {
     this.http.get<number>(this.url + 'Connect/username/' + usernamee + '/password/' + passwordd).subscribe(
-      data =>
-        this.errorC = data,
+      data => {
+        this.errorC = data;
+      if (this.errorC === 1) {
+        window.location.href = 'http://localhost:4200/actions';
+      }
+      },
       error =>
         console.log(error)
     );

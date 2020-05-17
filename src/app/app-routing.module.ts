@@ -17,8 +17,8 @@ import {LocalComponent} from './components/local/local.component';
 import {PrestationInterneListeComponent} from './components/prestation-interne-liste/prestation-interne-liste.component';
 import {PrestationExterneListeComponent} from './components/prestation-externe-liste/prestation-externe-liste.component';
 import {DocumentationComponent} from './components/documentation/documentation.component';
-import {BonvComponent} from "./components/bonv/bonv.component";
-import {BonrComponent} from "./components/bonr/bonr.component";
+import {BonvComponent} from './components/bonv/bonv.component';
+import {BonrComponent} from './components/bonr/bonr.component';
 import {AgentComponent} from './components/agent/agent.component';
 
 
