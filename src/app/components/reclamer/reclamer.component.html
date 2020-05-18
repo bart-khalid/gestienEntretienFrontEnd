@@ -1,4 +1,4 @@
-<p-toast [style]="{marginTop: '30%'}"></p-toast>
+<p-toast [style]="{marginTop: '2%'}"></p-toast>
 <p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
@@ -42,10 +42,10 @@
         <div class="col-md-4">
       <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label></div>
         <div class="col-md-4">
-      <button class="btn btn-block"  pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
+      <button class="btn btn-block"  pButton icon="pi pi-plus-circle" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
         </div>
         <div class="col-md-4">
-      <button  class="btn btn-block" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre"  id="itemss"></button>
+      <button  class="btn btn-block" pButton icon="pi pi-plus-circle" (click)="showDialogToAdd()" label="Autre"  id="itemss"></button>
       </div>
       </div>
     </div>
@@ -79,11 +79,11 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <p-dropdown formControlName="local" [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
+        <p-dropdown formControlName="local" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="choisir un locale" [(ngModel)]="reclamation.locale" [filter]="true"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" *ngIf="(userform.controls['local'].touched &&!userform.controls['local'].dirty  || userform.controls['local'].value=='Choisir un locale')"
+        <p-message severity="error" *ngIf="(userform.controls['local'].touched &&!userform.controls['local'].dirty)  || userform.controls['local'].value=='Choisir un locale'"
                    text="Veuillez choisir un locale" ></p-message>
       </div>
     </div>
@@ -98,7 +98,7 @@
       </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" *ngIf="userform.controls['description'].hasError('required') && (userform.controls['description'].dirty || userform.controls['description'].touched) "
+        <p-message severity="error" *ngIf="userform.controls['description'].hasError('required') && (userform.controls['description'].dirty || userform.controls['description'].touched)"
                    text="Champ Obligatoire"></p-message>
       </div>
     </div>
@@ -106,7 +106,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
@@ -144,7 +144,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <p-dropdown formControlName="locale" [options]="locales" [(ngModel)]="reclamation.nomLocale" [filter]="true"></p-dropdown>
+        <p-dropdown formControlName="locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="choisir un locale" [(ngModel)]="selectedLocale" [filter]="true"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-4">
@@ -160,7 +160,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <p-dropdown formControlName="mater" [options]="materiels" [(ngModel)]="reclamation.nomMateriel" [filter]="true"></p-dropdown>
+        <p-dropdown formControlName="mater" [options]="selectedLocale.localDetails" placeholder="choisir un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="reclamation.materiel" [filter]="true"></p-dropdown>
         </div>
       </div>
 
@@ -189,7 +189,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-save" [disabled]="!userform1.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>

@@ -120,7 +120,7 @@ export class ReclamationComponent implements OnInit {
   onRowSelect(event) {
     this.newReclamation = false;
     this.reclamation = this.cloneReclamation(event.data);
-    if (this.reclamation.nomMateriel === '' || this.reclamation.nomMateriel == null) {
+    if (this.reclamation.nomMateriel === 'Pas de materiel' || this.reclamation.nomMateriel == null) {
       this.displayDialog = true;
     } else {
       this.displayDialogM = true;

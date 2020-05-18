@@ -8,6 +8,9 @@ export class Localdetail {
   public localeAssocie: string;
   public  dateAffectation: Date;
 
+
+  public descriptionMaterielLocale: string;
+
   public  materiel = new Materiel();
   public  locale = new Local();
 

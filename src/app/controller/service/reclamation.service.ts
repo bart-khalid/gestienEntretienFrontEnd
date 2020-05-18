@@ -21,7 +21,7 @@ export class ReclamationService {
       data => {
           this.reclamationsFounded = data.reverse();
           console.log('success');
-          console.log('ha data : ' + data.length);
+          console.log('Reclamations data : ' + data.length);
       }, error => {
         console.log('error in the link');
       }
@@ -32,16 +32,45 @@ export class ReclamationService {
   public save(reclamation: Reclamation, username: string) {
     this.http.post<number>(this.url + username, reclamation).subscribe(
       data => {
-        if (data === -2) {
-          alert('user not found');
-        } else if (data === -1) {
-          alert('la reference existe deja');
+        if (data === -1) {
+          console.log('reclamation existe deja ');
+        } else if (data === -2) {
+          console.log('reclament not found');
         } else {
           console.log('reclamation saved');
           this.findAll();
         }
       }, error => {
         console.log('error in the save link');
+      }
+    );
+  }
+
+  public update(reclamation: Reclamation) {
+    this.http.put<number>(this.url + 'update', reclamation).subscribe(
+      data => {
+        if (data === -1) {
+          alert('reclamation not found');
+        } else {
+          console.log('reclamation updated');
+          this.findAll();
+        }
+      }, error => {
+        console.log('error in the update link');
+      }
+    );
+  }
+
+  public delete(reference: string) {
+    this.http.delete<number>(this.url + 'deleteReclamation/' + reference).subscribe(
+      data => {
+        if (data === -1) {
+          alert('reclamation not found');
+        } else {
+          console.log('reclamation deleted');
+        }
+      }, error => {
+        console.log('error in the delete link');
       }
     );
   }

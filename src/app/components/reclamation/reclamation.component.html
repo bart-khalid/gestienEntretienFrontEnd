@@ -38,19 +38,6 @@
     </tr>
   </ng-template>
 
-  <!--
-  <ng-template pTemplate="summary" let-rowData>
-    <div style="text-align:left">
-
-
-      <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label>&nbsp; &nbsp; &nbsp;
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAddM()" label="Materiel" style="width: 150px" id="items"></button>&nbsp;
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Autre" style="width: 150px" id="items"></button>
-
-
-    </div>
-  </ng-template>
-  -->
 </p-table>
 
 <p-dialog header="Réclamation Details" [(visible)]="displayDialog"   [focusOnShow]="true"  showEffect="fade" [modal]="true"  [style]="{width: '660px'}">
@@ -96,7 +83,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <textarea  pInputText formControlName="description" autoResize="autoResize" id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style=" height: 60px"></textarea>
+        <textarea  pInputText formControlName="description" autoResize="autoResize" id="description" placeholder="la description du probleme rencontré"  [(ngModel)]="reclamation.description" style="resize: none; height: 60px"></textarea>
       </div>
       </div>
       <div class="ui-g-4">
@@ -107,8 +94,8 @@
           </div>
           <p-footer>
             <div class="ui-dialog-buttonpane ui-helper-clearfix">
-              <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-              <button type="button" pButton icon="pi pi-check" [disabled]="!userform.valid"  (click)="save()" label="Enregistrer"></button>
+              <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+              <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid"  (click)="save()" label="Enregistrer"></button>
             </div>
           </p-footer>
         </p-dialog>
@@ -187,8 +174,8 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-      <button type="button" pButton icon="pi pi-check" [disabled]="!userform1.valid" (click)="save()" label="Enregistrer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-save" [disabled]="!userform1.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
 </p-dialog>
