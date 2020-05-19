@@ -59,12 +59,9 @@ export class LoginService {
           dataa => {
             this.currentuser = dataa;
             console.log(this.currentuser);
-          },
-          error => {
-            console.log('error user');
           }
         );
-        this.route.navigate(['/actions']);
+        this.route.navigate(['actions']);
 //        window.location.href = 'http://localhost:4200/actions';
       }
       },

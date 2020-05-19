@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng';
 import {LoginService} from './controller/service/login.service';
-import {Users} from "./controller/model/users.model";
+import {Users} from './controller/model/users.model';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -10,16 +11,20 @@ import {Users} from "./controller/model/users.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  user = 'Administrateur';
+  // user = 'Administrateur';
   items: MenuItem[];
   itemsEmploye: MenuItem[];
-  //user = this.loginService.currentuser;
 
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService , private route: Router) {
   }
 
   ngOnInit() {
+    if(this.currentUser.username === '' || this.currentUser.username == null) {
+      // @ts-ignore
+      this.route.navigate('');
+    }
+
     this.items = [
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
     {label: 'Bons Parc Automobile', items: [
@@ -68,5 +73,8 @@ export class AppComponent implements OnInit {
     },
   ];
 
+}
+get currentUser(): Users {
+    return this.loginService.currentuser;
 }
 }
