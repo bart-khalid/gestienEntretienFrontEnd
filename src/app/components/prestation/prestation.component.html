@@ -20,13 +20,14 @@
     <!-- First dialog to add a prestation Interne -->
     <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false"  showEffect="fade" [modal]="true"  [style]="{width: '660px'}" >
       <div class="ui-g ui-fluid" *ngIf="prestataionInterne" >
+
         <div class="ui-g-12">
           <div class="ui-g-3">
             <label for="typeEntretienn" style="color: #00aeef"><strong>Type Entretien :</strong> </label>
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown id="typeEntretienn" formControlName="typeEntretien" [options]="entretiens" [(ngModel)]="prestataionInterne.typeEntretienI" [filter]="true"></p-dropdown>
+            <p-dropdown id="typeEntretienn" formControlName="typeEntretien" [options]="entretiens" placeholder="Choisir un type" [(ngModel)]="prestataionInterne.typeEntretienI" [filter]="true"></p-dropdown>
           </div>
           </div>
           <div class="ui-g-4">
@@ -36,12 +37,18 @@
         </div>
 
         <div class="ui-g-12">
+          <div class="ui-g-3">
+            <label for="nomloc" style="color: #00aeef"><strong>locale :</strong> </label>
+          </div>
+          <div class="ui-g-5">
+            <p-dropdown id="nomloc" formControlName="nomLocale" [options]="" placeholder="Choisir un locale" [filter]="true"></p-dropdown>
+          </div>
+
           <div class="ui-g-4">
-            <label for="nomloc" style="color: #00aeef"><strong>locale</strong> </label>
+            <p-message severity="error"  *ngIf="(userform.controls['nomLocale'].touched &&!userform.controls['nomLocale'].dirty  || userform.controls['nomLocale'].value=='Choisir un locale')"
+                       text="Veuillez choisir un type"></p-message>
           </div>
-          <div class="ui-g-8">
-            <p-dropdown id="nomloc" [options]="entretiens" [filter]="true"></p-dropdown>
-          </div>
+
         </div>
 
 
@@ -79,7 +86,7 @@
             <label for="refReclamationn" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown [filter]="true"  [options]="reclamations" [(ngModel)]="prestataionInterne.referenceReclamationI"  id="refReclamationn"></p-dropdown>
+            <p-dropdown [filter]="true"  [options]="foundedReclamations" optionLabel="descreptionDropDownReclamation" placeholder="choisir la reclamation" [(ngModel)]="prestataionInterne.referenceReclamationI"  id="refReclamationn"></p-dropdown>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" severity="error" HIDDEN="true" text="Veuillez choisir une réclamation"></p-message>
