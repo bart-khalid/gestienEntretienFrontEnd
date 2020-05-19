@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Message, MessageService, SelectItem} from 'primeng/api';
 import {Users} from '../../controller/model/users.model';
 import {UsersService} from '../../controller/service/users.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
 
   msgs: Message[] = [];
 
-  constructor(private fb: FormBuilder,private messageService: MessageService,private userService: UsersService) {
+  constructor(private fb: FormBuilder, private messageService: MessageService, private userService: UsersService) {
   }
 
   ngOnInit(): void {
@@ -48,23 +48,28 @@ export class UsersComponent implements OnInit {
     });
 
     this.cols = [
-      {field: 'nomu', header: 'Nom '} ,
-      {field: 'prenomu', header: 'Prénom'},
-      {field: 'telephoneu', header: 'Numero de Telephone'},
-      {field: 'username', header: 'Nom D\'utilisateur'},
+      {field: 'reference', header: 'Reference '} ,
+      {field: 'nom', header: 'Nom '} ,
+      {field: 'prenom', header: 'Prénom'},
+      {field: 'telephone', header: 'Numero de Telephone'},
+      {field: 'username', header: 'Nom d\'utilisateur'},
       {field: 'password', header: 'Mot de passe'},
-      {field: 'typeu', header: 'Type utilisateur'}
+      {field: 'type', header: 'Type utilisateur'}
     ];
     this.type = [];
     this.type.push({label: 'Selectionnez le Type', value: ''});
     this.type.push({label: 'Administrateur', value: 'administrateur'});
     this.type.push({label: 'Employé', value: 'employe'});
 
+    this.find();
+  }
+
+  public find() {
     this.userService.findAll().subscribe(
       data => {
-        this.users = data;
+        this.users = data.reverse();
       },
-          error => {
+      error => {
         console.log('error find');
       });
   }
@@ -91,20 +96,34 @@ export class UsersComponent implements OnInit {
         data => {
           console.log(data);
           this.errorS = data;
+          if (this.errorS === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.user = null;
+            this.displayDialog = false;
+          } else if (this.errorS === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Utilisateur déja existe'});
+          } else if (this.errorS === -5){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numero de telephone déja existe'});
+          }
         }, error => {
           console.log('error');
         }
       );
     } else {
+    //  use[this.users.indexOf(this.selectedUser)] = this.user;
       use[this.users.indexOf(this.selectedUser)] = this.user;
-    }
-    this.users = use;
-
-    if (this.errorS === 1) {
-    this.user = null;
-    this.displayDialog = false;
-    } else {
-
+      this.userService.update(this.user).subscribe(
+        data => {
+          console.log(data);
+          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+          this.find();
+          this.user = null;
+          this.displayDialog = false;
+        }, error => {
+          console.log('error update');
+        }
+      );
     }
   }
 
@@ -112,6 +131,14 @@ export class UsersComponent implements OnInit {
   delete() {
     const index = this.users.indexOf(this.selectedUser);
     this.users = this.users.filter((val, i) => i !== index);
+    this.userService.delete(this.selectedUser.reference).subscribe(
+      data => {
+        this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Utilisateur Supprimé'});
+      },
+      error => {
+        console.log('error delete');
+      }
+    );
     this.user = null;
     this.displayDialog = false;
   }

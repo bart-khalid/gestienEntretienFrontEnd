@@ -3,7 +3,8 @@ import {Users} from '../../controller/model/users.model';
 import {Message, MessageService, SelectItem} from 'primeng/api';
 import {UsersService} from '../../controller/service/users.service';
 import {Agent} from '../../controller/model/agent.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AgentService} from '../../controller/service/agent.service';
 
 @Component({
   selector: 'app-agent',
@@ -28,8 +29,10 @@ export class AgentComponent implements OnInit {
 
   userform: FormGroup;
 
+  errors: number;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {
+
+  constructor(private fb: FormBuilder, private messageService: MessageService , private agentService: AgentService ) {
   }
 
   ngOnInit(): void {
@@ -44,13 +47,25 @@ export class AgentComponent implements OnInit {
     });
 
     this.cols = [
+      {field: 'reference', header: 'Reference'} ,
       {field: 'codeAgent', header: 'Code Agent'} ,
       {field: 'nomAgent', header: 'Nom Agent'},
       {field: 'dateEntree', header: 'Date Enree'},
-      {field: 'entrepriseLiee', header: 'Entreprise Liee'},
+      {field: 'entrepriseliee', header: 'Entreprise Liée'},
       {field: 'adresseDomicile', header: 'Adresse domicile'},
       {field: 'tel', header: 'Telephone'}
     ];
+    this.find();
+  }
+
+  public find() {
+    this.agentService.findAll().subscribe(
+      data => {
+        this.agents = data.reverse();
+      },
+      error => {
+        console.log('error find');
+      });
   }
   showDialogToAdd() {
     this.agent = new Agent();
@@ -61,26 +76,58 @@ export class AgentComponent implements OnInit {
   }
 
   save() {
-    const agents = this.agents;
+    const age = this.agents;
     if (this.newAgent) {
-      agents.push(this.agent);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+      this.agentService.save(this.agent).subscribe(
+        data => {
+          console.log(data);
+          this.errors = data;
+          if (this.errors === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.agent = null;
+            this.displayDialog = false;
+          } else if (this.errors === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Code agent déja existe'});
+          }
+          else if (this.errors === -2){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de Telephone déja existe'});
+          }
+        }, error => {
+          console.log('error');
+        }
+      );
     } else {
-      agents[this.agents.indexOf(this.selectedAgent)] = this.agent;
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+      //  use[this.users.indexOf(this.selectedUser)] = this.user;
+      age[this.agents.indexOf(this.selectedAgent)] = this.agent;
+      this.agentService.update(this.agent).subscribe(
+        data => {
+          console.log(data);
+          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+          this.find();
+          this.agent = null;
+          this.displayDialog = false;
+        }, error => {
+          console.log('error update');
+        }
+      );
     }
-    this.agents = agents;
-    this.agent = null;
-    this.displayDialog = false;
   }
 
 
   delete() {
     const index = this.agents.indexOf(this.selectedAgent);
     this.agents = this.agents.filter((val, i) => i !== index);
+    this.agentService.delete(this.selectedAgent.reference).subscribe(
+      data => {
+        this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Agent Supprimé'});
+      },
+      error => {
+        console.log('error delete');
+      }
+    );
     this.agent = null;
     this.displayDialog = false;
-    this.messageService.add({severity: 'warn', summary: 'Deleted', detail: 'Opération Réussie'});
   }
 
   onRowSelect(event) {

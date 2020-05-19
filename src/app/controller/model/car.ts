@@ -1,7 +1,8 @@
 export class Car {
+  reference: string;
   matricule: string;
   type: string;
   utilite: string;
-  marquev: string;
+  marque: string;
   dateEntrerParc: Date;
 }

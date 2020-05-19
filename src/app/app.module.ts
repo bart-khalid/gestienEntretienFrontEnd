@@ -92,6 +92,7 @@ import { AgentComponent } from './components/agent/agent.component';
     BonvComponent,
 
     AgentComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,7 @@ export class VehiculeListComponent implements OnInit {
 
   userform: FormGroup;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService,private carService: CarService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private carService: CarService) { }
 
   ngOnInit() {
 
@@ -42,34 +42,30 @@ export class VehiculeListComponent implements OnInit {
       type: new FormControl('', Validators.required)
     });
 
-    this.cars = [
-      { matricule: 'Apple', type: 'automobile', marquev: '40%', utilite: '$54,406.00', dateEntrerParc: new Date()},
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      { matricule: 'Appleee', type: 'bus', marquev: '40', utilite: '5,406.00', dateEntrerParc: null },
-      ];
     this.cols = [
+      { field: 'reference', header: 'Reference' },
       { field: 'matricule', header: 'Matricule' },
       { field: 'type', header: 'Type' },
-      { field: 'marquev', header: 'Marque' },
+      { field: 'marque', header: 'Marque' },
       { field: 'utilite', header: 'Utilité' },
       { field: 'dateEntrerParc', header: 'Date Achat' }
     ];
     this.type = [];
     this.type.push({label: 'Choisir un Type', value: ''});
-    this.type.push({label: 'Automobile', value: 'automobile'});
-    this.type.push({label: 'Bus', value: 'bus'});
+    this.type.push({label: 'Automobile', value: 'Automobile'});
+    this.type.push({label: 'Bus', value: 'Bus'});
+
+    this.find()
   }
 
-  onSubmit(value: string) {
-    this.submitted = true;
-    this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+  public find() {
+    this.carService.findAll().subscribe(
+      data => {
+        this.cars = data.reverse();
+      },
+      error => {
+        console.log('error find');
+      });
   }
 
   showDialogToAdd() {
@@ -80,27 +76,52 @@ export class VehiculeListComponent implements OnInit {
   }
 
   save() {
-    const cars = this.cars;
+    const car = this.cars;
     if (this.newCar) {
       this.carService.save(this.car).subscribe(
         data => {
+          console.log(data);
           this.errors = data;
-          console.log(this.errors);
-        } ,  error => console.log('error')
+          if (this.errors === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.car = null;
+            this.displayDialog = false;
+          } else if (this.errors === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Matricule déja existe'});
+          }
+        }, error => {
+          console.log('error');
+        }
       );
-      cars.push(this.car);
     } else {
-      cars[this.cars.indexOf(this.selectedCar)] = this.car;
+      //  use[this.users.indexOf(this.selectedUser)] = this.user;
+      car[this.cars.indexOf(this.selectedCar)] = this.car;
+      this.carService.update(this.car).subscribe(
+        data => {
+          console.log(data);
+          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+          this.find();
+          this.car = null;
+          this.displayDialog = false;
+        }, error => {
+          console.log('error update');
+        }
+      );
     }
-
-    this.cars = cars;
-    this.car = null;
-    this.displayDialog = false;
   }
 
   delete() {
     const index = this.cars.indexOf(this.selectedCar);
     this.cars = this.cars.filter((val, i) => i !== index);
+    this.carService.delete(this.selectedCar.reference).subscribe(
+      data => {
+        this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Véhicule Supprimé'});
+      },
+      error => {
+        console.log('error delete');
+      }
+    );
     this.car = null;
     this.displayDialog = false;
   }

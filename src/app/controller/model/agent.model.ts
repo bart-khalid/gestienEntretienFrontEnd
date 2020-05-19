@@ -1,8 +1,9 @@
 export class Agent {
+  reference: string;
   codeAgent: string;
   nomAgent: string;
   dateEntree: Date;
-  entrepriseLiee: string;
+  entrepriseliee: string;
   tel: string;
   adresseDomicile: string;
 }

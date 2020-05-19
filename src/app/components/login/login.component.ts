@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../controller/service/login.service';
-import {Login} from '../../controller/model/login.model';
 import {Router} from '@angular/router';
+import {Users} from '../../controller/model/users.model';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +12,15 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService, private router: Router) { }
 
-  get login(): Login {
-    return  this.loginService.login;
+  get users(): Users {
+    return  this.loginService.user;
   }
 
   public connect(usernamee: string , passwordd: string) {
     return this.loginService.connect(usernamee, passwordd);
   }
 
-  public SuccessMsg() {
-    return this.loginService.SuccessMsg();
-  }
+
   public errorMsg() {
     return this.loginService.errorMsg();
   }
@@ -30,8 +28,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public goTo() {
-    this.router.navigate(['actions']);
-}
+
 
 }

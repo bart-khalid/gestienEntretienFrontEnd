@@ -1,5 +1,5 @@
-import {Car} from "./car";
-import {FournisseurSV} from "./fournisseurSV.model";
+import {Car} from './car';
+import {FournisseurSV} from './fournisseurSV.model';
 
 export class BonsR {
   // reparation
@@ -8,8 +8,8 @@ export class BonsR {
   descriptionR: number;
   quantiteR: number;
   prixunitaireR: number;
-  totalbrutR: string;
-  montantvignetteR: string;
+  totalbrutR: number;
+  montantvignetteR: number;
   fournisseurR = new FournisseurSV();
   numbonR: number;
 }

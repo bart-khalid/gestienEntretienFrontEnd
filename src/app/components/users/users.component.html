@@ -50,7 +50,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <input pInputText id="ma" formControlName="nom" [(ngModel)]="user.nomu" />
+          <input pInputText id="ma" formControlName="nom" [(ngModel)]="user.nom" />
         </div>
         </div>
         <div class="ui-g-4">
@@ -65,7 +65,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <input pInputText id="marqee" formControlName="prenom" [(ngModel)]="user.prenomu" />
+          <input pInputText id="marqee" formControlName="prenom" [(ngModel)]="user.prenom" />
           </div>
         </div>
         <div class="ui-g-4">
@@ -80,7 +80,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <input pInputText id="marqe"  formControlName="telephone" [(ngModel)]="user.telephoneu" />
+          <input pInputText id="marqe"  formControlName="telephone" [(ngModel)]="user.telephone" />
         </div>
         </div>
         <div class="ui-g-4">
@@ -128,7 +128,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown id="type" formControlName="type" [options]="type" [(ngModel)]="user.typeu"></p-dropdown>
+          <p-dropdown id="type" formControlName="type" [options]="type" [(ngModel)]="user.type"></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
@@ -141,7 +141,7 @@
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
         <button *ngIf="!cancel" type="button" [disabled]="!userform.valid" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
-        <button type="submit"  pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="save();onSubmit()" label="Enregistrer"></button>
+        <button type="submit"  pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>
 
