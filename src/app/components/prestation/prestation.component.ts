@@ -38,6 +38,7 @@ export class PrestationComponent implements OnInit {
 
     this.userform = this.fb.group({
       typeEntretien: new FormControl('', Validators.required),
+      nomLocale: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       agent: new FormControl('', Validators.required),
       });
@@ -57,14 +58,10 @@ export class PrestationComponent implements OnInit {
       { field: 'etat', header: 'Etat' }
     ];
     this.entretiens = [
-      { value: '', label: 'Choisir un type' },
       { value: 'jardinage', label: 'Jardinage' }
     ];
 
-    this.reclamations = [
-      { value: '', label: 'Choisir une réclamation' },
-      { value: '1', label: 'recla 1' }
-    ];
+
     this.agents = [
       { value: '', label: 'Choisir un agent' },
       { value: '1', label: 'agent 1' }
