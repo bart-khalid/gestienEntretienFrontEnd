@@ -46,6 +46,7 @@ export class FournisseurSVComponent implements OnInit {
     });
 
     this.cols = [
+      {field: 'reference', header: 'Réference'},
       {field: 'nomf', header: 'Nom Fournisseur'},
       {field: 'adressef', header: 'Adresse'},
       {field: 'emailf', header: 'Adresse Mail'},
@@ -85,7 +86,7 @@ export class FournisseurSVComponent implements OnInit {
   delete() {
     const index = this.fournisseurService.foundedFourniseurs.indexOf(this.selectedFournisseur);
     this.fournisseurService.foundedFourniseurs = this.fournisseurService.foundedFourniseurs.filter((val, i) => i !== index);
-    this.fournisseurService.delete(this.selectedFournisseur.nomf, this.selectedFournisseur.adressef);
+    this.fournisseurService.delete(this.selectedFournisseur.reference);
     this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Fournisseur Supprimé'});
     this.fournisseur = null;
     this.displayDialog = false;

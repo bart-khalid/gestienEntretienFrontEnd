@@ -54,8 +54,8 @@ export class LocaldetailComponent implements OnInit {
     this.cols = [
       {field: 'referenceML', header: 'Réference'},
       {field: 'materielLocale', header: 'Materiel'},
-      {field: 'localeAssocie', header: 'Locale, Departement'},
-      {field: 'dateAffectation', header: 'Date Achat Materiel'},
+      {field: 'localeAssocie', header: 'Locale, Département'},
+      {field: 'dateAffectation', header: 'Date Achat Matériel'},
     ];
   }
 

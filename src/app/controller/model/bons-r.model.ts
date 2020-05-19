@@ -3,6 +3,7 @@ import {FournisseurSV} from './fournisseurSV.model';
 
 export class BonsR {
   // reparation
+  reference: string;
   vehiculeR = new Car();
   datebonR: Date;
   descriptionR: number;
@@ -11,5 +12,8 @@ export class BonsR {
   totalbrutR: number;
   montantvignetteR: number;
   fournisseurR = new FournisseurSV();
-  numbonR: number;
+  numbonR: string;
+  fourniassooci: string;
+  vehiculeassooci: string;
+
 }

@@ -3,6 +3,7 @@ import {FournisseurSV} from './fournisseurSV.model';
 
 export class BonsV {
   // vidange
+  reference: string;
   vehiculeV = new Car();
   datebonV: Date;
   descriptionV: string;
@@ -13,5 +14,7 @@ export class BonsV {
   kilometrageV: number;
   typehuileV: string;
   fournisseurV = new FournisseurSV();
-  numbonV: number;
+  numbonV: string;
+  fourniassooci: string;
+  vehiculeassooci: string;
 }

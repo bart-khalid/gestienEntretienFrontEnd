@@ -5,4 +5,5 @@ export class Car {
   utilite: string;
   marque: string;
   dateEntrerParc: Date;
+  descriptionDropDown: string;
 }

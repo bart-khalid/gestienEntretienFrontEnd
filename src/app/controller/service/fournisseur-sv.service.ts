@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {FournisseurSV} from '../model/fournisseurSV.model';
 import {Reclamation} from '../model/reclamation.model';
 import {MessageService} from 'primeng/api';
+import {Observable} from "rxjs";
+import {Users} from "../model/users.model";
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +55,8 @@ export class FournisseurSVService {
       }
     );
   }
-  public delete(nom: string, adress: string) {
-    this.http.delete<number>(this.url + 'deleteFournisseur/' + nom + '/' + adress).subscribe(
+  public delete(reference: string) {
+    this.http.delete<number>(this.url + 'deleteFournisseur/' + reference ).subscribe(
       data => {
         if (data === 1) {
           console.log('fournisseur deleted');
@@ -75,4 +77,7 @@ export class FournisseurSVService {
     this._foundedFourniseurs = value;
   }
 
+  public find(): Observable<FournisseurSV[]> {
+    return this.http.get<FournisseurSV[]>(this.url);
+  }
 }
