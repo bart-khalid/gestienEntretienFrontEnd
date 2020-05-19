@@ -3,6 +3,12 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
+import {Local} from '../../controller/model/local.model';
+import {LocalService} from '../../controller/service/local.service';
+import {MaterielService} from '../../controller/service/materiel.service';
+import {Materiel} from '../../controller/model/materiel.model';
+import {LocaldetailService} from '../../controller/service/localdetail.service';
+import {Localdetail} from '../../controller/model/localdetail.model';
 
 @Component({
   selector: 'app-reclamer',
@@ -24,16 +30,20 @@ export class ReclamerComponent implements OnInit {
   userform: FormGroup;
   userform1: FormGroup;
 
+  selectedLocale = new  Local();
 
   cols: any[];
 
-  locales: Array<any>;
-  materiels: Array<any>;
-  constructor(private fb: FormBuilder, private reclamationService: ReclamationService, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
+              private localService: LocalService,
+              private localdetailService: LocaldetailService,
+              private messageService: MessageService) { }
 
 
   ngOnInit() {
     this.reclamationService.findAll();
+    this.localService.findAll();
+    this.localdetailService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
       { field: 'reclamentName', header: 'Reclament' },
@@ -44,20 +54,6 @@ export class ReclamerComponent implements OnInit {
       { field: 'nomMateriel', header: 'Materiel' },
       { field: 'etat', header: 'Etat' }
     ];
-    this.locales = [
-      { value: '', label: 'Choisir un locale' },
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-    ];
-
-    this.materiels = [
-      { value: '', label: 'Choisir un matériel' },
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-    ];
-
     this.userform = this.fb.group({
       objet: new FormControl('', Validators.required),
       local: new FormControl('', Validators.required),
@@ -93,12 +89,18 @@ export class ReclamerComponent implements OnInit {
   save() {
     const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
+      // update locale associe;
+      this.reclamation.locale = this.selectedLocale;
+      console.log(this.reclamation.locale);
       this.reclamationService.save(this.reclamation, 'khalid');
       reclamations.push(this.reclamation);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Reclamation Enregistrée'});
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+      // update locale associe;
+      this.reclamation.locale = this.selectedLocale;
+      this.reclamationService.update(this.reclamation);
+      this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Reclamation Modifiée'});
     }
     this.reclamationService.reclamationsFounded = reclamations;
     this.reclamation = null;
@@ -110,16 +112,17 @@ export class ReclamerComponent implements OnInit {
   delete() {
     const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
     this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
+    this.reclamationService.delete(this.selectedReclamation.reference);
     this.reclamation = null;
     this.displayDialog = false;
     this.displayDialogM = false;
-    this.messageService.add({severity: 'warn', summary: 'Deleted', detail: 'Opération Réussie'});
+    this.messageService.add({severity: 'warn', summary: 'Deleted', detail: 'Reclamation Supprimer'});
   }
 
   onRowSelect(event) {
     this.newReclamation = false;
     this.reclamation = this.cloneReclamation(event.data);
-    if (this.reclamation.nomMateriel === '' || this.reclamation.nomMateriel == null) {
+    if (this.reclamation.nomMateriel === 'Pas de materiel' || this.reclamation.nomMateriel == null) {
       this.displayDialog = true;
     } else {
       this.displayDialogM = true;
@@ -137,5 +140,12 @@ export class ReclamerComponent implements OnInit {
 
   get reclamationsFounded(): Reclamation[] {
     return this.reclamationService.reclamationsFounded;
+  }
+
+  get foundedLocales(): Local[] {
+    return this.localService.foudedLocales;
+  }
+  get foundedMateriels(): Localdetail[] {
+    return this.localdetailService.foundedLocalDetails;
   }
 }
