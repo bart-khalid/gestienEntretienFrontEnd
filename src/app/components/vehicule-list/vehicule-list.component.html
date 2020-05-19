@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <p-table #dt [columns]="cols"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="row">
@@ -77,7 +78,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <input pInputText formControlName="marque" id="marque" [(ngModel)]="car.marquev" />
+        <input pInputText formControlName="marque" id="marque" [(ngModel)]="car.marque" />
       </div>
       </div>
       <div class="ui-g-4">

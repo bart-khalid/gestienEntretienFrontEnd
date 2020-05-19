@@ -1,18 +1,20 @@
-<!--
+
 <nav class="navbar navbar-dark bg-transparent" id="navbar" style="width: 100%;" >
   <div class="row" style="width: 103%">
   <div class="col-md-4" style="text-align: center; width: 100%">
-  <a class="navbar-brand" id="logo" routerLink="login" style="font-family: Delius;color: white;padding-top: 10px;margin-top: 25px; width: 100%"><h1 class="h1" ><strong style="font-size: 33px">GESTION ENTRETIEN</strong></h1> </a>
+  <a class="navbar-brand" id="logo" routerLink="login" style="font-family: Delius;color: #65899b ;padding-top: 10px;margin-top: 25px; width: 100%"><h1 class="h1" ><strong style="font-size: 33px">GESTION ENTRETIEN</strong></h1> </a>
   </div>
   <div class="col-md-8" style="text-align: center; align-items: center;align-content: center; width: 100%" >
     <img src="../assets/baniere_fstg.jpg" alt="image" style="width: 100%; height: 100px">
   </div>
   </div>
 </nav>
--->
+<!--
 <nav style="text-align: Left;height: 80px; background-color: #d4e7ed;font-family: Delius;color: rgba(51,144,55,0.92);"><h1 class="h1" style="margin-top: 20px" ><strong style="font-size: 35px;padding-top: 25px;">GESTION ENTRETIEN</strong></h1> </nav>
+-->
+
 <div class="bodyCont">
-<p-menubar [model]="items" *ngIf="curentUserType === 'admin'" [style]="{backgroundColor: '#b1eae8'}" >
+<p-menubar [model]="items" *ngIf="user === 'Administrateur'" [style]="{backgroundColor: '#b1eae8'}" >
   <div>
     <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
     <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;
@@ -21,7 +23,7 @@
   </div>
 </p-menubar>
 
-  <p-menubar [model]="itemsEmploye" *ngIf="curentUserType === 'employe'" [style]="{backgroundColor: '#b1eae8'}">
+  <p-menubar [model]="itemsEmploye" *ngIf="user === 'Employe'" [style]="{backgroundColor: '#b1eae8'}">
     <div>
       <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
       <label for="login" style="color: #00aeef; font-family: Algerian" ><strong>username</strong></label> &nbsp; &nbsp;

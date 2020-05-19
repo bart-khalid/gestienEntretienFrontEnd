@@ -10,7 +10,6 @@ import {inspect} from 'util';
   styleUrls: ['./actions.component.css']
 })
 export class ActionsComponent implements OnInit {
-
   dataREclamations: any;
   dataPrestations: any;
   dataBons: any;
@@ -115,7 +114,6 @@ export class ActionsComponent implements OnInit {
 
       ]
     };
-
 
 
   }

@@ -20,9 +20,7 @@ export class LoginComponent implements OnInit {
     return this.loginService.connect(usernamee, passwordd);
   }
 
-  public SuccessMsg() {
-    return this.loginService.SuccessMsg();
-  }
+
   public errorMsg() {
     return this.loginService.errorMsg();
   }
@@ -30,8 +28,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public goTo() {
-    this.router.navigate(['']);
-}
+
 
 }

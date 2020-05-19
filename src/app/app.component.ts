@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng';
-import {hostViewClassName} from '@angular/compiler';
-import {inspect} from 'util';
+import {LoginService} from './controller/service/login.service';
+import {Users} from "./controller/model/users.model";
 
 
 @Component({
@@ -10,11 +10,17 @@ import {inspect} from 'util';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  curentUserType = 'admin';
+  user = 'Administrateur';
   items: MenuItem[];
   itemsEmploye: MenuItem[];
-ngOnInit() {
-  this.items = [
+  //user = this.loginService.currentuser;
+
+
+  constructor(private loginService: LoginService) {
+  }
+
+  ngOnInit() {
+    this.items = [
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
     {label: 'Bons Parc Automobile', items: [
         {label: 'Carburant', icon: 'pi pi-fw pi-pencil', routerLink: 'bons'},
@@ -37,7 +43,8 @@ ngOnInit() {
         {label: 'Affecter Materiel', icon: 'pi pi-pencil', routerLink: 'localDetail'},
         {label: 'Vehicule', icon: 'pi pi-pencil', routerLink: 'vehicule'},
         {label: 'Fournisseur', icon: 'pi pi-pencil', routerLink: 'fournisseur'},
-        {label: 'Personnel', items: [{label: 'Agent', icon: 'pi pi-user-edit', routerLink: 'agent'}, {label: 'Utilisateur', icon: 'pi pi-user-edit', routerLink: 'users'}], icon: 'pi pi-users'},
+        {label: 'Personnel', items: [{label: 'Agent', icon: 'pi pi-user-edit', routerLink: 'agent'},
+            {label: 'Utilisateur', icon: 'pi pi-user-edit', routerLink: 'users'}], icon: 'pi pi-users'},
       ], icon: 'pi pi-fw pi-cog'},
 
     {separator: true},
@@ -49,7 +56,7 @@ ngOnInit() {
     }
   ];
 
-  this.itemsEmploye = [
+    this.itemsEmploye = [
     {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
     {label: 'Reclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
     {separator: true},
