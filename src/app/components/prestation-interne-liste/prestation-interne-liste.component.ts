@@ -2,8 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {PrestationInterne} from '../../controller/model/prestation-interne.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {SelectItem} from "primeng";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {SelectItem} from 'primeng';
+import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
+import {LocalService} from '../../controller/service/local.service';
+import {LocaldetailService} from '../../controller/service/localdetail.service';
+import {AgentService} from '../../controller/service/agent.service';
+import {Agent} from '../../controller/model/agent.model';
+import {Local} from '../../controller/model/local.model';
+import {Localdetail} from '../../controller/model/localdetail.model';
 
 @Component({
   selector: 'app-prestation-interne-liste',
@@ -29,26 +36,41 @@ export class PrestationInterneListeComponent implements OnInit {
 
   cols: any[];
   entretiens: any[];
-  constructor(private fb: FormBuilder, private reclamationService: ReclamationService) { }
+  foundedAgents = new Array<Agent>();
+  constructor(private fb: FormBuilder,
+              private prestationInterneService: PrestationInterneService,
+              private localdetailService: LocaldetailService,
+              private agentService: AgentService,
+              private reclamationService: ReclamationService,
+              private localService: LocalService) { }
 
 
   ngOnInit() {
+    this.prestationInterneService.findAll();
+    this.localdetailService.findAll();
+    this.localService.findAll();
+    this.reclamationService.findAll();
+    this.findAllAgents();
+
     this.userform = this.fb.group({
       typeEntretien: new FormControl('', Validators.required),
+      Locale: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       agent: new FormControl('', Validators.required),
     });
 
     this.cols = [
-      { field: 'reference', header: 'Reference' },
-      { field: 'typeEntretien', header: 'Entretien' },
-      { field: 'date', header: 'Date' },
-      { field: 'reclamed', header: 'Réclamée ?' },
-      { field: 'codeAgent', header: 'Agent' },
+      { field: 'referenceI', header: 'Reference' },
+      { field: 'typeEntretienI', header: 'Entretien' },
+      { field: 'dateI', header: 'Date' },
+      { field: 'nomAgentI', header: 'Agent' },
+      { field: 'nomLocaleI', header: 'Locale' },
+      { field: 'nomMaterielI', header: 'Materiel' },
+      { field: 'reclamedI', header: 'Réclamée ?' },
     ];
     this.entretiens = [
-      { value: '', label: 'Choisir un type' },
       { value: 'jardinage', label: 'Jardinage' },
+      { value: 'materiel', label: 'Entretien materiel' },
     ];
 
     this.reclamations = [
@@ -68,21 +90,22 @@ export class PrestationInterneListeComponent implements OnInit {
     this.cancel = true;
   }
   save() {
-    const prestationsInternes = this.prestationsInternes;
+    const prestationsInternes = this.prestationInterneService.foundedPrestationInternes;
     if (this.newPrestation) {
         prestationsInternes.push(this.prestationInterne);
     } else {
-      prestationsInternes[this.prestationsInternes.indexOf(this.selectedPrestation)] = this.prestationInterne;
+      prestationsInternes[this.prestationInterneService.foundedPrestationInternes.indexOf(this.selectedPrestation)] = this.prestationInterne;
+      this.prestationInterneService.update(this.prestationInterne);
     }
-    this.prestationsInternes = prestationsInternes;
+    this.prestationInterneService.foundedPrestationInternes = prestationsInternes;
     this.prestationInterne = null;
     this.displayDialog = false;
-
   }
 
   delete() {
-    const index = this.prestationsInternes.indexOf(this.selectedPrestation);
-    this.prestationsInternes = this.prestationsInternes.filter((val, i) => i !== index);
+    const index = this.prestationInterneService.foundedPrestationInternes.indexOf(this.selectedPrestation);
+    this.prestationInterneService.foundedPrestationInternes = this.prestationInterneService.foundedPrestationInternes.filter((val, i) => i !== index);
+    this.prestationInterneService.delete(this.selectedPrestation.referenceI);
     this.prestationInterne = null;
     this.displayDialog = false;
   }
@@ -100,5 +123,27 @@ export class PrestationInterneListeComponent implements OnInit {
       prestation[prop] = p[prop];
     }
     return prestation;
+  }
+  get foundedPrestationInterne(): PrestationInterne[] {
+    return this.prestationInterneService.foundedPrestationInternes;
+  }
+  get foundedLocales(): Local[] {
+    return this.localService.foudedLocales;
+  }
+  get foundedLocalDetails(): Localdetail[] {
+    return this.localdetailService.foundedLocalDetails;
+  }
+  get foundedReclamatoins(): Reclamation[] {
+    return this.reclamationService.reclamationsFounded;
+  }
+  findAllAgents() {
+    this.agentService.findAll().subscribe(
+      data => {
+        this.foundedAgents = data.reverse();
+        console.log('data Agents : ' + data.length);
+      },
+      error => {
+        console.log('error find');
+      });
   }
 }

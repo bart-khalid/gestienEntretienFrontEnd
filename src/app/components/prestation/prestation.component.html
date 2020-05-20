@@ -1,4 +1,4 @@
-<p-toast [style]="{marginTop: '30%'}"></p-toast>
+<p-toast [style]="{marginTop: '2%'}"></p-toast>
 <div class="row">
   <div class="col-md-8">
 
@@ -6,19 +6,19 @@
     <div class="card bg-transparent" id="cardToCenter">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-2" style="color: rgba(147,212,191,0.92)"><label for="ajouter"><h2><strong> Ajouter :</strong></h2> </label></div>
+        <div class="col-md-2" style="color: rgba(147,212,191,0.92)"><label ><h2><strong> Ajouter :</strong></h2> </label></div>
       <div class="col-md-5">
-        <button class="btn btn-block btn-primary" pButton icon="pi pi-plus" id="ajouter" (click)="showDialogToAdd()" label="Prestation Interne"></button>
+        <button class="btn btn-block btn-primary" pButton icon="pi pi-plus"  (click)="showDialogToAdd()" label="Prestation Interne"></button>
       </div>
       <div class="col-md-5">
-        <button class="btn btn-block btn-primary" pButton icon="pi pi-plus" id="ajouter" (click)="showDialogToAddE()" label="Prestation Externe"></button>
+        <button class="btn btn-block btn-primary" pButton icon="pi pi-plus"  (click)="showDialogToAddE()" label="Prestation Externe"></button>
       </div>
     </div>
     </div>
   </div>
 
     <!-- First dialog to add a prestation Interne -->
-    <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false"  showEffect="fade" [modal]="true"  [style]="{width: '660px'}" >
+    <p-dialog header="Prestation Interne Details" [(visible)]="displayDialog" [focusOnShow]="false"  showEffect="fade" [modal]="true"  [style]="{width: '800px'}" >
       <div class="ui-g ui-fluid" *ngIf="prestataionInterne" >
 
         <div class="ui-g-12">
@@ -27,7 +27,7 @@
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown id="typeEntretienn" formControlName="typeEntretien" [options]="entretiens" placeholder="Choisir un type" [(ngModel)]="prestataionInterne.typeEntretienI" [filter]="true"></p-dropdown>
+            <p-dropdown id="typeEntretienn" formControlName="typeEntretien" [options]="entretiens" placeholder="Choisir un type" [(ngModel)]="selectedEntretien" [filter]="true"></p-dropdown>
           </div>
           </div>
           <div class="ui-g-4">
@@ -41,16 +41,27 @@
             <label for="nomloc" style="color: #00aeef"><strong>locale :</strong> </label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown id="nomloc" formControlName="nomLocale" [options]="" placeholder="Choisir un locale" [filter]="true"></p-dropdown>
+            <div class="form-group" [formGroup]="userform"  >
+            <p-dropdown id="nomloc" formControlName="Locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="Choisir un locale" [(ngModel)]="selectedLocalee" [filter]="true"></p-dropdown>
+            </div>
           </div>
 
           <div class="ui-g-4">
-            <p-message severity="error"  *ngIf="(userform.controls['nomLocale'].touched &&!userform.controls['nomLocale'].dirty  || userform.controls['nomLocale'].value=='Choisir un locale')"
+            <p-message severity="error"  *ngIf="(userform.controls['Locale'].touched &&!userform.controls['Locale'].dirty  || userform.controls['Locale'].value=='Choisir un locale')"
                        text="Veuillez choisir un type"></p-message>
           </div>
 
         </div>
 
+
+        <div class="ui-g-12" *ngIf="selectedEntretien === 'materiel'">
+          <div class="ui-g-3">
+            <label for="nomMat" style="color: #00aeef"><strong>Materiel :</strong> </label>
+          </div>
+          <div class="ui-g-5">
+            <p-dropdown id="nomMat"  [options]="selectedLocalee.localDetails" placeholder="choisir un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestataionInterne.materielLocale" [filter]="true"></p-dropdown>
+          </div>
+        </div>
 
         <div class="ui-g-12">
           <div class="ui-g-3">
@@ -76,9 +87,6 @@
             <label for="bonL" style="color: #00aeef"><strong>{{prestataionInterne.reclamedI}}</strong></label>
           </div>
           <div class="ui-g-3"></div>
-          <div class="ui-g-4">
-            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-          </div>
         </div>
 
         <div class="ui-g-12" *ngIf="prestataionInterne.reclamedI">
@@ -86,10 +94,7 @@
             <label for="refReclamationn" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown [filter]="true"  [options]="foundedReclamations" optionLabel="descreptionDropDownReclamation" placeholder="choisir la reclamation" [(ngModel)]="prestataionInterne.referenceReclamationI"  id="refReclamationn"></p-dropdown>
-          </div>
-          <div class="ui-g-4">
-            <p-message severity="error" severity="error" HIDDEN="true" text="Veuillez choisir une réclamation"></p-message>
+            <p-dropdown [filter]="true"  [options]="foundedReclamations" optionLabel="descreptionDropDownReclamation" placeholder="choisir la reclamation" [(ngModel)]="prestataionInterne.reclamationI"  id="refReclamationn"></p-dropdown>
           </div>
         </div>
 
@@ -99,11 +104,11 @@
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown [options]="agents" formControlName="agent" [(ngModel)]="prestataionInterne.agent.codeAgent"  id="codeAgent"></p-dropdown>
-          </div>
+            <p-dropdown [options]="foundedAgents" formControlName="agent" optionLabel="nomAgent" [(ngModel)]="prestataionInterne.agent" placeholder="Choisir un agent"  id="codeAgent"></p-dropdown>
+            </div>
           </div>
           <div class="ui-g-4">
-            <p-message severity="error" *ngIf="(userform.controls['agent'].touched &&!userform.controls['agent'].dirty  || userform.controls['agent'].value=='Choisir un agent')"
+            <p-message severity="error" *ngIf="(userform.controls['agent'].touched &&!userform.controls['agent'].dirty)  || userform.controls['agent'].value=='Choisir un agent'"
                        text="Veuillez choisir un agent"></p-message>
           </div>
         </div>
@@ -170,7 +175,7 @@
             <label for="refReclamation" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown  [options]="reclamations" [(ngModel)]="prestataionExterne.referenceReclamationE"  id="refReclamation"></p-dropdown>
+            <p-dropdown  [options]="foundedReclamations" optionLabel="reference" [(ngModel)]="prestataionExterne.referenceReclamationE"  id="refReclamation"></p-dropdown>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>

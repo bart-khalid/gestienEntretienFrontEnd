@@ -4,7 +4,14 @@ import {Reclamation} from '../../controller/model/reclamation.model';
 import {PrestationInterne} from '../../controller/model/prestation-interne.model';
 import {MessageService, SelectItem} from 'primeng';
 import {PrestationExterne} from '../../controller/model/prestation-externee.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {LocaldetailService} from '../../controller/service/localdetail.service';
+import {LocalService} from '../../controller/service/local.service';
+import {Local} from '../../controller/model/local.model';
+import {Localdetail} from '../../controller/model/localdetail.model';
+import {AgentService} from '../../controller/service/agent.service';
+import {Agent} from '../../controller/model/agent.model';
+import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
 
 
 @Component({
@@ -16,8 +23,7 @@ export class PrestationComponent implements OnInit {
 
   cols: any[];
   entretiens: any[];
-  reclamations: SelectItem[];
-  agents: SelectItem[];
+
   userform: FormGroup;
   userform1: FormGroup;
 
@@ -27,18 +33,33 @@ export class PrestationComponent implements OnInit {
   public newPresExterne: boolean;
 
 
+  selectedEntretien: string;
+  selectedLocalee = new Local();
+
 
   public prestataionInterne = new PrestationInterne();
   public prestataionExterne = new PrestationExterne();
+  public foundedAgents = new Array<Agent>();
 
-  constructor(private fb: FormBuilder, private reclamationService: ReclamationService, private messageService: MessageService ) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
+              private prestationInterneService: PrestationInterneService,
+              private localService: LocalService,
+              private agentService: AgentService,
+              private localdetailService: LocaldetailService,
+              private messageService: MessageService ) { }
 
   ngOnInit(): void {
     this.reclamationService.findAll();
+    this.localService.findAll();
+    this.agentService.findAll();
+    this.localdetailService.findAll();
+
+    this.findAllAgents();
+
 
     this.userform = this.fb.group({
       typeEntretien: new FormControl('', Validators.required),
-      nomLocale: new FormControl('', Validators.required),
+      Locale: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       agent: new FormControl('', Validators.required),
       });
@@ -58,31 +79,31 @@ export class PrestationComponent implements OnInit {
       { field: 'etat', header: 'Etat' }
     ];
     this.entretiens = [
-      { value: 'jardinage', label: 'Jardinage' }
+      { value: 'jardinage', label: 'Jardinage' },
+      { value: 'materiel', label: 'Entretien Materiel' }
     ];
 
-
-    this.agents = [
-      { value: '', label: 'Choisir un agent' },
-      { value: '1', label: 'agent 1' }
-    ];
   }
 
   showDialogToAdd() {
+    this.newPresExterne = false;
     this.newPresInterne = true;
     this.prestataionInterne = new PrestationInterne();
     this.displayDialog = true;
   }
   showDialogToAddE() {
+    this.newPresInterne = false;
     this.newPresExterne = true;
     this.prestataionExterne = new PrestationExterne();
     this.displayDialogE = true;
   }
   save() {
     if (this.newPresInterne) {
-      this.prestataionInterne = null;
+      this.prestataionInterne.typeEntretienI = this.selectedEntretien;
+      this.prestataionInterne.locale = this.selectedLocalee;
+      this.prestationInterneService.save(this.prestataionInterne);
     } else if (this.newPresExterne) {
-      this.prestataionExterne = null;
+     // to be implement
     }
     this.displayDialog = false;
     this.displayDialogE = false;
@@ -90,6 +111,24 @@ export class PrestationComponent implements OnInit {
   }
   get foundedReclamations(): Reclamation[] {
     return this.reclamationService.reclamationsFounded;
+  }
+  get foundedLocales(): Local[] {
+    return this.localService.foudedLocales;
+  }
+
+  get foundedMateriels(): Localdetail[] {
+    return this.localdetailService.foundedLocalDetails;
+  }
+
+  findAllAgents() {
+    this.agentService.findAll().subscribe(
+      data => {
+        this.foundedAgents = data.reverse();
+        console.log('data Agents : ' + data.length);
+      },
+      error => {
+        console.log('error find');
+      });
   }
 
 }

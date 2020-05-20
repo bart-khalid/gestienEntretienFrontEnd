@@ -26,15 +26,11 @@ export class ReclamationComponent implements OnInit {
 
   materiels: Array<any>;
 
-  userform: FormGroup;
-
-  userform1: FormGroup;
-
 
   cols: any[];
 
   locales: Array<any>;
-  constructor(private fb: FormBuilder, private reclamationService: ReclamationService) { }
+  constructor(private reclamationService: ReclamationService) { }
 
 
   ngOnInit() {
@@ -49,33 +45,6 @@ export class ReclamationComponent implements OnInit {
       { field: 'nomMateriel', header: 'Materiel' },
       { field: 'etat', header: 'Etat' }
     ];
-    this.userform = this.fb.group({
-      objet: new FormControl('', Validators.required),
-      local: new FormControl('', Validators.required),
-      description : new FormControl('', Validators.required),
-    });
-
-    this.userform1 = this.fb.group({
-      objett: new FormControl('', Validators.required),
-      locale: new FormControl('', Validators.required),
-      mater: new FormControl('', Validators.required),
-      desc: new FormControl('', Validators.required),
-    });
-
-    this.locales = [
-      { value: '', label: 'Choisir un locale' },
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-    ];
-
-    this.materiels = [
-      { value: '', label: 'Choisir un matériel' },
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-    ];
-
   }
   showDialogToAdd() {
     this.newReclamation = true;
@@ -112,6 +81,7 @@ export class ReclamationComponent implements OnInit {
   delete() {
     const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
     this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
+    this.reclamationService.delete(this.selectedReclamation.reference);
     this.reclamation = null;
     this.displayDialog = false;
     this.displayDialogM = false;

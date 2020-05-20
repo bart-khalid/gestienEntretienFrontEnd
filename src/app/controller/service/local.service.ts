@@ -46,7 +46,7 @@ export class LocalService {
     this.http.get<Array<Local>>(this.url).subscribe(
       data => {
         this._foudedLocales = data.reverse();
-        console.log('data locle: ' + data.length);
+        console.log('data locale: ' + data.length);
       }, error => {
         console.log('error in the link');
       }

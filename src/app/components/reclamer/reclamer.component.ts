@@ -43,7 +43,6 @@ export class ReclamerComponent implements OnInit {
   ngOnInit() {
     this.reclamationService.findAll();
     this.localService.findAll();
-    this.localdetailService.findAll();
     this.cols = [
       { field: 'reference', header: 'Reference' },
       { field: 'reclamentName', header: 'Reclament' },
@@ -145,7 +144,5 @@ export class ReclamerComponent implements OnInit {
   get foundedLocales(): Local[] {
     return this.localService.foudedLocales;
   }
-  get foundedMateriels(): Localdetail[] {
-    return this.localdetailService.foundedLocalDetails;
-  }
+
 }

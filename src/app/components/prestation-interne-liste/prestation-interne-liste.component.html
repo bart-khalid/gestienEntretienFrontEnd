@@ -1,4 +1,4 @@
-<p-table #dt [columns]="cols" [value]="prestationsInternes" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-table #dt [columns]="cols" [value]="foundedPrestationInterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
     <div class="row">
@@ -23,17 +23,13 @@
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-      <th>Actions</th>
+
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
       <td *ngFor="let col of columns">
         {{rowData[col.field]}}
-      </td>
-      <td style="text-align:center">
-        <button  pButton icon="" class="btn btn-block btn-outline-success"></button>
-
       </td>
     </tr>
   </ng-template>
@@ -59,6 +55,31 @@
       </div>
     </div>
 
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="nomloc" style="color: #00aeef"><strong>locale :</strong> </label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform"  >
+          <p-dropdown id="nomloc" formControlName="Locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="Choisir un locale" [(ngModel)]="prestationInterne.locale" [filter]="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform.controls['Locale'].touched &&!userform.controls['Locale'].dirty  || userform.controls['Locale'].value=='Choisir un locale')"
+                   text="Veuillez choisir un type"></p-message>
+      </div>
+    </div>
+
+      <div class="ui-g-12" *ngIf="prestationInterne.typeEntretienI === 'materiel'">
+        <div class="ui-g-3">
+          <label for="nomMat" style="color: #00aeef"><strong>Materiel :</strong> </label>
+        </div>
+        <div class="ui-g-5">
+
+            <p-dropdown id="nomMat"  [options]="foundedLocalDetails"  [(ngModel)]="prestationInterne.materielLocale" optionLabel="descriptionMaterielLocale" placeholder="Choisir un materiel"  [filter]="true"></p-dropdown>
+
+        </div>
+    </div>
 
     <div class="ui-g-12">
       <div class="ui-g-3">
@@ -75,7 +96,7 @@
       </div>
     </div>
 
-    <div class="ui-g-12">
+    <div class="ui-g-12" *ngIf="prestationInterne.reclamedI">
       <div class="ui-g-4">
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
@@ -84,21 +105,16 @@
         <label for="reclamer" style="color: #00aeef"><strong>{{prestationInterne.reclamedI}}</strong></label>
       </div>
       <div class="ui-g-3"></div>
-      <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-      </div>
     </div>
 
     <div class="ui-g-12" *ngIf="prestationInterne.reclamedI">
       <div class="ui-g-3">
-        <label for="refReclamation" style="color: #00aeef">Reference de la reclamation</label>
+        <label for="refReclamation" style="color: #00aeef">Reclamation :</label>
       </div>
       <div class="ui-g-5">
-        <p-dropdown type="text" [options]="reclamations" [(ngModel)]="prestationInterne.referenceReclamationI" pInputText id="refReclamation"></p-dropdown>
+        <p-dropdown type="text" formControlName="reclamation" [options]="foundedReclamatoins" optionLabel="descreptionDropDownReclamation" [(ngModel)]="prestationInterne.reclamationI" placeholder="Choisir la reclamation" pInputText id="refReclamation" [filter]="true" ></p-dropdown>
       </div>
-      <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-      </div>
+
     </div>
 
     <div class="ui-g-12">
@@ -107,7 +123,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <input type="text" formControlName="agent" [(ngModel)]="prestationInterne.agent.codeAgent" pInputText id="codeAgent">
+          <p-dropdown type="text" formControlName="agent" [options]="foundedAgents" optionLabel="nomAgent" [(ngModel)]="prestationInterne.agent" placeholder="Choisir un agent" pInputText id="codeAgent" [filter]="true"></p-dropdown>
       </div>
       </div>
       <div class="ui-g-4">
@@ -116,12 +132,13 @@
       </div>
     </div>
 
-
-
   </div>
+
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
+
 </p-dialog>
