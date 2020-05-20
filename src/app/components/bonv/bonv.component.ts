@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from "primeng";
-import {BonsR} from "../../controller/model/bons-r.model";
-import {MessageService} from "primeng/api";
-import {BonsV} from "../../controller/model/bons-v.model";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {SelectItem} from 'primeng';
+import {MessageService} from 'primeng/api';
+import {BonsV} from '../../controller/model/bons-v.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {BonvService} from '../../controller/service/bonv.service';
+import {CarService} from "../../controller/service/car.service";
+import {FournisseurSVService} from "../../controller/service/fournisseur-sv.service";
+import {FournisseurSV} from "../../controller/model/fournisseurSV.model";
+import {Car} from "../../controller/model/car";
 
 @Component({
   selector: 'app-bonv',
@@ -11,8 +15,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./bonv.component.css']
 })
 export class BonvComponent implements OnInit {
-  typebon: SelectItem[];
-  typeselecte: string;
+  errorc: number;
   colsV: any[];
   cancelV: boolean;
   displayDialogV: boolean;
@@ -20,12 +23,14 @@ export class BonvComponent implements OnInit {
   selectedBonV: BonsV;
   newbonV: boolean;
   bonsV = new Array<BonsV>();
-  fourniss : SelectItem[];
-  vehicule : SelectItem[];
+  fourniss: SelectItem[];
+  vehicule: SelectItem[];
   userform: FormGroup;
+  fournisseurs: FournisseurSV[];
+  cars: Car[];
 
-
-  constructor(private fb: FormBuilder,private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService , private bonvService: BonvService,
+              private carService: CarService , private fournisseurSVService: FournisseurSVService) { }
 
   ngOnInit(): void {
     this.userform = this.fb.group({
@@ -44,8 +49,8 @@ export class BonvComponent implements OnInit {
 
     this.colsV = [
       {field: 'numbonV', header: 'Numero de Bon'},
-      {field: 'vehiculeV', header: 'Matricule Véhicule'},
-      {field: 'fournisseurV', header: 'Fournisseur'},
+      {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
+      {field: 'fourniassooci', header: 'Fournisseur'},
       {field: 'descriptionV', header: 'Désignation'},
       {field: 'typehuileV', header: 'Type huile'},
       {field: 'kilometrageV', header: 'Kilométrage'},
@@ -56,7 +61,7 @@ export class BonvComponent implements OnInit {
       {field: 'montantvignetteV', header: 'Montant Vignette'}
     ];
 
-    this.vehicule=[
+    this.vehicule = [
       {label: 'Selectionnez une véhicule', value: ''},
       {label: 'V1', value: 'v1'},
       {label: 'V2', value: 'v2'},
@@ -69,8 +74,28 @@ export class BonvComponent implements OnInit {
       {label: 'fournisseur 2', value: 'f2'},
       {label: 'fournisseur 3', value: 'f3'}
     ];
-
+    this.find();
+    this.fournisseurSVService.find().subscribe(
+      data => {
+        this.fournisseurs = data;
+      }
+    );
+    this.carService.findAll().subscribe(
+      data => {
+        this.cars = data;
+      }
+    );
   }
+  public find() {
+    this.bonvService.findAll().subscribe(
+      data => {
+        this.bonsV = data.reverse();
+      },
+      error => {
+        console.log('error find');
+      });
+  }
+
   showDialogToAddV() {
     this.newbonV = true;
     this.bonV = new BonsV();
@@ -80,17 +105,49 @@ export class BonvComponent implements OnInit {
   saveV() {
     const bonv = this.bonsV;
     if (this.newbonV) {
-      bonv.push(this.bonV);
+      this.bonvService.save(this.bonV).subscribe(
+        data => {
+          console.log(data);
+          this.errorc = data;
+          if (this.errorc === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.bonV = null;
+            this.displayDialogV = false;
+          } else if (this.errorc === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de bon déja existe'});
+          }
+        }, error => {
+          console.log('error');
+        }
+      );
     } else {
+      //  use[this.users.indexOf(this.selectedUser)] = this.user;
       bonv[this.bonsV.indexOf(this.selectedBonV)] = this.bonV;
+      this.bonvService.update(this.bonV).subscribe(
+        data => {
+          console.log(data);
+          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+          this.find();
+          this.bonV = null;
+          this.displayDialogV = false;
+        }, error => {
+          console.log('error update');
+        }
+      );
     }
-    this.bonsV = bonv;
-    this.bonV = null;
-    this.displayDialogV = false;
   }
   deleteV() {
     const index = this.bonsV.indexOf(this.selectedBonV);
     this.bonsV = this.bonsV.filter((val, i) => i !== index);
+    this.bonvService.delete(this.selectedBonV.reference).subscribe(
+      data => {
+        this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Bon Carburant Supprimé'});
+      },
+      error => {
+        console.log('error delete');
+      }
+    );
     this.bonV = null;
     this.displayDialogV = false;
   }

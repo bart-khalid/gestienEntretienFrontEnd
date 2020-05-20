@@ -14,7 +14,7 @@
 -->
 
 <div class="bodyCont">
-<p-menubar [model]="items" *ngIf="currentUser.type === 'administrateur'" [style]="{backgroundColor: '#b1eae8'}" >
+<p-menubar [model]="items" *ngIf="  user === 'administrateur'" [style]="{backgroundColor: '#b1eae8'}" >
   <div>
     <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
     <label for="login" style="color: #00aeef; font-family: Delice" ><strong>{{currentUser.prenom+' '+currentUser.nom}}</strong></label> &nbsp; &nbsp;

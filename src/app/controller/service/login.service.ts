@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Login} from '../model/login.model';
 import {HttpClient} from '@angular/common/http';
-import {Users} from "../model/users.model";
-import {UsersService} from "./users.service";
-import {Router, RouterLink, RouterLinkActive} from "@angular/router";
+import {Users} from '../model/users.model';
+import {UsersService} from './users.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +68,7 @@ export class LoginService {
       error =>
         console.log(error)
     );
+
  }
 
 

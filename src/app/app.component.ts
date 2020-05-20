@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // user = 'Administrateur';
+  user = 'administrateur';
   items: MenuItem[];
   itemsEmploye: MenuItem[];
 
@@ -20,10 +20,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.currentUser.username === '' || this.currentUser.username == null) {
+   // if(this.currentUser.username === '' || this.currentUser.username == null) {
       // @ts-ignore
-      this.route.navigate('');
-    }
+     // this.route.navigate('');
+    // }
 
     this.items = [
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'actions'},

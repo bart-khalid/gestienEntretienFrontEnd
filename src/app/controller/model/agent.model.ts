@@ -6,4 +6,5 @@ export class Agent {
   entrepriseliee: string;
   tel: string;
   adresseDomicile: string;
+  descriptionDropDown: string;
 }

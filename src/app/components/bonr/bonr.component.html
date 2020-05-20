@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <p-table #dtt [columns]="colsR"    [value]="bonsR" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedBonR" (onRowSelect)="onRowSelectR($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="row">
@@ -44,11 +45,11 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="numbonc"> Numero de Bon :</label>
+        <label for="numbonc"> Numéro de Bon :</label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-          <input pInputText id="numbonc" type="number"  formControlName="numbonR"  [(ngModel)]="bonR.numbonR" autofocus />
+          <input pInputText id="numbonc"   formControlName="numbonR"  [(ngModel)]="bonR.numbonR" autofocus />
         </div>
       </div>
       <div class="ui-g-4">
@@ -63,7 +64,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown [filter]="true" id="matrv" formControlName="vehiculeR" [options]="vehicule" [(ngModel)]="bonR.vehiculeR" ></p-dropdown>
+          <p-dropdown [filter]="true" id="matrv" formControlName="vehiculeR" [options]="cars" optionLabel="descriptionDropDown" [(ngModel)]="bonR.vehiculeR" placeholder="Selectionnez une véhicule"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-4">
@@ -78,7 +79,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown [filter]="true" id="fo" formControlName="fournisseurR" [options]="fourniss" [(ngModel)]="bonR.fournisseurR" ></p-dropdown>
+          <p-dropdown [filter]="true" id="fo" formControlName="fournisseurR" [options]="fournisseurs" optionLabel="descriptionDropDown" [(ngModel)]="bonR.fournisseurR" placeholder="Selectionnez un fournisseur" ></p-dropdown>
         </div>
       </div>
       <div class="ui-g-4">

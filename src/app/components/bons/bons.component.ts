@@ -5,6 +5,11 @@ import {BonsC} from '../../controller/model/bons-c.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BonsR} from '../../controller/model/bons-r.model';
 import {BonsV} from '../../controller/model/bons-v.model';
+import {BoncService} from '../../controller/service/bonc.service';
+import {CarService} from "../../controller/service/car.service";
+import {FournisseurSVService} from "../../controller/service/fournisseur-sv.service";
+import {FournisseurSV} from "../../controller/model/fournisseurSV.model";
+import {Car} from "../../controller/model/car";
 
 @Component({
   selector: 'app-bons',
@@ -13,41 +18,26 @@ import {BonsV} from '../../controller/model/bons-v.model';
 })
 export class BonsComponent implements OnInit {
   userform: FormGroup;
-  typebon: SelectItem[];
-  typeselecte: string;
-  colsR: any[];
-  colsV: any[];
   colsC: any[];
-  cancelR: boolean;
   cancelC: boolean;
-  cancelV: boolean;
-  displayDialogR: boolean;
-  displayDialogV: boolean;
   displayDialogC: boolean;
-  submitted: boolean;
-  bonR = new BonsR();
-  bonV = new BonsV();
   bonC = new BonsC();
-  selectedBonR: BonsR;
-  selectedBonV: BonsV;
   selectedBonC: BonsC;
-  newbonR: boolean;
   newbonC: boolean;
-  newbonV: boolean;
-
-  bonsR = new Array<BonsR>();
-  bonsV = new Array<BonsV>();
   bonsC = new Array<BonsC>();
-  fourniss : SelectItem[];
-  vehicule : SelectItem[];
+  fourniss: SelectItem[];
+  vehicule: SelectItem[];
+  errorc: number;
+  fournisseurs: FournisseurSV[];
+  cars: Car[];
 
 
-
-  constructor(private fb: FormBuilder,private messageService: MessageService) {
+  constructor(private fb: FormBuilder, private messageService: MessageService, private boncService: BoncService,
+              private carService: CarService , private fournisseurSVService: FournisseurSVService) {
   }
 
   ngOnInit() {
-    this.vehicule=[
+    this.vehicule = [
       {label: 'Selectionnez une véhicule', value: ''},
       {label: 'V1', value: 'v1'},
       {label: 'V2', value: 'v2'},
@@ -76,8 +66,8 @@ export class BonsComponent implements OnInit {
     });
     this.colsC = [
       {field: 'numbonC', header: 'Numero de Bon'},
-      {field: 'vehiculeC', header: 'Matricule Véhicule'},
-      {field: 'fournisseurC', header: 'Fournisseur'},
+      {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
+      {field: 'fourniassooci', header: 'Fournisseur'},
       {field: 'descriptionC', header: 'Désignation'},
       {field: 'prixunitaireC', header: 'Prix Unitaire'},
       {field: 'quantiteC', header: 'Quantité'},
@@ -86,45 +76,27 @@ export class BonsComponent implements OnInit {
       {field: 'totalbrutC', header: 'Total Brut'},
       {field: 'montantvignetteC', header: 'Montant Vignette'}
     ];
-    this.colsR = [
-      {field: 'numbonR', header: 'Numero de Bon'},
-      {field: 'vehiculeR', header: 'Matricule Véhicule'},
-      {field: 'fournisseurR', header: 'Fournisseur'},
-      {field: 'descriptionR', header: 'Désignation'},
-      {field: 'prixunitaireR', header: 'Prix Unitaire'},
-      {field: 'quantiteR', header: 'Quantité'},
-      {field: 'datebonR', header: 'Date Bon'},
-      {field: 'totalbrutR', header: 'Total Brut'},
-      {field: 'montantvignetteR', header: 'Montant Vignette'}
-    ];
-
-    this.colsV = [
-      {field: 'numbonV', header: 'Numero de Bon'},
-      {field: 'vehiculeV', header: 'Matricule Véhicule'},
-      {field: 'fournisseurV', header: 'Fournisseur'},
-      {field: 'descriptionV', header: 'Désignation'},
-      {field: 'typehuileV', header: 'Type huile'},
-      {field: 'kilometrageV', header: 'Kilométrage'},
-      {field: 'prixunitaireV', header: 'Prix Unitaire'},
-      {field: 'quantiteV', header: 'Quantité'},
-      {field: 'datebonV', header: 'Date Bon'},
-      {field: 'totalbrutV', header: 'Total Brut'},
-      {field: 'montantvignetteV', header: 'Montant Vignette'}
-    ];
+    this.find();
+    this.fournisseurSVService.find().subscribe(
+      data => {
+        this.fournisseurs = data;
+      }
+    );
+    this.carService.findAll().subscribe(
+      data => {
+        this.cars = data;
+      }
+    );
   }
 
-  showDialogToAddR() {
-    this.newbonR = true;
-    this.bonR = new BonsR();
-    this.displayDialogR = true;
-    this.cancelR = true;
-  }
-
-  showDialogToAddV() {
-    this.newbonV = true;
-    this.bonV = new BonsV();
-    this.displayDialogV = true;
-    this.cancelV = true;
+  public find() {
+    this.boncService.findAll().subscribe(
+      data => {
+        this.bonsC = data.reverse();
+      },
+      error => {
+        console.log('error find');
+      });
   }
 
   showDialogToAddC() {
@@ -134,61 +106,53 @@ export class BonsComponent implements OnInit {
     this.cancelC = true;
   }
 
-  saveR() {
-    const bonr = this.bonsR;
-    if (this.newbonR) {
-      bonr.push(this.bonR);
-    } else {
-      bonr[this.bonsR.indexOf(this.selectedBonR)] = this.bonR;
-    }
-    this.bonsR = bonr;
-    this.bonR = null;
-    this.displayDialogR = false;
-  }
-
   saveC() {
-    const bonc = this.bonsC;
+    const bonr = this.bonsC;
     if (this.newbonC) {
-      bonc.push(this.bonC);
+      this.boncService.save(this.bonC).subscribe(
+        data => {
+          console.log(data);
+          this.errorc = data;
+          if (this.errorc === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.bonC = null;
+            this.displayDialogC = false;
+          } else if (this.errorc === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de bon déja existe'});
+          }
+        }, error => {
+          console.log('error');
+        }
+      );
     } else {
-      bonc[this.bonsC.indexOf(this.selectedBonC)] = this.bonC;
+      //  use[this.users.indexOf(this.selectedUser)] = this.user;
+      bonr[this.bonsC.indexOf(this.selectedBonC)] = this.bonC;
+      this.boncService.update(this.bonC).subscribe(
+        data => {
+          console.log(data);
+          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
+          this.find();
+          this.bonC = null;
+          this.displayDialogC = false;
+        }, error => {
+          console.log('error update');
+        }
+      );
     }
-
-    this.bonsC = bonc;
-    this.bonC = null;
-    this.displayDialogC = false;
-  }
-
-  saveV() {
-    const bonv = this.bonsV;
-    if (this.newbonV) {
-      bonv.push(this.bonV);
-    } else {
-      bonv[this.bonsV.indexOf(this.selectedBonV)] = this.bonV;
-    }
-
-    this.bonsV = bonv;
-    this.bonV = null;
-    this.displayDialogV = false;
-  }
-
-  deleteR() {
-    const index = this.bonsR.indexOf(this.selectedBonR);
-    this.bonsR = this.bonsR.filter((val, i) => i !== index);
-    this.bonR = null;
-    this.displayDialogR = false;
-  }
-
-  deleteV() {
-    const index = this.bonsV.indexOf(this.selectedBonV);
-    this.bonsV = this.bonsV.filter((val, i) => i !== index);
-    this.bonV = null;
-    this.displayDialogV = false;
   }
 
   deleteC() {
     const index = this.bonsC.indexOf(this.selectedBonC);
     this.bonsC = this.bonsC.filter((val, i) => i !== index);
+    this.boncService.delete(this.selectedBonC.reference).subscribe(
+      data => {
+        this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Bon Carburant Supprimé'});
+      },
+      error => {
+        console.log('error delete');
+      }
+    );
     this.bonC = null;
     this.displayDialogC = false;
   }
@@ -200,28 +164,6 @@ export class BonsComponent implements OnInit {
     }
     return bon;
   }
-  cloneBonR(b: BonsR): BonsR {
-    const bon = new BonsR();
-    for (const prop in b) {
-      bon[prop] = b[prop];
-    }
-    return bon;
-  }
-  cloneBonV(b: BonsV): BonsV {
-    const bon = new BonsV();
-    for (const prop in b) {
-      bon[prop] = b[prop];
-    }
-    return bon;
-  }
-
-  onRowSelectR(event) {
-    this.newbonR = false;
-    this.bonR = this.cloneBonR(event.data);
-    this.displayDialogR = true;
-    this.cancelR = false;
-  }
-
   onRowSelectC(event) {
     this.newbonC = false;
     this.bonC = this.cloneBonC(event.data);
@@ -229,10 +171,4 @@ export class BonsComponent implements OnInit {
     this.cancelC = false;
   }
 
-  onRowSelectV(event) {
-    this.newbonV = false;
-    this.bonV = this.cloneBonV(event.data);
-    this.displayDialogV = true;
-    this.cancelV = false;
-  }
 }
