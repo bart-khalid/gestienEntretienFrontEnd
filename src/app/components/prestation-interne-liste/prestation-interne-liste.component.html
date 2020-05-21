@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <p-table #dt [columns]="cols" [value]="foundedPrestationInterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
@@ -123,7 +124,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown type="text" formControlName="agent" [options]="foundedAgents" optionLabel="nomAgent" [(ngModel)]="prestationInterne.agent" placeholder="Choisir un agent" pInputText id="codeAgent" [filter]="true"></p-dropdown>
+          <p-dropdown type="text" formControlName="agent" [options]="foundedAgents" optionLabel="nomAgent" [(ngModel)]="prestationInterne.agent" placeholder="Choisir un agent"  id="codeAgent" [filter]="true"></p-dropdown>
       </div>
       </div>
       <div class="ui-g-4">
