@@ -61,7 +61,7 @@ export class PrestationComponent implements OnInit {
       typeEntretien: new FormControl('', Validators.required),
       Locale: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
-      agent: new FormControl('', Validators.required),
+      agentt: new FormControl('', Validators.required),
       });
 
 
@@ -108,6 +108,8 @@ export class PrestationComponent implements OnInit {
     this.displayDialog = false;
     this.displayDialogE = false;
     this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
+    this.prestataionInterne = null;
+    this.prestataionExterne = null;
   }
   get foundedReclamations(): Reclamation[] {
     return this.reclamationService.reclamationsFounded;
