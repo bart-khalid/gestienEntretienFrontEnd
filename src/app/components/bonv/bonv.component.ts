@@ -8,6 +8,8 @@ import {CarService} from "../../controller/service/car.service";
 import {FournisseurSVService} from "../../controller/service/fournisseur-sv.service";
 import {FournisseurSV} from "../../controller/model/fournisseurSV.model";
 import {Car} from "../../controller/model/car";
+import {element} from "protractor";
+import {FOCUS_TRAP_INERT_STRATEGY} from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-bonv',
@@ -26,9 +28,9 @@ export class BonvComponent implements OnInit {
   fourniss: SelectItem[];
   vehicule: SelectItem[];
   userform: FormGroup;
-  fournisseurs: FournisseurSV[];
+  fournisseurs = new Array<FournisseurSV>();
+  fournisseursfiltre = new Array<FournisseurSV>();
   cars: Car[];
-
   constructor(private fb: FormBuilder, private messageService: MessageService , private bonvService: BonvService,
               private carService: CarService , private fournisseurSVService: FournisseurSVService) { }
 
@@ -77,7 +79,13 @@ export class BonvComponent implements OnInit {
     this.find();
     this.fournisseurSVService.find().subscribe(
       data => {
-        this.fournisseurs = data;
+        for (const f of data) {
+          if (f.typef === 'service') {
+            this.fournisseursfiltre.push(f);
+          }
+        }
+        this.fournisseurs = this.fournisseursfiltre;
+        console.log(this.fournisseurs.length + 'data');
       }
     );
     this.carService.findAll().subscribe(

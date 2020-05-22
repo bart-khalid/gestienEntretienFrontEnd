@@ -44,6 +44,7 @@ import { DocumentationComponent } from './components/documentation/documentation
 import {BonrComponent} from './components/bonr/bonr.component';
 import {BonvComponent} from './components/bonv/bonv.component';
 import { AgentComponent } from './components/agent/agent.component';
+import { EntretienComponent } from './components/entretien/entretien.component';
 
 
 
@@ -92,6 +93,8 @@ import { AgentComponent } from './components/agent/agent.component';
     BonvComponent,
 
     AgentComponent,
+
+    EntretienComponent,
 
   ],
   imports: [

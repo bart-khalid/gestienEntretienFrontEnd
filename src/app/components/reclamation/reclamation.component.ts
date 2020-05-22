@@ -42,7 +42,7 @@ export class ReclamationComponent implements OnInit {
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
       { field: 'nomLocale', header: 'Locale' },
-      { field: 'nomMateriel', header: 'Materiel' },
+      { field: 'nomMateriel', header: 'Matériel' },
       { field: 'etat', header: 'Etat' }
     ];
   }

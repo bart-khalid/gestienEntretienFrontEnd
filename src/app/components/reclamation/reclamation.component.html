@@ -1,5 +1,5 @@
+<p-toast></p-toast>
 <p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
-
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
@@ -11,7 +11,7 @@
       <div class="col-md-4">
     <div style="text-align: center; align-items: center; align-content: center">
       <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
-      <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+      <input type="text" pInputText size="50" placeholder="Rechercher dans la table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
     </div>
     </div>
     </div>
