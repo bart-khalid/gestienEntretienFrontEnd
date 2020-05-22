@@ -43,18 +43,18 @@
 </p-table>
 
 <!-- dialog 1 -->
-<p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" [modal]="true" showEffect="fade"   [style]="{width: '600px', textAlign: 'center'}">
+<p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" [modal]="true" showEffect="fade"   [style]="{width: '660px', textAlign: 'center'}">
   <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 300px" >
 
 
     <div class="ui-g-12" >
       <div class="ui-g-3">
-        <label for="marque">Marque :</label>
+        <label for="marque">Fournisseur Matériel :</label>
       </div>
       <div class="ui-g-5" >
         <div class="form-group" [formGroup]="userform" >
 
-        <p-dropdown id="marque" formControlName="marque" [options]="foundedFournisseurs" optionLabel="nomf" [(ngModel)]="materiel.fournisseur" placeholder="choisir un fournisseur" [filter]="true" ></p-dropdown>
+        <p-dropdown id="marque" formControlName="marque" [options]="fournisseurs" optionLabel="nomf" [(ngModel)]="materiel.fournisseur" placeholder="Choisissez un fournisseur" [filter]="true" ></p-dropdown>
 
           <!--
                    <select class="btn btn-block btn-light" id="marque" formControlName="marque" [(ngModel)]="materiel.fournisseur" >

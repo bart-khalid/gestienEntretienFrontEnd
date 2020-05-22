@@ -20,12 +20,14 @@ import {DocumentationComponent} from './components/documentation/documentation.c
 import {BonvComponent} from './components/bonv/bonv.component';
 import {BonrComponent} from './components/bonr/bonr.component';
 import {AgentComponent} from './components/agent/agent.component';
+import {EntretienComponent} from './components/entretien/entretien.component';
 
 
 
 const routes: Routes = [
   { path: '' , component: LoginComponent},
   { path: 'materiel' , component: MaterielComponent},
+  { path: 'entretiens' , component: EntretienComponent},
   { path: 'prestation' , component: PrestationComponent},
   { path: 'reclamations' , component: ReclamationComponent},
   { path: 'vehiculeComponent' , component: VehiculeComponent},
@@ -35,7 +37,7 @@ const routes: Routes = [
   { path: 'vehiculeeComponent' , component: VehiculeComponent},
   { path: 'fournisseur' , component: FournisseurSVComponent},
   { path: 'reclamer' , component: ReclamerComponent},
-  { path: 'actions' , component: ActionsComponent},
+  { path: 'accueil' , component: ActionsComponent},
   { path: 'localDetail' , component: LocaldetailComponent},
   { path: 'local' , component: LocalComponent},
   { path: 'prestationInterneListe' , component: PrestationInterneListeComponent},

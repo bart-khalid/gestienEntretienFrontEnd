@@ -122,6 +122,21 @@
                      text="Numero non valide"></p-message>        </div>
       </div>
 
+      <div class="ui-g-12">
+        <div class="ui-g-3">
+          <label for="type">Type Fournisseur :</label>
+        </div>
+        <div class="ui-g-5">
+          <div class="form-group" [formGroup]="userform"  >
+            <p-dropdown  id="type" formControlName="typef" [options]="typesfournisseurs" [(ngModel)]="fournisseur.typef"></p-dropdown>
+          </div>
+        </div>
+        <div class="ui-g-4">
+          <p-message severity="error" *ngIf="(userform.controls['typef'].touched &&!userform.controls['typef'].dirty  || userform.controls['typef'].value =='Choisir un type')"
+                     text="Champ Obligatoire"></p-message>
+        </div>
+      </div>
+
 
     </div>
 

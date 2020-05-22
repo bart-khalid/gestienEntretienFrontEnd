@@ -28,7 +28,8 @@ export class BonrComponent implements OnInit {
   fourniss: SelectItem[];
   vehicule: SelectItem[];
   errorc: number;
-  fournisseurs: FournisseurSV[];
+  fournisseurs = new Array<FournisseurSV>();
+  fournisseursfiltre = new Array<FournisseurSV>();
   cars: Car[];
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private bonrService: BonrService,
@@ -73,7 +74,13 @@ export class BonrComponent implements OnInit {
     this.find();
     this.fournisseurSVService.find().subscribe(
       data => {
-        this.fournisseurs = data;
+        for (const f of data) {
+          if (f.typef === 'service') {
+            this.fournisseursfiltre.push(f);
+          }
+        }
+        this.fournisseurs = this.fournisseursfiltre;
+        console.log(this.fournisseurs.length + 'data');
       }
     );
     this.carService.findAll().subscribe(

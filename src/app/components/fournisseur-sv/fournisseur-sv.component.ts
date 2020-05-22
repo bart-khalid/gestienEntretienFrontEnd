@@ -25,6 +25,7 @@ export class FournisseurSVComponent implements OnInit {
   cols: any[];
   userform: FormGroup;
 
+  typesfournisseurs: SelectItem[];
   txt = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   errorS: number ;
@@ -38,6 +39,7 @@ export class FournisseurSVComponent implements OnInit {
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),
       adresse: new FormControl('', Validators.required),
+      typef: new FormControl('', Validators.required),
       telephone: new FormControl('', Validators.compose([Validators.required,
         Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
       email: new FormControl('', Validators.compose([Validators.required,
@@ -45,12 +47,19 @@ export class FournisseurSVComponent implements OnInit {
         )])),
     });
 
+    this.typesfournisseurs = [
+      {label: 'Choisir un type', value: ''},
+      {label: 'Matériel', value: 'matériel'},
+      {label: 'Service', value: 'service'}
+    ];
+
     this.cols = [
       {field: 'reference', header: 'Réference'},
       {field: 'nomf', header: 'Nom Fournisseur'},
       {field: 'adressef', header: 'Adresse'},
       {field: 'emailf', header: 'Adresse Mail'},
-      {field: 'telephonef', header: 'Numero de Telephone'},
+      {field: 'telephonef', header: 'Numéro de Télephone'},
+      {field: 'typef', header: 'Type Fournisseur'},
     ];
     this.fournisseurService.findAll();
   }

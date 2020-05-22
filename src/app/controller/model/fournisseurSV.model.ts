@@ -9,6 +9,7 @@ export class FournisseurSV {
   public adressef: string;
   public telephonef: string;
   public descriptionDropDown: string;
+  public typef: string;
   public bonsCarburant = new Array<BonsC>();
   public bonsReparation = new Array<BonsR>();
   public bonsVidange = new Array<BonsV>();

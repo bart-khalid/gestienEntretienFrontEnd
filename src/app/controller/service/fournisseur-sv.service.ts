@@ -12,6 +12,8 @@ import {Users} from "../model/users.model";
 export class FournisseurSVService {
 
   private _foundedFourniseurs = new Array<FournisseurSV>();
+  private fournisseursfiltre = new Array<FournisseurSV>();
+
   private url = 'http://localhost:8090/GestionEntretien/fournisseur/';
   constructor(private http: HttpClient) { }
 

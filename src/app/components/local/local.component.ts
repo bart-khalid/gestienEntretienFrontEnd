@@ -72,7 +72,7 @@ export class LocalComponent implements OnInit {
       {label: 'Département Géologie', value: 'Géologie'},
       {label: 'Département Tec', value: 'Tec'},
       {label: 'Département Génie Civil', value: 'Génie Civil'},
-      {label: 'Autre', value: 'autre'},
+      {label: 'Autre', value: 'Autre'},
     ];
   }
 

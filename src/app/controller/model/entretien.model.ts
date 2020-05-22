@@ -7,6 +7,7 @@ export class Entretien {
   public prestataire: string;
   public montant: number;
   public numFacture: string;
+  public nomLocale: string;
 
   public materiel = new  Materiel();
   public locale = new Local();

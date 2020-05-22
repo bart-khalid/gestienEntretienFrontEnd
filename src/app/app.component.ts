@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     // }
 
     this.items = [
-    {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
+    {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'accueil'},
     {label: 'Bons Parc Automobile', items: [
         {label: 'Carburant', icon: 'pi pi-fw pi-pencil', routerLink: 'bons'},
         {label: 'Vidange', icon: 'pi pi-fw pi-pencil', routerLink: 'bonv'},
@@ -42,6 +42,8 @@ export class AppComponent implements OnInit {
           ], icon: 'pi pi-fw pi-pencil'}
       ], icon: 'pi pi-align-left'},
 
+      {label: 'Entretiens', icon: 'pi pi-align-right', routerLink: 'entretiens'},
+
     {label: 'Gestion', items: [
         {label: 'Materiel', icon: 'pi pi-pencil', routerLink: 'materiel'},
         {label: 'Locale', icon: 'pi pi-pencil', routerLink: 'local'},
@@ -51,6 +53,7 @@ export class AppComponent implements OnInit {
         {label: 'Personnel', items: [{label: 'Agent', icon: 'pi pi-user-edit', routerLink: 'agent'},
             {label: 'Utilisateur', icon: 'pi pi-user-edit', routerLink: 'users'}], icon: 'pi pi-users'},
       ], icon: 'pi pi-fw pi-cog'},
+
 
     {separator: true},
     {label: 'Aide',

@@ -21,6 +21,9 @@ export class MaterielComponent implements OnInit {
   materiel = new Materiel();
   materiels = new Array<Materiel>();
 
+  materielsfiltre = new Array<Materiel>();
+
+
   selectedMatereil: Materiel;
 
   newMateriel: boolean;
@@ -29,6 +32,9 @@ export class MaterielComponent implements OnInit {
 
 
   cols: any[];
+
+  fournisseurs = new Array<FournisseurSV>();
+  fournisseursfiltre = new Array<FournisseurSV>();
 
   types: Array<any>;
   constructor(private fb: FormBuilder,
@@ -44,13 +50,22 @@ export class MaterielComponent implements OnInit {
       marque: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required)
     });
-    this.fournisseurService.findAll();
-    this.cols = [
+    this.fournisseurService.find().subscribe(
+      data => {
+        for (const f of data) {
+          if (f.typef === 'matériel') {
+            this.fournisseursfiltre.push(f);
+          }
+        }
+        this.fournisseurs = this.fournisseursfiltre;
+        console.log(this.fournisseurs.length + 'data');
+      }
+    );    this.cols = [
       { field: 'reference', header: 'Reference' },
-      { field: 'marque', header: 'Marque' },
+      { field: 'marque', header: 'Fournisseur Matériel' },
       { field: 'nom', header: 'Nom' },
       { field: 'type', header: 'Type' },
-      { field: 'nbrEntite', header: 'NbrEntite' }
+      { field: 'nbrEntite', header: 'Nombre d\'entités affectés aux locaux ' }
     ];
     this.types = [
       { value: '', label: 'Choisissez un Type' },
