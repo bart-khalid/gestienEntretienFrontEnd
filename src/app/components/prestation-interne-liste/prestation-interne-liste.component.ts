@@ -72,16 +72,6 @@ export class PrestationInterneListeComponent implements OnInit {
       { value: 'jardinage', label: 'Jardinage' },
       { value: 'materiel', label: 'Entretien materiel' },
     ];
-
-    this.reclamations = [
-      { value: '', label: 'Choisir une réclamation' },
-      { value: '1', label: 'recla 1' }
-    ];
-
-    this.agents = [
-      { value: '', label: 'Choisir un agent' },
-      { value: '1', label: 'agent 1' }
-    ];
   }
   showDialogToAdd() {
     this.newPrestation = true;
@@ -136,6 +126,7 @@ export class PrestationInterneListeComponent implements OnInit {
   get foundedReclamatoins(): Reclamation[] {
     return this.reclamationService.reclamationsFounded;
   }
+
   findAllAgents() {
     this.agentService.findAll().subscribe(
       data => {

@@ -12,6 +12,7 @@ import {Localdetail} from '../../controller/model/localdetail.model';
 import {AgentService} from '../../controller/service/agent.service';
 import {Agent} from '../../controller/model/agent.model';
 import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
+import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
 
 
 @Component({
@@ -44,16 +45,14 @@ export class PrestationComponent implements OnInit {
   constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
               private prestationInterneService: PrestationInterneService,
               private localService: LocalService,
-              private agentService: AgentService,
-              private localdetailService: LocaldetailService,
-              private messageService: MessageService ) { }
+              private prestationExterneService: PrestationExterneService,
+              private agentService: AgentService) { }
 
   ngOnInit(): void {
     this.reclamationService.findAll();
     this.localService.findAll();
     this.agentService.findAll();
-    this.localdetailService.findAll();
-
+    this.reclamationService.findAllReclamationsNonTraiter();
     this.findAllAgents();
 
 
@@ -68,6 +67,7 @@ export class PrestationComponent implements OnInit {
     this.userform1 = this.fb.group({
       typeEntretienn: new FormControl('', Validators.required),
       datee: new FormControl('', Validators.required),
+      LocaleE: new FormControl('', Validators.required),
       nomprestataire: new FormControl('', Validators.required),
       montant: new FormControl('', Validators.required),
       });
@@ -104,10 +104,11 @@ export class PrestationComponent implements OnInit {
       this.prestationInterneService.save(this.prestataionInterne);
     } else if (this.newPresExterne) {
      // to be implement
+      this.prestataionExterne.locale = this.selectedLocalee;
+      this.prestationExterneService.save(this.prestataionExterne);
     }
     this.displayDialog = false;
     this.displayDialogE = false;
-    this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Réussie'});
     this.prestataionInterne = null;
     this.prestataionExterne = null;
   }
@@ -117,9 +118,8 @@ export class PrestationComponent implements OnInit {
   get foundedLocales(): Local[] {
     return this.localService.foudedLocales;
   }
-
-  get foundedMateriels(): Localdetail[] {
-    return this.localdetailService.foundedLocalDetails;
+  get foundedReclamationsToChoose(): Reclamation[] {
+    return this.reclamationService.foundedReclamationsNonTraiter;
   }
 
   findAllAgents() {

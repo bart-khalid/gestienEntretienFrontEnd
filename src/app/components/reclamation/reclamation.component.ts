@@ -5,6 +5,7 @@ import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {MenuItem, SelectItem} from 'primeng';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-reclamation',
@@ -30,7 +31,7 @@ export class ReclamationComponent implements OnInit {
   cols: any[];
 
   locales: Array<any>;
-  constructor(private reclamationService: ReclamationService) { }
+  constructor(private reclamationService: ReclamationService, private toast: ToastrService) { }
 
 
   ngOnInit() {
@@ -112,9 +113,9 @@ export class ReclamationComponent implements OnInit {
 
   public reclamationSeen(reclamation: Reclamation) {
     if (reclamation.etat === 'Sous Traitement') {
-      alert('la reclamation est deja Vu');
+      this.toast.warning('la reclamation est deja vue');
     } else if (reclamation.etat === 'Bien Traitée') {
-      alert('la reclamation est bien traité, vous pouvez pas faire cette action');
+      this.toast.warning('la reclamation est bien traitée, vous pouvez pas faire cette action');
     } else {
       this.reclamationService.reclamationSeen(reclamation.reference);
       }

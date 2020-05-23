@@ -7,6 +7,7 @@ import {MaterielService} from '../../controller/service/materiel.service';
 import {LocalService} from '../../controller/service/local.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {Local} from '../../controller/model/local.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-localdetail',
@@ -35,7 +36,7 @@ export class LocaldetailComponent implements OnInit {
 
   errorS: number;
   errorC: number;
-  constructor(private fb: FormBuilder, private messageService: MessageService,
+  constructor(private fb: FormBuilder,
               private materielService: MaterielService,
               private localService: LocalService,
               private localdetailService: LocaldetailService) { }
@@ -59,10 +60,6 @@ export class LocaldetailComponent implements OnInit {
     ];
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
-  }
 
   showDialogToAdd() {
     this.newLocal = true;
@@ -74,17 +71,12 @@ export class LocaldetailComponent implements OnInit {
   save() {
     const localls = this.localdetailService.foundedLocalDetails;
     if (this.newLocal) {
-      localls.push(this.local);
-      console.log('ha howa ref dialhom bjoj : ' + this.local.materiel.reference + ', loacale :' + this.local.locale.reference);
       this.localdetailService.save(this.local);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Materiel Affecté'});
     } else {
       localls[this.localdetailService.foundedLocalDetails.indexOf(this.selectedLocal)] = this.local;
       this.localdetailService.update(this.local);
-      this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Materiel Modifié'});
     }
 
-    this.localdetailService.foundedLocalDetails = localls;
     this.local = null;
     this.displayDialog = false;
   }
@@ -95,7 +87,6 @@ export class LocaldetailComponent implements OnInit {
     const index = this.localdetailService.foundedLocalDetails.indexOf(this.selectedLocal);
     this.localdetailService.foundedLocalDetails = this.localdetailService.foundedLocalDetails.filter((val, i) => i !== index);
     this.localdetailService.delete(this.selectedLocal.referenceML);
-    this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Materiel Supprimé'});
     this.local = null;
     this.displayDialog = false;
   }

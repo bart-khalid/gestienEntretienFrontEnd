@@ -1,6 +1,6 @@
 <p-toast [style]="{marginTop: '2%'}"></p-toast>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
 
     <!-- Buttons to Add a Prestation -->
     <div class="card bg-transparent" id="cardToCenter">
@@ -94,7 +94,7 @@
             <label for="refReclamationn" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown [filter]="true"  [options]="foundedReclamations" optionLabel="descreptionDropDownReclamation" placeholder="choisir la reclamation" [(ngModel)]="prestataionInterne.reclamationI"  id="refReclamationn"></p-dropdown>
+            <p-dropdown [filter]="true"  [options]="foundedReclamationsToChoose" optionLabel="descreptionDropDownReclamation" placeholder="choisir la reclamation" [(ngModel)]="prestataionInterne.reclamationI"  id="refReclamationn"></p-dropdown>
           </div>
         </div>
 
@@ -125,18 +125,43 @@
     <!-- Second dialog to add a prestation Externe -->
     <p-dialog header="Prestation Externe Details" [(visible)]="displayDialogE" [focusOnShow]="true"  showEffect="fade" [modal]="true"  [style]="{width: '660px'}">
       <div class="ui-g ui-fluid" *ngIf="prestataionExterne" >
+
         <div class="ui-g-12">
           <div class="ui-g-3">
             <label for="typeEntretien" style="color: #00aeef"><strong>Type Entretien :</strong></label>
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform1"  >
-            <p-dropdown id="typeEntretien" formControlName="typeEntretienn" [options]="entretiens" [(ngModel)]="prestataionExterne.typeEntretienE" [filter]="true"></p-dropdown>
+            <p-dropdown id="typeEntretien" formControlName="typeEntretienn" [options]="entretiens"  [(ngModel)]="prestataionExterne.typeEntretienE" placeholder="Choisir un type" [filter]="true"></p-dropdown>
           </div>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" *ngIf="(userform1.controls['typeEntretienn'].touched &&!userform1.controls['typeEntretienn'].dirty  || userform1.controls['typeEntretienn'].value=='Choisir un type')"
                        text="Veuillez choisir un type"></p-message>
+          </div>
+        </div>
+
+        <div class="ui-g-12">
+          <div class="ui-g-3">
+            <label for="typeLoc" style="color: #00aeef"><strong>Locale :</strong></label>
+          </div>
+          <div class="ui-g-5">
+            <div class="form-group" [formGroup]="userform1"  >
+              <p-dropdown id="typeLoc" formControlName="LocaleE" [options]="foundedLocales" [(ngModel)]="selectedLocalee"  optionLabel="descriptionDropDown" placeholder="Choisir un locale" [filter]="true"></p-dropdown>
+            </div>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" *ngIf="(userform1.controls['LocaleE'].touched &&!userform1.controls['LocaleE'].dirty  || userform1.controls['LocaleE'].value=='Choisir un locale')"
+                       text="Veuillez choisir un locale"></p-message>
+          </div>
+        </div>
+
+        <div class="ui-g-12" *ngIf="prestataionExterne.typeEntretienE === 'materiel'">
+          <div class="ui-g-3">
+            <label for="nomMatE" style="color: #00aeef"><strong>Materiel :</strong> </label>
+          </div>
+          <div class="ui-g-5">
+            <p-dropdown id="nomMatE"  [options]="selectedLocalee.localDetails" placeholder="choisir un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestataionExterne.materielLocale" [filter]="true"></p-dropdown>
           </div>
         </div>
 
@@ -165,9 +190,6 @@
             <p-checkbox [(ngModel)]="prestataionExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
             <label for="bonL" style="color: #00aeef"><strong>{{prestataionExterne.reclamedE}}</strong></label>
           </div>
-          <div class="ui-g-4">
-            <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-          </div>
         </div>
 
         <div class="ui-g-12" *ngIf="prestataionExterne.reclamedE">
@@ -175,7 +197,7 @@
             <label for="refReclamation" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown  [options]="foundedReclamations" optionLabel="reference" [(ngModel)]="prestataionExterne.referenceReclamationE"  id="refReclamation"></p-dropdown>
+            <p-dropdown  [options]="foundedReclamationsToChoose" optionLabel="descreptionDropDownReclamation" [(ngModel)]="prestataionExterne.reclamationE" placeholder="choisir la reclamation" id="refReclamation"></p-dropdown>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -362,9 +384,9 @@
 
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
 
-    <p-table [columns]="cols" [value]="foundedReclamations" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="5">
+    <p-table [columns]="cols" [value]="foundedReclamations" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="10">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">

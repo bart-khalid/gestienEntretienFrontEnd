@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Local} from '../model/local.model';
+import {log} from 'util';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class LocalService {
 
   private _foudedLocales = new Array<Local>();
   private url = 'http://localhost:8090/GestionEntretien/locale/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toast: ToastrService) { }
 
   public save(locale: Local) {
     this.http.post<number>(this.url, locale).subscribe(
@@ -18,6 +20,7 @@ export class LocalService {
         this.findAll();
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
@@ -28,6 +31,7 @@ export class LocalService {
         console.log('success locale updated');
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
@@ -36,8 +40,10 @@ export class LocalService {
     this.http.delete<number>(this.url + 'deleteLocale/' + reference).subscribe(
       data => {
         console.log('success locale deleted');
+        console.log('data deleted : ' + data);
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
@@ -49,6 +55,7 @@ export class LocalService {
         console.log('data locale: ' + data.length);
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }

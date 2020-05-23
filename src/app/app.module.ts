@@ -45,6 +45,7 @@ import {BonrComponent} from './components/bonr/bonr.component';
 import {BonvComponent} from './components/bonv/bonv.component';
 import { AgentComponent } from './components/agent/agent.component';
 import { EntretienComponent } from './components/entretien/entretien.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -127,6 +128,7 @@ import { EntretienComponent } from './components/entretien/entretien.component';
     MenubarModule,
     AccordionModule,
     ChartModule,
+    ToastrModule.forRoot(),
   ],
   providers: [MessageService, DatePipe],
   bootstrap: [AppComponent]

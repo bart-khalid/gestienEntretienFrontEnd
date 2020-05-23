@@ -97,7 +97,7 @@ export class LocalComponent implements OnInit {
     } else {
       localls[this.localService.foudedLocales.indexOf(this.selectedLocal)] = this.local;
       this.localService.update(this.local);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Locale Modifié'});
+      this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Locale Modifié'});
     }
 
     this.locals = localls;

@@ -1,4 +1,4 @@
-<p-toast [style]="{marginTop: '2%'}"></p-toast>
+<p-toast></p-toast>
   <p-table #dt [columns]="cols" [value]="foudedLocales" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
@@ -35,7 +35,7 @@
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
-        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter un Locale"></button>
+        <button type="button" pButton icon="pi pi-home" (click)="showDialogToAdd()" label="Ajouter un Locale"></button>
       </div>
     </ng-template>
   </p-table>
@@ -90,7 +90,7 @@
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+        <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
         <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>

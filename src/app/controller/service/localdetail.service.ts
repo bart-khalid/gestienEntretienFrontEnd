@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Localdetail} from '../model/localdetail.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,21 @@ export class LocaldetailService {
 
   private _foundedLocalDetails = new Array<Localdetail>();
   private url = 'http://localhost:8090/GestionEntretien/materielsLocale/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toast: ToastrService) { }
 
   public save(localeDetail: Localdetail) {
     this.http.post<number>(this.url, localeDetail).subscribe(
       data => {
-        console.log('success Materiel affected');
-        this.findAll();
+        if (data === 1) {
+          console.log('success Materiel affected');
+          this.findAll();
+          this.toast.success('Materiel affecté');
+        } else {
+          this.toast.error('Reference du materiel dupliquée');
+        }
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
@@ -25,9 +32,16 @@ export class LocaldetailService {
   public update(localeDetail: Localdetail) {
     this.http.put<number>(this.url + 'update', localeDetail).subscribe(
       data => {
-        console.log('success Materiel updated');
+        if (data === -1) {
+          this.toast.warning('erreur verifier que tous les champs sont remplis');
+        } else {
+          console.log('success Materiel updated');
+          this.toast.info('Materiel modifié');
+          this.findAll();
+        }
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
@@ -36,8 +50,10 @@ export class LocaldetailService {
     this.http.delete<number>(this.url + 'deleteMateriel/' + reference ).subscribe(
       data => {
         console.log('success Materiel deleted');
+        this.toast.success('Materiel supprimé');
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
@@ -49,6 +65,7 @@ export class LocaldetailService {
         this._foundedLocalDetails = data.reverse();
       }, error => {
         console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );
   }
