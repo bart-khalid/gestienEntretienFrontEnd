@@ -5,8 +5,9 @@ import {Reclamation} from './reclamation.model';
 export class Localdetail {
   public  referenceML: string;
   public materielLocale: string;
-  public localeAssocie: string;
   public  dateAffectation: Date;
+  public localeAssocie: string;
+  public reference: string;
 
 
   public descriptionMaterielLocale: string;

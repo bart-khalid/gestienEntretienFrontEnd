@@ -39,7 +39,8 @@ export class LocaldetailComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private materielService: MaterielService,
               private localService: LocalService,
-              private localdetailService: LocaldetailService) { }
+              private localdetailService: LocaldetailService,
+              private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.localdetailService.findAll();
@@ -54,9 +55,9 @@ export class LocaldetailComponent implements OnInit {
     this.materielService.findAll();
     this.cols = [
       {field: 'referenceML', header: 'Réference'},
-      {field: 'materielLocale', header: 'Materiel'},
+      {field: 'materielLocale', header: 'Matériel'},
       {field: 'localeAssocie', header: 'Locale, Département'},
-      {field: 'dateAffectation', header: 'Date Achat Matériel'},
+      {field: 'dateAffectation', header: 'Date d\'affectation '},
     ];
   }
 
@@ -71,14 +72,48 @@ export class LocaldetailComponent implements OnInit {
   save() {
     const localls = this.localdetailService.foundedLocalDetails;
     if (this.newLocal) {
-      this.localdetailService.save(this.local);
+      this.localdetailService.save(this.local).subscribe(
+        data => {
+          if (data === 1) {
+            this.toast.success('Matériel affecté');
+            this.localdetailService.findAll();
+            this.local = null;
+            this.displayDialog = false;
+          } else if (data === -2) {
+            this.toast.error('Veuillez choisir un locale');
+          } else if(data === -1){
+            this.toast.error('Réference déja existe');
+          }
+        }
+          , error => {
+          console.log('error in the link');
+          this.toast.error('erreur du serveur merci d\' actualiser la page');
+        }
+      );
     } else {
-      localls[this.localdetailService.foundedLocalDetails.indexOf(this.selectedLocal)] = this.local;
-      this.localdetailService.update(this.local);
+      this.localdetailService.update(this.local).subscribe(
+        data => {
+          if (data === -1) {
+            this.toast.warning('Veuillez choisir un locale');
+          } else if(data === -2) {
+            this.toast.warning('Réference déja existant');
+          }
+          else {
+            console.log('success Materiel updated');
+            this.toast.info('Materiel modifié');
+            this.localdetailService.findAll();
+            this.local = null;
+            this.displayDialog = false;
+          }
+        }, error => {
+          console.log('error in the link');
+          this.toast.error('erreur du serveur merci d\' actualiser la page');
+        }
+      );
+
     }
 
-    this.local = null;
-    this.displayDialog = false;
+
   }
 
 
@@ -86,7 +121,7 @@ export class LocaldetailComponent implements OnInit {
   delete() {
     const index = this.localdetailService.foundedLocalDetails.indexOf(this.selectedLocal);
     this.localdetailService.foundedLocalDetails = this.localdetailService.foundedLocalDetails.filter((val, i) => i !== index);
-    this.localdetailService.delete(this.selectedLocal.referenceML);
+    this.localdetailService.delete(this.selectedLocal.reference);
     this.local = null;
     this.displayDialog = false;
   }

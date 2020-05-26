@@ -44,11 +44,10 @@ export class LocalComponent implements OnInit {
     });
 
     this.cols = [
-      {field: 'reference', header: 'Reference'},
       {field: 'nomLocal', header: 'Nom Locale'},
       {field: 'typeLocal', header: 'Type Locale'},
       {field: 'departement', header: 'Département'},
-      {field: 'nbrMateriel', header: 'Nombre Materiel affectés'}
+      {field: 'nbrMateriel', header: 'Nombre Matériels affectés'}
     ];
 
     this.typeslocal = [
