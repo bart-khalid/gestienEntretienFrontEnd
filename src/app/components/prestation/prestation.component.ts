@@ -13,6 +13,7 @@ import {AgentService} from '../../controller/service/agent.service';
 import {Agent} from '../../controller/model/agent.model';
 import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
 import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class PrestationComponent implements OnInit {
   constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
               private prestationInterneService: PrestationInterneService,
               private localService: LocalService,
+              private toast: ToastrService,
               private prestationExterneService: PrestationExterneService,
               private agentService: AgentService) { }
 
@@ -101,16 +103,12 @@ export class PrestationComponent implements OnInit {
     if (this.newPresInterne) {
       this.prestataionInterne.typeEntretienI = this.selectedEntretien;
       this.prestataionInterne.locale = this.selectedLocalee;
-      this.prestationInterneService.save(this.prestataionInterne);
+      this.savePresInterne(this.prestataionInterne);
     } else if (this.newPresExterne) {
      // to be implement
       this.prestataionExterne.locale = this.selectedLocalee;
-      this.prestationExterneService.save(this.prestataionExterne);
+      this.savePresExterne(this.prestataionExterne);
     }
-    this.displayDialog = false;
-    this.displayDialogE = false;
-    this.prestataionInterne = null;
-    this.prestataionExterne = null;
   }
   get foundedReclamations(): Reclamation[] {
     return this.reclamationService.reclamationsFounded;
@@ -133,4 +131,50 @@ export class PrestationComponent implements OnInit {
       });
   }
 
+  public savePresInterne(prestationI: PrestationInterne) {
+    this.prestationInterneService.save(prestationI).subscribe(
+      data => {
+        if (data === -2) {
+          this.toast.warning('erreur vérifiez que tous les champs sont remplis');
+        } else if (data === -3) {
+          this.toast.warning('merci de choisir le materiel');
+        } else {
+          this.displayDialog = false;
+          this.prestataionInterne = null;
+          console.log('success prestationInterne saved');
+          this.toast.success('Prestation Interne Enregitrée');
+          this.reclamationService.findAll();
+          this.reclamationService.findAllReclamationsNonTraiter();
+        }
+      }, error => {
+        console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\'actualiser la page');
+      }
+    );
+  }
+  public savePresExterne(prestationE: PrestationExterne) {
+    this.prestationExterneService.save(prestationE).subscribe(
+      data => {
+        if (data === -1) {
+          this.toast.warning('merci de choisir un locale');
+        } else if (data === -2) {
+          this.toast.warning('merci de choisir le materiel');
+        } else if (data === -3) {
+          this.toast.warning('merci de choisir la reclamation');
+        } else if (data === -4) {
+          this.toast.warning('merci de remplir les champ du bon de commande');
+        } else if (data === -5) {
+          this.toast.warning('merci de remplir les champ du bon de livraison');
+        } else {
+          this.displayDialogE = false;
+          console.log('prestationExterne saved');
+          this.toast.success('Prestation Externe Enregistrée');
+          this.prestataionExterne = null;
+        }
+      }, error => {
+        console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\'actualiser la page');
+      }
+    );
+  }
 }

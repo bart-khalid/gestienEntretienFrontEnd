@@ -12,20 +12,6 @@ export class PrestationExterneService {
   constructor(private http: HttpClient, private toast: ToastrService) { }
 
   public save(prestationE: PrestationExterne) {
-    this.http.post<number>(this.url, prestationE).subscribe(
-      data => {
-        if (data === -1) {
-          this.toast.warning('merci de choisir un locale');
-        } else if (data === -2) {
-          this.toast.warning('merci de choisir le materiel');
-        } else {
-          console.log('prestationExterne saved');
-          this.toast.success('Prestation Externe Enregistrée');
-        }
-      }, error => {
-        console.log('error in the link');
-        this.toast.error('erreur');
-      }
-    );
+    return this.http.post<number>(this.url, prestationE);
   }
 }

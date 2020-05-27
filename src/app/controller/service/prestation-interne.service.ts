@@ -14,24 +14,7 @@ export class PrestationInterneService {
   constructor(private http: HttpClient, private reclamationService: ReclamationService, private toast: ToastrService) { }
 
   public save(prestationInterne: PrestationInterne) {
-    this.http.post<number>(this.url, prestationInterne).subscribe(
-      data => {
-        if (data === -2) {
-          this.toast.warning('erreur vérifiez que tous les champs sont remplis');
-        } else if (data === -3) {
-          this.toast.warning('merci de choisir le materiel');
-        } else {
-          console.log('success prestationInterne saved');
-          this.toast.success('Prestation Interne Enregitrée');
-          this.findAll();
-          this.reclamationService.findAll();
-          this.reclamationService.findAllReclamationsNonTraiter();
-        }
-      }, error => {
-        console.log('error in the link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
+    return  this.http.post<number>(this.url, prestationInterne);
   }
 
   public update(prestationInterne: PrestationInterne) {
