@@ -7,43 +7,22 @@ import {ToastrService} from 'ngx-toastr';
   providedIn: 'root'
 })
 export class LocaldetailService {
-
+  private _errors: number;
   private _foundedLocalDetails = new Array<Localdetail>();
   private url = 'http://localhost:8090/GestionEntretien/materielsLocale/';
   constructor(private http: HttpClient, private toast: ToastrService) { }
 
+
+  get errors(): number {
+    return this._errors;
+  }
+
   public save(localeDetail: Localdetail) {
-    this.http.post<number>(this.url, localeDetail).subscribe(
-      data => {
-        if (data === 1) {
-          console.log('success Materiel affected');
-          this.findAll();
-          this.toast.success('Materiel affecté');
-        } else {
-          this.toast.error('Reference du materiel dupliquée');
-        }
-      }, error => {
-        console.log('error in the link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
+   return this.http.post<number>(this.url, localeDetail);
   }
 
   public update(localeDetail: Localdetail) {
-    this.http.put<number>(this.url + 'update', localeDetail).subscribe(
-      data => {
-        if (data === -1) {
-          this.toast.warning('erreur verifier que tous les champs sont remplis');
-        } else {
-          console.log('success Materiel updated');
-          this.toast.info('Materiel modifié');
-          this.findAll();
-        }
-      }, error => {
-        console.log('error in the link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
+   return this.http.put<number>(this.url + 'update', localeDetail);
   }
 
   public delete(reference: string) {

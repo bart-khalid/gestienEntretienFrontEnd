@@ -47,7 +47,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="ref">Reference Matériel :</label>
+          <label for="ref">Réference Matériel :</label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -66,11 +66,11 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown  id="type" formControlName="materiellocal" [options]="foundedMaterielToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.materiel" placeholder="choisir un materiel" [filter]="true" ></p-dropdown>
+          <p-dropdown  id="type" formControlName="materiellocal" [options]="foundedMaterielToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.materiel" placeholder="Choisissez un materiel" [filter]="true" ></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='')"
+          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='Choisissez un materiel')"
                      text="Champ Obligatoire"></p-message>
         </div>
       </div>
@@ -81,11 +81,11 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown id="matricule" formControlName="localassocie" [filter]="true" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="choisir un locale" ></p-dropdown>
+          <p-dropdown id="matricule" formControlName="localassocie" [filter]="true" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="Choisissez un locale" ></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value==''|| userform.controls['referencelocal'].value== null)"
+          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value=='Choisissez un locale')"
                      text="Champ Obligatoire"></p-message>
         </div>
       </div>

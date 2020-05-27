@@ -60,11 +60,11 @@ export class MaterielComponent implements OnInit {
         this.fournisseurs = this.fournisseursfiltre;
         console.log(this.fournisseurs.length + 'data');
       }
-    );    this.cols = [
-      { field: 'reference', header: 'Reference' },
+    );
+    this.cols = [
+      { field: 'nom', header: 'Nom Matériel' },
       { field: 'marque', header: 'Fournisseur Matériel' },
-      { field: 'nom', header: 'Nom' },
-      { field: 'type', header: 'Type' },
+      { field: 'type', header: 'Type Matériel' },
       { field: 'nbrEntite', header: 'Nombre d\'entités affectés aux locaux ' }
     ];
     this.types = [
