@@ -3,8 +3,7 @@ import {MenuItem} from 'primeng';
 import {LoginService} from './controller/service/login.service';
 import {Users} from './controller/model/users.model';
 import {Router} from '@angular/router';
-import {AuthenticationService} from "./controller/service/authentication.service";
-import {url} from "inspector";
+import {AuthenticationService} from './controller/service/authentication.service';
 
 
 @Component({
@@ -47,7 +46,11 @@ export class AppComponent implements OnInit {
         {label: 'Listes', items: [
             {label: 'Interne', icon: 'pi pi-fw pi-pencil', routerLink: 'prestationInterneListe'},
             {label: 'Externe', icon: 'pi pi-fw pi-pencil', routerLink: 'prestationExterneListe'}
-          ], icon: 'pi pi-fw pi-pencil'}
+          ], icon: 'pi pi-fw pi-pencil'},
+          {label: 'Bons', items: [
+            {label: 'Commande', icon: 'pi pi-fw pi-pencil', routerLink: 'bonsCommande'},
+            {label: 'Livraison', icon: 'pi pi-fw pi-pencil', routerLink: 'bonsLivraison'}
+          ], icon: 'pi pi-fw pi-folder'}
       ], icon: 'pi pi-align-left'},
 
       {label: 'Entretiens', icon: 'pi pi-briefcase', routerLink: 'entretiens'},

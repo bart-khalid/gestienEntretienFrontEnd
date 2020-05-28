@@ -65,18 +65,6 @@ export class ReclamationComponent implements OnInit {
     this.cancel = true;
   }
 
-  save() {
-    const reclamations = this.reclamationService.reclamationsFounded;
-    if (this.newReclamation) {
-      console.log(sessionStorage.getItem('username'));
-      this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
-      reclamations.push(this.reclamation);
-      } else {
-      reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
-    }
-    this.reclamationService.reclamationsFounded = reclamations;
-  }
-
   delete(data: Reclamation) {
     const index = this.reclamationService.reclamationsFounded.indexOf(data);
     this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
@@ -118,29 +106,5 @@ export class ReclamationComponent implements OnInit {
       this.reclamationService.reclamationSeen(reclamation.reference);
       }
     }
-    public saveReclamation(reclamation: Reclamation, userneme: string) {
-    this.reclamationService.save(reclamation, userneme).subscribe(
-      data => {
-        if (data === -1) {
-          console.log('reclamation existe deja ');
-        } else if (data === -2) {
-          console.log('reclament not found');
-          this.toast.error('erreur vuillez vous connecter à nouveau');
-        } else if (data === -3) {
-          console.log('locale undefined');
-          this.toast.warning('merci de choisir un locale');
-        } else {
-          console.log('reclamation saved');
-          this.toast.success('Reclamation enregitrée');
-          this.reclamationService.findAll();
-          this.reclamation = null;
-          this.displayDialog = false;
-          this.displayDialogM = false;
-        }
-      }, error => {
-        console.log('error in the save link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
-    }
+
   }

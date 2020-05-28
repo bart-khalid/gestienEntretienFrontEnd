@@ -109,8 +109,8 @@ export class ReclamerComponent implements OnInit {
       // update locale associe;
       this.reclamation.locale = this.selectedLocale;
       console.log(this.reclamation.locale.descriptionDropDown);
-      this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
-     // this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
+     // this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
+      this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
@@ -159,4 +159,33 @@ export class ReclamerComponent implements OnInit {
     return this.localService.foudedLocales;
   }
 
+  get foundedReclamationsemploye(): Reclamation[] {
+    return this.reclamationService.foundedReclamationsemploye;
+  }
+
+  public saveReclamation(reclamation: Reclamation, userneme: string) {
+    this.reclamationService.save(reclamation, userneme).subscribe(
+      data => {
+        if (data === -1) {
+          console.log('reclamation existe deja ');
+        } else if (data === -2) {
+          console.log('reclament not found');
+          this.toast.error('veuillez vous connecter à nouveau');
+        } else if (data === -3) {
+          console.log('locale undefined');
+          this.toast.warning('Veuillez choisir un locale');
+        } else {
+          console.log('reclamation saved');
+          this.toast.success('Reclamation enregitrée');
+          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+          this.reclamation = null;
+          this.displayDialog = false;
+          this.displayDialogM = false;
+        }
+      }, error => {
+        console.log('error in the save link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
+  }
 }
