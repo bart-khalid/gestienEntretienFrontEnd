@@ -106,8 +106,6 @@ export class PrestationComponent implements OnInit {
       this.prestataionInterne.locale = this.selectedLocalee;
       this.savePresInterne(this.prestataionInterne);
     } else if (this.newPresExterne) {
-     // to be implement
-      this.prestataionExterne.locale = this.selectedLocalee;
       this.savePresExterne(this.prestataionExterne);
     }
   }

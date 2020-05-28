@@ -3,7 +3,7 @@ import {MenuItem} from 'primeng';
 import {LoginService} from './controller/service/login.service';
 import {Users} from './controller/model/users.model';
 import {Router} from '@angular/router';
-import {AuthenticationService} from "./controller/service/authentication.service";
+import {AuthenticationService} from './controller/service/authentication.service';
 
 
 @Component({

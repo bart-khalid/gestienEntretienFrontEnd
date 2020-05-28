@@ -3,6 +3,10 @@ import {PrestationExterne} from '../../controller/model/prestation-externee.mode
 import {ReclamationService} from '../../controller/service/reclamation.service';
 
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
+import {Reclamation} from '../../controller/model/reclamation.model';
+import {Local} from '../../controller/model/local.model';
+import {LocalService} from '../../controller/service/local.service';
 
 @Component({
   selector: 'app-prestation-externe-liste',
@@ -17,7 +21,7 @@ export class PrestationExterneListeComponent implements OnInit {
 
 
   prestationExterne: PrestationExterne;
-  prestationsExterne: PrestationExterne[];
+  prestationsExternes: PrestationExterne[];
   selectedPrestationExteerne: PrestationExterne;
 
   newPrestation: boolean;
@@ -27,33 +31,42 @@ export class PrestationExterneListeComponent implements OnInit {
 
   userform1: FormGroup;
 
-  constructor(private fb: FormBuilder, private reclamationService: ReclamationService) { }
+  constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
+              private localService: LocalService,
+              private prestationExterneService: PrestationExterneService) { }
 
 
   ngOnInit() {
+
+    this.prestationExterneService.findAll();
+    this.reclamationService.findAll();
+    this.localService.findAll();
+
     this.userform1 = this.fb.group({
       typeEntretienn: new FormControl('', Validators.required),
+      locale: new FormControl('', Validators.required),
       datee: new FormControl('', Validators.required),
       nomprestataire: new FormControl('', Validators.required),
       montant: new FormControl('', Validators.required),
     });
 
     this.cols = [
-      { field: 'reference', header: 'Reference' },
-      { field: 'typeEntretien', header: 'Entretien' },
-      { field: 'date', header: 'Date' },
+      { field: 'referenceE', header: 'Reference' },
+      { field: 'typeEntretienE', header: 'Entretien' },
+      { field: 'dateE', header: 'Date' },
       { field: 'nomLocale', header: 'Locale' },
       { field: 'nomMateriel', header: 'Materiel' },
-      { field: 'nomPrestataire', header: 'Prestataire' },
-      { field: 'numeroFac', header: 'Numero Facture' },
-      { field: 'montantFac', header: 'Montant' },
-      { field: 'reclamed', header: 'Réclamée ?' },
-      { field: 'bonCommande', header: 'Avec bon Commande ?' },
-      { field: 'bonLivraison', header: 'Avec bon Livraison ?' },
+      { field: 'nomPrestataireE', header: 'Prestataire' },
+      { field: 'numeroFacE', header: 'Numero Facture' },
+      { field: 'montantFacE', header: 'Montant' },
+      { field: 'reclamedE', header: 'Réclamée ?' },
+      { field: 'bonCommandeE', header: 'Avec bon Commande ?' },
+      { field: 'bonLivraisonE', header: 'Avec bon Livraison ?' },
     ];
     this.entretiens = [
       { value: '', label: 'Choisir un type' },
       { value: 'jardinage', label: 'Jardinage' },
+      { value: 'materiel', label: 'Entretien Materiel' },
     ];
   }
   showDialogToAddE() {
@@ -63,20 +76,19 @@ export class PrestationExterneListeComponent implements OnInit {
   }
 
   save() {
-    const prestationsExternes = this.prestationsExterne;
+    const prestationsExterness = this.prestationsExternes;
     if (this.newPrestation) {
-      prestationsExternes.push(this.prestationExterne);
+      prestationsExterness.push(this.prestationExterne);
     } else {
-      prestationsExternes[this.prestationsExterne.indexOf(this.selectedPrestationExteerne)] = this.prestationExterne;
+      prestationsExterness[this.prestationsExternes.indexOf(this.selectedPrestationExteerne)] = this.prestationExterne;
     }
-    this.prestationsExterne = prestationsExternes;
+    this.prestationsExternes = prestationsExterness;
     this.prestationExterne = null;
     this.displayDialog = false;
 
   }
   delete() {
-    const index = this.prestationsExterne.indexOf(this.selectedPrestationExteerne);
-    this.prestationsExterne = this.prestationsExterne.filter((val, i) => i !== index);
+    this.prestationExterneService.delete(this.selectedPrestationExteerne.referenceE);
     this.prestationExterne = null;
     this.displayDialog = false;
   }
@@ -92,5 +104,14 @@ export class PrestationExterneListeComponent implements OnInit {
       prestation[prop] = p[prop];
     }
     return prestation;
+  }
+  get foundedPrestationExternes(): PrestationExterne[] {
+    return this.prestationExterneService.foundedPrestationExternes;
+  }
+  get foundedReclamations(): Reclamation[] {
+    return this.reclamationService.reclamationsFounded;
+  }
+  get foundedLocales(): Local[] {
+    return this.localService.foudedLocales;
   }
 }
