@@ -9,6 +9,7 @@ import {MaterielService} from '../../controller/service/materiel.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {LocaldetailService} from '../../controller/service/localdetail.service';
 import {Localdetail} from '../../controller/model/localdetail.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-reclamer',
@@ -37,6 +38,7 @@ export class ReclamerComponent implements OnInit {
   constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
               private localService: LocalService,
               private localdetailService: LocaldetailService,
+              private toast: ToastrService,
               private messageService: MessageService) { }
 
 
@@ -91,7 +93,8 @@ export class ReclamerComponent implements OnInit {
       // update locale associe;
       this.reclamation.locale = this.selectedLocale;
       console.log(this.reclamation.locale.descriptionDropDown);
-      this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
+     // this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
+      this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
@@ -100,9 +103,7 @@ export class ReclamerComponent implements OnInit {
       this.reclamationService.update(this.reclamation);
     }
     this.reclamationService.reclamationsFounded = reclamations;
-    this.reclamation = null;
-    this.displayDialog = false;
-    this.displayDialogM = false;
+
 
   }
 
@@ -142,4 +143,29 @@ export class ReclamerComponent implements OnInit {
     return this.localService.foudedLocales;
   }
 
+  public saveReclamation(reclamation: Reclamation, userneme: string) {
+    this.reclamationService.save(reclamation, userneme).subscribe(
+      data => {
+        if (data === -1) {
+          console.log('reclamation existe deja ');
+        } else if (data === -2) {
+          console.log('reclament not found');
+          this.toast.error('erreur vuillez vous connecter à nouveau');
+        } else if (data === -3) {
+          console.log('locale undefined');
+          this.toast.warning('merci de choisir un locale');
+        } else {
+          console.log('reclamation saved');
+          this.toast.success('Reclamation enregistrée');
+          this.reclamationService.findAll();
+          this.reclamation = null;
+          this.displayDialog = false;
+          this.displayDialogM = false;
+        }
+      }, error => {
+        console.log('error in the save link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
+  }
 }

@@ -46,6 +46,8 @@ import {BonvComponent} from './components/bonv/bonv.component';
 import { AgentComponent } from './components/agent/agent.component';
 import { EntretienComponent } from './components/entretien/entretien.component';
 import { ToastrModule } from 'ngx-toastr';
+import { PresBonCommandeComponent } from './components/pres-bon-commande/pres-bon-commande.component';
+import { PresBonLivraisonComponent } from './components/pres-bon-livraison/pres-bon-livraison.component';
 
 
 
@@ -96,6 +98,10 @@ import { ToastrModule } from 'ngx-toastr';
     AgentComponent,
 
     EntretienComponent,
+
+    PresBonCommandeComponent,
+
+    PresBonLivraisonComponent,
 
   ],
   imports: [

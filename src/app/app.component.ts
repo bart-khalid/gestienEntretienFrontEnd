@@ -47,7 +47,11 @@ export class AppComponent implements OnInit {
         {label: 'Listes', items: [
             {label: 'Interne', icon: 'pi pi-fw pi-pencil', routerLink: 'prestationInterneListe'},
             {label: 'Externe', icon: 'pi pi-fw pi-pencil', routerLink: 'prestationExterneListe'}
-          ], icon: 'pi pi-fw pi-pencil'}
+          ], icon: 'pi pi-fw pi-pencil'},
+        {label: 'Bons', items: [
+            {label: 'Commandes', icon: 'pi pi-fw pi-pencil', routerLink: 'bonsCommande'},
+            {label: 'Livraisons', icon: 'pi pi-fw pi-pencil', routerLink: 'bonsLivraison'}
+          ], icon: 'pi pi-folder-open'}
       ], icon: 'pi pi-align-left'},
 
       {label: 'Entretiens', icon: 'pi pi-align-right', routerLink: 'entretiens'},

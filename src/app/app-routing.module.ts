@@ -22,6 +22,10 @@ import {BonrComponent} from './components/bonr/bonr.component';
 import {AgentComponent} from './components/agent/agent.component';
 import {EntretienComponent} from './components/entretien/entretien.component';
 import {AuthGaurdService} from './controller/service/auth-gaurd.service';
+import {PresBonCommande} from './controller/model/pres-bon-commande.model';
+import {PresBonCommandeComponent} from './components/pres-bon-commande/pres-bon-commande.component';
+import {PresBonLivraison} from './controller/model/pres-bon-livraison.model';
+import {PresBonLivraisonComponent} from './components/pres-bon-livraison/pres-bon-livraison.component';
 
 
 
@@ -47,6 +51,8 @@ const routes: Routes = [
   { path: 'agent' , component: AgentComponent, canActivate: [AuthGaurdService]},
   { path: 'bonv' , component: BonvComponent, canActivate: [AuthGaurdService]},
   { path: 'bonr' , component: BonrComponent, canActivate: [AuthGaurdService]},
+  { path: 'bonsCommande' , component: PresBonCommandeComponent, canActivate: [AuthGaurdService]},
+  { path: 'bonsLivraison' , component: PresBonLivraisonComponent, canActivate: [AuthGaurdService]},
 
 ];
 
