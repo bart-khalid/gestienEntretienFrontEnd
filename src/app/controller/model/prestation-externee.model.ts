@@ -9,12 +9,15 @@ export class PrestationExterne {
  public typeEntretienE: string;
  public dateE: Date;
  public reclamedE = false;
- public referenceReclamationE: string;
+
+
  public nomPrestataireE: string;
  public montantFacE: number;
  public numeroFacE: string;
  public bonCommandeE = false;
  public bonLivraisonE = false;
+ public nomMateriel: string;
+ public nomLocale: string;
 
  public locale = new Local();
  public materielLocale = new Localdetail();

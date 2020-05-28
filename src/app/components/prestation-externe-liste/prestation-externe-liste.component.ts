@@ -38,16 +38,12 @@ export class PrestationExterneListeComponent implements OnInit {
       montant: new FormControl('', Validators.required),
     });
 
-   /* this.prestationsExterne = [
-      { reference: 'Apple', typeEntretien: 'automobile', date: new Date(), nomPrestataire: 'zaka', numeroFac: '233',
-        montantFac: 12, reclamed: true, bonCommande: true , bonLivraison: true ,
-        presBonCommande: null , presBonLivraison: null , referenceReclamation: '12'},
-      ]; */
-
     this.cols = [
       { field: 'reference', header: 'Reference' },
       { field: 'typeEntretien', header: 'Entretien' },
       { field: 'date', header: 'Date' },
+      { field: 'nomLocale', header: 'Locale' },
+      { field: 'nomMateriel', header: 'Materiel' },
       { field: 'nomPrestataire', header: 'Prestataire' },
       { field: 'numeroFac', header: 'Numero Facture' },
       { field: 'montantFac', header: 'Montant' },

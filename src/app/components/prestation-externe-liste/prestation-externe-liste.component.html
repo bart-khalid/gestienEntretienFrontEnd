@@ -94,7 +94,7 @@
         <label for="refReclamation" style="color: #00aeef">Reference de la reclamation :</label>
       </div>
       <div class="ui-g-5">
-        <input type="text" [(ngModel)]="prestationExterne.referenceReclamationE" pInputText id="refReclamation">
+        <p-dropdown  [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" id="refReclamation" [filter]="true"></p-dropdown>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
