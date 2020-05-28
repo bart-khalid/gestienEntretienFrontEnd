@@ -91,7 +91,7 @@ export class ReclamerComponent implements OnInit {
       // update locale associe;
       this.reclamation.locale = this.selectedLocale;
       console.log(this.reclamation.locale.descriptionDropDown);
-      this.reclamationService.save(this.reclamation, 'khalid');
+      this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;

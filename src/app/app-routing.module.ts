@@ -21,31 +21,32 @@ import {BonvComponent} from './components/bonv/bonv.component';
 import {BonrComponent} from './components/bonr/bonr.component';
 import {AgentComponent} from './components/agent/agent.component';
 import {EntretienComponent} from './components/entretien/entretien.component';
+import {AuthGaurdService} from './controller/service/auth-gaurd.service';
 
 
 
 const routes: Routes = [
   { path: '' , component: LoginComponent},
-  { path: 'materiel' , component: MaterielComponent},
-  { path: 'entretiens' , component: EntretienComponent},
-  { path: 'prestation' , component: PrestationComponent},
-  { path: 'reclamations' , component: ReclamationComponent},
-  { path: 'vehiculeComponent' , component: VehiculeComponent},
-  { path: 'bons' , component: BonsComponent},
-  { path: 'vehicule' , component: VehiculeListComponent},
-  { path: 'users' , component: UsersComponent} ,
-  { path: 'vehiculeeComponent' , component: VehiculeComponent},
-  { path: 'fournisseur' , component: FournisseurSVComponent},
-  { path: 'reclamer' , component: ReclamerComponent},
-  { path: 'accueil' , component: ActionsComponent},
-  { path: 'localDetail' , component: LocaldetailComponent},
-  { path: 'local' , component: LocalComponent},
-  { path: 'prestationInterneListe' , component: PrestationInterneListeComponent},
-  { path: 'prestationExterneListe' , component: PrestationExterneListeComponent},
-  { path: 'documentation' , component: DocumentationComponent},
-  { path: 'agent' , component: AgentComponent},
-  { path: 'bonv' , component: BonvComponent},
-  { path: 'bonr' , component: BonrComponent},
+  { path: 'materiel' , component: MaterielComponent, canActivate: [AuthGaurdService]},
+  { path: 'entretiens' , component: EntretienComponent, canActivate: [AuthGaurdService]},
+  { path: 'prestation' , component: PrestationComponent, canActivate: [AuthGaurdService]},
+  { path: 'reclamations' , component: ReclamationComponent, canActivate: [AuthGaurdService]},
+  { path: 'vehiculeComponent' , component: VehiculeComponent, canActivate: [AuthGaurdService]},
+  { path: 'bons' , component: BonsComponent, canActivate: [AuthGaurdService]},
+  { path: 'vehicule' , component: VehiculeListComponent, canActivate: [AuthGaurdService]},
+  { path: 'users' , component: UsersComponent, canActivate: [AuthGaurdService]} ,
+  { path: 'vehiculeeComponent' , component: VehiculeComponent, canActivate: [AuthGaurdService]},
+  { path: 'fournisseur' , component: FournisseurSVComponent, canActivate: [AuthGaurdService]},
+  { path: 'reclamer' , component: ReclamerComponent, canActivate: [AuthGaurdService]},
+  { path: 'accueil' , component: ActionsComponent, canActivate: [AuthGaurdService]},
+  { path: 'localDetail' , component: LocaldetailComponent, canActivate: [AuthGaurdService]},
+  { path: 'local' , component: LocalComponent, canActivate: [AuthGaurdService]},
+  { path: 'prestationInterneListe' , component: PrestationInterneListeComponent, canActivate: [AuthGaurdService]},
+  { path: 'prestationExterneListe' , component: PrestationExterneListeComponent, canActivate: [AuthGaurdService]},
+  { path: 'documentation' , component: DocumentationComponent, canActivate: [AuthGaurdService]},
+  { path: 'agent' , component: AgentComponent, canActivate: [AuthGaurdService]},
+  { path: 'bonv' , component: BonvComponent, canActivate: [AuthGaurdService]},
+  { path: 'bonr' , component: BonrComponent, canActivate: [AuthGaurdService]},
 
 ];
 
