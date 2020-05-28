@@ -9,6 +9,7 @@ import {MaterielService} from '../../controller/service/materiel.service';
 import {Materiel} from '../../controller/model/materiel.model';
 import {LocaldetailService} from '../../controller/service/localdetail.service';
 import {Localdetail} from '../../controller/model/localdetail.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-reclamer',
@@ -39,6 +40,7 @@ export class ReclamerComponent implements OnInit {
   constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
               private localService: LocalService,
               private localdetailService: LocaldetailService,
+              private toast: ToastrService,
               private messageService: MessageService) { }
 
 
@@ -107,7 +109,8 @@ export class ReclamerComponent implements OnInit {
       // update locale associe;
       this.reclamation.locale = this.selectedLocale;
       console.log(this.reclamation.locale.descriptionDropDown);
-      this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
+     // this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
+      this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
@@ -116,9 +119,7 @@ export class ReclamerComponent implements OnInit {
       this.reclamationService.update(this.reclamation);
     }
     this.reclamationService.reclamationsFounded = reclamations;
-    this.reclamation = null;
-    this.displayDialog = false;
-    this.displayDialogM = false;
+
 
   }
 
@@ -156,10 +157,6 @@ export class ReclamerComponent implements OnInit {
 
   get foundedLocales(): Local[] {
     return this.localService.foudedLocales;
-  }
-
-  get foundedReclamationsemploye(): Reclamation[] {
-    return this.reclamationService.foundedReclamationsemploye;
   }
 
 }

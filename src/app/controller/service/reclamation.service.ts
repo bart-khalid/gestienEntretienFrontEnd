@@ -58,23 +58,7 @@ export class ReclamationService {
   }
 
   public save(reclamation: Reclamation, username: string) {
-    this.http.post<number>(this.url + username, reclamation).subscribe(
-      data => {
-        if (data === -1) {
-          console.log('reclamation existe deja ');
-        } else if (data === -2) {
-          console.log('reclament not found');
-          this.toast.error('erreur vuillez vous connecter à nouveau');
-        } else {
-          console.log('reclamation saved');
-          this.toast.success('Reclamation enregitrée');
-          this.findAll();
-        }
-      }, error => {
-        console.log('error in the save link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
+    return this.http.post<number>(this.url + username, reclamation);
   }
 
   public update(reclamation: Reclamation) {

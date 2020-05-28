@@ -1,4 +1,4 @@
-<p-table #dt [columns]="cols" [value]="prestationsExterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestationExteerne" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-table #dt [columns]="cols" [value]="foundedPrestationExternes" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestationExteerne" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
     <div class="row">
@@ -23,7 +23,7 @@
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-      <th>Actions</th>
+
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -31,17 +31,14 @@
       <td *ngFor="let col of columns">
         {{rowData[col.field]}}
       </td>
-      <td style="text-align:center">
-        <button  pButton icon="" class="btn btn-block btn-outline-success"></button>
 
-      </td>
     </tr>
   </ng-template>
 </p-table>
 
 <!-- dialogue to update or delete a prestation -->
 
-<p-dialog header="Prestation Externe Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '660 px'}">
+<p-dialog header="Prestation Externe Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '700px'}">
   <div class="ui-g ui-fluid" *ngIf="prestationExterne" >
 
     <div class="ui-g-12">
@@ -58,6 +55,33 @@
                    text="Veuillez choisir un type" ></p-message>
       </div>
     </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="typeEntretien" style="color: #00aeef"><strong>Locale :</strong></label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+          <p-dropdown id="locale" formControlName="locale" [options]="foundedLocales" placeholder="Choisir un locale" optionLabel="descriptionDropDown" [(ngModel)]="prestationExterne.locale" [filter]="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="(userform1.controls['locale'].touched &&!userform1.controls['locale'].dirty  || userform1.controls['locale'].value=='Choisir un locale')"
+                   text="Veuillez choisir un type" ></p-message>
+      </div>
+    </div>
+
+    <div class="ui-g-12" *ngIf="prestationExterne.typeEntretienE === 'materiel'">
+      <div class="ui-g-3">
+        <label for="typeEntretien" style="color: #00aeef"><strong>Materiel :</strong></label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+          <p-dropdown id="materiel"  [options]="prestationExterne.locale.localDetails" placeholder="Choisir un materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestationExterne.materielLocale" [filter]="true"></p-dropdown>
+        </div>
+      </div>
+    </div>
+
 
 
     <div class="ui-g-12">
@@ -76,14 +100,13 @@
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-4">
+      <div class="ui-g-3">
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
-      <div class="ui-g-2">
+      <div class="ui-g-5">
         <p-checkbox [(ngModel)]="prestationExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
         <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamedE}}</strong></label>
       </div>
-      <div class="ui-g-3"></div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
       </div>
@@ -91,10 +114,10 @@
 
     <div class="ui-g-12" *ngIf="prestationExterne.reclamedE">
       <div class="ui-g-3">
-        <label for="refReclamation" style="color: #00aeef">Reference de la reclamation :</label>
+        <label for="refReclamation" style="color: #00aeef">Reclamation :</label>
       </div>
       <div class="ui-g-5">
-        <p-dropdown  [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" id="refReclamation" [filter]="true"></p-dropdown>
+        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" id="refReclamation" [filter]="true"></p-dropdown>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -178,7 +201,7 @@
           <label for="dateBonc" style="color: #00aeef">Date Bon Commande :</label>
         </div>
         <div class="ui-g-5">
-          <p-calendar  [(ngModel)]="prestationExterne.presBonCommandeE.dateBonCommande" id="dateBonc" > </p-calendar>
+          <input type="date" pInputText  [(ngModel)]="prestationExterne.presBonCommandeE.dateBonCommande" id="dateBonc" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -247,7 +270,7 @@
           <label for="dateBonL" style="color: #00aeef">Date Bon Livraison :</label>
         </div>
         <div class="ui-g-5">
-          <p-calendar  [(ngModel)]="prestationExterne.presBonLivraisonE.dateBonLivraison" id="dateBonL" > </p-calendar>
+          <input type="date" pInputText [(ngModel)]="prestationExterne.presBonLivraisonE.dateBonLivraison" id="dateBonL" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -287,6 +310,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button"  pButton icon="pi pi-trash"  (click)="delete()" label="Supprimer"></button>
       <button type="button" [disabled]="!userform1.valid" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
