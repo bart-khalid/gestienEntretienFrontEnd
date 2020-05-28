@@ -73,14 +73,19 @@ export class PrestationComponent implements OnInit {
       });
 
     this.cols = [
-      { field: 'reference', header: 'Reference' },
-      { field: 'reclamentName', header: 'Reclament' },
+      { field: 'reference', header: 'Réference reclamation' },
+      { field: 'reclamentName', header: 'Réclament' },
       { field: 'objet', header: 'Objet' },
-      { field: 'etat', header: 'Etat' }
+      { field: 'etat', header: 'État' }
     ];
     this.entretiens = [
+      { value: 'materiel', label: 'Matériel' },
       { value: 'jardinage', label: 'Jardinage' },
-      { value: 'materiel', label: 'Entretien Materiel' }
+      { value: 'electricité', label: 'Electricité' },
+      { value: 'plomberie', label: 'Plomberie' },
+      { value: 'télephone', label: 'Télephone' },
+      { value: 'minuiserie', label: 'Minuiserie' },
+      { value: 'internet', label: 'Internet' },
     ];
 
   }

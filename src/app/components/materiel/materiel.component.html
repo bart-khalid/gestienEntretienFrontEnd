@@ -4,7 +4,7 @@
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="h3" style="color: #004a80"><strong>Gestion Des Materiels</strong></h1>
+        <h1 class="h3" style="color: #004a80"><strong>Gestion Famille Materiels</strong></h1>
       </div>
     </div>
     <div class="row">
@@ -12,7 +12,7 @@
       <div class="col-md-4">
         <div style="text-align: center; align-items: center; align-content: center">
           <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
-          <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
         </div>
       </div>
     </div>
@@ -54,18 +54,13 @@
       <div class="ui-g-5" >
         <div class="form-group" [formGroup]="userform" >
 
-        <p-dropdown id="marque" formControlName="marque" [options]="fournisseurs" optionLabel="nomf" [(ngModel)]="materiel.fournisseur" placeholder="Choisissez un fournisseur" [filter]="true" ></p-dropdown>
+        <p-dropdown id="marque" formControlName="marque" [options]="fournisseurs" optionLabel="nomf" [(ngModel)]="materiel.fournisseur" placeholder='Choisissez un fournisseur' [filter]="true"  ></p-dropdown>
 
-          <!--
-                   <select class="btn btn-block btn-light" id="marque" formControlName="marque" [(ngModel)]="materiel.fournisseur" >
-                     <option value="0" selected disabled>choisir Fournisseur</option>
-
-                   </select>
-         -->
                  </div>
                </div>
                <div class="ui-g-4">
-                 <p-message severity="error"  *ngIf="(userform.controls['marque'].touched &&!userform.controls['marque'].dirty  || userform.controls['marque'].value=='Choisissez un fournisseur')" text="Veuillez Choisir un fournisseur "></p-message>
+                 <p-message severity="error"  *ngIf="(userform.controls['marque'].touched &&!userform.controls['marque'].dirty  || userform.controls['marque'].value=='Choisissez un fournisseur')"
+                            text="Veuillez Choisir un fournisseur "></p-message>
                </div>
              </div>
 

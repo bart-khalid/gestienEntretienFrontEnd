@@ -43,12 +43,12 @@ export class VehiculeListComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'reference', header: 'Reference' },
+      { field: 'reference', header: 'Réference' },
       { field: 'matricule', header: 'Matricule' },
       { field: 'type', header: 'Type' },
       { field: 'marque', header: 'Marque' },
       { field: 'utilite', header: 'Utilité' },
-      { field: 'dateEntrerParc', header: 'Date Achat' }
+      { field: 'dateEntrerParc', header: 'Date affectation au parc' }
     ];
     this.type = [];
     this.type.push({label: 'Choisir un Type', value: ''});

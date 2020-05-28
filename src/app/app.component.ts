@@ -4,6 +4,7 @@ import {LoginService} from './controller/service/login.service';
 import {Users} from './controller/model/users.model';
 import {Router} from '@angular/router';
 import {AuthenticationService} from "./controller/service/authentication.service";
+import {url} from "inspector";
 
 
 @Component({
@@ -12,7 +13,6 @@ import {AuthenticationService} from "./controller/service/authentication.service
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // user = 'administrateur';
   prenomm = sessionStorage.getItem('prenom');
   nomm = sessionStorage.getItem('nom');
   typee = sessionStorage.getItem('type');
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
     this.items = [
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'accueil'},
-    {label: 'Bons Parc Automobile', items: [
+    {label: 'Bons véhicules', items: [
         {label: 'Carburant', icon: 'pi pi-fw pi-pencil', routerLink: 'bons'},
         {label: 'Vidange', icon: 'pi pi-fw pi-pencil', routerLink: 'bonv'},
         {label: 'Reparation', icon: 'pi pi-fw pi-pencil', routerLink: 'bonr'}], icon: 'pi pi-list' },
@@ -50,16 +50,16 @@ export class AppComponent implements OnInit {
           ], icon: 'pi pi-fw pi-pencil'}
       ], icon: 'pi pi-align-left'},
 
-      {label: 'Entretiens', icon: 'pi pi-align-right', routerLink: 'entretiens'},
+      {label: 'Entretiens', icon: 'pi pi-briefcase', routerLink: 'entretiens'},
 
     {label: 'Gestion', items: [
-        {label: 'Materiel', icon: 'pi pi-pencil', routerLink: 'materiel'},
-        {label: 'Locale', icon: 'pi pi-pencil', routerLink: 'local'},
-        {label: 'Affecter Materiel', icon: 'pi pi-pencil', routerLink: 'localDetail'},
-        {label: 'Vehicule', icon: 'pi pi-pencil', routerLink: 'vehicule'},
-        {label: 'Fournisseur', icon: 'pi pi-pencil', routerLink: 'fournisseur'},
-        {label: 'Personnel', items: [{label: 'Agent', icon: 'pi pi-user-edit', routerLink: 'agent'},
-            {label: 'Utilisateur', icon: 'pi pi-user-edit', routerLink: 'users'}], icon: 'pi pi-users'},
+        {label: 'Famille matériels', icon: 'pi pi-desktop', routerLink: 'materiel'},
+        {label: 'Locaux', icon: 'pi pi-home', routerLink: 'local'},
+        {label: 'Matériels des locaux', icon: 'pi pi-pencil', routerLink: 'localDetail'},
+        {label: 'Véhicules', icon: 'fa fa-car', routerLink: 'vehicule'},
+        {label: 'Fournisseurs', icon: 'fa fa-list', routerLink: 'fournisseur'},
+        {label: 'Personnels', items: [{label: 'Agents', icon: 'pi pi-user-edit', routerLink: 'agent'},
+            {label: 'Utilisateurs', icon: 'pi pi-user-edit', routerLink: 'users'}], icon: 'pi pi-users'},
       ], icon: 'pi pi-fw pi-cog'},
 
 
@@ -73,8 +73,9 @@ export class AppComponent implements OnInit {
   ];
 
     this.itemsEmploye = [
-    {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'actions'},
-    {label: 'Reclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
+    {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'accueil'},
+          {label: 'Mes Réclamations', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
+          {label: 'Liste Réclamations globale', icon: 'pi pi-info' , routerLink: 'reclamations'} ,
     {separator: true},
     {label: 'Aide',
       icon: 'pi pi-fw pi-question',
