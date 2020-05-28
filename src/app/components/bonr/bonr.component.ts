@@ -48,7 +48,7 @@ export class BonrComponent implements OnInit {
       montantvignetteR: new FormControl('', Validators.required),
     });
     this.colsR = [
-      {field: 'numbonR', header: 'Numero de Bon'},
+      {field: 'numbonR', header: 'Nº de Bon'},
       {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
       {field: 'fourniassooci', header: 'Fournisseur'},
       {field: 'descriptionR', header: 'Désignation'},

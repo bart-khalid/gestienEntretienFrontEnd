@@ -47,13 +47,13 @@ export class AgentComponent implements OnInit {
     });
 
     this.cols = [
-      {field: 'reference', header: 'Reference'} ,
+      {field: 'reference', header: 'Réference'} ,
       {field: 'codeAgent', header: 'Code Agent'} ,
       {field: 'nomAgent', header: 'Nom Agent'},
-      {field: 'dateEntree', header: 'Date Enree'},
+      {field: 'dateEntree', header: 'Date Entrée'},
       {field: 'entrepriseliee', header: 'Entreprise Liée'},
       {field: 'adresseDomicile', header: 'Adresse domicile'},
-      {field: 'tel', header: 'Telephone'}
+      {field: 'tel', header: 'Télephone'}
     ];
     this.find();
   }

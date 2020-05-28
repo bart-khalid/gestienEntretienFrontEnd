@@ -50,7 +50,7 @@ export class BonvComponent implements OnInit {
     });
 
     this.colsV = [
-      {field: 'numbonV', header: 'Numero de Bon'},
+      {field: 'numbonV', header: 'Nº de Bon'},
       {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
       {field: 'fourniassooci', header: 'Fournisseur'},
       {field: 'descriptionV', header: 'Désignation'},

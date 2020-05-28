@@ -1,10 +1,10 @@
 <p-toast [style]="{marginTop: '2%'}"></p-toast>
-<p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-table #dt [columns]="cols" [value]="foundedReclamationsemploye" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="h3" style="color: #004a80"><strong>Espace Reclamations</strong></h1>
+        <h1 class="h3" style="color: #004a80"><strong>Espace Réclamations</strong></h1>
       </div>
     </div>
     <div class="row">
@@ -12,7 +12,7 @@
       <div class="col-md-4">
         <div style="text-align: center; align-items: center; align-content: center">
           <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
-          <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          <input type="text" pInputText size="50" placeholder="Rechercher dans la table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="row">
 
         <div class="col-md-4">
-      <label for="items" style="font-size: large; color: #00aeef">Reclamer :</label></div>
+      <label for="items" style="font-size: large; color: #00aeef">Réclamer :</label></div>
         <div class="col-md-4">
       <button class="btn btn-block"  pButton icon="pi pi-plus-circle" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
         </div>
@@ -79,7 +79,7 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
-        <p-dropdown formControlName="local" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="choisir un locale" [(ngModel)]="selectedLocale" [filter]="true"></p-dropdown>
+        <p-dropdown formControlName="local" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="Choisissez un locale" [(ngModel)]="selectedLocale" [filter]="true"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-4">
@@ -144,11 +144,11 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <p-dropdown formControlName="locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="choisir un locale" [(ngModel)]="selectedLocale" [filter]="true"></p-dropdown>
+        <p-dropdown formControlName="locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="Choisissez un locale" [(ngModel)]="selectedLocale" [filter]="true"></p-dropdown>
         </div>
       </div>
       <div class="ui-g-4">
-        <p-message severity="error" *ngIf="(userform1.controls['locale'].touched &&!userform1.controls['locale'].dirty  || userform1.controls['locale'].value=='Choisir un locale')"
+        <p-message severity="error" *ngIf="(userform1.controls['locale'].touched &&!userform1.controls['locale'].dirty  || userform1.controls['locale'].value=='Choisissez un locale')"
                    text="Veuillez choisir un locale" ></p-message>
       </div>
     </div>
@@ -160,12 +160,12 @@
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
-        <p-dropdown formControlName="mater" [options]="selectedLocale.localDetails" placeholder="choisir un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="reclamation.materiel" [filter]="true"></p-dropdown>
+        <p-dropdown formControlName="mater" [options]="selectedLocale.localDetails" placeholder="Choisissez un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="reclamation.materiel" [filter]="true"></p-dropdown>
         </div>
       </div>
 
       <div class="ui-g-4">
-        <p-message severity="error" *ngIf="(userform1.controls['mater'].touched &&!userform1.controls['mater'].dirty  || userform1.controls['mater'].value=='Choisir un matériel')"
+        <p-message severity="error" *ngIf="(userform1.controls['mater'].touched &&!userform1.controls['mater'].dirty  || userform1.controls['mater'].value=='Choisissez un matériel')"
                    text="Veuillez choisir un matériel"></p-message>
       </div>
     </div>

@@ -13,7 +13,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./reclamation.component.css']
 })
 export class ReclamationComponent implements OnInit {
-
+  typeuser = sessionStorage.getItem('type');
   value: boolean;
   cancel: boolean;
   displayDialog: boolean;
@@ -35,8 +35,9 @@ export class ReclamationComponent implements OnInit {
 
 
   ngOnInit() {
-    this.reclamationService.findAll();
-    this.cols = [
+   this.reclamationService.findAll();
+
+   this.cols = [
       { field: 'reference', header: 'Réference' },
       { field: 'reclamentName', header: 'Réclament' },
       { field: 'date', header: 'Date' },
@@ -44,7 +45,7 @@ export class ReclamationComponent implements OnInit {
       { field: 'description', header: 'Description' },
       { field: 'nomLocale', header: 'Locale' },
       { field: 'nomMateriel', header: 'Matériel' },
-      { field: 'etat', header: 'Etat' }
+      { field: 'etat', header: 'État' }
     ];
   }
   showDialogToAdd() {
@@ -76,10 +77,10 @@ export class ReclamationComponent implements OnInit {
     this.reclamationService.reclamationsFounded = reclamations;
   }
 
-  delete() {
-    const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
+  delete(data: Reclamation) {
+    const index = this.reclamationService.reclamationsFounded.indexOf(data);
     this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
-    this.reclamationService.delete(this.selectedReclamation.reference);
+    this.reclamationService.delete(data.reference);
     this.reclamation = null;
     this.displayDialog = false;
     this.displayDialogM = false;

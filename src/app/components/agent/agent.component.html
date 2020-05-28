@@ -1,5 +1,5 @@
-<p-toast [style]="{marginTop: '30%'}"></p-toast>
-<p-table #dt  [columns]="cols" [responsive]="true" [value]="agents" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedAgent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+<p-toast ></p-toast>
+<p-table #dt  [columns]="cols"  [value]="agents" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedAgent" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
@@ -11,7 +11,7 @@
         <div class="col-md-4">
           <div style="text-align: center; align-items: center; align-content: center">
             <i class="pi pi-search" style="margin:4px 4px 4px 4px"></i>
-            <input type="text" pInputText size="50" placeholder="Filtre des Résultas " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+            <input type="text" pInputText size="50" placeholder="Rechercher dans la Table " (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Agent Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="false"  [style]="{width:'60%'}">
+  <p-dialog  header="Agent Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'660px', textAlign: 'center'}">
 
     <div class="ui-g ui-fluid"   *ngIf="agent">
 
@@ -122,7 +122,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="tel">Telephone :</label>
+          <label for="tel">Nº Telephone :</label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >

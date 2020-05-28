@@ -13,9 +13,35 @@ export class ReclamationService {
   private reclamation = new Reclamation();
   // tslint:disable-next-line:variable-name
   private _reclamationsFounded = new Array<Reclamation>();
+  // tslint:disable-next-line:variable-name
   private _foundedReclamationsNonTraiter = new Array<Reclamation>();
+  // tslint:disable-next-line:variable-name
+  private _foundedReclamationsemploye = new Array<Reclamation>();
   private url = 'http://localhost:8090/GestionEntretien/reclamation/';
+  private urlr = 'http://localhost:8090/GestionEntretien/reclamation/reclaments/';
+
   constructor(private http: HttpClient, private toast: ToastrService) {
+  }
+
+
+  get foundedReclamationsemploye(): Reclamation[] {
+    return this._foundedReclamationsemploye;
+  }
+
+  set foundedReclamationsemploye(value: Reclamation[]) {
+    this._foundedReclamationsemploye = value;
+  }
+
+  public findbyreclament(reclamentname: string) {
+    this.http.get<Array<Reclamation>>(this.urlr + reclamentname).subscribe(
+      data => {
+        this.foundedReclamationsemploye = data.reverse();
+        console.log('Reclamations employe data : ' + data.length);
+      }, error => {
+        console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
   }
 
   public findAll() {

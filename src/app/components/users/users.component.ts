@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
     this.type = [];
     this.type.push({label: 'Selectionnez le Type', value: ''});
     this.type.push({label: 'Administrateur', value: 'administrateur'});
-    this.type.push({label: 'Employé', value: 'employe'});
+    this.type.push({label: 'Employé', value: 'employé'});
 
     this.find();
   }
@@ -74,13 +74,6 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  showSuccess(){
-    this.msgs = [];
-    this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
-  }
-  onSubmit(){
-    this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
-  }
 
   showDialogToAdd() {
     this.newUser = true;
@@ -104,7 +97,7 @@ export class UsersComponent implements OnInit {
           } else if (this.errorS === -1){
             this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Utilisateur déja existe'});
           } else if (this.errorS === -5){
-            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numero de telephone déja existe'});
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de télephone déja existe'});
           }
         }, error => {
           console.log('error');

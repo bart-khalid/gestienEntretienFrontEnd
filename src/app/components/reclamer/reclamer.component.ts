@@ -28,6 +28,8 @@ export class ReclamerComponent implements OnInit {
 
   newReclamation: boolean;
 
+  reclamations = Array<any>();
+
   userform: FormGroup;
   userform1: FormGroup;
 
@@ -43,17 +45,18 @@ export class ReclamerComponent implements OnInit {
 
 
   ngOnInit() {
-    this.reclamationService.findAll();
+
+    this.reclamationService.findbyreclament(sessionStorage.getItem('nom') + ', ' + sessionStorage.getItem('prenom'));
     this.localService.findAll();
     this.cols = [
-      { field: 'reference', header: 'Reference' },
-      { field: 'reclamentName', header: 'Reclament' },
+      { field: 'reference', header: 'Réference' },
+      { field: 'reclamentName', header: 'Réclament' },
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
       { field: 'nomLocale', header: 'Locale' },
-      { field: 'nomMateriel', header: 'Materiel' },
-      { field: 'etat', header: 'Etat' }
+      { field: 'nomMateriel', header: 'Matériel' },
+      { field: 'etat', header: 'État' }
     ];
     this.userform = this.fb.group({
       objet: new FormControl('', Validators.required),
@@ -70,6 +73,19 @@ export class ReclamerComponent implements OnInit {
     });
 
   }
+/*
+  start() {
+    if (sessionStorage.getItem('type') === 'administrateur') {
+
+      this.reclamationService.findAll();
+      this.reclamations = this.reclamationsFounded;
+    } else {
+      console.log(sessionStorage.getItem('nom') + ', ' + sessionStorage.getItem('prenom'));
+      this.reclamationService.findbyreclament(sessionStorage.getItem('nom') + ', ' + sessionStorage.getItem('prenom'));
+      this.reclamations = this.foundedReclamationsemploye;
+    }
+  }
+*/
   showDialogToAdd() {
     this.newReclamation = true;
     this.reclamation = new Reclamation();
@@ -93,8 +109,8 @@ export class ReclamerComponent implements OnInit {
       // update locale associe;
       this.reclamation.locale = this.selectedLocale;
       console.log(this.reclamation.locale.descriptionDropDown);
-     // this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
-      this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
+      this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
+     // this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
@@ -143,29 +159,4 @@ export class ReclamerComponent implements OnInit {
     return this.localService.foudedLocales;
   }
 
-  public saveReclamation(reclamation: Reclamation, userneme: string) {
-    this.reclamationService.save(reclamation, userneme).subscribe(
-      data => {
-        if (data === -1) {
-          console.log('reclamation existe deja ');
-        } else if (data === -2) {
-          console.log('reclament not found');
-          this.toast.error('erreur vuillez vous connecter à nouveau');
-        } else if (data === -3) {
-          console.log('locale undefined');
-          this.toast.warning('merci de choisir un locale');
-        } else {
-          console.log('reclamation saved');
-          this.toast.success('Reclamation enregistrée');
-          this.reclamationService.findAll();
-          this.reclamation = null;
-          this.displayDialog = false;
-          this.displayDialogM = false;
-        }
-      }, error => {
-        console.log('error in the save link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
-  }
 }

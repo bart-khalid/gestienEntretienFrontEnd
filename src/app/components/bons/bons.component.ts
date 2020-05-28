@@ -66,7 +66,7 @@ export class BonsComponent implements OnInit {
       montantvignetteC: new FormControl('', Validators.required),
     });
     this.colsC = [
-      {field: 'numbonC', header: 'Numero de Bon'},
+      {field: 'numbonC', header: 'Nº de Bon'},
       {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
       {field: 'fourniassooci', header: 'Fournisseur'},
       {field: 'descriptionC', header: 'Désignation'},
