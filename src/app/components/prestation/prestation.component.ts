@@ -72,6 +72,7 @@ export class PrestationComponent implements OnInit {
       LocaleE: new FormControl('', Validators.required),
       nomprestataire: new FormControl('', Validators.required),
       montant: new FormControl('', Validators.required),
+      num: new FormControl('', Validators.required)
       });
 
     this.cols = [
@@ -142,7 +143,7 @@ export class PrestationComponent implements OnInit {
           this.displayDialog = false;
           this.prestataionInterne = null;
           console.log('success prestationInterne saved');
-          this.toast.success('Prestation Interne Enregitrée');
+          this.toast.success('Prestation Interne Enregistrée');
           this.reclamationService.findAll();
           this.reclamationService.findAllReclamationsNonTraiter();
         }
