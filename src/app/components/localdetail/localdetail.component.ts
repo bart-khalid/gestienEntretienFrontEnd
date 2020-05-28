@@ -81,7 +81,7 @@ export class LocaldetailComponent implements OnInit {
             this.displayDialog = false;
           } else if (data === -2) {
             this.toast.error('Veuillez choisir un locale');
-          } else if(data === -1){
+          } else if (data === -1) {
             this.toast.error('Réference déja existe');
           }
         }
@@ -95,10 +95,9 @@ export class LocaldetailComponent implements OnInit {
         data => {
           if (data === -1) {
             this.toast.warning('Veuillez choisir un locale');
-          } else if(data === -2) {
+          } else if (data === -2) {
             this.toast.warning('Réference déja existant');
-          }
-          else {
+          } else {
             console.log('success Materiel updated');
             this.toast.info('Materiel modifié');
             this.localdetailService.findAll();

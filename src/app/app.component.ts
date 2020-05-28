@@ -3,6 +3,7 @@ import {MenuItem} from 'primeng';
 import {LoginService} from './controller/service/login.service';
 import {Users} from './controller/model/users.model';
 import {Router} from '@angular/router';
+import {AuthenticationService} from "./controller/service/authentication.service";
 
 
 @Component({
@@ -11,13 +12,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  user = 'administrateur';
+  // user = 'administrateur';
+  prenomm = sessionStorage.getItem('prenom');
+  nomm = sessionStorage.getItem('nom');
+  typee = sessionStorage.getItem('type');
   items: MenuItem[];
   itemsEmploye: MenuItem[];
 
 
-  constructor(private loginService: LoginService , private route: Router) {
+  constructor(private loginService: LoginService , private route: Router , private auth: AuthenticationService) {
   }
+
+   logout() {
+    this.loginService.logOut();
+   }
 
   ngOnInit() {
    // if(this.currentUser.username === '' || this.currentUser.username == null) {

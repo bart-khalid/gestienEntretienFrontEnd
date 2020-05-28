@@ -55,7 +55,7 @@ export class VehiculeListComponent implements OnInit {
     this.type.push({label: 'Automobile', value: 'Automobile'});
     this.type.push({label: 'Bus', value: 'Bus'});
 
-    this.find()
+    this.find();
   }
 
   public find() {

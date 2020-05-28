@@ -14,21 +14,21 @@
 -->
 
 <div class="bodyCont">
-<p-menubar [model]="items" *ngIf="  user === 'administrateur'" [style]="{backgroundColor: '#b1eae8'}" >
+<p-menubar [model]="items" *ngIf=" typee === 'administrateur'" [style]="{backgroundColor: '#b1eae8'}" >
   <div>
     <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
-    <label for="login" style="color: #00aeef; font-family: Delice" ><strong>{{currentUser.prenom+' '+currentUser.nom}}</strong></label> &nbsp; &nbsp;
+    <label for="login" style="color: #ff566e; font-family: Delice" ><strong>{{prenomm+' '+nomm}}</strong></label> &nbsp; &nbsp;
 
-    <button pButton label="Logout" icon="pi pi-power-off" id="login" style="margin-left:.25em"></button>
+    <button pButton label="déconnecter" (click)="logout()" icon="pi pi-power-off" id="login" style="margin-left:.25em"></button>
   </div>
 </p-menubar>
 
-  <p-menubar [model]="itemsEmploye" *ngIf="currentUser.type  === 'employe'" [style]="{backgroundColor: '#b1eae8'}">
+  <p-menubar [model]="itemsEmploye" *ngIf=" typee  === 'employe'" [style]="{backgroundColor: '#b1eae8'}">
     <div>
       <button pButton icon="pi pi-user" class="btn btn-sm" disabled></button> &nbsp;
-      <label for="login" style="color: #00aeef; font-family: Delice" ><strong>{{currentUser.prenom+' '+currentUser.nom}}</strong></label> &nbsp; &nbsp;
+      <label for="login" style="color: #00ffb0; font-family: Delice" ><strong>{{prenomm+' '+nomm}}</strong></label> &nbsp; &nbsp;
 
-      <button pButton label="Logout" icon="pi pi-power-off" id="loginn" style="margin-left:.25em"></button>
+      <button pButton label="déconnecter" (click)="logout()" icon="pi pi-power-off" id="loginn" style="margin-left:.25em"></button>
     </div>
   </p-menubar>
 

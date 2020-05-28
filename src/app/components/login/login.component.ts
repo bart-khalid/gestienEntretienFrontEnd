@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../controller/service/login.service';
 import {Router} from '@angular/router';
 import {Users} from '../../controller/model/users.model';
+import {AuthenticationService} from '../../controller/service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,7 @@ import {Users} from '../../controller/model/users.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private auth: AuthenticationService) { }
 
   get users(): Users {
     return  this.loginService.user;
@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
 
 

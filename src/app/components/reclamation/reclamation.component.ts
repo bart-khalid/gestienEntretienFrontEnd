@@ -67,7 +67,8 @@ export class ReclamationComponent implements OnInit {
   save() {
     const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
-      this.reclamationService.save(this.reclamation, 'khalid'),
+      console.log(sessionStorage.getItem('username'));
+      this.reclamationService.save(this.reclamation, sessionStorage.getItem('username')),
       reclamations.push(this.reclamation);
       } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
