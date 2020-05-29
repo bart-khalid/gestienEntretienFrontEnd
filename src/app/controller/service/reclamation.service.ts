@@ -122,6 +122,7 @@ export class ReclamationService {
   }
 
 
+
   get foundedReclamationsNonTraiter(): Reclamation[] {
     return this._foundedReclamationsNonTraiter;
   }

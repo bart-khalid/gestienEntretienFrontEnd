@@ -32,8 +32,9 @@
         {{rowData[col.field]}}
       </td>
       <td *ngIf="typeuser === 'administrateur'" style="text-align:center">
-        <span><button  class="btn btn-block btn-outline-success"  (click)="reclamationSeen(rowData)"> <i class="fa fa-eye"></i></button>
-        <button  class="btn btn-block btn-outline-danger"  (click)="delete(rowData)"> <i class="fa fa-trash"></i></button>
+        <span>
+          <button  class="btn btn-sm btn-block btn-outline-success"  (click)="reclamationSeen(rowData)"><i class="fa fa-eye"></i></button>
+          <button  class="btn btn-sm btn-block btn-outline-danger"  (click)="delete(rowData)"><i class="fa fa-trash"></i></button>
         </span>
       </td>
     </tr>

@@ -26,9 +26,11 @@ export class ReclamerComponent implements OnInit {
 
   selectedReclamation: Reclamation;
 
+
   newReclamation: boolean;
 
   reclamations = Array<any>();
+
 
   userform: FormGroup;
   userform1: FormGroup;
@@ -158,5 +160,9 @@ export class ReclamerComponent implements OnInit {
   get foundedLocales(): Local[] {
     return this.localService.foudedLocales;
   }
+  get foundedReclamationsemploye(): Reclamation[] {
+    return this.reclamationService.foundedReclamationsemploye;
+  }
+
 
 }
