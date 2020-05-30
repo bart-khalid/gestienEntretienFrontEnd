@@ -6,7 +6,7 @@
     <div class="card bg-transparent" id="cardToCenter">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-2" style="color: #ff7d9f"><label ><h2><strong> Ajouter:</strong></h2> </label></div>
+        <div class="col-md-2" style="color: rgba(255,190,82,0.92)"><label ><h2><strong>Ajouter</strong></h2> </label></div>
       <div class="col-md-5">
         <button class="btn btn-block btn-primary" pButton icon="pi pi-plus"  (click)="showDialogToAdd()" label="Prestation Interne"></button>
       </div>
@@ -184,6 +184,53 @@
 
         <div class="ui-g-12">
           <div class="ui-g-3">
+            <label for="numF" style="color: #00aeef"><strong>Numero Facture :</strong></label>
+          </div>
+          <div class="ui-g-5">
+            <div class="form-group" [formGroup]="userform1"  >
+              <input formControlName="num" [(ngModel)]="prestataionExterne.numeroFacE" pInputText id="numF">
+            </div>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" *ngIf="userform1.controls['num'].hasError('required') && (userform1.controls['num'].dirty || userform1.controls['num'].touched) "
+                       text="Champ Obligatoire"></p-message>
+          </div>
+        </div>
+
+        <div class="ui-g-12">
+          <div class="ui-g-3">
+            <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire :</strong></label>
+          </div>
+          <div class="ui-g-5">
+            <div class="form-group" [formGroup]="userform1"  >
+              <input type="text" formControlName="nomprestataire" [(ngModel)]="prestataionExterne.nomPrestataireE" pInputText id="nomPres">
+            </div>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" *ngIf="userform1.controls['nomprestataire'].hasError('required') && (userform1.controls['nomprestataire'].dirty || userform1.controls['nomprestataire'].touched) "
+                       text="Champ Obligatoire"></p-message>
+          </div>
+        </div>
+
+        <div class="ui-g-12">
+          <div class="ui-g-3">
+            <label for="montant" style="color: #00aeef"><strong>Montant Facture :</strong></label>
+          </div>
+          <div class="ui-g-5">
+            <div class="form-group" [formGroup]="userform1"  >
+              <input type="number" formControlName="montant" [(ngModel)]="prestataionExterne.montantFacE" pInputText id="montant">
+            </div>
+          </div>
+          <div class="ui-g-4">
+            <p-message severity="error" *ngIf="userform1.controls['montant'].hasError('required') && (userform1.controls['montant'].dirty || userform1.controls['montant'].touched) "
+                       text="Champ Obligatoire"></p-message>
+          </div>
+        </div>
+
+
+
+        <div class="ui-g-12">
+          <div class="ui-g-3">
             <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est déja réclamée ?</strong></label>
           </div>
           <div class="ui-g-5">
@@ -204,35 +251,7 @@
           </div>
         </div>
 
-        <div class="ui-g-12">
-          <div class="ui-g-3">
-            <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire :</strong></label>
-          </div>
-          <div class="ui-g-5">
-            <div class="form-group" [formGroup]="userform1"  >
-            <input type="text" formControlName="nomprestataire" [(ngModel)]="prestataionExterne.nomPrestataireE" pInputText id="nomPres">
-          </div>
-          </div>
-          <div class="ui-g-4">
-            <p-message severity="error" *ngIf="userform1.controls['nomprestataire'].hasError('required') && (userform1.controls['nomprestataire'].dirty || userform1.controls['nomprestataire'].touched) "
-                       text="Champ Obligatoire"></p-message>
-          </div>
-        </div>
 
-        <div class="ui-g-12">
-          <div class="ui-g-3">
-            <label for="montant" style="color: #00aeef"><strong>Montant Facture :</strong></label>
-          </div>
-          <div class="ui-g-5">
-            <div class="form-group" [formGroup]="userform1"  >
-            <input type="number" formControlName="montant" [(ngModel)]="prestataionExterne.montantFacE" pInputText id="montant">
-          </div>
-          </div>
-          <div class="ui-g-4">
-            <p-message severity="error" *ngIf="userform1.controls['montant'].hasError('required') && (userform1.controls['montant'].dirty || userform1.controls['montant'].touched) "
-                       text="Champ Obligatoire"></p-message>
-          </div>
-        </div>
 
         <div class="ui-g-12">
           <div class="ui-g-3">

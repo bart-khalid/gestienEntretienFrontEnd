@@ -26,9 +26,11 @@ export class ReclamerComponent implements OnInit {
 
   selectedReclamation: Reclamation;
 
+
   newReclamation: boolean;
 
   reclamations = Array<any>();
+
 
   userform: FormGroup;
   userform1: FormGroup;
@@ -46,7 +48,7 @@ export class ReclamerComponent implements OnInit {
 
   ngOnInit() {
 
-    this.reclamationService.findbyreclament(sessionStorage.getItem('nom') + ', ' + sessionStorage.getItem('prenom'));
+    this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
     this.localService.findAll();
     this.cols = [
       { field: 'reference', header: 'Réference' },
@@ -106,17 +108,15 @@ export class ReclamerComponent implements OnInit {
   save() {
     const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
-      // update locale associe;
-      this.reclamation.locale = this.selectedLocale;
-      console.log(this.reclamation.locale.descriptionDropDown);
+
      // this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
       this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
       // update locale associe;
-      this.reclamation.locale = this.selectedLocale;
-      this.reclamationService.update(this.reclamation);
+
+      this.updateReclamation(this.reclamation);
     }
     this.reclamationService.reclamationsFounded = reclamations;
 
@@ -124,9 +124,7 @@ export class ReclamerComponent implements OnInit {
   }
 
   delete() {
-    const index = this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation);
-    this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
-    this.reclamationService.delete(this.selectedReclamation.reference);
+    this.deleteReclamation(this.selectedReclamation.reference);
     this.reclamation = null;
     this.displayDialog = false;
     this.displayDialogM = false;
@@ -151,17 +149,15 @@ export class ReclamerComponent implements OnInit {
     return reclamation;
   }
 
-  get reclamationsFounded(): Reclamation[] {
-    return this.reclamationService.reclamationsFounded;
-  }
 
   get foundedLocales(): Local[] {
     return this.localService.foudedLocales;
   }
-
   get foundedReclamationsemploye(): Reclamation[] {
     return this.reclamationService.foundedReclamationsemploye;
   }
+
+
 
   public saveReclamation(reclamation: Reclamation, userneme: string) {
     this.reclamationService.save(reclamation, userneme).subscribe(
@@ -176,14 +172,54 @@ export class ReclamerComponent implements OnInit {
           this.toast.warning('Veuillez choisir un locale');
         } else {
           console.log('reclamation saved');
-          this.toast.success('Reclamation enregitrée');
-          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+          this.toast.success('Reclamation enregistrée');
           this.reclamation = null;
           this.displayDialog = false;
           this.displayDialogM = false;
+          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+
         }
       }, error => {
         console.log('error in the save link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
+  }
+  updateReclamation(reclamation: Reclamation) {
+    this.reclamationService.update(reclamation).subscribe(
+      data => {
+
+        if (data === -1) {
+          this.toast.warning('merci de choisir le materiel');
+        } else if (data === -2) {
+          this.toast.warning('cette reclamation est bien traitée, vous pouvez pas la modifiée');
+        } else {
+          console.log('reclamation updated');
+          this.toast.info('Reclamation modifiée');
+          this.reclamation = null;
+          this.displayDialog = false;
+          this.displayDialogM = false;
+          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+        }
+      }, error => {
+        console.log('error in the update link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
+  }
+  deleteReclamation(ref: string) {
+    this.reclamationService.delete(ref).subscribe(
+      data => {
+        if (data === -1) {
+          console.log('reclamation not found');
+          this.toast.error('erreur du serveur merci de recharger la page');
+        } else {
+          console.log('reclamation deleted');
+          this.toast.success('Reclamaton supprimée');
+          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+        }
+      }, error => {
+        console.log('error in the delete link');
         this.toast.error('erreur du serveur merci d\' actualiser la page');
       }
     );

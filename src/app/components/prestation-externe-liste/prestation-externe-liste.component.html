@@ -73,12 +73,12 @@
 
     <div class="ui-g-12" *ngIf="prestationExterne.typeEntretienE === 'materiel'">
       <div class="ui-g-3">
-        <label for="typeEntretien" style="color: #00aeef"><strong>Materiel :</strong></label>
+        <label for="nomMat" style="color: #00aeef"><strong>Materiel :</strong> </label>
       </div>
       <div class="ui-g-5">
-        <div class="form-group" [formGroup]="userform1"  >
-          <p-dropdown id="materiel"  [options]="prestationExterne.locale.localDetails" placeholder="Choisir un materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestationExterne.materielLocale" [filter]="true"></p-dropdown>
-        </div>
+
+        <p-dropdown id="nomMat"  [options]="prestationExterne.locale.localDetails"  [(ngModel)]="prestationExterne.materielLocale" optionLabel="descriptionMaterielLocale" placeholder="Choisir un materiel"  [filter]="true"></p-dropdown>
+
       </div>
     </div>
 
@@ -99,45 +99,8 @@
       </div>
     </div>
 
-    <div class="ui-g-12">
-      <div class="ui-g-3">
-        <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
-      </div>
-      <div class="ui-g-5">
-        <p-checkbox [(ngModel)]="prestationExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamedE}}</strong></label>
-      </div>
-      <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-      </div>
-    </div>
 
-    <div class="ui-g-12" *ngIf="prestationExterne.reclamedE">
-      <div class="ui-g-3">
-        <label for="refReclamation" style="color: #00aeef">Reclamation :</label>
-      </div>
-      <div class="ui-g-5">
-        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" id="refReclamation" [filter]="true"></p-dropdown>
-      </div>
-      <div class="ui-g-4">
-        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
-      </div>
-    </div>
 
-    <div class="ui-g-12">
-      <div class="ui-g-3">
-        <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire :</strong></label>
-      </div>
-      <div class="ui-g-5">
-        <div class="form-group" [formGroup]="userform1"  >
-        <input type="text" formControlName="nomprestataire" [(ngModel)]="prestationExterne.nomPrestataireE" pInputText id="nomPres">
-      </div>
-      </div>
-      <div class="ui-g-4">
-        <p-message severity="error" *ngIf="userform1.controls['nomprestataire'].hasError('required') && (userform1.controls['nomprestataire'].dirty || userform1.controls['nomprestataire'].touched) "
-                   text="Champ Obligatoire"></p-message>
-      </div>
-    </div>
 
     <div class="ui-g-12">
       <div class="ui-g-3">
@@ -166,6 +129,48 @@
                    text="Champ Obligatoire"></p-message>
       </div>
     </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="nomPres" style="color: #00aeef"><strong>Nom Prestataire :</strong></label>
+      </div>
+      <div class="ui-g-5">
+        <div class="form-group" [formGroup]="userform1"  >
+          <input type="text" formControlName="nomprestataire" [(ngModel)]="prestationExterne.nomPrestataireE" pInputText id="nomPres">
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" *ngIf="userform1.controls['nomprestataire'].hasError('required') && (userform1.controls['nomprestataire'].dirty || userform1.controls['nomprestataire'].touched) "
+                   text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
+      </div>
+      <div class="ui-g-5">
+        <p-checkbox [(ngModel)]="prestationExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamedE}}</strong></label>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
+
+    <div class="ui-g-12" *ngIf="prestationExterne.reclamedE">
+      <div class="ui-g-3">
+        <label for="refReclamation" style="color: #00aeef">Reclamation :</label>
+      </div>
+      <div class="ui-g-5">
+        <label id="refReclamation" *ngIf="prestationExterne.reclamationE != null" >{{prestationExterne.reclamationE.descreptionDropDownReclamation}}</label>
+        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" placeholder="choisir la nouvelle reclamation" [filter]="true" ></p-dropdown>
+      </div>
+      <div class="ui-g-4">
+        <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
+      </div>
+    </div>
+
 
     <div class="ui-g-12">
       <div class="ui-g-3">
@@ -201,7 +206,7 @@
           <label for="dateBonc" style="color: #00aeef">Date Bon Commande :</label>
         </div>
         <div class="ui-g-5">
-          <input type="date" pInputText  [(ngModel)]="prestationExterne.presBonCommandeE.dateBonCommande" id="dateBonc" >
+          <input pInputText id="dateBonc"  type="date" [(ngModel)]="prestationExterne.presBonCommandeE.dateBonCommande" />
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>

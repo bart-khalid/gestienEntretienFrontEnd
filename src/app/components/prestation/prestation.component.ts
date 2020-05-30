@@ -171,9 +171,11 @@ export class PrestationComponent implements OnInit {
           this.toast.warning('merci de remplir les champ du bon de livraison');
         } else {
           this.displayDialogE = false;
+          this.prestataionExterne = null;
           console.log('prestationExterne saved');
           this.toast.success('Prestation Externe Enregistrée');
-          this.prestataionExterne = null;
+          this.reclamationService.findAll();
+          this.reclamationService.findAllReclamationsNonTraiter();
         }
       }, error => {
         console.log('error in the link');
