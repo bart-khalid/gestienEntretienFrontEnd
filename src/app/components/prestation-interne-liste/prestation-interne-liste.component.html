@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<div style="text-align: center; align-items: center; align-content: center" *ngIf="progress"><p-progressSpinner  ></p-progressSpinner></div>
 <p-table #dt [columns]="cols" [value]="foundedPrestationInterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
 
   <ng-template pTemplate="caption">
@@ -77,7 +77,7 @@
         </div>
         <div class="ui-g-5">
 
-            <p-dropdown id="nomMat"  [options]="foundedLocalDetails"  [(ngModel)]="prestationInterne.materielLocale" optionLabel="descriptionMaterielLocale" placeholder="Choisir un materiel"  [filter]="true"></p-dropdown>
+            <p-dropdown id="nomMat"  [options]="prestationInterne.locale.localDetails"  [(ngModel)]="prestationInterne.materielLocale" optionLabel="descriptionMaterielLocale" placeholder="Choisir un materiel"  [filter]="true"></p-dropdown>
 
         </div>
     </div>
@@ -97,25 +97,25 @@
       </div>
     </div>
 
-    <div class="ui-g-12" *ngIf="prestationInterne.reclamedI">
-      <div class="ui-g-4">
-        <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <label for="reclameer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationInterne.reclamedI" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="reclamer" style="color: #00aeef"><strong>{{prestationInterne.reclamedI}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationInterne.reclamedI" id="reclameer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
+        <label for="reclameer" style="color: #00aeef"><strong>{{prestationInterne.reclamedI}}</strong></label>
       </div>
       <div class="ui-g-3"></div>
     </div>
 
     <div class="ui-g-12" *ngIf="prestationInterne.reclamedI">
       <div class="ui-g-3">
-        <label for="refReclamation" style="color: #00aeef">Reclamation :</label>
+        <label for="refReclamationn" style="color: #00aeef">Réclamation :</label>
       </div>
       <div class="ui-g-5">
-        <p-dropdown type="text" formControlName="reclamation" [options]="foundedReclamatoins" optionLabel="descreptionDropDownReclamation" [(ngModel)]="prestationInterne.reclamationI" placeholder="Choisir la reclamation"  id="refReclamation" [filter]="true" ></p-dropdown>
+        <label for="refReclamationn" *ngIf="prestationInterne.reclamationI != null">{{prestationInterne.reclamationI.descreptionDropDownReclamation}}</label>
+        <p-dropdown [filter]="true"  [options]="foundedReclamatoinsSousTraitement" optionLabel="descreptionDropDownReclamation" placeholder="changer la reclamation" [(ngModel)]="prestationInterne.reclamationI"  id="refReclamationn"></p-dropdown>
       </div>
-
     </div>
 
     <div class="ui-g-12">

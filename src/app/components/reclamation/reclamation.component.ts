@@ -69,6 +69,7 @@ export class ReclamationComponent implements OnInit {
     const index = this.reclamationService.reclamationsFounded.indexOf(data);
     this.reclamationService.reclamationsFounded = this.reclamationService.reclamationsFounded.filter((val, i) => i !== index);
     this.reclamationService.delete(data.reference);
+    this.deleteReclamation(data.reference);
     this.reclamation = null;
     this.displayDialog = false;
     this.displayDialogM = false;
@@ -106,5 +107,20 @@ export class ReclamationComponent implements OnInit {
       this.reclamationService.reclamationSeen(reclamation.reference);
       }
     }
-
+  deleteReclamation(ref: string) {
+    this.reclamationService.delete(ref).subscribe(
+      data => {
+        if (data === -1) {
+          console.log('reclamation not found');
+          this.toast.error('erreur du serveur merci de recharger la page');
+        } else {
+          console.log('reclamation deleted');
+          this.toast.success('Reclamaton supprimée');
+        }
+      }, error => {
+        console.log('error in the delete link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
+  }
   }

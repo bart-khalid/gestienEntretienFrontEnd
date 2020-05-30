@@ -11,6 +11,7 @@ import {AgentService} from '../../controller/service/agent.service';
 import {Agent} from '../../controller/model/agent.model';
 import {Local} from '../../controller/model/local.model';
 import {Localdetail} from '../../controller/model/localdetail.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-prestation-interne-liste',
@@ -42,14 +43,14 @@ export class PrestationInterneListeComponent implements OnInit {
               private localdetailService: LocaldetailService,
               private agentService: AgentService,
               private reclamationService: ReclamationService,
+              private toast: ToastrService,
               private localService: LocalService) { }
 
 
   ngOnInit() {
     this.prestationInterneService.findAll();
-    this.localdetailService.findAll();
     this.localService.findAll();
-    this.reclamationService.findAll();
+    this.reclamationService.findAllReclamationsNonTraiter();
     this.findAllAgents();
 
     this.userform = this.fb.group({
@@ -69,8 +70,13 @@ export class PrestationInterneListeComponent implements OnInit {
       { field: 'reclamedI', header: 'Réclamée ?' },
     ];
     this.entretiens = [
+      { value: 'materiel', label: 'Matériel' },
       { value: 'jardinage', label: 'Jardinage' },
-      { value: 'materiel', label: 'Entretien materiel' },
+      { value: 'electricité', label: 'Electricité' },
+      { value: 'plomberie', label: 'Plomberie' },
+      { value: 'télephone', label: 'Télephone' },
+      { value: 'minuiserie', label: 'Minuiserie' },
+      { value: 'internet', label: 'Internet' },
     ];
   }
   showDialogToAdd() {
@@ -80,16 +86,8 @@ export class PrestationInterneListeComponent implements OnInit {
     this.cancel = true;
   }
   save() {
-    const prestationsInternes = this.prestationInterneService.foundedPrestationInternes;
-    if (this.newPrestation) {
-        prestationsInternes.push(this.prestationInterne);
-    } else {
-      prestationsInternes[this.prestationInterneService.foundedPrestationInternes.indexOf(this.selectedPrestation)] = this.prestationInterne;
-      this.prestationInterneService.update(this.prestationInterne);
-    }
-    this.prestationInterneService.foundedPrestationInternes = prestationsInternes;
-    this.prestationInterne = null;
-    this.displayDialog = false;
+    console.log('materiel:' + this.prestationInterne.materielLocale);
+    this.updatePrestationI(this.prestationInterne);
   }
 
   delete() {
@@ -120,11 +118,9 @@ export class PrestationInterneListeComponent implements OnInit {
   get foundedLocales(): Local[] {
     return this.localService.foudedLocales;
   }
-  get foundedLocalDetails(): Localdetail[] {
-    return this.localdetailService.foundedLocalDetails;
-  }
-  get foundedReclamatoins(): Reclamation[] {
-    return this.reclamationService.reclamationsFounded;
+
+  get foundedReclamatoinsSousTraitement(): Reclamation[] {
+    return this.reclamationService.foundedReclamationsNonTraiter;
   }
 
   findAllAgents() {
@@ -136,5 +132,37 @@ export class PrestationInterneListeComponent implements OnInit {
       error => {
         console.log('error find');
       });
+  }
+  updatePrestationI(prestationI: PrestationInterne) {
+    this.progress = true;
+    this.prestationInterneService.update(prestationI).subscribe(
+      data => {
+        if (data === -1) {
+          this.toast.warning('merci de choisir le materiel');
+        } else if (data === -2) {
+          this.toast.warning('merci de choisir la reclamation');
+        } else if (data === -3) {
+          this.toast.warning('merci de choisir le materiel');
+        } else if (data === -4) {
+          this.toast.warning('merci de choisir le materiel');
+        } else {
+          console.log('success prestationInterne updated');
+          this.toast.info('Prestation Interne Modifiée');
+          this.prestationInterneService.findAll();
+          this.prestationInterne = null;
+          this.displayDialog = false;
+          this.progress = false;
+        }
+      }, error => {
+        console.log('error in the link');
+        this.toast.error('erreur du serveur merci d\' actualiser la page');
+      }
+    );
+  }
+  get progress(): boolean {
+    return this.prestationInterneService.progress;
+  }
+  set progress(value: boolean) {
+    this.prestationInterneService.progress = value;
   }
 }

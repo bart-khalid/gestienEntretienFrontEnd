@@ -32,8 +32,8 @@ export class ReclamationService {
     this._foundedReclamationsemploye = value;
   }
 
-  public findbyreclament(reclamentname: string) {
-    this.http.get<Array<Reclamation>>(this.urlr + reclamentname).subscribe(
+  public findbyreclament(username: string) {
+    this.http.get<Array<Reclamation>>(this.urlr + username).subscribe(
       data => {
         this.foundedReclamationsemploye = data.reverse();
         console.log('Reclamations employe data : ' + data.length);
@@ -62,38 +62,11 @@ export class ReclamationService {
   }
 
   public update(reclamation: Reclamation) {
-    this.http.put<number>(this.url + 'update', reclamation).subscribe(
-      data => {
-        if (data === -1) {
-          console.log('reclamation not found');
-          this.toast.error('erreur vuillez vous connecter à nouveau');
-        } else {
-          console.log('reclamation updated');
-          this.toast.info('Reclamation modifiée');
-          this.findAll();
-        }
-      }, error => {
-        console.log('error in the update link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
+    return this.http.put<number>(this.url + 'update', reclamation);
   }
 
   public delete(reference: string) {
-    this.http.delete<number>(this.url + 'deleteReclamation/' + reference).subscribe(
-      data => {
-        if (data === -1) {
-          console.log('reclamation not found');
-          this.toast.error('erreur vuillez vous connecter à nouveau');
-        } else {
-          console.log('reclamation deleted');
-          this.toast.success('Reclamaton supprimée');
-        }
-      }, error => {
-        console.log('error in the delete link');
-        this.toast.error('erreur du serveur merci d\' actualiser la page');
-      }
-    );
+    return this.http.delete<number>(this.url + 'deleteReclamation/' + reference);
   }
 
   public reclamationSeen(reference: string) {
