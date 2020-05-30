@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {MaterielComponent} from './components/materiel/materiel.component';
 import {PrestationComponent} from './components/prestation/prestation.component';
 import {ReclamationComponent} from './components/reclamation/reclamation.component';
-import {VehiculeComponent} from './components/vehicule/vehicule.component';
+import {UserinformationsComponent} from './components/userinformations/userinformations.component';
 import {VehiculeListComponent} from './components/vehicule-list/vehicule-list.component';
 import {BonsComponent} from './components/bons/bons.component';
 import {ReclamerComponent} from './components/reclamer/reclamer.component';
@@ -35,11 +35,11 @@ const routes: Routes = [
   { path: 'entretiens' , component: EntretienComponent, canActivate: [AuthGaurdService]},
   { path: 'prestation' , component: PrestationComponent, canActivate: [AuthGaurdService]},
   { path: 'reclamations' , component: ReclamationComponent, canActivate: [AuthGaurdService]},
-  { path: 'vehiculeComponent' , component: VehiculeComponent, canActivate: [AuthGaurdService]},
+  { path: 'mesinfos' , component: UserinformationsComponent, canActivate: [AuthGaurdService]},
   { path: 'bons' , component: BonsComponent, canActivate: [AuthGaurdService]},
   { path: 'vehicule' , component: VehiculeListComponent, canActivate: [AuthGaurdService]},
   { path: 'users' , component: UsersComponent, canActivate: [AuthGaurdService]} ,
-  { path: 'vehiculeeComponent' , component: VehiculeComponent, canActivate: [AuthGaurdService]},
+  { path: 'vehiculeeComponent' , component: UserinformationsComponent, canActivate: [AuthGaurdService]},
   { path: 'fournisseur' , component: FournisseurSVComponent, canActivate: [AuthGaurdService]},
   { path: 'reclamer' , component: ReclamerComponent, canActivate: [AuthGaurdService]},
   { path: 'accueil' , component: ActionsComponent, canActivate: [AuthGaurdService]},

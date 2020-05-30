@@ -20,12 +20,14 @@ export class LoginComponent implements OnInit {
     return this.loginService.connect(usernamee, passwordd);
   }
 
-
-  public errorMsg() {
-    return this.loginService.errorMsg();
+  islogged(){
+    if (this.loginService.isUserLoggedIn()) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
   }
 
   ngOnInit(): void {
+   this.islogged();
   }
 
 

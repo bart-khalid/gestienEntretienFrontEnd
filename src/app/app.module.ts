@@ -11,7 +11,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { LoginComponent } from './components/login/login.component';
 
-import { VehiculeComponent } from './components/vehicule/vehicule.component';
+import { UserinformationsComponent } from './components/userinformations/userinformations.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {
   AccordionModule,
@@ -61,7 +61,7 @@ import { PresBonLivraisonComponent } from './components/pres-bon-livraison/pres-
 
     LoginComponent,
 
-    VehiculeComponent,
+    UserinformationsComponent,
 
     BonsComponent,
 

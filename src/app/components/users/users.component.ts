@@ -108,11 +108,18 @@ export class UsersComponent implements OnInit {
       use[this.users.indexOf(this.selectedUser)] = this.user;
       this.userService.update(this.user).subscribe(
         data => {
+          this.errorS = data;
           console.log(data);
-          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
-          this.find();
-          this.user = null;
-          this.displayDialog = false;
+          if (this.errorS === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.user = null;
+            this.displayDialog = false;
+          } else if (this.errorS === -1) {
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Nom d\'utilisateur déja existe'});
+          } else if (this.errorS === -2) {
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de télephone déja existe'});
+          }
         }, error => {
           console.log('error update');
         }

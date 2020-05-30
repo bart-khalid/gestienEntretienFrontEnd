@@ -79,6 +79,7 @@ export class AppComponent implements OnInit {
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'accueil'},
           {label: 'Mes Réclamations', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
           {label: 'Liste Réclamations globale', icon: 'pi pi-info' , routerLink: 'reclamations'} ,
+          {label: 'Mon compte', icon: 'pi pi-user-edit' , routerLink: 'mesinfos'} ,
     {separator: true},
     {label: 'Aide',
       icon: 'pi pi-fw pi-question',

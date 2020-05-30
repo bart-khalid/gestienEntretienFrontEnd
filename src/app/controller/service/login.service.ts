@@ -5,6 +5,7 @@ import {Users} from '../model/users.model';
 import {UsersService} from './users.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './authentication.service';
+import {MessageService} from "primeng";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class LoginService {
   private url = 'http://localhost:8090/GestionEntretien/Login/';
   private _currentuser: Users = null;
 
+  constructor(private http: HttpClient , private usersService: UsersService , private route: Router,
+              private messageService: MessageService) {}
 
   set currentuser(value: Users) {
     this._currentuser = value;
@@ -49,9 +52,12 @@ export class LoginService {
     if (this._errorC === 1) {
       console.log(this.currentuser.username);
       sessionStorage.setItem('prenom', this.currentuser.prenom);
+      sessionStorage.setItem('reference', this.currentuser.reference);
       sessionStorage.setItem('nom', this.currentuser.nom);
       sessionStorage.setItem('type', this.currentuser.type);
       sessionStorage.setItem('username', this.currentuser.username);
+      sessionStorage.setItem('password', this.currentuser.password);
+      sessionStorage.setItem('telephone', String(this.currentuser.telephone));
       return true;
     } else {
       return false;
@@ -64,8 +70,11 @@ export class LoginService {
     const user1 = sessionStorage.getItem('nom');
     const user2 = sessionStorage.getItem('type');
     const user3 = sessionStorage.getItem('username');
+    const user4 = sessionStorage.getItem('password');
+    const user5 = sessionStorage.getItem('telephone');
+
     console.log(!(user === null));
-    return !(user === null && user1 === null && user2 === null && user3 === null );
+    return !(user === null && user1 === null && user2 === null && user3 === null && user4 === null && user5 === null  );
   }
 
   logOut() {
@@ -73,47 +82,52 @@ export class LoginService {
     sessionStorage.removeItem('nom');
     sessionStorage.removeItem('type');
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('password');
+    sessionStorage.removeItem('telephone');
     window.location.href = 'http://localhost:4200/';
   }
 
 
-  constructor(private http: HttpClient , private usersService: UsersService , private route: Router) {}
 
- public errorMsg() {
-  /*  if (this.errorS === -1) { return 'Cet Utilisateur existe déja'; }
-    else if (this.errorS === -2) { return 'Nom Utilisateur est obligatoire'; }
-    else if (this.errorS === -3) { return 'Mot de passe est obligatoire'; }
-    else if (this.errorS === -3) { return 'Type est obligatoire'; } */
-    if (this._errorC === -1 || this._errorC === -2) { return 'Vérifier votre Nom d\'utilisateur ou Mot de passe'; }
- }
+
 
 
  public connect( usernamee: string , passwordd: string) {
-    this.http.get<number>(this.url + 'Connect/username/' + usernamee + '/password/' + passwordd).subscribe(
-      data => {
-        this._errorC = data;
-        console.log(this._errorC);
-        if (this._errorC === 1) {
-          this.usersService.findbyUsername(usernamee).subscribe(
-          dataa => {
-            this.currentuser = dataa;
-            this.authenticate();
-            if (this.authenticate()) {
-              window.location.href = 'http://localhost:4200/accueil';
-            }
-            console.log(this.currentuser);
-          }
-        );
-    //    this.route.navigate(['accueil']);
-    //    window.location.href = 'http://localhost:4200/accueil';
-      }
-      },
-      error =>
-        console.log(error)
-    );
+   if (usernamee === null || usernamee === '' || usernamee === undefined) {
+     this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Veuillez fournir un nom d\'utilisateur '});
+   } else if (passwordd === null || passwordd === '' || passwordd === undefined) {
+     this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Veuillez fournir un mot de passe '});
+   } else {
 
+
+     this.http.get<number>(this.url + 'Connect/username/' + usernamee + '/password/' + passwordd).subscribe(
+       data => {
+         console.log(data);
+         if (data === -1 || data === -2) {
+           // tslint:disable-next-line:max-line-length
+           this.messageService.add({severity: 'error', summary: 'Erreur', detail: '  Vérifier votre Nom d\'utilisateur ou Mot de passe'});
+         }
+         if (data === 1) {
+           this.usersService.findbyUsername(usernamee).subscribe(
+             dataa => {
+               this.currentuser = dataa;
+               this.authenticate();
+               if (this.authenticate()) {
+                 window.location.href = 'http://localhost:4200/accueil';
+               }
+               console.log(this.currentuser);
+             }
+           );
+           //    this.route.navigate(['accueil']);
+           //    window.location.href = 'http://localhost:4200/accueil';
+         }
+       },
+       error =>
+         console.log(error)
+     );
+
+   }
  }
-
 
 }
 

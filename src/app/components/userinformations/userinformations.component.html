@@ -1,0 +1,105 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<form [formGroup]="userform" >
+  <p-panel header="Mes informations personnels " >
+
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px; ">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+        <div class="ui-grid-col-4">
+          Nom :
+        </div>
+        <div class="ui-grid-col-4">
+          <label >{{nomm}}</label>
+        </div>
+
+        </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+
+        <div class="ui-grid-col-4">
+          Prénom :
+        </div>
+        <div class="ui-grid-col-4" >
+          <label >{{pren}}</label>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+
+        <div class="ui-grid-col-4">
+          Numéro de Télephone :
+        </div>
+        <div class="ui-grid-col-4" *ngIf="labelopen === false">
+          <input pInputText  [(ngModel)]="teleinput" formControlName="numtele"/>
+        </div>
+        <div class="ui-grid-col-4" *ngIf="labelopen === true">
+          <label >{{tele}}</label>
+        </div>
+        <div class="ui-grid-col-2"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['numtele'].valid&&userform.controls['numtele'].dirty"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+
+        <div class="ui-grid-col-4">
+          Nom d'utilisateur :
+        </div>
+        <div class="ui-grid-col-4" *ngIf="labelopen === false">
+          <input pInputTextarea type="text" [(ngModel)]="nomuserinput" formControlName="username"/>
+        </div>
+        <div class="ui-grid-col-4" *ngIf="labelopen === true">
+          <label >{{nomuser}}</label>
+        </div>
+        <div class="ui-grid-col-2"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['username'].valid&&userform.controls['username'].dirty"></p-message>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+
+        <div class="ui-grid-col-4">
+          Mot de passe :
+        </div>
+        <div class="ui-grid-col-4" *ngIf="labelopen === false">
+          <input pInputTextarea type="password" [(ngModel)]="passinput" formControlName="pass"/>
+        </div>
+        <div class="ui-grid-col-4" *ngIf="labelopen === true">
+          <label >*********</label>
+        </div>
+        <div class="ui-grid-col-2">
+          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['pass'].valid&&userform.controls['pass'].dirty"></p-message>
+        </div>
+      </div>
+    </div>
+
+
+
+      <div class="row" *ngIf="labelopen === true" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-3">
+          <button pButton  class="btn btn-block"   label="Modifier mes informations" (click)="modify()" ></button>
+        </div>
+        <div class="col-md-1"></div>
+
+      </div>
+
+
+    <div class="row" *ngIf="labelopen === false">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <button pButton class="btn btn-block"  label="Enregistrer" (click)="update()" [disabled]="!userform.valid"></button>
+      </div>
+      <div class="col-md-3">
+        <button pButton  class="btn btn-block"   label="Annuler" (click)="annuler()" ></button>
+      </div>
+    </div>
+
+
+  </p-panel>
+</form>
+

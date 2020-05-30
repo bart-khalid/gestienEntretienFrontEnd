@@ -3,7 +3,7 @@
   margin-right: 15px;
 
   /* make sure to cover the screen */
-  min-height: 80vh;
+  min-height: 53vh;
 
 
   /* need a solid bg to hide the footer */
@@ -39,7 +39,6 @@ footer {
 footer {
   /* place on the bottom */
   position: sticky;
-
   width: 100%;
   background-color: #dae1e7;
   padding: 50px;
