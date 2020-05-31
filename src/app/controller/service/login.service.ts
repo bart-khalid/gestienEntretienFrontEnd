@@ -102,12 +102,12 @@ export class LoginService {
 
      this.http.get<number>(this.url + 'Connect/username/' + usernamee + '/password/' + passwordd).subscribe(
        data => {
+         this._errorC = data;
          console.log(data);
-         if (data === -1 || data === -2) {
+         if (this._errorC === -1 || this._errorC === -2) {
            // tslint:disable-next-line:max-line-length
            this.messageService.add({severity: 'error', summary: 'Erreur', detail: '  Vérifier votre Nom d\'utilisateur ou Mot de passe'});
-         }
-         if (data === 1) {
+         } else if (this._errorC === 1) {
            this.usersService.findbyUsername(usernamee).subscribe(
              dataa => {
                this.currentuser = dataa;
@@ -125,7 +125,6 @@ export class LoginService {
        error =>
          console.log(error)
      );
-
    }
  }
 
