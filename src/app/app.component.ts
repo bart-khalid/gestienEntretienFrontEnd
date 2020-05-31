@@ -19,19 +19,13 @@ export class AppComponent implements OnInit {
   itemsEmploye: MenuItem[];
 
 
-  constructor(private loginService: LoginService , private route: Router , private auth: AuthenticationService) {
+  constructor(private loginService: LoginService , private router: Router , private auth: AuthenticationService) {
   }
 
    logout() {
     this.loginService.logOut();
    }
-
   ngOnInit() {
-   // if(this.currentUser.username === '' || this.currentUser.username == null) {
-      // @ts-ignore
-     // this.route.navigate('');
-    // }
-
     this.items = [
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: 'accueil'},
     {label: 'Bons véhicules', items: [

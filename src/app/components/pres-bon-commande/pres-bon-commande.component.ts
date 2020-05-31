@@ -20,7 +20,7 @@ export class PresBonCommandeComponent implements OnInit {
       { field: 'dateBonCommande', header: 'Date' },
       { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
       { field: 'nomPrestataireC', header: 'Prestataire' },
-      { field: 'montantC', header: 'Montant' }
+      { field: 'montantC', header: 'Montant(DH)' }
     ];
   }
 

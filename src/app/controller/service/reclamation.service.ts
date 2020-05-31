@@ -33,7 +33,7 @@ export class ReclamationService {
   }
 
   public findbyreclament(username: string) {
-    this.http.get<Array<Reclamation>>(this.urlr + username).subscribe(
+    this.http.get<Array<Reclamation>>(this.url + 'reclaments/' + username).subscribe(
       data => {
         this.foundedReclamationsemploye = data.reverse();
         console.log('Reclamations employe data : ' + data.length);

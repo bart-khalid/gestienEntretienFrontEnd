@@ -22,7 +22,7 @@ export class EntretienComponent implements OnInit {
       { field: 'nomMateriel', header: 'Nom Matériel' },
       { field: 'prestataire', header: 'Prestataire de service' },
       { field: 'nomLocale', header: 'Nom Locale' },
-      { field: 'montant', header: 'Montant' },
+      { field: 'montant', header: 'Montant(DH)' },
       { field: 'dateEntretien', header: 'Date Entretien' }
     ];
     this.find();

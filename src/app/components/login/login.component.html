@@ -1,3 +1,4 @@
+<div style="text-align: center; align-items: center; align-content: center" *ngIf="progressLogen"><p-progressSpinner  ></p-progressSpinner></div>
 <p-toast [style]="{paddingTop: '7%' }"></p-toast>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
@@ -11,7 +12,7 @@
 </head>
 
 
-<body>
+<body *ngIf="!progressLogen">
 
 <div class="row">
   <section id="content" class="row" style="align-items: center; align-content: center; text-align: center">

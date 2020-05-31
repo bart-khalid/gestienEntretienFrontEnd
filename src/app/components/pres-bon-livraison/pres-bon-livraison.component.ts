@@ -19,7 +19,7 @@ export class PresBonLivraisonComponent implements OnInit {
       { field: 'dateBonLivraison', header: 'Date' },
       { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
       { field: 'nomPrestataireL', header: 'Prestataire' },
-      { field: 'montantL', header: 'Montant' }
+      { field: 'montantL', header: 'Montant(DH)' }
     ];
   }
   delete(presBonLivraison: PresBonLivraison) {

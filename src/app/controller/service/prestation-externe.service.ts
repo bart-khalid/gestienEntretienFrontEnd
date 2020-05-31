@@ -8,6 +8,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class PrestationExterneService {
 
+  private _dataPresExterne : number;
   private _foundedPrestationExternes = new Array<PrestationExterne>();
   private url = 'http://localhost:8090/GestionEntretien/prestationExterne/';
   constructor(private http: HttpClient, private toast: ToastrService) { }
@@ -34,6 +35,8 @@ export class PrestationExterneService {
     this.http.get<Array<PrestationExterne>>(this.url).subscribe(
       data => {
         this._foundedPrestationExternes = data.reverse();
+        console.log('data presExterne: ' + data.length);
+        this._dataPresExterne = data.length;
       }, error => {
         console.log('error in the link');
         this.toast.error('erreur du serveur merci de recharger la page');
@@ -47,5 +50,9 @@ export class PrestationExterneService {
 
   set foundedPrestationExternes(value: PrestationExterne[]) {
     this._foundedPrestationExternes = value;
+  }
+
+  get dataPresExterne(): number {
+    return this._dataPresExterne;
   }
 }
