@@ -9,6 +9,8 @@ import {Local} from '../../controller/model/local.model';
 import {LocalService} from '../../controller/service/local.service';
 import {error} from '@angular/compiler/src/util';
 import {ToastrService} from 'ngx-toastr';
+import {PresBonLivraison} from '../../controller/model/pres-bon-livraison.model';
+import {PresBonCommande} from '../../controller/model/pres-bon-commande.model';
 
 @Component({
   selector: 'app-prestation-externe-liste',
@@ -87,6 +89,12 @@ export class PrestationExterneListeComponent implements OnInit {
   onRowSelect(event) {
     this.newPrestation = false;
     this.prestationExterne = this.clonePrestationExterne(event.data);
+    if (this.prestationExterne.presBonCommandeE == null) {
+      this.prestationExterne.presBonCommandeE = new PresBonCommande();
+    }
+    if (this.prestationExterne.presBonLivraisonE == null ) {
+      this.prestationExterne.presBonLivraisonE= new PresBonLivraison();
+    }
     this.displayDialog = true;
     this.cancel = false;
   }

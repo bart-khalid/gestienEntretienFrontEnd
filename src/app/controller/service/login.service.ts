@@ -16,17 +16,34 @@ export class LoginService {
   private _errorC: number = null ;
   private url = 'http://localhost:8090/GestionEntretien/Login/';
   private _currentuser: Users = null;
+  private _progressLogen: boolean;
 
   constructor(private http: HttpClient , private usersService: UsersService , private route: Router,
               private messageService: MessageService) {}
+
+
+  get progressLogen(): boolean {
+    return this._progressLogen;
+  }
+
+  set progressLogen(value: boolean) {
+    this._progressLogen = value;
+  }
 
   set currentuser(value: Users) {
     this._currentuser = value;
   }
 
   get errorC(): number {
-    console.log('get c ' + this._errorC);
     return this._errorC;
+  }
+
+  set errorC(value: number) {
+    this._errorC = value;
+  }
+
+  set errorS(value: number) {
+    this._errorS = value;
   }
 
   get user(): Users {
@@ -48,8 +65,8 @@ export class LoginService {
   }
 
   authenticate() {
-    console.log(this._errorC);
-    if (this._errorC === 1) {
+    console.log(this.errorC);
+    if (this.errorC === 1) {
       console.log(this.currentuser.username);
       sessionStorage.setItem('prenom', this.currentuser.prenom);
       sessionStorage.setItem('reference', this.currentuser.reference);
@@ -93,37 +110,42 @@ export class LoginService {
 
 
  public connect( usernamee: string , passwordd: string) {
-   if (usernamee === null || usernamee === '' || usernamee === undefined) {
+    if (usernamee === null || usernamee === '' || usernamee === undefined) {
      this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Veuillez fournir un nom d\'utilisateur '});
-   } else if (passwordd === null || passwordd === '' || passwordd === undefined) {
+    } else if (passwordd === null || passwordd === '' || passwordd === undefined) {
      this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Veuillez fournir un mot de passe '});
-   } else {
-
-
-     this.http.get<number>(this.url + 'Connect/username/' + usernamee + '/password/' + passwordd).subscribe(
+    } else {
+      this.progressLogen = true;
+      this.http.get<number>(this.url + 'Connect/username/' + usernamee + '/password/' + passwordd).subscribe(
        data => {
-         this._errorC = data;
-         console.log(data);
-         if (this._errorC === -1 || this._errorC === -2) {
-           // tslint:disable-next-line:max-line-length
+         this.errorC = data;
+         if (this.errorC === -1) {
            this.messageService.add({severity: 'error', summary: 'Erreur', detail: '  Vérifier votre Nom d\'utilisateur ou Mot de passe'});
-         } else if (this._errorC === 1) {
+           this.progressLogen = false;
+         } else if (this.errorC === -2) {
+           // tslint:disable-next-line:max-line-length
+           this.messageService.add({severity: 'error', summary: 'Erreur', detail: '  Vérifier votre Mot de passe'});
+           this.progressLogen = false;
+         } else {
            this.usersService.findbyUsername(usernamee).subscribe(
              dataa => {
+               this.messageService.add({severity: 'success', summary: 'Succée', detail: '  Vous etes connecté '});
                this.currentuser = dataa;
                this.authenticate();
                if (this.authenticate()) {
                  window.location.href = 'http://localhost:4200/accueil';
                }
                console.log(this.currentuser);
+               this.progressLogen = false;
              }
            );
            //    this.route.navigate(['accueil']);
            //    window.location.href = 'http://localhost:4200/accueil';
          }
        },
-       error =>
-         console.log(error)
+       error => {
+         console.log('error');
+       }
      );
    }
  }

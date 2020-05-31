@@ -34,21 +34,10 @@
   </ng-template>
 
   <ng-template pTemplate="summary" let-rowData>
-    <div >
-
-      <div class="row">
-
-        <div class="col-md-4">
-      <label for="items" style="font-size: large; color: #00aeef">Réclamer :</label></div>
-        <div class="col-md-4">
-      <button class="btn btn-block"  pButton icon="pi pi-plus-circle" (click)="showDialogToAddM()" label="Materiel"  id="items"></button>
-        </div>
-        <div class="col-md-4">
-      <button  class="btn btn-block" pButton icon="pi pi-plus-circle" (click)="showDialogToAdd()" label="Autre"  id="itemss"></button>
-      </div>
-      </div>
+    <div style="text-align: left">
+      <button pButton icon="pi pi-plus-circle" (click)="showDialogToAddM()" label="Réclamer"  id="items"></button>
     </div>
-  </ng-template>
+ </ng-template>
 </p-table>
 
 <!-- dialog 1 -->

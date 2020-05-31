@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng';
 import {Router} from '@angular/router';
 import {inspect} from 'util';
+import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
+import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
 
 
 @Component({
@@ -16,10 +18,15 @@ export class ActionsComponent implements OnInit {
   dataUtilisateur: any;
   dataVehicule: any;
   dataMateriel: any;
-  constructor() { }
+  constructor(private prestationInterneService: PrestationInterneService,
+              private prestationExterneService: PrestationExterneService,
+              ) { }
   ngOnInit() {
+    this.prestationInterneService.findAll();
+    this.prestationExterneService.findAll();
+
     this.dataREclamations = {
-      labels: ['Crée', 'Sous Traitement', 'Bien Traitée'],
+      labels: ['Non Vue', 'Sous Traitement', 'Bien Traitée'],
 
       datasets: [
         {
@@ -61,7 +68,7 @@ export class ActionsComponent implements OnInit {
       labels: ['Interne', 'Externe'],
       datasets: [
         {
-          data : [50, 180],
+          data : [this.prestationInterneService.dataPresInterne, this.prestationExterneService.dataPresExterne],
           backgroundColor: ['#FFCE56', '#4BC0C0'],
           hoverBackgroundColor: ['#FFCE56', '#4BC0C0']
         },
@@ -114,7 +121,5 @@ export class ActionsComponent implements OnInit {
 
       ]
     };
-
-
   }
 }

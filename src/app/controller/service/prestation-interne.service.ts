@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class PrestationInterneService {
 
+  private _dataPresInterne: number;
   private _foundedPrestationInternes = new Array<PrestationInterne>();
   private url = 'http://localhost:8090/GestionEntretien/prestationInterne/';
   private _progress: boolean;
@@ -43,6 +44,7 @@ export class PrestationInterneService {
       data => {
         this._foundedPrestationInternes = data.reverse();
         console.log('Prestations Internes data: ' + data.length);
+        this._dataPresInterne = data.length;
         this._progress = false;
       }, error => {
         console.log('error in the link');
@@ -66,5 +68,8 @@ export class PrestationInterneService {
 
   set progress(value: boolean) {
     this._progress = value;
+  }
+  get dataPresInterne(): number {
+    return this._dataPresInterne;
   }
 }

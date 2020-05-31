@@ -12,15 +12,24 @@ import {AuthenticationService} from '../../controller/service/authentication.ser
 export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router, private auth: AuthenticationService) { }
 
+  get progressLogen(): boolean {
+    return this.loginService.progressLogen;
+  }
   get users(): Users {
     return  this.loginService.user;
   }
-
-  public connect(usernamee: string , passwordd: string) {
-    return this.loginService.connect(usernamee, passwordd);
+  get errorC(): number {
+    return this.loginService.errorC;
   }
 
-  islogged(){
+  public connect(usernamee: string , passwordd: string) {
+    this.loginService.connect(usernamee, passwordd);
+    if (this.errorC === -1 || this.errorC === -2) {
+      this.users.password = null;
+    }
+  }
+
+  islogged() {
     if (this.loginService.isUserLoggedIn()) {
       window.location.href = 'http://localhost:4200/accueil';
     }
@@ -29,9 +38,4 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
    this.islogged();
   }
-
-
-
-
-
 }
