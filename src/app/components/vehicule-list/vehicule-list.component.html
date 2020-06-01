@@ -1,4 +1,10 @@
 <p-toast></p-toast>
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
 <p-table #dt [columns]="cols"  [value]="cars" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="row">
@@ -43,7 +49,7 @@
   <div class="ui-g ui-fluid"  *ngIf="car">
      <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="matricule"> Matricule :</label>
+        <label for="matricule" style="color: #00aeef"><strong> Matricule : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -59,7 +65,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="type">Type :</label>
+        <label for="type" style="color: #00aeef"><strong>Type :</strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -74,7 +80,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="marque">Marque :</label>
+        <label for="marque"style="color: #00aeef"><strong>Marque : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -89,7 +95,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="utilite">Utilité :</label>
+        <label for="utilite" style="color: #00aeef"><strong>Utilité :</strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -103,7 +109,7 @@
     </div>
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="date">Date Affectation au parc :</label>
+        <label for="date"style="color: #00aeef"><strong>Date Affectation au parc :</strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -121,7 +127,7 @@
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="delete()" label="Supprimer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-times" (click)="confirm()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>

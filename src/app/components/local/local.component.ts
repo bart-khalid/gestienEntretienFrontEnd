@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Local} from '../../controller/model/local.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
 import {LocalService} from '../../controller/service/local.service';
 
 @Component({
@@ -33,8 +33,16 @@ export class LocalComponent implements OnInit {
 
   errorS: number ;
   errorC: number ;
-  constructor(private fb: FormBuilder, private messageService: MessageService, private localService: LocalService) { }
-
+  constructor(private fb: FormBuilder, private messageService: MessageService, private localService: LocalService,
+              private confirmationService: ConfirmationService) { }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
   ngOnInit(): void {
     this.localService.findAll();
     this.userform = this.fb.group({
@@ -43,9 +51,11 @@ export class LocalComponent implements OnInit {
       departement: new FormControl('', Validators.required),
     });
 
+
+
     this.cols = [
-      {field: 'nomLocal', header: 'Nom Locale'},
-      {field: 'typeLocal', header: 'Type Locale'},
+      {field: 'nomLocal', header: 'Nom Local'},
+      {field: 'typeLocal', header: 'Type Local'},
       {field: 'departement', header: 'Département'},
       {field: 'nbrMateriel', header: 'Nombre Matériels affectés'}
     ];
@@ -90,13 +100,13 @@ export class LocalComponent implements OnInit {
   save() {
     const localls = this.localService.foudedLocales;
     if (this.newLocal) {
-      localls.push(this.local);
+  //    localls.push(this.local);
       this.localService.save(this.local);
       this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Locale Enregistré'});
     } else {
-      localls[this.localService.foudedLocales.indexOf(this.selectedLocal)] = this.local;
+//    localls[this.localService.foudedLocales.indexOf(this.selectedLocal)] = this.local;
       this.localService.update(this.local);
-      this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Locale Modifié'});
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Locale Modifié'});
     }
 
     this.locals = localls;

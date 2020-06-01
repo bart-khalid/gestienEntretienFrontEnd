@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PresBonLivraisonService} from '../../controller/service/pres-bon-livraison.service';
 import {PresBonLivraison} from '../../controller/model/pres-bon-livraison.model';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-pres-bon-livraison',
@@ -10,7 +11,8 @@ import {PresBonLivraison} from '../../controller/model/pres-bon-livraison.model'
 export class PresBonLivraisonComponent implements OnInit {
 
   cols: any;
-  constructor(private presBonLivraisonService: PresBonLivraisonService) { }
+  constructor(private presBonLivraisonService: PresBonLivraisonService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.presBonLivraisonService.findAll();

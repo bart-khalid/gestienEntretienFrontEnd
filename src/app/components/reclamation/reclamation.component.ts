@@ -6,6 +6,7 @@ import {ReclamationService} from '../../controller/service/reclamation.service';
 import {MenuItem, SelectItem} from 'primeng';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-reclamation',
@@ -31,9 +32,17 @@ export class ReclamationComponent implements OnInit {
   cols: any[];
 
   locales: Array<any>;
-  constructor(private reclamationService: ReclamationService, private toast: ToastrService) { }
+  constructor(private reclamationService: ReclamationService, private toast: ToastrService,
+              private confirmationService: ConfirmationService) { }
 
-
+  confirm(data: Reclamation) {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete(data);
+      }
+    });
+  }
   ngOnInit() {
    this.reclamationService.findAll();
 
@@ -43,7 +52,7 @@ export class ReclamationComponent implements OnInit {
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
-      { field: 'nomLocale', header: 'Locale' },
+      { field: 'nomLocale', header: 'Local' },
       { field: 'nomMateriel', header: 'Matériel' },
       { field: 'etat', header: 'État' }
     ];

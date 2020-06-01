@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
 import {Reclamation} from '../../controller/model/reclamation.model';
 import {ReclamationService} from '../../controller/service/reclamation.service';
 import {Local} from '../../controller/model/local.model';
@@ -43,8 +43,17 @@ export class ReclamerComponent implements OnInit {
               private localService: LocalService,
               private localdetailService: LocaldetailService,
               private toast: ToastrService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService) { }
 
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
 
   ngOnInit() {
 
@@ -56,7 +65,7 @@ export class ReclamerComponent implements OnInit {
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },
       { field: 'description', header: 'Description' },
-      { field: 'nomLocale', header: 'Locale' },
+      { field: 'nomLocale', header: 'Local' },
       { field: 'nomMateriel', header: 'Matériel' },
       { field: 'etat', header: 'État' }
     ];

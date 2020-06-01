@@ -18,19 +18,7 @@ export class FournisseurSVService {
   constructor(private http: HttpClient) { }
 
   public save(fournisseur: FournisseurSV) {
-    this.http.post<number>(this.url, fournisseur).subscribe(
-      data => {
-        if (data === 1) {
-          console.log('success fournisseur saved');
-          this.findAll();
-        } else {
-          console.log('fournisseur existe deja');
-          alert('fournisseur existe deja');
-        }
-      }, error => {
-        console.log('error in the link to save fournisseur');
-      }
-    );
+    return this.http.post<number>(this.url, fournisseur);
   }
   public findAll() {
     this.http.get<Array<FournisseurSV>>(this.url).subscribe(
@@ -45,17 +33,7 @@ export class FournisseurSVService {
     );
   }
   public update(fournisseur: FournisseurSV) {
-    this.http.put<number>(this.url + 'update', fournisseur).subscribe(
-      data => {
-        if (data === 1) {
-          console.log('fournisseur updated');
-        } else {
-          console.log('fournisseur not updated');
-        }
-      }, error => {
-        console.log('error in the link');
-      }
-    );
+   return this.http.put<number>(this.url + 'update', fournisseur);
   }
   public delete(reference: string) {
     this.http.delete<number>(this.url + 'deleteFournisseur/' + reference ).subscribe(

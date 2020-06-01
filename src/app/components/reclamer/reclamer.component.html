@@ -1,4 +1,10 @@
-<p-table #dt [columns]="cols" [value]="foundedReclamationsemploye" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-table #dt [columns]="cols" [value]="foundedReclamationsemploye" selectionMode="single" [resizableColumns]="true" [autoLayout]="true"  [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
 
   <ng-template pTemplate="caption">
     <div class="row">
@@ -47,7 +53,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="objet">Objet :</label>
+        <label for="objet" style="color: #00aeef"><strong>Objet :</strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -63,7 +69,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label >Locale :</label>
+        <label style="color: #00aeef"><strong>Local : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform"  >
@@ -72,7 +78,7 @@
       </div>
       <div class="ui-g-4">
         <p-message severity="error" *ngIf="(userform.controls['local'].touched &&!userform.controls['local'].dirty)  || userform.controls['local'].value=='Choisir un locale'"
-                   text="Veuillez choisir un locale" ></p-message>
+                   text="Veuillez choisir un local" ></p-message>
       </div>
     </div>
 
@@ -94,7 +100,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform.valid" type="button" pButton icon="pi pi-trash" (click)="confirm()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>
@@ -109,7 +115,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="object">Objet :</label>
+        <label for="object" style="color: #00aeef"><strong>Objet : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
@@ -128,7 +134,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label >Locale :</label>
+        <label style="color: #00aeef"><strong>Local : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
@@ -137,14 +143,14 @@
       </div>
       <div class="ui-g-4">
         <p-message severity="error" *ngIf="(userform1.controls['locale'].touched &&!userform1.controls['locale'].dirty  || userform1.controls['locale'].value=='Choisissez un locale')"
-                   text="Veuillez choisir un locale" ></p-message>
+                   text="Veuillez choisir un local" ></p-message>
       </div>
     </div>
 
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label >Materiel :</label>
+        <label style="color: #00aeef"><strong>Matériel : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
@@ -161,7 +167,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="descriptionM">Description :</label>
+        <label for="descriptionM" style="color: #00aeef"><strong>Description : </strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
@@ -177,7 +183,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+      <button *ngIf="!cancel" [disabled]="!userform1.valid" type="button" pButton icon="pi pi-trash" (click)="confirm()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-save" [disabled]="!userform1.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>

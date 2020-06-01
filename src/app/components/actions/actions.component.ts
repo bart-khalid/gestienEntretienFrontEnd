@@ -24,7 +24,10 @@ export class ActionsComponent implements OnInit {
   ngOnInit() {
     this.prestationInterneService.findAll();
     this.prestationExterneService.findAll();
+    this.charts();
+  }
 
+  charts() {
     this.dataREclamations = {
       labels: ['Non Vue', 'Sous Traitement', 'Bien Traitée'],
 
@@ -68,7 +71,7 @@ export class ActionsComponent implements OnInit {
       labels: ['Interne', 'Externe'],
       datasets: [
         {
-          data : [this.prestationInterneService.dataPresInterne, this.prestationExterneService.dataPresExterne],
+          data : [21, 12],
           backgroundColor: ['#FFCE56', '#4BC0C0'],
           hoverBackgroundColor: ['#FFCE56', '#4BC0C0']
         },
@@ -122,4 +125,5 @@ export class ActionsComponent implements OnInit {
       ]
     };
   }
+
 }

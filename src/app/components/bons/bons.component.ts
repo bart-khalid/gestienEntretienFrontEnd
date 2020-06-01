@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectItem} from 'primeng';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {BonsC} from '../../controller/model/bons-c.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BonsR} from '../../controller/model/bons-r.model';
@@ -34,9 +34,17 @@ export class BonsComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private boncService: BoncService,
-              private carService: CarService , private fournisseurSVService: FournisseurSVService) {
+              private carService: CarService , private fournisseurSVService: FournisseurSVService,
+              private confirmationService: ConfirmationService) {
   }
-
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.deleteC();
+      }
+    });
+  }
   ngOnInit() {
     this.vehicule = [
       {label: 'Selectionnez une véhicule', value: ''},

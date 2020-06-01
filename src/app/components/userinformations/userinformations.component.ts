@@ -32,7 +32,8 @@ export class UserinformationsComponent implements OnInit {
   ngOnInit() {
     this.userform = this.fb.group({
       username: new FormControl('', Validators.required),
-      numtele: new FormControl('', Validators.required),
+      numtele: new FormControl('',  Validators.compose([Validators.required,
+                 Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
       pass: new FormControl('', Validators.required),
     });
   }
@@ -42,7 +43,7 @@ export class UserinformationsComponent implements OnInit {
   this.userupdate.type = this.type;
   this.userupdate.nom = this.nomm;
   this.userupdate.prenom = this.pren;
-  this.userupdate.telephone = Number(this.teleinput);
+  this.userupdate.telephone = this.teleinput;
   this.userupdate.username = this.nomuserinput;
   this.userupdate.password = this.passinput;
   this.usersService.update(this.userupdate).subscribe(

@@ -6,11 +6,12 @@
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px; ">
       <div class="ui-grid-row">
         <div class="ui-grid-col-2"></div>
-        <div class="ui-grid-col-4">
+        <div class="ui-grid-col-4" style="color: #00aeef"><strong>
           Nom :
+        </strong>
         </div>
         <div class="ui-grid-col-4">
-          <label >{{nomm}}</label>
+          <label ><strong>{{nomm}}</strong></label>
         </div>
 
         </div>
@@ -18,41 +19,46 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-2"></div>
 
-        <div class="ui-grid-col-4">
+        <div class="ui-grid-col-4"style="color: #00aeef"><strong>
           Prénom :
+        </strong>
         </div>
         <div class="ui-grid-col-4" >
-          <label >{{pren}}</label>
+          <label ><strong>{{pren}}</strong></label>
         </div>
       </div>
 
       <div class="ui-grid-row">
         <div class="ui-grid-col-2"></div>
 
-        <div class="ui-grid-col-4">
-          Numéro de Télephone :
+        <div class="ui-grid-col-4" style="color: #00aeef"><strong>
+          Nº de Télephone : </strong>
         </div>
         <div class="ui-grid-col-4" *ngIf="labelopen === false">
           <input pInputText  [(ngModel)]="teleinput" formControlName="numtele"/>
         </div>
         <div class="ui-grid-col-4" *ngIf="labelopen === true">
-          <label >{{tele}}</label>
+          <label ><strong>{{tele}}</strong></label>
         </div>
-        <div class="ui-grid-col-2"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['numtele'].valid&&userform.controls['numtele'].dirty"></p-message>
+        <div class="ui-grid-col-2">
+          <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['numtele'].valid&&userform.controls['numtele'].dirty"></p-message>
+          <p-message severity="error" *ngIf="userform.controls['numtele'].hasError('pattern') && (userform.controls['numtele'].dirty || userform.controls['numtele'].touched) "
+                     text="Numero non valide"></p-message>
         </div>
       </div>
 
       <div class="ui-grid-row">
         <div class="ui-grid-col-2"></div>
 
-        <div class="ui-grid-col-4">
+        <div class="ui-grid-col-4" style="color: #00aeef"><strong>
           Nom d'utilisateur :
+        </strong>
         </div>
         <div class="ui-grid-col-4" *ngIf="labelopen === false">
           <input pInputTextarea type="text" [(ngModel)]="nomuserinput" formControlName="username"/>
         </div>
         <div class="ui-grid-col-4" *ngIf="labelopen === true">
-          <label >{{nomuser}}</label>
+          <label ><strong>{{nomuser}}</strong></label>
         </div>
         <div class="ui-grid-col-2"><p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['username'].valid&&userform.controls['username'].dirty"></p-message>
         </div>
@@ -61,14 +67,14 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-2"></div>
 
-        <div class="ui-grid-col-4">
-          Mot de passe :
+        <div class="ui-grid-col-4" style="color: #00aeef"><strong>
+          Mot de passe : </strong>
         </div>
         <div class="ui-grid-col-4" *ngIf="labelopen === false">
           <input pInputTextarea type="password" [(ngModel)]="passinput" formControlName="pass"/>
         </div>
         <div class="ui-grid-col-4" *ngIf="labelopen === true">
-          <label >*********</label>
+          <label ><strong>*********</strong> </label>
         </div>
         <div class="ui-grid-col-2">
           <p-message severity="error" text="champ obligatoire" *ngIf="!userform.controls['pass'].valid&&userform.controls['pass'].dirty"></p-message>

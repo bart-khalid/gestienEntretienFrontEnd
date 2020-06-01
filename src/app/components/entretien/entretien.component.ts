@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Entretien} from '../../controller/model/entretien.model';
 import {EntretienService} from '../../controller/service/entretien.service';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-entretien',
@@ -14,14 +14,15 @@ export class EntretienComponent implements OnInit {
 
 
 
-  constructor(private entretienService: EntretienService, private messageService: MessageService) { }
+  constructor(private entretienService: EntretienService, private messageService: MessageService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.cols = [
       { field: 'numFacture', header: 'Numéro Facture' },
       { field: 'nomMateriel', header: 'Nom Matériel' },
       { field: 'prestataire', header: 'Prestataire de service' },
-      { field: 'nomLocale', header: 'Nom Locale' },
+      { field: 'nomLocale', header: 'Nom Local' },
       { field: 'montant', header: 'Montant(DH)' },
       { field: 'dateEntretien', header: 'Date Entretien' }
     ];
@@ -34,7 +35,14 @@ export class EntretienComponent implements OnInit {
       }
     );
   }
-
+  confirm(entretien: Entretien) {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete(entretien);
+      }
+    });
+  }
 
   public delete(entretien: Entretien) {
   this.messageService.add({severity: 'warn', summary: 'Succés', detail: 'Entretien supprimé'});

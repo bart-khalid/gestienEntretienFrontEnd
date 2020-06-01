@@ -1,5 +1,11 @@
 <p-toast></p-toast>
-<p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-table #dt [columns]="cols" [value]="reclamationsFounded" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedReclamation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
@@ -34,7 +40,7 @@
       <td *ngIf="typeuser === 'administrateur'" style="text-align:center">
         <span>
           <button  class="btn btn-sm btn-block btn-outline-success"  (click)="reclamationSeen(rowData)"><i class="fa fa-eye"></i></button>
-          <button  class="btn btn-sm btn-block btn-outline-danger"  (click)="delete(rowData)"><i class="fa fa-trash"></i></button>
+          <button  class="btn btn-sm btn-block btn-outline-danger"  (click)="confirm(rowData)"><i class="fa fa-trash"></i></button>
         </span>
       </td>
     </tr>

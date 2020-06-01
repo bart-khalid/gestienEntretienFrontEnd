@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectItem} from 'primeng';
 import {BonsR} from '../../controller/model/bons-r.model';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BonrService} from '../../controller/service/bonr.service';
 import {CarService} from "../../controller/service/car.service";
@@ -33,8 +33,16 @@ export class BonrComponent implements OnInit {
   cars: Car[];
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private bonrService: BonrService,
-              private carService: CarService , private fournisseurSVService: FournisseurSVService) { }
-
+              private carService: CarService , private fournisseurSVService: FournisseurSVService,
+              private confirmationService: ConfirmationService) { }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.deleteR();
+      }
+    });
+  }
   ngOnInit(): void {
     this.userform = this.fb.group({
       numbonR: new FormControl('', Validators.required),

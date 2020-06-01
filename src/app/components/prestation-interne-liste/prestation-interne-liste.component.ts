@@ -12,6 +12,7 @@ import {Agent} from '../../controller/model/agent.model';
 import {Local} from '../../controller/model/local.model';
 import {Localdetail} from '../../controller/model/localdetail.model';
 import {ToastrService} from 'ngx-toastr';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-prestation-interne-liste',
@@ -44,9 +45,17 @@ export class PrestationInterneListeComponent implements OnInit {
               private agentService: AgentService,
               private reclamationService: ReclamationService,
               private toast: ToastrService,
-              private localService: LocalService) { }
+              private localService: LocalService,
+              private confirmationService: ConfirmationService) { }
 
-
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
   ngOnInit() {
     this.prestationInterneService.findAll();
     this.localService.findAll();
@@ -61,12 +70,12 @@ export class PrestationInterneListeComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'referenceI', header: 'Reference' },
+      { field: 'referenceI', header: 'Réference' },
       { field: 'typeEntretienI', header: 'Entretien' },
       { field: 'dateI', header: 'Date' },
       { field: 'nomAgentI', header: 'Agent' },
-      { field: 'nomLocaleI', header: 'Locale' },
-      { field: 'nomMaterielI', header: 'Materiel' },
+      { field: 'nomLocaleI', header: 'Local' },
+      { field: 'nomMaterielI', header: 'Matériel' },
       { field: 'reclamedI', header: 'Réclamée ?' },
     ];
     this.entretiens = [
@@ -77,6 +86,7 @@ export class PrestationInterneListeComponent implements OnInit {
       { value: 'télephone', label: 'Télephone' },
       { value: 'minuiserie', label: 'Minuiserie' },
       { value: 'internet', label: 'Internet' },
+      { value: 'autre', label: 'Autre' },
     ];
   }
   showDialogToAdd() {

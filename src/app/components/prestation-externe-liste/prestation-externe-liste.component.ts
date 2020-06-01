@@ -11,6 +11,7 @@ import {error} from '@angular/compiler/src/util';
 import {ToastrService} from 'ngx-toastr';
 import {PresBonLivraison} from '../../controller/model/pres-bon-livraison.model';
 import {PresBonCommande} from '../../controller/model/pres-bon-commande.model';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-prestation-externe-liste',
@@ -37,8 +38,16 @@ export class PrestationExterneListeComponent implements OnInit {
   constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
               private localService: LocalService,
               private toast: ToastrService,
-              private prestationExterneService: PrestationExterneService) { }
-
+              private prestationExterneService: PrestationExterneService,
+              private confirmationService: ConfirmationService) { }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
 
   ngOnInit() {
 
@@ -55,13 +64,13 @@ export class PrestationExterneListeComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'referenceE', header: 'Reference' },
+      { field: 'referenceE', header: 'Réference' },
       { field: 'typeEntretienE', header: 'Entretien' },
       { field: 'dateE', header: 'Date' },
-      { field: 'nomLocale', header: 'Locale' },
+      { field: 'nomLocale', header: 'Local' },
       { field: 'nomMateriel', header: 'Materiel' },
       { field: 'nomPrestataireE', header: 'Prestataire' },
-      { field: 'numeroFacE', header: 'Numero Facture' },
+      { field: 'numeroFacE', header: 'Numéro Facture' },
       { field: 'montantFacE', header: 'Montant' },
       { field: 'reclamedE', header: 'Réclamée ?' },
       { field: 'bonCommandeE', header: 'Avec bon Commande ?' },
@@ -75,6 +84,7 @@ export class PrestationExterneListeComponent implements OnInit {
       { value: 'télephone', label: 'Télephone' },
       { value: 'minuiserie', label: 'Minuiserie' },
       { value: 'internet', label: 'Internet' },
+      { value: 'autre', label: 'Autre' },
     ];
   }
   save() {

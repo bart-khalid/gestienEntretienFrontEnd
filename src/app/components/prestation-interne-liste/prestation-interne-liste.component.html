@@ -1,5 +1,11 @@
 <div style="text-align: center; align-items: center; align-content: center" *ngIf="progress"><p-progressSpinner  ></p-progressSpinner></div>
-<p-table #dt [columns]="cols" [value]="foundedPrestationInterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-table #dt [columns]="cols" [value]="foundedPrestationInterne" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestation" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
 
   <ng-template pTemplate="caption">
     <div class="row">
@@ -137,7 +143,7 @@
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+      <button type="button" pButton icon="pi pi-trash" (click)="confirm()" label="Supprimer"></button>
       <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>

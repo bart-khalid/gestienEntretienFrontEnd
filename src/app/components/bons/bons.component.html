@@ -1,4 +1,10 @@
 <p-toast></p-toast>
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
   <p-table #dt [columns]="colsC"   [value]="bonsC" [resizableColumns]="true" [autoLayout]="true"  selectionMode="single"   [(selection)]="selectedBonC" (onRowSelect)="onRowSelectC($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption" >
       <div class="row">
@@ -44,7 +50,7 @@
     <div class="ui-g ui-fluid" style="height: 450px" *ngIf="bonC">
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="numbonc"> Nº de Bon :</label>
+          <label for="numbonc" style="color: #00aeef"><strong> Nº de Bon : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -59,7 +65,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="matrv">Matricule Véhicule :</label>
+          <label for="matrv" style="color: #00aeef"><strong>Matricule Véhicule : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -74,7 +80,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="fo">Fournisseur :</label>
+          <label for="fo" style="color: #00aeef"><strong>Fournisseur : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -89,7 +95,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="designa">Désignation :</label>
+          <label for="designa" style="color: #00aeef"><strong>Désignation : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -104,7 +110,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="ty">Type Carburant :</label>
+          <label for="ty" style="color: #00aeef"><strong>Type Carburant : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -121,7 +127,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="puni">Prix Unitaire :</label>
+          <label for="puni" style="color: #00aeef"><strong>Prix Unitaire : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -136,7 +142,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="quant">Quantité :</label>
+          <label for="quant" style="color: #00aeef"><strong>Quantité : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -151,7 +157,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="daterv">Date Bon :</label>
+          <label for="daterv" style="color: #00aeef"><strong>Date Bon : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -167,7 +173,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="tbrutrv">Total Brut :</label>
+          <label for="tbrutrv" style="color: #00aeef"><strong>Total Brut : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -182,7 +188,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="mtvrv">Montant Vignette :</label>
+          <label for="mtvrv" style="color: #00aeef"><strong>Montant Vignette : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -200,7 +206,7 @@
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancelC" type="button" [disabled]="!userform.valid" pButton icon="pi pi-times" (click)="deleteC()" label="Supprimer"></button>
+        <button *ngIf="!cancelC" type="button" [disabled]="!userform.valid" pButton icon="pi pi-times" (click)="confirm()" label="Supprimer"></button>
         <button type="button" pButton icon="pi pi-check" [disabled]="!userform.valid" (click)="saveC()" label="Enregistrer"></button>
       </div>
     </p-footer>

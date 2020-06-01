@@ -6,6 +6,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MaterielService} from '../../controller/service/materiel.service';
 import {FournisseurSVService} from '../../controller/service/fournisseur-sv.service';
 import {FournisseurSV} from '../../controller/model/fournisseurSV.model';
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-materiel',
@@ -41,7 +42,8 @@ export class MaterielComponent implements OnInit {
               private materielService: MaterielService,
               private messageService: MessageService,
               private fournisseurService: FournisseurSVService,
-              private reclamationService: ReclamationService) { }
+              private reclamationService: ReclamationService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.materielService.findAll();
@@ -72,6 +74,14 @@ export class MaterielComponent implements OnInit {
       { value: 'Informatique', label: 'Informatique ' },
       { value: 'Enseignement', label: 'Enseignement ' }
     ];
+  }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
   }
   showDialogToAdd() {
     this.newMateriel = true;

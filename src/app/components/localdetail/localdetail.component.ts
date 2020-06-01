@@ -1,5 +1,5 @@
 import {Component, OnInit, PipeTransform} from '@angular/core';
-import {MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Localdetail} from '../../controller/model/localdetail.model';
 import {LocaldetailService} from '../../controller/service/localdetail.service';
@@ -40,7 +40,8 @@ export class LocaldetailComponent implements OnInit {
               private materielService: MaterielService,
               private localService: LocalService,
               private localdetailService: LocaldetailService,
-              private toast: ToastrService) { }
+              private toast: ToastrService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.localdetailService.findAll();
@@ -56,12 +57,19 @@ export class LocaldetailComponent implements OnInit {
     this.cols = [
       {field: 'referenceML', header: 'Réference'},
       {field: 'materielLocale', header: 'Matériel'},
-      {field: 'localeAssocie', header: 'Locale, Département'},
+      {field: 'localeAssocie', header: 'Local, Département'},
       {field: 'dateAffectation', header: 'Date d\'affectation '},
     ];
   }
 
-
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
   showDialogToAdd() {
     this.newLocal = true;
     this.local = new Localdetail();
@@ -80,7 +88,7 @@ export class LocaldetailComponent implements OnInit {
             this.local = null;
             this.displayDialog = false;
           } else if (data === -2) {
-            this.toast.error('Veuillez choisir un locale');
+            this.toast.error('Veuillez choisir un local');
           } else if (data === -1) {
             this.toast.error('Réference déja existe');
           }
@@ -94,12 +102,12 @@ export class LocaldetailComponent implements OnInit {
       this.localdetailService.update(this.local).subscribe(
         data => {
           if (data === -1) {
-            this.toast.warning('Veuillez choisir un locale');
+            this.toast.warning('Veuillez choisir un local');
           } else if (data === -2) {
             this.toast.warning('Réference déja existant');
           } else {
             console.log('success Materiel updated');
-            this.toast.info('Materiel modifié');
+            this.toast.info('Matériel modifié');
             this.localdetailService.findAll();
             this.local = null;
             this.displayDialog = false;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Message, MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, Message, MessageService, SelectItem} from 'primeng/api';
 import {Users} from '../../controller/model/users.model';
 import {UsersService} from '../../controller/service/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -33,7 +33,17 @@ export class UsersComponent implements OnInit {
 
   msgs: Message[] = [];
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private userService: UsersService) {
+  constructor(private fb: FormBuilder, private messageService: MessageService,
+              private userService: UsersService,
+              private confirmationService: ConfirmationService) {
+  }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -94,9 +104,9 @@ export class UsersComponent implements OnInit {
             this.find();
             this.user = null;
             this.displayDialog = false;
-          } else if (this.errorS === -1){
+          } else if (this.errorS === -1) {
             this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Utilisateur déja existe'});
-          } else if (this.errorS === -5){
+          } else if (this.errorS === -5) {
             this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de télephone déja existe'});
           }
         }, error => {
@@ -105,7 +115,6 @@ export class UsersComponent implements OnInit {
       );
     } else {
     //  use[this.users.indexOf(this.selectedUser)] = this.user;
-      use[this.users.indexOf(this.selectedUser)] = this.user;
       this.userService.update(this.user).subscribe(
         data => {
           this.errorS = data;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Users} from '../../controller/model/users.model';
-import {Message, MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, Message, MessageService, SelectItem} from 'primeng/api';
 import {UsersService} from '../../controller/service/users.service';
 import {Agent} from '../../controller/model/agent.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -32,9 +32,17 @@ export class AgentComponent implements OnInit {
   errors: number;
 
 
-  constructor(private fb: FormBuilder, private messageService: MessageService , private agentService: AgentService ) {
+  constructor(private fb: FormBuilder, private messageService: MessageService , private agentService: AgentService,
+              private confirmationService: ConfirmationService ) {
   }
-
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
   ngOnInit(): void {
     this.userform = this.fb.group({
       codeAgent: new FormControl('', Validators.required),
@@ -42,7 +50,7 @@ export class AgentComponent implements OnInit {
       dateEntree: new FormControl('', Validators.required),
       adresseDomicile: new FormControl('', Validators.required),
       entrepriseLiee: new FormControl('', Validators.required),
-      telephone: new FormControl('',Validators.compose([Validators.required,
+      telephone: new FormControl('', Validators.compose([Validators.required,
         Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
     });
 
@@ -91,7 +99,7 @@ export class AgentComponent implements OnInit {
             this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Code agent déja existe'});
           }
           else if (this.errors === -2){
-            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de Telephone déja existe'});
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de Télephone déja existe'});
           }
         }, error => {
           console.log('error');
@@ -99,14 +107,18 @@ export class AgentComponent implements OnInit {
       );
     } else {
       //  use[this.users.indexOf(this.selectedUser)] = this.user;
-      age[this.agents.indexOf(this.selectedAgent)] = this.agent;
       this.agentService.update(this.agent).subscribe(
         data => {
+          this.errors = data;
           console.log(data);
-          this.messageService.add({severity: 'info', summary: 'Succés', detail: 'Opération Enregistrée'});
-          this.find();
-          this.agent = null;
-          this.displayDialog = false;
+          if(this.errors === 1) {
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Opération Enregistrée'});
+            this.find();
+            this.agent = null;
+            this.displayDialog = false;
+          } else if(this.errors === -1) {
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Numéro de Télephone déja existe'});
+          }
         }, error => {
           console.log('error update');
         }

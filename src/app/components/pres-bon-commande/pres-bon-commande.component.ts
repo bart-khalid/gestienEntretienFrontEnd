@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PresBonCommandeService} from '../../controller/service/pres-bon-commande.service';
 import {PresBonCommande} from '../../controller/model/pres-bon-commande.model';
 import {Reclamation} from '../../controller/model/reclamation.model';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-pres-bon-commande',
@@ -11,7 +12,8 @@ import {Reclamation} from '../../controller/model/reclamation.model';
 export class PresBonCommandeComponent implements OnInit {
 
   cols: any;
-  constructor(private presBonCommandeService: PresBonCommandeService) { }
+  constructor(private presBonCommandeService: PresBonCommandeService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.presBonCommandeService.findAll();

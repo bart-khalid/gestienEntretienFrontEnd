@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectItem} from 'primeng';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {BonsV} from '../../controller/model/bons-v.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BonvService} from '../../controller/service/bonv.service';
@@ -10,6 +10,7 @@ import {FournisseurSV} from "../../controller/model/fournisseurSV.model";
 import {Car} from "../../controller/model/car";
 import {element} from "protractor";
 import {FOCUS_TRAP_INERT_STRATEGY} from "@angular/cdk/a11y";
+import {Entretien} from "../../controller/model/entretien.model";
 
 @Component({
   selector: 'app-bonv',
@@ -32,7 +33,16 @@ export class BonvComponent implements OnInit {
   fournisseursfiltre = new Array<FournisseurSV>();
   cars: Car[];
   constructor(private fb: FormBuilder, private messageService: MessageService , private bonvService: BonvService,
-              private carService: CarService , private fournisseurSVService: FournisseurSVService ) { }
+              private carService: CarService , private fournisseurSVService: FournisseurSVService,
+              private confirmationService: ConfirmationService ) { }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.deleteV();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.userform = this.fb.group({

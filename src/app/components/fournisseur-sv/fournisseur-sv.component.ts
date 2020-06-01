@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Message, MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, Message, MessageService, SelectItem} from 'primeng/api';
 import {FournisseurSV} from '../../controller/model/fournisseurSV.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FournisseurSVService} from '../../controller/service/fournisseur-sv.service';
@@ -32,8 +32,16 @@ export class FournisseurSVComponent implements OnInit {
   errorC: number ;
 
   msgs: Message[] = [];
-  constructor(private fb: FormBuilder, private messageService: MessageService, private fournisseurService: FournisseurSVService) { }
-
+  constructor(private fb: FormBuilder, private messageService: MessageService, private fournisseurService: FournisseurSVService,
+              private confirmationService: ConfirmationService) { }
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
   ngOnInit() {
     this.fournisseurService.findAll();
     this.userform = this.fb.group({
@@ -80,16 +88,52 @@ export class FournisseurSVComponent implements OnInit {
     const fournisseurss = this.fournisseurService.foundedFourniseurs;
     if (this.newFournisseur) {
       console.log(this.fournisseur);
-      this.fournisseurService.save(this.fournisseur);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Fournisseur Enregistré'});
+      this.fournisseurService.save(this.fournisseur).subscribe(
+        data => {
+          this.errorS = data;
+          if (this.errorS === 1) {
+            console.log('success fournisseur saved');
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Fournisseur Enregistré'});
+            this.findAll();
+            this.fournisseurService.foundedFourniseurs = fournisseurss;
+            this.fournisseur = null;
+            this.displayDialog = false;
+          } else if(this.errorS === -1 ) {
+            console.log('fournisseur existe déja');
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'fournisseur  déja existe'});
+          } else if(this.errorS === -2) {
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'numéro de télephone  déja existe'});
+          } else if(this.errorS === -3){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'email  déja existe'});
+          }
+        }, error => {
+          console.log('error in the link to save fournisseur');
+        }
+      );
+
     } else {
-      fournisseurss[this.fournisseurService.foundedFourniseurs.indexOf(this.selectedFournisseur)] = this.fournisseur;
-      this.fournisseurService.update(this.fournisseur);
-      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Fournisseur Modifié'});
+      this.fournisseurService.update(this.fournisseur).subscribe(
+        data => {
+          this.errorS = data;
+          if (this.errorS === 1) {
+            console.log('fournisseur updated');
+            this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Fournisseur Modifié'});
+            this.findAll();
+            this.fournisseurService.foundedFourniseurs = fournisseurss;
+            this.fournisseur = null;
+            this.displayDialog = false;
+          }  else if(this.errorS === -2) {
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'numéro de télephone  déja existe'});
+          } else if(this.errorS === -1){
+            this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'email  déja existe'});
+          }
+        }, error => {
+          console.log('error in the link');
+        }
+      );
+
     }
-    this.fournisseurService.foundedFourniseurs = fournisseurss;
-    this.fournisseur = null;
-    this.displayDialog = false;
+
   }
 
   delete() {

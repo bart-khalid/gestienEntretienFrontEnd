@@ -1,4 +1,10 @@
-<p-table #dt [columns]="cols" [value]="foundedPrestationExternes" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestationExteerne" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="8">
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-table #dt [columns]="cols" [value]="foundedPrestationExternes" selectionMode="single" [resizableColumns]="true" [autoLayout]="true" [(selection)]="selectedPrestationExteerne" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
 
   <ng-template pTemplate="caption">
     <div class="row">
@@ -58,7 +64,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="typeEntretien" style="color: #00aeef"><strong>Locale :</strong></label>
+        <label for="typeEntretien" style="color: #00aeef"><strong>Local :</strong></label>
       </div>
       <div class="ui-g-5">
         <div class="form-group" [formGroup]="userform1"  >
@@ -73,7 +79,7 @@
 
     <div class="ui-g-12" *ngIf="prestationExterne.typeEntretienE === 'materiel'">
       <div class="ui-g-3">
-        <label for="nomMat" style="color: #00aeef"><strong>Materiel :</strong> </label>
+        <label for="nomMat" style="color: #00aeef"><strong>Matériel :</strong> </label>
       </div>
       <div class="ui-g-5">
 
@@ -104,7 +110,7 @@
 
     <div class="ui-g-12">
       <div class="ui-g-3">
-        <label for="numeroFac" style="color: #00aeef"><strong>Numero Facture :</strong></label>
+        <label for="numeroFac" style="color: #00aeef"><strong>Numéro Facture :</strong></label>
       </div>
       <div class="ui-g-5">
         <input type="text"  [(ngModel)]="prestationExterne.numeroFacE" pInputText id="numeroFac">
@@ -191,7 +197,7 @@
 
       <div class="ui-g-12" >
         <div class="ui-g-3">
-          <label for="numbonc" style="color: #00aeef">Numero Bon Commande :</label>
+          <label for="numbonc" style="color: #00aeef">Numéro Bon Commande :</label>
         </div>
         <div class="ui-g-5">
           <input type="number" pInputText [(ngModel)]="prestationExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
@@ -260,7 +266,7 @@
 
       <div class="ui-g-12" >
         <div class="ui-g-3">
-          <label for="numbonL" style="color: #00aeef">Numero Bon Livraison :</label>
+          <label for="numbonL" style="color: #00aeef">Numéro Bon Livraison :</label>
         </div>
         <div class="ui-g-5">
           <input type="number" pInputText [(ngModel)]="prestationExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >
@@ -315,7 +321,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button"  pButton icon="pi pi-trash"  (click)="delete()" label="Supprimer"></button>
+      <button type="button"  pButton icon="pi pi-trash"  (click)="confirm()" label="Supprimer"></button>
       <button type="button" [disabled]="!userform1.valid" pButton icon="pi pi-save"  (click)="save()" label="Enregistrer"></button>
     </div>
   </p-footer>

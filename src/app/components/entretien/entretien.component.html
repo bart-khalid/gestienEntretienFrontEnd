@@ -1,4 +1,10 @@
 <p-toast></p-toast>
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
 <p-table #dt [columns]="cols" [value]="enretiens"  [resizableColumns]="true" [autoLayout]="true"  [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="row">
@@ -32,7 +38,7 @@
         {{rowData[col.field]}}
       </td>
       <td style="text-align:center">
-        <span><button  class="btn btn-block btn-outline-danger"  (click)="delete(rowData)"> <i class="fa fa-trash"></i></button></span>
+        <span><button  class="btn btn-block btn-outline-danger"  (click)="confirm(rowData)"> <i class="fa fa-trash"></i></button></span>
 
       </td>
     </tr>

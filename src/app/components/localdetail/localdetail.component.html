@@ -1,4 +1,10 @@
 <!--<p-toast [style]="{marginTop: '2%'}"></p-toast>-->
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="Annuler" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
 <p-table #dt [columns]="cols"  [value]="foundedLocalDetails" [resizableColumns]="true" [autoLayout]="true" selectionMode="single" [(selection)]="selectedLocal" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <div class="row">
@@ -41,13 +47,13 @@
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'660px',textAlign:'center'}">
+  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'700px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 400px" *ngIf="local">
 
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="ref">Réference Matériel :</label>
+          <label for="ref" style="color: #00aeef"><strong>Réference Matériel : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -62,7 +68,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="type">Nom Matériel :</label>
+          <label for="type" style="color: #00aeef"><strong>Nom Matériel: </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -77,7 +83,7 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="matricule"> Nom Locale :</label>
+          <label for="matricule" style="color: #00aeef"><strong> Nom Local : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
@@ -94,7 +100,7 @@
       <div class="ui-g-12">
         <div class="ui-g-3">
 
-          <label for="date">Date Affectation :</label>
+          <label for="date" style="color: #00aeef"><strong>Date Affectation : </strong></label>
         </div>
 
         <div class="ui-g-5">
@@ -113,7 +119,7 @@
 
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button *ngIf="!cancel"  type="button" pButton icon="pi pi-trash" (click)="delete()" label="Supprimer"></button>
+        <button *ngIf="!cancel"  type="button" pButton icon="pi pi-trash" (click)="confirm()" label="Supprimer"></button>
         <button type="button" pButton icon="pi pi-save" [disabled]="!userform.valid" (click)="save()" label="Enregistrer"></button>
       </div>
     </p-footer>

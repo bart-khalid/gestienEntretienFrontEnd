@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CarService} from '../../controller/service/car.service';
 import {Car} from '../../controller/model/car';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-vehicule-list',
@@ -30,8 +30,17 @@ export class VehiculeListComponent implements OnInit {
 
   userform: FormGroup;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private carService: CarService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private carService: CarService,
+              private confirmationService: ConfirmationService) { }
 
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment effectuer cette action?',
+      accept: () => {
+        this.delete();
+      }
+    });
+  }
   ngOnInit() {
 
     this.userform = this.fb.group({
