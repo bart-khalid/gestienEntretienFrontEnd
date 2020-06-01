@@ -84,11 +84,11 @@ export class MaterielComponent implements OnInit {
     if (this.newMateriel) {
       materiels.push(this.materiel);
       this.materielService.save(this.materiel);
-      this.messageService.add({severity: 'success', summary: 'Succé', detail: 'Materiel Enregistré'});
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Matériel Enregistré'});
     } else {
       materiels[this.materielService.foundedMateriels.indexOf(this.selectedMatereil)] = this.materiel;
       this.materielService.update(this.materiel);
-      this.messageService.add({severity: 'success', summary: 'Succé', detail: 'Materiel Modifier'});
+      this.messageService.add({severity: 'success', summary: 'Succés', detail: 'Matériel Modifié'});
     }
     this.materielService.foundedMateriels = materiels;
     this.materiel = null;

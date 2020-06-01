@@ -81,7 +81,7 @@
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown id="matricule" formControlName="localassocie" [filter]="true" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="Choisissez un locale" ></p-dropdown>
+            <p-dropdown  id="matricule" formControlName="localassocie" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="Choisissez un locale" [filter]="true" ></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
