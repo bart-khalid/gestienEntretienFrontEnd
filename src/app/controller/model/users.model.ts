@@ -5,5 +5,5 @@ export class Users {
   public type: string;
   public prenom: string;
   public nom: string;
-  public telephone: number;
+  public telephone: string;
 }

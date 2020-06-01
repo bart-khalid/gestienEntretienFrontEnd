@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {inspect} from 'util';
 import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
 import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
+import {AccueilService} from '../../controller/service/accueil.service';
 
 
 @Component({
@@ -18,19 +19,37 @@ export class ActionsComponent implements OnInit {
   dataUtilisateur: any;
   dataVehicule: any;
   dataMateriel: any;
-  constructor(private prestationInterneService: PrestationInterneService,
-              private prestationExterneService: PrestationExterneService,
-              ) { }
+  constructor(private accueilService: AccueilService) { }
   ngOnInit() {
-    this.prestationInterneService.findAll();
-    this.prestationExterneService.findAll();
-
+    this.findALL();
+  }
+  get progress(): boolean {
+   return  this.accueilService.progress;
+  }
+  public findALL() {
+    this.accueilService.findAllBonCarburant();
+    this.accueilService.findAllBonReparation();
+    this.accueilService.findAllBonVidange();
+    this.accueilService.findAllMaterielEnseinement();
+    this.accueilService.findAllMaterielInformatique();
+    this.accueilService.findAllPrestationExterne();
+    this.accueilService.findAllPrestationInterne();
+    this.accueilService.findAllReclamationNonLu();
+    this.accueilService.findAllReclamationsBienTraite();
+    this.accueilService.findAllReclamationSousTraitement();
+    this.accueilService.findAllVehiculeAutoBus();
+    this.accueilService.findAllVehiculeVoiture();
+    this.accueilService.findAllUsersAdmin();
+    this.accueilService.findAllUsersEmploye();
+    this.charts();
+  }
+  public charts() {
     this.dataREclamations = {
-      labels: ['Non Vue', 'Sous Traitement', 'Bien Traitée'],
+      labels: ['Pas Encore Vue', 'Sous Traitement', 'Bien Traitée'],
 
       datasets: [
         {
-          data : [1, 80, 3],
+          data : [this.accueilService.dataRecNonLu, this.accueilService.dataRecSousTrait, this.accueilService.dataRecBienTraite],
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
           hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         },
@@ -40,27 +59,11 @@ export class ActionsComponent implements OnInit {
 
     this.dataBons = {
       datasets: [{
-        data: [
-          11,
-          16,
-          7
-
-        ],
-        backgroundColor: [
-
-          '#4BC0C0',
-
-          '#E7E9ED',
-          '#36A2EB'
-        ],
+        data: [this.accueilService.dataBonCar, this.accueilService.dataBonVid, this.accueilService.dataBonRep],
+        backgroundColor: ['#4BC0C0', '#E7E9ED', '#36A2EB'],
         label: 'My dataset'
       }],
-      labels: [
-        'Carburant',
-        'Vidange',
-        'Reparation'
-
-      ]
+      labels: ['Carburant', 'Vidange', 'Reparation']
     };
 
 
@@ -68,7 +71,7 @@ export class ActionsComponent implements OnInit {
       labels: ['Interne', 'Externe'],
       datasets: [
         {
-          data : [this.prestationInterneService.dataPresInterne, this.prestationExterneService.dataPresExterne],
+          data : [this.accueilService.dataPresInterne, this.accueilService.dataPresExterne],
           backgroundColor: ['#FFCE56', '#4BC0C0'],
           hoverBackgroundColor: ['#FFCE56', '#4BC0C0']
         },
@@ -79,7 +82,7 @@ export class ActionsComponent implements OnInit {
       labels: ['Admin', 'Employe'],
       datasets: [
         {
-          data : [50, 80],
+          data : [this.accueilService.dataUsersAd, this.accueilService.dataUsersEmp],
           backgroundColor: ['#FF6384', '#36A2EB'],
           hoverBackgroundColor: ['#FF6384', '#36A2EB']
         },
@@ -90,36 +93,20 @@ export class ActionsComponent implements OnInit {
       labels: ['Informatique', 'Enseignement'],
       datasets: [
         {
-          data : [50, 80],
+          data : [this.accueilService.dataMaterielInf, this.accueilService.dataMaterielEns],
           backgroundColor: ['#FF6384', '#FFCE56'],
           hoverBackgroundColor: ['#FF6384', '#FFCE56']
         },
       ]
     };
 
-
-
-
     this.dataVehicule = {
       datasets: [{
-        data: [
-          2,
-          7
-
-        ],
-        backgroundColor: [
-
-          '#4BC0C0',
-
-          '#E7E9ED'
-        ],
+        data: [this.accueilService.dataVehiculeBus, this.accueilService.dataVehiculeVoi],
+        backgroundColor: ['#4BC0C0', '#E7E9ED'],
         label: 'My dataset'
       }],
-      labels: [
-        'AutoBus',
-        'Voiture'
-
-      ]
+      labels: ['AutoBus', 'Voiture']
     };
   }
 }

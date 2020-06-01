@@ -42,7 +42,7 @@ export class UserinformationsComponent implements OnInit {
   this.userupdate.type = this.type;
   this.userupdate.nom = this.nomm;
   this.userupdate.prenom = this.pren;
-  this.userupdate.telephone = Number(this.teleinput);
+  this.userupdate.telephone = this.teleinput;
   this.userupdate.username = this.nomuserinput;
   this.userupdate.password = this.passinput;
   this.usersService.update(this.userupdate).subscribe(
