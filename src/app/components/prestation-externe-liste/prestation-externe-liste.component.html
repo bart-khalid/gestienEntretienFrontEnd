@@ -156,8 +156,7 @@
         <label for="reclamer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
       </div>
       <div class="ui-g-5">
-        <p-checkbox [(ngModel)]="prestationExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="reclamer" style="color: #00aeef"><strong>{{prestationExterne.reclamedE}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationExterne.reclamedE" id="reclamer" [binary]="true"></p-checkbox>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -166,11 +165,11 @@
 
     <div class="ui-g-12" *ngIf="prestationExterne.reclamedE">
       <div class="ui-g-3">
-        <label for="refReclamation" style="color: #00aeef">Reclamation :</label>
+        <label for="refReclamationn" style="color: #00aeef">Reclamation :</label>
       </div>
       <div class="ui-g-5">
-        <label id="refReclamation" *ngIf="prestationExterne.reclamationE != null" >{{prestationExterne.reclamationE.descreptionDropDownReclamation}}</label>
-        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" placeholder="choisir la nouvelle reclamation" [filter]="true" ></p-dropdown>
+        <label for="refReclamationn" *ngIf="prestationExterne.reclamationE != null">{{prestationExterne.reclamationE.descreptionDropDownReclamation}}</label>
+        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" placeholder="choisir la nouvelle reclamation" [filter]="true" id="refReclamationn"></p-dropdown>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -183,8 +182,7 @@
         <label for="bonc" style="color: #00aeef"><strong>Prestation A Un Bon Commande ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationExterne.bonCommandeE" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="bonC" style="color: #00aeef"><strong>{{prestationExterne.bonCommandeE}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationExterne.bonCommandeE" id="bonC" [binary]="true"></p-checkbox>
       </div>
       <div class="ui-g-3"></div>
       <div class="ui-g-4">
@@ -200,7 +198,7 @@
           <label for="numbonc" style="color: #00aeef">Numéro Bon Commande :</label>
         </div>
         <div class="ui-g-5">
-          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
+          <input pInputText [(ngModel)]="prestationExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -251,8 +249,7 @@
         <label for="bonL" style="color: #00aeef"><strong>Prestation A Un Bon Livraison ?</strong></label>
       </div>
       <div class="ui-g-2">
-        <p-checkbox [(ngModel)]="prestationExterne.bonLivraisonE" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-        <label for="bonL" style="color: #00aeef"><strong>{{prestationExterne.bonLivraisonE}}</strong></label>
+        <p-checkbox [(ngModel)]="prestationExterne.bonLivraisonE" id="bonL" [binary]="true"></p-checkbox>
       </div>
       <div class="ui-g-3"></div>
       <div class="ui-g-4">
@@ -269,7 +266,7 @@
           <label for="numbonL" style="color: #00aeef">Numéro Bon Livraison :</label>
         </div>
         <div class="ui-g-5">
-          <input type="number" pInputText [(ngModel)]="prestationExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >
+          <input  pInputText [(ngModel)]="prestationExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >
         </div>
         <div class="ui-g-4">
           <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>

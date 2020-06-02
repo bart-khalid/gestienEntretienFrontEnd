@@ -83,8 +83,7 @@
             <label for="reclameer" style="color: #00aeef"><strong>Cette prestation est réclamée ?</strong></label>
           </div>
           <div class="ui-g-2">
-            <p-checkbox [(ngModel)]="prestataionInterne.reclamedI" id="reclameer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-            <label for="bonL" style="color: #00aeef"><strong>{{prestataionInterne.reclamedI}}</strong></label>
+            <p-checkbox [(ngModel)]="prestataionInterne.reclamedI" id="reclameer" [binary]="true"></p-checkbox>
           </div>
           <div class="ui-g-3"></div>
         </div>
@@ -258,8 +257,7 @@
             <label for="bonc" style="color: #00aeef"><strong>Cette Prestation à un Bon Commande ?</strong></label>
           </div>
           <div class="ui-g-5">
-            <p-checkbox [(ngModel)]="prestataionExterne.bonCommandeE" id="bonC" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-            <label for="bonL" style="color: #00aeef"><strong>{{prestataionExterne.bonCommandeE}}</strong></label>
+            <p-checkbox [(ngModel)]="prestataionExterne.bonCommandeE" id="bonC" [binary]="true"></p-checkbox>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -274,7 +272,7 @@
             <label for="numbonc" style="color: #00aeef">Numéro Bon Commande :</label>
           </div>
           <div class="ui-g-5">
-            <input type="number" pInputText [(ngModel)]="prestataionExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
+            <input  pInputText [(ngModel)]="prestataionExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
           </div>
           <div class="ui-g-4">
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -325,8 +323,7 @@
             <label for="bonL" style="color: #00aeef"><strong>Prestation A Un Bon Livraison ?</strong></label>
           </div>
           <div class="ui-g-5">
-            <p-checkbox [(ngModel)]="prestataionExterne.bonLivraisonE" id="bonL" [binary]="true"></p-checkbox> &nbsp; &nbsp;
-            <label for="bonL" style="color: #00aeef"><strong>{{prestataionExterne.bonLivraisonE}}</strong></label>
+            <p-checkbox [(ngModel)]="prestataionExterne.bonLivraisonE" id="bonL" [binary]="true"></p-checkbox>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -342,7 +339,7 @@
               <label for="numbonL" style="color: #00aeef">Numéro Bon Livraison :</label>
             </div>
             <div class="ui-g-5">
-              <input type="number" pInputText [(ngModel)]="prestataionExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >
+              <input  pInputText [(ngModel)]="prestataionExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >
             </div>
             <div class="ui-g-4">
               <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
