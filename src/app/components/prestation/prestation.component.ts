@@ -38,7 +38,7 @@ export class PrestationComponent implements OnInit {
   selectedEntretien: string;
   selectedLocalee = new Local();
 
-
+  typeuser = localStorage.getItem('type');
   public prestataionInterne = new PrestationInterne();
   public prestataionExterne = new PrestationExterne();
   public foundedAgents = new Array<Agent>();
@@ -51,6 +51,9 @@ export class PrestationComponent implements OnInit {
               private agentService: AgentService) { }
 
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
     this.reclamationService.findAll();
     this.localService.findAll();
     this.agentService.findAll();

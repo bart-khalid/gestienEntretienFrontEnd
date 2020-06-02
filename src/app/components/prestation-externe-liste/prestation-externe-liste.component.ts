@@ -34,6 +34,7 @@ export class PrestationExterneListeComponent implements OnInit {
   entretiens: any[];
 
   userform1: FormGroup;
+  typeuser = localStorage.getItem('type');
 
   constructor(private fb: FormBuilder, private reclamationService: ReclamationService,
               private localService: LocalService,
@@ -50,6 +51,9 @@ export class PrestationExterneListeComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
 
     this.prestationExterneService.findAll();
     this.reclamationService.findAllReclamationsNonTraiter();

@@ -30,7 +30,7 @@ export class LocalComponent implements OnInit {
   typesDepartement: SelectItem[];
 
   userform: FormGroup;
-
+  typeuser = localStorage.getItem('type');
   errorS: number ;
   errorC: number ;
   constructor(private fb: FormBuilder, private messageService: MessageService, private localService: LocalService,
@@ -44,6 +44,10 @@ export class LocalComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.localService.findAll();
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),

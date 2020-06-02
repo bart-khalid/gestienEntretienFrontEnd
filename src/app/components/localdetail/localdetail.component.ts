@@ -15,7 +15,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./localdetail.component.css']
 })
 export class LocaldetailComponent implements OnInit {
-
+  typeuser = localStorage.getItem('type');
   value: boolean;
   cancel: boolean;
   displayDialog: boolean;
@@ -43,6 +43,10 @@ export class LocaldetailComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.localdetailService.findAll();
 
     this.userform = this.fb.group({

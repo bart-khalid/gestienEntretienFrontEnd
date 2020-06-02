@@ -31,7 +31,7 @@ export class MaterielComponent implements OnInit {
 
   userform: FormGroup;
 
-
+  typeuser = localStorage.getItem('type');
   cols: any[];
 
   fournisseurs = new Array<FournisseurSV>();
@@ -46,6 +46,10 @@ export class MaterielComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.materielService.findAll();
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),

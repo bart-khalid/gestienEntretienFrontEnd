@@ -32,7 +32,7 @@ export class PrestationInterneListeComponent implements OnInit {
   newPrestation: boolean;
 
   userform: FormGroup;
-
+  typeuser = localStorage.getItem('type');
   reclamations: SelectItem[];
   agents: SelectItem[];
 
@@ -57,6 +57,9 @@ export class PrestationInterneListeComponent implements OnInit {
     });
   }
   ngOnInit() {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
     this.prestationInterneService.findAll();
     this.localService.findAll();
     this.reclamationService.findAllReclamationsNonTraiter();

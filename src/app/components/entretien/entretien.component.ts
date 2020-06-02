@@ -11,13 +11,17 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 export class EntretienComponent implements OnInit {
   cols: any[];
   enretiens: Entretien[];
-
+  typeuser = localStorage.getItem('type');
 
 
   constructor(private entretienService: EntretienService, private messageService: MessageService,
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.cols = [
       { field: 'numFacture', header: 'Numéro Facture' },
       { field: 'nomMateriel', header: 'Nom Matériel' },

@@ -29,6 +29,7 @@ export class VehiculeListComponent implements OnInit {
   errors: number;
 
   userform: FormGroup;
+  typeuser = localStorage.getItem('type');
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private carService: CarService,
               private confirmationService: ConfirmationService) { }
@@ -42,6 +43,9 @@ export class VehiculeListComponent implements OnInit {
     });
   }
   ngOnInit() {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
 
     this.userform = this.fb.group({
       matricule: new FormControl('', Validators.required),

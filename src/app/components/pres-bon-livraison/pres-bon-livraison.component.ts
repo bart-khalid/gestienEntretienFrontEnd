@@ -9,12 +9,16 @@ import {ConfirmationService, MessageService} from "primeng/api";
   styleUrls: ['./pres-bon-livraison.component.css']
 })
 export class PresBonLivraisonComponent implements OnInit {
-
+  typeuser = localStorage.getItem('type');
   cols: any;
   constructor(private presBonLivraisonService: PresBonLivraisonService,
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.presBonLivraisonService.findAll();
     this.cols = [
       { field: 'numeroBonLivraison', header: 'Numero Bon' },

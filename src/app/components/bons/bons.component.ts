@@ -31,7 +31,7 @@ export class BonsComponent implements OnInit {
   cars: Car[];
   fournisseurs = new Array<FournisseurSV>();
   fournisseursfiltre = new Array<FournisseurSV>();
-
+  typeuser = localStorage.getItem('type');
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private boncService: BoncService,
               private carService: CarService , private fournisseurSVService: FournisseurSVService,
@@ -46,6 +46,10 @@ export class BonsComponent implements OnInit {
     });
   }
   ngOnInit() {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.vehicule = [
       {label: 'Selectionnez une véhicule', value: ''},
       {label: 'V1', value: 'v1'},

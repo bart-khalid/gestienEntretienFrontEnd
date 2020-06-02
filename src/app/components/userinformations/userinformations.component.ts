@@ -15,21 +15,26 @@ import {LoginService} from "../../controller/service/login.service";
 export class UserinformationsComponent implements OnInit {
   userform: FormGroup;
   labelopen = true;
-  ref = sessionStorage.getItem('reference');
-  type = sessionStorage.getItem('type');
-  nomm = sessionStorage.getItem('nom');
-  pren = sessionStorage.getItem('prenom');
-  tele = sessionStorage.getItem('telephone');
+  ref = localStorage.getItem('reference');
+  type = localStorage.getItem('type');
+  nomm = localStorage.getItem('nom');
+  pren = localStorage.getItem('prenom');
+  tele = localStorage.getItem('telephone');
   teleinput: string;
-  nomuser = sessionStorage.getItem('username');
+  nomuser = localStorage.getItem('username');
   nomuserinput: string;
   passinput: string ;
   errorupdate: number;
   userupdate = new Users();
+  typeuser = localStorage.getItem('type');
 
+  // tslint:disable-next-line:max-line-length
   constructor(private fb: FormBuilder, private loginService: LoginService ,private messageService: MessageService , private usersService: UsersService) {}
 
   ngOnInit() {
+    if (this.typeuser === 'administrateur' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
     this.userform = this.fb.group({
       username: new FormControl('', Validators.required),
       numtele: new FormControl('',  Validators.compose([Validators.required,

@@ -30,6 +30,7 @@ export class AgentComponent implements OnInit {
   userform: FormGroup;
 
   errors: number;
+  typeuser = localStorage.getItem('type');
 
 
   constructor(private fb: FormBuilder, private messageService: MessageService , private agentService: AgentService,
@@ -44,6 +45,10 @@ export class AgentComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.userform = this.fb.group({
       codeAgent: new FormControl('', Validators.required),
       nomAgent: new FormControl('', Validators.required),

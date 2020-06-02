@@ -28,6 +28,7 @@ export class UsersComponent implements OnInit {
 
    errorS: number ;
    errorC: number ;
+  typeuser = localStorage.getItem('type');
 
   userform: FormGroup;
 
@@ -47,6 +48,9 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),

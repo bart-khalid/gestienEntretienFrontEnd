@@ -27,7 +27,7 @@ export class FournisseurSVComponent implements OnInit {
 
   typesfournisseurs: SelectItem[];
   txt = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-
+  typeuser = localStorage.getItem('type');
   errorS: number ;
   errorC: number ;
 
@@ -43,6 +43,10 @@ export class FournisseurSVComponent implements OnInit {
     });
   }
   ngOnInit() {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.fournisseurService.findAll();
     this.userform = this.fb.group({
       nom: new FormControl('', Validators.required),

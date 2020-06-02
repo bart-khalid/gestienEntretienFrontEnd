@@ -31,6 +31,7 @@ export class BonrComponent implements OnInit {
   fournisseurs = new Array<FournisseurSV>();
   fournisseursfiltre = new Array<FournisseurSV>();
   cars: Car[];
+  typeuser = localStorage.getItem('type');
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private bonrService: BonrService,
               private carService: CarService , private fournisseurSVService: FournisseurSVService,
@@ -44,6 +45,10 @@ export class BonrComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    if (this.typeuser === 'employé' ) {
+      window.location.href = 'http://localhost:4200/accueil';
+    }
+
     this.userform = this.fb.group({
       numbonR: new FormControl('', Validators.required),
       vehiculeR: new FormControl('', Validators.required),
