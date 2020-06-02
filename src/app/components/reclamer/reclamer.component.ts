@@ -57,7 +57,7 @@ export class ReclamerComponent implements OnInit {
 
   ngOnInit() {
 
-    this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+    this.reclamationService.findbyreclament(localStorage.getItem('username'));
     this.localService.findAll();
     this.cols = [
       { field: 'reference', header: 'Réference' },
@@ -86,13 +86,13 @@ export class ReclamerComponent implements OnInit {
   }
 /*
   start() {
-    if (sessionStorage.getItem('type') === 'administrateur') {
+    if (localStorage.getItem('type') === 'administrateur') {
 
       this.reclamationService.findAll();
       this.reclamations = this.reclamationsFounded;
     } else {
-      console.log(sessionStorage.getItem('nom') + ', ' + sessionStorage.getItem('prenom'));
-      this.reclamationService.findbyreclament(sessionStorage.getItem('nom') + ', ' + sessionStorage.getItem('prenom'));
+      console.log(localStorage.getItem('nom') + ', ' + localStorage.getItem('prenom'));
+      this.reclamationService.findbyreclament(localStorage.getItem('nom') + ', ' + localStorage.getItem('prenom'));
       this.reclamations = this.foundedReclamationsemploye;
     }
   }
@@ -118,8 +118,8 @@ export class ReclamerComponent implements OnInit {
     const reclamations = this.reclamationService.reclamationsFounded;
     if (this.newReclamation) {
 
-     // this.reclamationService.save(this.reclamation, sessionStorage.getItem('username'));
-      this.saveReclamation(this.reclamation, sessionStorage.getItem('username'));
+     // this.reclamationService.save(this.reclamation, localStorage.getItem('username'));
+      this.saveReclamation(this.reclamation, localStorage.getItem('username'));
       reclamations.push(this.reclamation);
     } else {
       reclamations[this.reclamationService.reclamationsFounded.indexOf(this.selectedReclamation)] = this.reclamation;
@@ -185,7 +185,7 @@ export class ReclamerComponent implements OnInit {
           this.reclamation = null;
           this.displayDialog = false;
           this.displayDialogM = false;
-          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+          this.reclamationService.findbyreclament(localStorage.getItem('username'));
 
         }
       }, error => {
@@ -208,7 +208,7 @@ export class ReclamerComponent implements OnInit {
           this.reclamation = null;
           this.displayDialog = false;
           this.displayDialogM = false;
-          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+          this.reclamationService.findbyreclament(localStorage.getItem('username'));
         }
       }, error => {
         console.log('error in the update link');
@@ -225,7 +225,7 @@ export class ReclamerComponent implements OnInit {
         } else {
           console.log('reclamation deleted');
           this.toast.success('Reclamaton supprimée');
-          this.reclamationService.findbyreclament(sessionStorage.getItem('username'));
+          this.reclamationService.findbyreclament(localStorage.getItem('username'));
         }
       }, error => {
         console.log('error in the delete link');

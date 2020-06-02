@@ -14,7 +14,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
   styleUrls: ['./reclamation.component.css']
 })
 export class ReclamationComponent implements OnInit {
-  typeuser = sessionStorage.getItem('type');
+  typeuser = localStorage.getItem('type');
   value: boolean;
   cancel: boolean;
   displayDialog: boolean;
