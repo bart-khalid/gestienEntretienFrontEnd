@@ -12,9 +12,9 @@ import {AuthenticationService} from './controller/service/authentication.service
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  prenomm = sessionStorage.getItem('prenom');
-  nomm = sessionStorage.getItem('nom');
-  typee = sessionStorage.getItem('type');
+  prenomm = localStorage.getItem('prenom');
+  nomm = localStorage.getItem('nom');
+  typee = localStorage.getItem('type');
   items: MenuItem[];
   itemsEmploye: MenuItem[];
 

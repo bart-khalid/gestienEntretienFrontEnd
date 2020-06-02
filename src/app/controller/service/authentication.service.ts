@@ -11,7 +11,7 @@ export class AuthenticationService {
   authenticate() {
     console.log(this.loginService.errorC);
     if (this.loginService.errorC === 1) {
-      sessionStorage.setItem('key', this.loginService.currentuser.username);
+      localStorage.setItem('key', this.loginService.currentuser.username);
       return true;
     } else {
       return false;
@@ -20,12 +20,12 @@ export class AuthenticationService {
 
 
   isUserLoggedIn() {
-    const user = sessionStorage.getItem('key');
+    const user = localStorage.getItem('key');
     console.log(!(user === null));
     return !(user === null);
   }
 
   logOut() {
-    sessionStorage.removeItem('username');
+    localStorage.removeItem('username');
   }
 }

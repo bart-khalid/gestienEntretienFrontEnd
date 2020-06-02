@@ -68,13 +68,13 @@ export class LoginService {
     console.log(this.errorC);
     if (this.errorC === 1) {
       console.log(this.currentuser.username);
-      sessionStorage.setItem('prenom', this.currentuser.prenom);
-      sessionStorage.setItem('reference', this.currentuser.reference);
-      sessionStorage.setItem('nom', this.currentuser.nom);
-      sessionStorage.setItem('type', this.currentuser.type);
-      sessionStorage.setItem('username', this.currentuser.username);
-      sessionStorage.setItem('password', this.currentuser.password);
-      sessionStorage.setItem('telephone', String(this.currentuser.telephone));
+      localStorage.setItem('prenom', this.currentuser.prenom);
+      localStorage.setItem('reference', this.currentuser.reference);
+      localStorage.setItem('nom', this.currentuser.nom);
+      localStorage.setItem('type', this.currentuser.type);
+      localStorage.setItem('username', this.currentuser.username);
+      localStorage.setItem('password', this.currentuser.password);
+      localStorage.setItem('telephone', String(this.currentuser.telephone));
       return true;
     } else {
       return false;
@@ -83,24 +83,24 @@ export class LoginService {
 
 
   isUserLoggedIn() {
-    const user = sessionStorage.getItem('prenom');
-    const user1 = sessionStorage.getItem('nom');
-    const user2 = sessionStorage.getItem('type');
-    const user3 = sessionStorage.getItem('username');
-    const user4 = sessionStorage.getItem('password');
-    const user5 = sessionStorage.getItem('telephone');
+    const user = localStorage.getItem('prenom');
+    const user1 = localStorage.getItem('nom');
+    const user2 = localStorage.getItem('type');
+    const user3 = localStorage.getItem('username');
+    const user4 = localStorage.getItem('password');
+    const user5 = localStorage.getItem('telephone');
 
     console.log(!(user === null));
     return !(user === null && user1 === null && user2 === null && user3 === null && user4 === null && user5 === null  );
   }
 
   logOut() {
-    sessionStorage.removeItem('prenom');
-    sessionStorage.removeItem('nom');
-    sessionStorage.removeItem('type');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('password');
-    sessionStorage.removeItem('telephone');
+    localStorage.removeItem('prenom');
+    localStorage.removeItem('nom');
+    localStorage.removeItem('type');
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+    localStorage.removeItem('telephone');
     window.location.href = 'http://localhost:4200/';
   }
 
