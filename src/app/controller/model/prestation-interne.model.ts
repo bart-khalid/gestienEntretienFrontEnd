@@ -13,6 +13,7 @@ export class PrestationInterne {
   public nomAgentI: string;
   public nomLocaleI: string;
   public nomMaterielI: string;
+  public etatBoolean: string;
 
   public reclamationI = new Reclamation();
 

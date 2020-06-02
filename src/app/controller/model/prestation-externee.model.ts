@@ -19,6 +19,10 @@ export class PrestationExterne {
  public nomMateriel: string;
  public nomLocale: string;
 
+  public etatBooleanRec: string;
+  public etatBooleanBonL: string;
+  public etatBooleanBonC: string;
+
  public locale = new Local();
  public materielLocale = new Localdetail();
  public reclamationE = new Reclamation();
