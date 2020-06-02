@@ -38,17 +38,17 @@
 
         <div class="ui-g-12">
           <div class="ui-g-3">
-            <label for="nomloc" style="color: #00aeef"><strong>locale :</strong> </label>
+            <label for="nomloc" style="color: #00aeef"><strong>local :</strong> </label>
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown id="nomloc" formControlName="Locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="Choisir un locale" [(ngModel)]="selectedLocalee" [filter]="true"></p-dropdown>
+            <p-dropdown id="nomloc" formControlName="Locale" [options]="foundedLocales" optionLabel="descriptionDropDown" placeholder="Choisissez un locale" [(ngModel)]="selectedLocalee" [filter]="true"></p-dropdown>
             </div>
           </div>
 
           <div class="ui-g-4">
             <p-message severity="error"  *ngIf="(userform.controls['Locale'].touched &&!userform.controls['Locale'].dirty  || userform.controls['Locale'].value=='Choisir un locale')"
-                       text="Veuillez choisir un locale"></p-message>
+                       text="Veuillez choisir un local"></p-message>
           </div>
 
         </div>
@@ -56,10 +56,10 @@
 
         <div class="ui-g-12" *ngIf="selectedEntretien === 'materiel'">
           <div class="ui-g-3">
-            <label for="nomMat" style="color: #00aeef"><strong>Materiel :</strong> </label>
+            <label for="nomMat" style="color: #00aeef"><strong>Matériel :</strong> </label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown id="nomMat"  [options]="selectedLocalee.localDetails" placeholder="choisir un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestataionInterne.materielLocale" [filter]="true"></p-dropdown>
+            <p-dropdown id="nomMat"  [options]="selectedLocalee.localDetails" placeholder="Choisissez un Matériel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestataionInterne.materielLocale" [filter]="true"></p-dropdown>
           </div>
         </div>
 
@@ -80,7 +80,7 @@
 
         <div class="ui-g-12">
           <div class="ui-g-3">
-            <label for="reclameer" style="color: #00aeef"><strong>Cette prestation est reclamée ?</strong></label>
+            <label for="reclameer" style="color: #00aeef"><strong>Cette prestation est réclamée ?</strong></label>
           </div>
           <div class="ui-g-2">
             <p-checkbox [(ngModel)]="prestataionInterne.reclamedI" id="reclameer" [binary]="true"></p-checkbox> &nbsp; &nbsp;
@@ -94,7 +94,7 @@
             <label for="refReclamationn" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown [filter]="true"  [options]="foundedReclamationsToChoose" optionLabel="descreptionDropDownReclamation" placeholder="choisir la reclamation" [(ngModel)]="prestataionInterne.reclamationI"  id="refReclamationn"></p-dropdown>
+            <p-dropdown [filter]="true"  [options]="foundedReclamationsToChoose" optionLabel="descreptionDropDownReclamation" placeholder="Choisissez la réclamation" [(ngModel)]="prestataionInterne.reclamationI"  id="refReclamationn"></p-dropdown>
           </div>
         </div>
 
@@ -143,7 +143,7 @@
 
         <div class="ui-g-12">
           <div class="ui-g-3">
-            <label for="typeLoc" style="color: #00aeef"><strong>Locale :</strong></label>
+            <label for="typeLoc" style="color: #00aeef"><strong>Local :</strong></label>
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform1"  >
@@ -152,16 +152,16 @@
           </div>
           <div class="ui-g-4">
             <p-message severity="error" *ngIf="(userform1.controls['LocaleE'].touched &&!userform1.controls['LocaleE'].dirty  || userform1.controls['LocaleE'].value=='Choisir un locale')"
-                       text="Veuillez choisir un locale"></p-message>
+                       text="Veuillez choisir un local"></p-message>
           </div>
         </div>
 
         <div class="ui-g-12" *ngIf="prestataionExterne.typeEntretienE === 'materiel'">
           <div class="ui-g-3">
-            <label for="nomMatE" style="color: #00aeef"><strong>Materiel :</strong> </label>
+            <label for="nomMatE" style="color: #00aeef"><strong>Matériel :</strong> </label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown id="nomMatE"  [options]="prestataionExterne.locale.localDetails" placeholder="choisir un Materiel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestataionExterne.materielLocale" [filter]="true"></p-dropdown>
+            <p-dropdown id="nomMatE"  [options]="prestataionExterne.locale.localDetails" placeholder="Choisissez un Matériel" optionLabel="descriptionMaterielLocale" [(ngModel)]="prestataionExterne.materielLocale" [filter]="true"></p-dropdown>
           </div>
         </div>
 
@@ -184,7 +184,7 @@
 
         <div class="ui-g-12">
           <div class="ui-g-3">
-            <label for="numF" style="color: #00aeef"><strong>Numero Facture :</strong></label>
+            <label for="numF" style="color: #00aeef"><strong>Numéro Facture :</strong></label>
           </div>
           <div class="ui-g-5">
             <div class="form-group" [formGroup]="userform1"  >
@@ -244,7 +244,7 @@
             <label for="refReclamation" style="color: #00aeef">Réclamation associée :</label>
           </div>
           <div class="ui-g-5">
-            <p-dropdown  [options]="foundedReclamationsToChoose" optionLabel="descreptionDropDownReclamation" [(ngModel)]="prestataionExterne.reclamationE" placeholder="choisir la reclamation" id="refReclamation"></p-dropdown>
+            <p-dropdown  [options]="foundedReclamationsToChoose" optionLabel="descreptionDropDownReclamation" [(ngModel)]="prestataionExterne.reclamationE" placeholder="choisissez la réclamation" id="refReclamation"></p-dropdown>
           </div>
           <div class="ui-g-4">
             <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
@@ -271,7 +271,7 @@
 
         <div class="ui-g-12" >
           <div class="ui-g-3">
-            <label for="numbonc" style="color: #00aeef">Numero Bon Commande :</label>
+            <label for="numbonc" style="color: #00aeef">Numéro Bon Commande :</label>
           </div>
           <div class="ui-g-5">
             <input type="number" pInputText [(ngModel)]="prestataionExterne.presBonCommandeE.numeroBonCommande" id="numbonC" >
@@ -339,7 +339,7 @@
 
           <div class="ui-g-12" >
             <div class="ui-g-3">
-              <label for="numbonL" style="color: #00aeef">Numero Bon Livraison :</label>
+              <label for="numbonL" style="color: #00aeef">Numéro Bon Livraison :</label>
             </div>
             <div class="ui-g-5">
               <input type="number" pInputText [(ngModel)]="prestataionExterne.presBonLivraisonE.numeroBonLivraison" id="numbonL" >

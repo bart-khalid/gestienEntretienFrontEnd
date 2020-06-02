@@ -74,7 +74,7 @@ export class LoginService {
       localStorage.setItem('type', this.currentuser.type);
       localStorage.setItem('username', this.currentuser.username);
       localStorage.setItem('password', this.currentuser.password);
-      localStorage.setItem('telephone', String(this.currentuser.telephone));
+      localStorage.setItem('telephone', this.currentuser.telephone);
       return true;
     } else {
       return false;
@@ -101,6 +101,7 @@ export class LoginService {
     localStorage.removeItem('username');
     localStorage.removeItem('password');
     localStorage.removeItem('telephone');
+    localStorage.removeItem('reference');
     window.location.href = 'http://localhost:4200/';
   }
 
@@ -129,7 +130,7 @@ export class LoginService {
          } else {
            this.usersService.findbyUsername(usernamee).subscribe(
              dataa => {
-               this.messageService.add({severity: 'success', summary: 'Succée', detail: '  Vous etes connecté '});
+               this.messageService.add({severity: 'success', summary: 'Succés', detail: '  Vous êtes connecté '});
                this.currentuser = dataa;
                this.authenticate();
                if (this.authenticate()) {
