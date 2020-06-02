@@ -83,11 +83,11 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="matricule" style="color: #00aeef"><strong> Nom Local : </strong></label>
+          <label style="color: #00aeef"><strong> Nom Local : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown  id="matricule" formControlName="localassocie" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="Choisissez un locale" [filter]="true" ></p-dropdown>
+            <p-dropdown formControlName="localassocie" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" [filter]="true"></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
