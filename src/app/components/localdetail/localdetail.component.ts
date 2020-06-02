@@ -21,9 +21,8 @@ export class LocaldetailComponent implements OnInit {
   displayDialog: boolean;
   submitted: boolean;
   local = new Localdetail();
-
+  private url = 'http://localhost:8090/GestionEntretien/locale/';
   selectedLocal: Localdetail;
-
   newLocal: boolean;
 
   locals = new Array<Localdetail>();
@@ -147,6 +146,7 @@ export class LocaldetailComponent implements OnInit {
     }
     return local;
   }
+
   get foundedLocalDetails(): Localdetail[] {
     return this.localdetailService.foundedLocalDetails;
   }

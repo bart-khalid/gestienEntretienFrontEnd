@@ -76,7 +76,7 @@ export class PrestationComponent implements OnInit {
       });
 
     this.cols = [
-      { field: 'reference', header: 'Réference reclamation' },
+      { field: 'reference', header: 'Réference réclamation' },
       { field: 'reclamentName', header: 'Réclament' },
       { field: 'objet', header: 'Objet' },
       { field: 'etat', header: 'État' }

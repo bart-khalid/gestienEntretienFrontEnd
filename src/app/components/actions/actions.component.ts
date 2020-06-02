@@ -93,7 +93,7 @@ export class ActionsComponent implements OnInit {
         backgroundColor: ['#4BC0C0', '#E7E9ED', '#36A2EB', '#fbef9b', '#00ffa5'],
         label: 'My dataset'
       }],
-      labels: ['Carburant', 'Vidange', 'Reparation', 'Commande', 'Livraison']
+      labels: ['Carburant', 'Vidange', 'Réparation', 'Commande', 'Livraison']
     };
 
 
@@ -109,7 +109,7 @@ export class ActionsComponent implements OnInit {
     };
 
     this.dataUtilisateur = {
-      labels: ['Admin', 'Employe'],
+      labels: ['Admin', 'Employé'],
       datasets: [
         {
           data : [this.accueilService.dataUsersAd, this.accueilService.dataUsersEmp],

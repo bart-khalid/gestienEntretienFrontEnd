@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     {label: 'Bons véhicules', items: [
         {label: 'Carburant', icon: 'pi pi-fw pi-pencil', routerLink: 'bons'},
         {label: 'Vidange', icon: 'pi pi-fw pi-pencil', routerLink: 'bonv'},
-        {label: 'Reparation', icon: 'pi pi-fw pi-pencil', routerLink: 'bonr'}], icon: 'pi pi-list' },
+        {label: 'Réparation', icon: 'pi pi-fw pi-pencil', routerLink: 'bonr'}], icon: 'pi pi-list' },
     {label: 'Réclamations', items: [
         {label: 'Réclamer', icon: 'pi pi-fw pi-plus', routerLink: 'reclamer'},
         {label: 'Liste Réclamations', icon: 'pi pi-fw pi-pencil' , routerLink: 'reclamations'}], icon: 'pi pi-align-justify'},
