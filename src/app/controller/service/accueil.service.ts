@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AccueilService {
 
+  // tslint:disable-next-line:variable-name
   private _progress: boolean;
   private url = 'http://localhost:8090/GestionEntretien/accueil/';
   // tslint:disable-next-line:variable-name
@@ -36,6 +37,10 @@ export class AccueilService {
   private _dataVehiculeBus: number;
   // tslint:disable-next-line:variable-name
   private _dataMaterielInf: number;
+  // tslint:disable-next-line:variable-name
+  private _dataBonCmd: number;
+  // tslint:disable-next-line:variable-name
+  private _dataBonLiv: number;
   constructor(private http: HttpClient) { }
 
 
@@ -126,7 +131,6 @@ export class AccueilService {
     this.http.get<number>(this.url + 'sizeUsersAD').subscribe(
       data => {
         this._dataUsersAd = data;
-        this._progress = false;
       }, error => {
         console.log('erreur du serveur');
       }
@@ -183,120 +187,160 @@ export class AccueilService {
     );
   }
 
-
-  set dataPresInterne(value: number) {
-    this._dataPresInterne = value;
+  public findAllBonCommande() {
+    this.http.get<number>(this.url + 'sizeBonCmd').subscribe(
+      data => {
+        this._dataBonCmd = data;
+      }, error => {
+        console.log('erreur du serveur');
+      }
+    );
   }
 
-  set dataPresExterne(value: number) {
-    this._dataPresExterne = value;
+  public findAllBonLivraison() {
+    this.http.get<number>(this.url + 'sizeBonLiv').subscribe(
+      data => {
+        this._dataBonLiv = data;
+      }, error => {
+        console.log('erreur du serveur');
+      }
+    );
   }
 
-  set dataRecSousTrait(value: number) {
-    this._dataRecSousTrait = value;
-  }
-
-  set dataMaterielEns(value: number) {
-    this._dataMaterielEns = value;
-  }
-
-  set dataRecBienTraite(value: number) {
-    this._dataRecBienTraite = value;
-  }
-
-  set dataRecNonLu(value: number) {
-    this._dataRecNonLu = value;
-  }
-
-  set dataBonCar(value: number) {
-    this._dataBonCar = value;
-  }
-
-  set dataBonVid(value: number) {
-    this._dataBonVid = value;
-  }
-
-  set dataBonRep(value: number) {
-    this._dataBonRep = value;
-  }
-
-  set dataUsersAd(value: number) {
-    this._dataUsersAd = value;
-  }
-
-  set dataUsersEmp(value: number) {
-    this._dataUsersEmp = value;
-  }
-
-  set dataVehiculeVoi(value: number) {
-    this._dataVehiculeVoi = value;
-  }
-
-  set dataVehiculeBus(value: number) {
-    this._dataVehiculeBus = value;
-  }
-
-  set dataMaterielInf(value: number) {
-    this._dataMaterielInf = value;
-  }
 
   get progress(): boolean {
     return this._progress;
+  }
+
+  set progress(value: boolean) {
+    this._progress = value;
   }
 
   get dataPresInterne(): number {
     return this._dataPresInterne;
   }
 
+  set dataPresInterne(value: number) {
+    this._dataPresInterne = value;
+  }
+
   get dataPresExterne(): number {
     return this._dataPresExterne;
   }
 
-  get dataMaterielEns(): number {
-    return this._dataMaterielEns;
-  }
-
-  get dataRecBienTraite(): number {
-    return this._dataRecBienTraite;
-  }
-
-  get dataRecNonLu(): number {
-    return this._dataRecNonLu;
-  }
-
-  get dataBonCar(): number {
-    return this._dataBonCar;
-  }
-
-  get dataBonVid(): number {
-    return this._dataBonVid;
-  }
-
-  get dataBonRep(): number {
-    return this._dataBonRep;
-  }
-
-  get dataMaterielInf(): number {
-    return this._dataMaterielInf;
+  set dataPresExterne(value: number) {
+    this._dataPresExterne = value;
   }
 
   get dataRecSousTrait(): number {
     return this._dataRecSousTrait;
   }
 
+  set dataRecSousTrait(value: number) {
+    this._dataRecSousTrait = value;
+  }
+
+  get dataMaterielEns(): number {
+    return this._dataMaterielEns;
+  }
+
+  set dataMaterielEns(value: number) {
+    this._dataMaterielEns = value;
+  }
+
+  get dataRecBienTraite(): number {
+    return this._dataRecBienTraite;
+  }
+
+  set dataRecBienTraite(value: number) {
+    this._dataRecBienTraite = value;
+  }
+
+  get dataRecNonLu(): number {
+    return this._dataRecNonLu;
+  }
+
+  set dataRecNonLu(value: number) {
+    this._dataRecNonLu = value;
+  }
+
+  get dataBonCar(): number {
+    return this._dataBonCar;
+  }
+
+  set dataBonCar(value: number) {
+    this._dataBonCar = value;
+  }
+
+  get dataBonVid(): number {
+    return this._dataBonVid;
+  }
+
+  set dataBonVid(value: number) {
+    this._dataBonVid = value;
+  }
+
+  get dataBonRep(): number {
+    return this._dataBonRep;
+  }
+
+  set dataBonRep(value: number) {
+    this._dataBonRep = value;
+  }
+
   get dataUsersAd(): number {
     return this._dataUsersAd;
+  }
+
+  set dataUsersAd(value: number) {
+    this._dataUsersAd = value;
   }
 
   get dataUsersEmp(): number {
     return this._dataUsersEmp;
   }
 
+  set dataUsersEmp(value: number) {
+    this._dataUsersEmp = value;
+  }
+
   get dataVehiculeVoi(): number {
     return this._dataVehiculeVoi;
   }
 
+  set dataVehiculeVoi(value: number) {
+    this._dataVehiculeVoi = value;
+  }
+
   get dataVehiculeBus(): number {
     return this._dataVehiculeBus;
+  }
+
+  set dataVehiculeBus(value: number) {
+    this._dataVehiculeBus = value;
+  }
+
+  get dataMaterielInf(): number {
+    return this._dataMaterielInf;
+  }
+
+  set dataMaterielInf(value: number) {
+    this._dataMaterielInf = value;
+  }
+
+  get dataBonCmd(): number {
+    return this._dataBonCmd;
+  }
+
+  set dataBonCmd(value: number) {
+    this._dataBonCmd = value;
+  }
+
+  get dataBonLiv(): number {
+    return this._dataBonLiv;
+  }
+
+  set dataBonLiv(value: number) {
+    this._dataBonLiv = value;
   }
 }

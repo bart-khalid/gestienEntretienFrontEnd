@@ -5,7 +5,7 @@ import {inspect} from 'util';
 import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
 import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
 import {AccueilService} from '../../controller/service/accueil.service';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -20,7 +20,6 @@ export class ActionsComponent implements OnInit {
   dataUtilisateur: any;
   dataVehicule: any;
   dataMateriel: any;
-  num: number;
   private url = 'http://localhost:8090/GestionEntretien/accueil/';
   constructor(private accueilService: AccueilService , private http: HttpClient) { }
   ngOnInit() {
@@ -32,8 +31,8 @@ export class ActionsComponent implements OnInit {
   public findAllReclamationNonLu() {
     this.http.get<number>(this.url + 'sizeRecNonLu').subscribe(
       data => {
-        console.log(data);
         this.charts();
+        this.progress = false;
       }, error => {
         console.log('erreur du serveur');
       }
@@ -42,10 +41,25 @@ export class ActionsComponent implements OnInit {
   get progress(): boolean {
    return  this.accueilService.progress;
   }
+  set progress(value: boolean) {
+    this.accueilService.progress = value;
+  }
+  public refresh() {
+    this.find();
+    this.progress = false;
+    this.charts();
+
+  }
   public findALL() {
+   this.find();
+   this.charts();
+  }
+  public find() {
     this.accueilService.findAllBonCarburant();
     this.accueilService.findAllBonReparation();
     this.accueilService.findAllBonVidange();
+    this.accueilService.findAllBonCommande();
+    this.accueilService.findAllBonLivraison();
     this.accueilService.findAllMaterielEnseinement();
     this.accueilService.findAllMaterielInformatique();
     this.accueilService.findAllPrestationExterne();
@@ -57,7 +71,6 @@ export class ActionsComponent implements OnInit {
     this.accueilService.findAllVehiculeVoiture();
     this.accueilService.findAllUsersAdmin();
     this.accueilService.findAllUsersEmploye();
-    this.charts();
   }
   public charts() {
     this.dataREclamations = {
@@ -71,16 +84,16 @@ export class ActionsComponent implements OnInit {
         },
       ]
     };
-    console.log(this.num);
-
 
     this.dataBons = {
       datasets: [{
-        data: [this.accueilService.dataBonCar, this.accueilService.dataBonVid, this.accueilService.dataBonRep],
-        backgroundColor: ['#4BC0C0', '#E7E9ED', '#36A2EB'],
+        data: [this.accueilService.dataBonCar, this.accueilService.dataBonVid, this.accueilService.dataBonRep,
+          this.accueilService.dataBonCmd,
+          this.accueilService.dataBonLiv],
+        backgroundColor: ['#4BC0C0', '#E7E9ED', '#36A2EB', '#fbef9b', '#00ffa5'],
         label: 'My dataset'
       }],
-      labels: ['Carburant', 'Vidange', 'Reparation']
+      labels: ['Carburant', 'Vidange', 'Reparation', 'Commande', 'Livraison']
     };
 
 

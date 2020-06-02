@@ -35,6 +35,23 @@ export class PrestationExterneService {
     this.http.get<Array<PrestationExterne>>(this.url).subscribe(
       data => {
         this._foundedPrestationExternes = data.reverse();
+        for (const p of this.foundedPrestationExternes) {
+          if (p.reclamedE) {
+            p.etatBooleanRec = 'Oui';
+          } else {
+            p.etatBooleanRec = 'Non';
+          }
+          if (p.bonCommandeE) {
+            p.etatBooleanBonC = 'Oui';
+          } else {
+            p.etatBooleanBonC = 'Non';
+          }
+          if (p.bonLivraisonE) {
+            p.etatBooleanBonL = 'Oui';
+          } else {
+            p.etatBooleanBonL = 'Non';
+          }
+        }
         console.log('data presExterne: ' + data.length);
         this._dataPresExterne = data.length;
       }, error => {

@@ -72,9 +72,9 @@ export class PrestationExterneListeComponent implements OnInit {
       { field: 'nomPrestataireE', header: 'Prestataire' },
       { field: 'numeroFacE', header: 'Numéro Facture' },
       { field: 'montantFacE', header: 'Montant' },
-      { field: 'reclamedE', header: 'Réclamée ?' },
-      { field: 'bonCommandeE', header: 'Avec bon Commande ?' },
-      { field: 'bonLivraisonE', header: 'Avec bon Livraison ?' },
+      { field: 'etatBooleanRec', header: 'Réclamée ?' },
+      { field: 'etatBooleanBonC', header: 'Avec bon Commande ?' },
+      { field: 'etatBooleanBonL', header: 'Avec bon Livraison ?' },
     ];
     this.entretiens = [
       { value: 'materiel', label: 'Matériel' },

@@ -76,7 +76,7 @@ export class PrestationInterneListeComponent implements OnInit {
       { field: 'nomAgentI', header: 'Agent' },
       { field: 'nomLocaleI', header: 'Local' },
       { field: 'nomMaterielI', header: 'Matériel' },
-      { field: 'reclamedI', header: 'Réclamée ?' },
+      { field: 'etatBoolean', header: 'Réclamée ?' }
     ];
     this.entretiens = [
       { value: 'materiel', label: 'Matériel' },
@@ -102,6 +102,7 @@ export class PrestationInterneListeComponent implements OnInit {
 
   delete() {
     const index = this.prestationInterneService.foundedPrestationInternes.indexOf(this.selectedPrestation);
+    // tslint:disable-next-line:max-line-length
     this.prestationInterneService.foundedPrestationInternes = this.prestationInterneService.foundedPrestationInternes.filter((val, i) => i !== index);
     this.prestationInterneService.delete(this.selectedPrestation.referenceI);
     this.prestationInterne = null;

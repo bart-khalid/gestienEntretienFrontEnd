@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {PrestationInterne} from '../model/prestation-interne.model';
 import {ReclamationService} from './reclamation.service';
 import {ToastrService} from 'ngx-toastr';
+import {forEachComment} from 'tslint';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,13 @@ export class PrestationInterneService {
     this.http.get<Array<PrestationInterne>>(this.url).subscribe(
       data => {
         this._foundedPrestationInternes = data.reverse();
+        for (const r of this.foundedPrestationInternes) {
+          if (r.reclamedI) {
+            r.etatBoolean = 'Oui';
+          } else {
+            r.etatBoolean = 'Non';
+          }
+        }
         console.log('Prestations Internes data: ' + data.length);
         this._dataPresInterne = data.length;
         this._progress = false;
