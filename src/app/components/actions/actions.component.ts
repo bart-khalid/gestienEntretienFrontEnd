@@ -5,6 +5,7 @@ import {inspect} from 'util';
 import {PrestationInterneService} from '../../controller/service/prestation-interne.service';
 import {PrestationExterneService} from '../../controller/service/prestation-externe.service';
 import {AccueilService} from '../../controller/service/accueil.service';
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -19,9 +20,24 @@ export class ActionsComponent implements OnInit {
   dataUtilisateur: any;
   dataVehicule: any;
   dataMateriel: any;
-  constructor(private accueilService: AccueilService) { }
+  num: number;
+  private url = 'http://localhost:8090/GestionEntretien/accueil/';
+  constructor(private accueilService: AccueilService , private http: HttpClient) { }
   ngOnInit() {
     this.findALL();
+    this.findAllReclamationNonLu();
+    this.charts();
+  }
+
+  public findAllReclamationNonLu() {
+    this.http.get<number>(this.url + 'sizeRecNonLu').subscribe(
+      data => {
+        console.log(data);
+        this.charts();
+      }, error => {
+        console.log('erreur du serveur');
+      }
+    );
   }
   get progress(): boolean {
    return  this.accueilService.progress;
@@ -49,12 +65,13 @@ export class ActionsComponent implements OnInit {
 
       datasets: [
         {
-          data : [this.accueilService.dataRecNonLu, this.accueilService.dataRecSousTrait, this.accueilService.dataRecBienTraite],
+          data : [ this.accueilService.dataRecNonLu , this.accueilService.dataRecSousTrait, this.accueilService.dataRecBienTraite],
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
           hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         },
       ]
     };
+    console.log(this.num);
 
 
     this.dataBons = {

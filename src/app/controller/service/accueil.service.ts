@@ -38,6 +38,8 @@ export class AccueilService {
   private _dataMaterielInf: number;
   constructor(private http: HttpClient) { }
 
+
+
   public findAllPrestationInterne() {
     this.http.get<number>(this.url + 'sizePresIn').subscribe(
       data => {
@@ -61,7 +63,7 @@ export class AccueilService {
   public findAllReclamationNonLu() {
     this.http.get<number>(this.url + 'sizeRecNonLu').subscribe(
       data => {
-        this._dataRecNonLu = data;
+        this.dataRecNonLu = data;
       }, error => {
         console.log('erreur du serveur');
       }
@@ -93,7 +95,7 @@ export class AccueilService {
     this._progress = true;
     this.http.get<number>(this.url + 'sizeBonCar').subscribe(
       data => {
-        this._dataBonCar = data;
+        this.dataBonCar = data;
       }, error => {
         console.log('erreur du serveur');
       }
@@ -103,7 +105,7 @@ export class AccueilService {
   public findAllBonVidange() {
     this.http.get<number>(this.url + 'sizeBonVid').subscribe(
       data => {
-        this._dataBonVid = data;
+        this.dataBonVid = data;
       }, error => {
         console.log('erreur du serveur');
       }
@@ -113,7 +115,7 @@ export class AccueilService {
   public findAllBonReparation() {
     this.http.get<number>(this.url + 'sizeBonRep').subscribe(
       data => {
-        this._dataBonRep = data;
+        this.dataBonRep = data;
       }, error => {
         console.log('erreur du serveur');
       }
@@ -181,6 +183,62 @@ export class AccueilService {
     );
   }
 
+
+  set dataPresInterne(value: number) {
+    this._dataPresInterne = value;
+  }
+
+  set dataPresExterne(value: number) {
+    this._dataPresExterne = value;
+  }
+
+  set dataRecSousTrait(value: number) {
+    this._dataRecSousTrait = value;
+  }
+
+  set dataMaterielEns(value: number) {
+    this._dataMaterielEns = value;
+  }
+
+  set dataRecBienTraite(value: number) {
+    this._dataRecBienTraite = value;
+  }
+
+  set dataRecNonLu(value: number) {
+    this._dataRecNonLu = value;
+  }
+
+  set dataBonCar(value: number) {
+    this._dataBonCar = value;
+  }
+
+  set dataBonVid(value: number) {
+    this._dataBonVid = value;
+  }
+
+  set dataBonRep(value: number) {
+    this._dataBonRep = value;
+  }
+
+  set dataUsersAd(value: number) {
+    this._dataUsersAd = value;
+  }
+
+  set dataUsersEmp(value: number) {
+    this._dataUsersEmp = value;
+  }
+
+  set dataVehiculeVoi(value: number) {
+    this._dataVehiculeVoi = value;
+  }
+
+  set dataVehiculeBus(value: number) {
+    this._dataVehiculeBus = value;
+  }
+
+  set dataMaterielInf(value: number) {
+    this._dataMaterielInf = value;
+  }
 
   get progress(): boolean {
     return this._progress;
