@@ -16,18 +16,18 @@ export class PresBonCommandeComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.presBonCommandeService.findAll();
+      this.cols = [
+        { field: 'numeroBonCommande', header: 'Numero Bon' },
+        { field: 'dateBonCommande', header: 'Date' },
+        { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
+        { field: 'nomPrestataireC', header: 'Prestataire' },
+        { field: 'montantC', header: 'Montant(DH)' }
+      ];
     }
-
-    this.presBonCommandeService.findAll();
-    this.cols = [
-      { field: 'numeroBonCommande', header: 'Numero Bon' },
-      { field: 'dateBonCommande', header: 'Date' },
-      { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
-      { field: 'nomPrestataireC', header: 'Prestataire' },
-      { field: 'montantC', header: 'Montant(DH)' }
-    ];
   }
 
   delete(presBonCommande: PresBonCommande) {

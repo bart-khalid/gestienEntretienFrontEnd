@@ -43,26 +43,27 @@ export class LocaldetailComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+
+      this.localdetailService.findAll();
+
+      this.userform = this.fb.group({
+        referencelocal: new FormControl('', Validators.required),
+        materiellocal: new FormControl('', Validators.required),
+        localassocie: new FormControl('', Validators.required),
+        dateachat: new FormControl('', Validators.required),
+      });
+      this.localService.findAll();
+      this.materielService.findAll();
+      this.cols = [
+        {field: 'referenceML', header: 'Référence'},
+        {field: 'materielLocale', header: 'Matériel'},
+        {field: 'localeAssocie', header: 'Local, Département'},
+        {field: 'dateAffectation', header: 'Date d\'affectation '},
+      ];
     }
-
-    this.localdetailService.findAll();
-
-    this.userform = this.fb.group({
-      referencelocal: new FormControl('', Validators.required),
-      materiellocal: new FormControl('', Validators.required),
-      localassocie: new FormControl('', Validators.required),
-      dateachat: new FormControl('', Validators.required),
-    });
-    this.localService.findAll();
-    this.materielService.findAll();
-    this.cols = [
-      {field: 'referenceML', header: 'Réference'},
-      {field: 'materielLocale', header: 'Matériel'},
-      {field: 'localeAssocie', header: 'Local, Département'},
-      {field: 'dateAffectation', header: 'Date d\'affectation '},
-    ];
   }
 
   confirm() {

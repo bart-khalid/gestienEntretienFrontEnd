@@ -48,34 +48,35 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.userform = this.fb.group({
+        nom: new FormControl('', Validators.required),
+        prenom: new FormControl('', Validators.required),
+        telephone: new FormControl('', Validators.compose([Validators.required,
+          Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
+        usernamee: new FormControl('', Validators.required),
+        passwordd: new FormControl('', Validators.required),
+        type: new FormControl('', Validators.required)
+      });
+
+      this.cols = [
+        {field: 'reference', header: 'Référence '} ,
+        {field: 'nom', header: 'Nom '} ,
+        {field: 'prenom', header: 'Prénom'},
+        {field: 'telephone', header: 'Numéro de Téléphone'},
+        {field: 'username', header: 'Nom d\'utilisateur'},
+        {field: 'password', header: 'Mot de passe'},
+        {field: 'type', header: 'Type utilisateur'}
+      ];
+      this.type = [];
+      this.type.push({label: 'Selectionnez le Type', value: ''});
+      this.type.push({label: 'Administrateur', value: 'administrateur'});
+      this.type.push({label: 'Utilisateur Normal', value: 'normal'});
+
+      this.find();
     }
-    this.userform = this.fb.group({
-      nom: new FormControl('', Validators.required),
-      prenom: new FormControl('', Validators.required),
-      telephone: new FormControl('', Validators.compose([Validators.required,
-        Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
-      usernamee: new FormControl('', Validators.required),
-      passwordd: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required)
-    });
-
-    this.cols = [
-      {field: 'reference', header: 'Reference '} ,
-      {field: 'nom', header: 'Nom '} ,
-      {field: 'prenom', header: 'Prénom'},
-      {field: 'telephone', header: 'Numero de Telephone'},
-      {field: 'username', header: 'Nom d\'utilisateur'},
-      {field: 'password', header: 'Mot de passe'},
-      {field: 'type', header: 'Type utilisateur'}
-    ];
-    this.type = [];
-    this.type.push({label: 'Selectionnez le Type', value: ''});
-    this.type.push({label: 'Administrateur', value: 'administrateur'});
-    this.type.push({label: 'Employé', value: 'employé'});
-
-    this.find();
   }
 
   public find() {

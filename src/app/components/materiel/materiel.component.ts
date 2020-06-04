@@ -46,38 +46,39 @@ export class MaterielComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
-    }
+    } else {
 
-    this.materielService.findAll();
-    this.userform = this.fb.group({
-      nom: new FormControl('', Validators.required),
-      marque: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required)
-    });
-    this.fournisseurService.find().subscribe(
-      data => {
-        for (const f of data) {
-          if (f.typef === 'matériel') {
-            this.fournisseursfiltre.push(f);
+      this.materielService.findAll();
+      this.userform = this.fb.group({
+        nom: new FormControl('', Validators.required),
+        marque: new FormControl('', Validators.required),
+        type: new FormControl('', Validators.required)
+      });
+      this.fournisseurService.find().subscribe(
+        data => {
+          for (const f of data) {
+            if (f.typef === 'matériel') {
+              this.fournisseursfiltre.push(f);
+            }
           }
+          this.fournisseurs = this.fournisseursfiltre;
+          console.log(this.fournisseurs.length + 'data');
         }
-        this.fournisseurs = this.fournisseursfiltre;
-        console.log(this.fournisseurs.length + 'data');
-      }
-    );
-    this.cols = [
-      { field: 'nom', header: 'Nom Matériel' },
-      { field: 'marque', header: 'Fournisseur Matériel' },
-      { field: 'type', header: 'Type Matériel' },
-      { field: 'nbrEntite', header: 'Nombre d\'entités affectés aux locaux ' }
-    ];
-    this.types = [
-      { value: '', label: 'Choisissez un Type' },
-      { value: 'Informatique', label: 'Informatique ' },
-      { value: 'Enseignement', label: 'Enseignement ' }
-    ];
+      );
+      this.cols = [
+        { field: 'nom', header: 'Nom Matériel' },
+        { field: 'marque', header: 'Fournisseur Matériel' },
+        { field: 'type', header: 'Type Matériel' },
+        { field: 'nbrEntite', header: 'Nombre d\'entités affectés aux locaux ' }
+      ];
+      this.types = [
+        { value: '', label: 'Choisissez un Type' },
+        { value: 'Informatique', label: 'Informatique ' },
+        { value: 'Enseignement', label: 'Enseignement ' }
+      ];
+    }
   }
   confirm() {
     this.confirmationService.confirm({

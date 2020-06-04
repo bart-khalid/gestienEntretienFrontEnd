@@ -60,7 +60,7 @@ export class ReclamerComponent implements OnInit {
     this.reclamationService.findbyreclament(localStorage.getItem('username'));
     this.localService.findAll();
     this.cols = [
-      { field: 'reference', header: 'Réference' },
+      { field: 'reference', header: 'Référence' },
       { field: 'reclamentName', header: 'Réclament' },
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },

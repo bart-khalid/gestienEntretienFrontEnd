@@ -15,18 +15,18 @@ export class PresBonLivraisonComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.presBonLivraisonService.findAll();
+      this.cols = [
+        { field: 'numeroBonLivraison', header: 'Numero Bon' },
+        { field: 'dateBonLivraison', header: 'Date' },
+        { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
+        { field: 'nomPrestataireL', header: 'Prestataire' },
+        { field: 'montantL', header: 'Montant(DH)' }
+      ];
     }
-
-    this.presBonLivraisonService.findAll();
-    this.cols = [
-      { field: 'numeroBonLivraison', header: 'Numero Bon' },
-      { field: 'dateBonLivraison', header: 'Date' },
-      { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
-      { field: 'nomPrestataireL', header: 'Prestataire' },
-      { field: 'montantL', header: 'Montant(DH)' }
-    ];
   }
   delete(presBonLivraison: PresBonLivraison) {
     this.presBonLivraisonService.delete(presBonLivraison.reference);

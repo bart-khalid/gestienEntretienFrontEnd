@@ -57,40 +57,41 @@ export class PrestationInterneListeComponent implements OnInit {
     });
   }
   ngOnInit() {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.prestationInterneService.findAll();
+      this.localService.findAll();
+      this.reclamationService.findAllReclamationsNonTraiter();
+      this.findAllAgents();
+
+      this.userform = this.fb.group({
+        typeEntretien: new FormControl('', Validators.required),
+        Locale: new FormControl('', Validators.required),
+        date: new FormControl('', Validators.required),
+        agent: new FormControl('', Validators.required),
+      });
+
+      this.cols = [
+        { field: 'referenceI', header: 'Référence' },
+        { field: 'typeEntretienI', header: 'Entretien' },
+        { field: 'dateI', header: 'Date' },
+        { field: 'nomAgentI', header: 'Agent' },
+        { field: 'nomLocaleI', header: 'Local' },
+        { field: 'nomMaterielI', header: 'Matériel' },
+        { field: 'etatBoolean', header: 'Réclamée ?' }
+      ];
+      this.entretiens = [
+        { value: 'materiel', label: 'Matériel' },
+        { value: 'jardinage', label: 'Jardinage' },
+        { value: 'electricité', label: 'Electricité' },
+        { value: 'plomberie', label: 'Plomberie' },
+        { value: 'télephone', label: 'Télephone' },
+        { value: 'minuiserie', label: 'Minuiserie' },
+        { value: 'internet', label: 'Internet' },
+        { value: 'autre', label: 'Autre' },
+      ];
     }
-    this.prestationInterneService.findAll();
-    this.localService.findAll();
-    this.reclamationService.findAllReclamationsNonTraiter();
-    this.findAllAgents();
-
-    this.userform = this.fb.group({
-      typeEntretien: new FormControl('', Validators.required),
-      Locale: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
-      agent: new FormControl('', Validators.required),
-    });
-
-    this.cols = [
-      { field: 'referenceI', header: 'Réference' },
-      { field: 'typeEntretienI', header: 'Entretien' },
-      { field: 'dateI', header: 'Date' },
-      { field: 'nomAgentI', header: 'Agent' },
-      { field: 'nomLocaleI', header: 'Local' },
-      { field: 'nomMaterielI', header: 'Matériel' },
-      { field: 'etatBoolean', header: 'Réclamée ?' }
-    ];
-    this.entretiens = [
-      { value: 'materiel', label: 'Matériel' },
-      { value: 'jardinage', label: 'Jardinage' },
-      { value: 'electricité', label: 'Electricité' },
-      { value: 'plomberie', label: 'Plomberie' },
-      { value: 'télephone', label: 'Télephone' },
-      { value: 'minuiserie', label: 'Minuiserie' },
-      { value: 'internet', label: 'Internet' },
-      { value: 'autre', label: 'Autre' },
-    ];
   }
   showDialogToAdd() {
     this.newPrestation = true;

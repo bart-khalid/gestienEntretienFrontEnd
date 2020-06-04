@@ -46,67 +46,67 @@ export class BonsComponent implements OnInit {
     });
   }
   ngOnInit() {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
-    }
+    } else {
+      this.vehicule = [
+        {label: 'Selectionnez une véhicule', value: ''},
+        {label: 'V1', value: 'v1'},
+        {label: 'V2', value: 'v2'},
+        {label: 'V3', value: 'v3'}
+      ];
 
-    this.vehicule = [
-      {label: 'Selectionnez une véhicule', value: ''},
-      {label: 'V1', value: 'v1'},
-      {label: 'V2', value: 'v2'},
-      {label: 'V3', value: 'v3'}
-    ];
-
-    this.fourniss = [
-      {label: 'Selectionnez un fournisseur', value: ''},
-      {label: 'fournisseur 1', value: 'f1'},
-      {label: 'fournisseur 2', value: 'f2'},
-      {label: 'fournisseur 3', value: 'f3'}
-    ];
+      this.fourniss = [
+        {label: 'Selectionnez un fournisseur', value: ''},
+        {label: 'fournisseur 1', value: 'f1'},
+        {label: 'fournisseur 2', value: 'f2'},
+        {label: 'fournisseur 3', value: 'f3'}
+      ];
 
 
-    this.userform = this.fb.group({
-      numbonC: new FormControl('', Validators.required),
-      vehiculeC: new FormControl('', Validators.required),
-      fournisseurC: new FormControl('', Validators.required),
-      descriptionC: new FormControl('', Validators.required),
-      prixunitaireC: new FormControl('', Validators.required),
-      quantiteC: new FormControl('', Validators.required),
-      typeC: new FormControl('', Validators.required),
-      datebonC: new FormControl('', Validators.required),
-      totalbrutC: new FormControl('', Validators.required),
-      montantvignetteC: new FormControl('', Validators.required),
-    });
-    this.colsC = [
-      {field: 'numbonC', header: 'Nº de Bon'},
-      {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
-      {field: 'fourniassooci', header: 'Fournisseur'},
-      {field: 'descriptionC', header: 'Désignation'},
-      {field: 'prixunitaireC', header: 'Prix Unitaire'},
-      {field: 'quantiteC', header: 'Quantité'},
-      {field: 'typeC', header: 'Type Carburant'},
-      {field: 'datebonC', header: 'Date Bon'},
-      {field: 'totalbrutC', header: 'Total Brut'},
-      {field: 'montantvignetteC', header: 'Montant Vignette'}
-    ];
-    this.find();
-    this.fournisseurSVService.find().subscribe(
-      data => {
-        for (const f of data) {
-          if (f.typef === 'service') {
-            this.fournisseursfiltre.push(f);
+      this.userform = this.fb.group({
+        numbonC: new FormControl('', Validators.required),
+        vehiculeC: new FormControl('', Validators.required),
+        fournisseurC: new FormControl('', Validators.required),
+        descriptionC: new FormControl('', Validators.required),
+        prixunitaireC: new FormControl('', Validators.required),
+        quantiteC: new FormControl('', Validators.required),
+        typeC: new FormControl('', Validators.required),
+        datebonC: new FormControl('', Validators.required),
+        totalbrutC: new FormControl('', Validators.required),
+        montantvignetteC: new FormControl('', Validators.required),
+      });
+      this.colsC = [
+        {field: 'numbonC', header: 'Nº de Bon'},
+        {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
+        {field: 'fourniassooci', header: 'Fournisseur'},
+        {field: 'descriptionC', header: 'Désignation'},
+        {field: 'prixunitaireC', header: 'Prix Unitaire'},
+        {field: 'quantiteC', header: 'Quantité'},
+        {field: 'typeC', header: 'Type Carburant'},
+        {field: 'datebonC', header: 'Date Bon'},
+        {field: 'totalbrutC', header: 'Total Brut'},
+        {field: 'montantvignetteC', header: 'Montant Vignette'}
+      ];
+      this.find();
+      this.fournisseurSVService.find().subscribe(
+        data => {
+          for (const f of data) {
+            if (f.typef === 'service') {
+              this.fournisseursfiltre.push(f);
+            }
           }
+          this.fournisseurs = this.fournisseursfiltre;
+          console.log(this.fournisseurs.length + 'data');
         }
-        this.fournisseurs = this.fournisseursfiltre;
-        console.log(this.fournisseurs.length + 'data');
-      }
-    );
+      );
 
-    this.carService.findAll().subscribe(
-      data => {
-        this.cars = data;
-      }
-    );
+      this.carService.findAll().subscribe(
+        data => {
+          this.cars = data;
+        }
+      );
+    }
   }
 
   public find() {

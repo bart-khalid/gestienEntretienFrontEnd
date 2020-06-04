@@ -51,48 +51,49 @@ export class PrestationComponent implements OnInit {
               private agentService: AgentService) { }
 
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.reclamationService.findAll();
+      this.localService.findAll();
+      this.agentService.findAll();
+      this.reclamationService.findAllReclamationsNonTraiter();
+      this.findAllAgents();
+
+
+      this.userform = this.fb.group({
+        typeEntretien: new FormControl('', Validators.required),
+        Locale: new FormControl('', Validators.required),
+        date: new FormControl('', Validators.required),
+        agentt: new FormControl('', Validators.required),
+      });
+
+
+      this.userform1 = this.fb.group({
+        typeEntretienn: new FormControl('', Validators.required),
+        datee: new FormControl('', Validators.required),
+        LocaleE: new FormControl('', Validators.required),
+        nomprestataire: new FormControl('', Validators.required),
+        montant: new FormControl('', Validators.required),
+        num: new FormControl('', Validators.required)
+      });
+
+      this.cols = [
+        { field: 'reference', header: 'Référence réclamation' },
+        { field: 'reclamentName', header: 'Réclament' },
+        { field: 'objet', header: 'Objet' },
+        { field: 'etat', header: 'État' }
+      ];
+      this.entretiens = [
+        { value: 'materiel', label: 'Matériel' },
+        { value: 'jardinage', label: 'Jardinage' },
+        { value: 'electricité', label: 'Electricité' },
+        { value: 'plomberie', label: 'Plomberie' },
+        { value: 'télephone', label: 'Télephone' },
+        { value: 'minuiserie', label: 'Minuiserie' },
+        { value: 'internet', label: 'Internet' },
+      ];
     }
-    this.reclamationService.findAll();
-    this.localService.findAll();
-    this.agentService.findAll();
-    this.reclamationService.findAllReclamationsNonTraiter();
-    this.findAllAgents();
-
-
-    this.userform = this.fb.group({
-      typeEntretien: new FormControl('', Validators.required),
-      Locale: new FormControl('', Validators.required),
-      date: new FormControl('', Validators.required),
-      agentt: new FormControl('', Validators.required),
-      });
-
-
-    this.userform1 = this.fb.group({
-      typeEntretienn: new FormControl('', Validators.required),
-      datee: new FormControl('', Validators.required),
-      LocaleE: new FormControl('', Validators.required),
-      nomprestataire: new FormControl('', Validators.required),
-      montant: new FormControl('', Validators.required),
-      num: new FormControl('', Validators.required)
-      });
-
-    this.cols = [
-      { field: 'reference', header: 'Réference réclamation' },
-      { field: 'reclamentName', header: 'Réclament' },
-      { field: 'objet', header: 'Objet' },
-      { field: 'etat', header: 'État' }
-    ];
-    this.entretiens = [
-      { value: 'materiel', label: 'Matériel' },
-      { value: 'jardinage', label: 'Jardinage' },
-      { value: 'electricité', label: 'Electricité' },
-      { value: 'plomberie', label: 'Plomberie' },
-      { value: 'télephone', label: 'Télephone' },
-      { value: 'minuiserie', label: 'Minuiserie' },
-      { value: 'internet', label: 'Internet' },
-    ];
 
   }
 

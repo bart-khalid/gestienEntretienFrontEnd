@@ -51,45 +51,45 @@ export class PrestationExterneListeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.prestationExterneService.findAll();
+      this.reclamationService.findAllReclamationsNonTraiter();
+      this.localService.findAll();
+
+      this.userform1 = this.fb.group({
+        typeEntretienn: new FormControl('', Validators.required),
+        locale: new FormControl('', Validators.required),
+        datee: new FormControl('', Validators.required),
+        nomprestataire: new FormControl('', Validators.required),
+        montant: new FormControl('', Validators.required),
+      });
+
+      this.cols = [
+        { field: 'referenceE', header: 'Référence' },
+        { field: 'typeEntretienE', header: 'Entretien' },
+        { field: 'dateE', header: 'Date' },
+        { field: 'nomLocale', header: 'Local' },
+        { field: 'nomMateriel', header: 'Materiel' },
+        { field: 'nomPrestataireE', header: 'Prestataire' },
+        { field: 'numeroFacE', header: 'Numéro Facture' },
+        { field: 'montantFacE', header: 'Montant' },
+        { field: 'etatBooleanRec', header: 'Réclamée ?' },
+        { field: 'etatBooleanBonC', header: 'Avec bon Commande ?' },
+        { field: 'etatBooleanBonL', header: 'Avec bon Livraison ?' },
+      ];
+      this.entretiens = [
+        { value: 'materiel', label: 'Matériel' },
+        { value: 'jardinage', label: 'Jardinage' },
+        { value: 'electricité', label: 'Electricité' },
+        { value: 'plomberie', label: 'Plomberie' },
+        { value: 'télephone', label: 'Télephone' },
+        { value: 'minuiserie', label: 'Minuiserie' },
+        { value: 'internet', label: 'Internet' },
+        { value: 'autre', label: 'Autre' },
+      ];
     }
-
-    this.prestationExterneService.findAll();
-    this.reclamationService.findAllReclamationsNonTraiter();
-    this.localService.findAll();
-
-    this.userform1 = this.fb.group({
-      typeEntretienn: new FormControl('', Validators.required),
-      locale: new FormControl('', Validators.required),
-      datee: new FormControl('', Validators.required),
-      nomprestataire: new FormControl('', Validators.required),
-      montant: new FormControl('', Validators.required),
-    });
-
-    this.cols = [
-      { field: 'referenceE', header: 'Réference' },
-      { field: 'typeEntretienE', header: 'Entretien' },
-      { field: 'dateE', header: 'Date' },
-      { field: 'nomLocale', header: 'Local' },
-      { field: 'nomMateriel', header: 'Materiel' },
-      { field: 'nomPrestataireE', header: 'Prestataire' },
-      { field: 'numeroFacE', header: 'Numéro Facture' },
-      { field: 'montantFacE', header: 'Montant' },
-      { field: 'etatBooleanRec', header: 'Réclamée ?' },
-      { field: 'etatBooleanBonC', header: 'Avec bon Commande ?' },
-      { field: 'etatBooleanBonL', header: 'Avec bon Livraison ?' },
-    ];
-    this.entretiens = [
-      { value: 'materiel', label: 'Matériel' },
-      { value: 'jardinage', label: 'Jardinage' },
-      { value: 'electricité', label: 'Electricité' },
-      { value: 'plomberie', label: 'Plomberie' },
-      { value: 'télephone', label: 'Télephone' },
-      { value: 'minuiserie', label: 'Minuiserie' },
-      { value: 'internet', label: 'Internet' },
-      { value: 'autre', label: 'Autre' },
-    ];
   }
   save() {
     console.log(this.prestationExterne.materielLocale);

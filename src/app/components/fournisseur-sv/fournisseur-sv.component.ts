@@ -43,37 +43,39 @@ export class FournisseurSVComponent implements OnInit {
     });
   }
   ngOnInit() {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+
+      this.fournisseurService.findAll();
+      this.userform = this.fb.group({
+        nom: new FormControl('', Validators.required),
+        adresse: new FormControl('', Validators.required),
+        typef: new FormControl('', Validators.required),
+        telephone: new FormControl('', Validators.compose([Validators.required,
+          Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
+        email: new FormControl('', Validators.compose([Validators.required,
+          Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/
+          )])),
+      });
+
+      this.typesfournisseurs = [
+        {label: 'Choisir un type', value: ''},
+        {label: 'Matériel', value: 'matériel'},
+        {label: 'Service', value: 'service'}
+      ];
+
+      this.cols = [
+        {field: 'reference', header: 'Référence'},
+        {field: 'nomf', header: 'Nom Fournisseur'},
+        {field: 'adressef', header: 'Adresse'},
+        {field: 'emailf', header: 'Adresse Mail'},
+        {field: 'telephonef', header: 'Numéro de Télephone'},
+        {field: 'typef', header: 'Type Fournisseur'},
+      ];
+      this.fournisseurService.findAll();
     }
 
-    this.fournisseurService.findAll();
-    this.userform = this.fb.group({
-      nom: new FormControl('', Validators.required),
-      adresse: new FormControl('', Validators.required),
-      typef: new FormControl('', Validators.required),
-      telephone: new FormControl('', Validators.compose([Validators.required,
-        Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
-      email: new FormControl('', Validators.compose([Validators.required,
-        Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/
-        )])),
-    });
-
-    this.typesfournisseurs = [
-      {label: 'Choisir un type', value: ''},
-      {label: 'Matériel', value: 'matériel'},
-      {label: 'Service', value: 'service'}
-    ];
-
-    this.cols = [
-      {field: 'reference', header: 'Réference'},
-      {field: 'nomf', header: 'Nom Fournisseur'},
-      {field: 'adressef', header: 'Adresse'},
-      {field: 'emailf', header: 'Adresse Mail'},
-      {field: 'telephonef', header: 'Numéro de Télephone'},
-      {field: 'typef', header: 'Type Fournisseur'},
-    ];
-    this.fournisseurService.findAll();
   }
 
   onSubmit(value: string) {

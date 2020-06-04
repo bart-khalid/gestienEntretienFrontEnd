@@ -47,7 +47,7 @@ export class ReclamationComponent implements OnInit {
    this.reclamationService.findAll();
 
    this.cols = [
-      { field: 'reference', header: 'Réference' },
+      { field: 'reference', header: 'Référence' },
       { field: 'reclamentName', header: 'Réclament' },
       { field: 'date', header: 'Date' },
       { field: 'objet', header: 'Objet' },

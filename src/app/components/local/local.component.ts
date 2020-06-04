@@ -44,49 +44,50 @@ export class LocalComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
-    }
+    } else {
 
-    this.localService.findAll();
-    this.userform = this.fb.group({
-      nom: new FormControl('', Validators.required),
-      typelocal: new FormControl('', Validators.required),
-      departement: new FormControl('', Validators.required),
-    });
+      this.localService.findAll();
+      this.userform = this.fb.group({
+        nom: new FormControl('', Validators.required),
+        typelocal: new FormControl('', Validators.required),
+        departement: new FormControl('', Validators.required),
+      });
 
 
 
-    this.cols = [
-      {field: 'nomLocal', header: 'Nom Local'},
-      {field: 'typeLocal', header: 'Type Local'},
-      {field: 'departement', header: 'Département'},
-      {field: 'nbrMateriel', header: 'Nombre Matériels affectés'}
-    ];
-
-    this.typeslocal = [
-      {label: 'Choisir un type', value: ''},
-      {label: 'Amphi', value: 'Amphi'},
-      {label: 'Salle', value: 'Salle'},
-      {label: 'Laboratoire', value: 'Laboratoire'},
-      {label: 'Bibliothèque', value: 'Bibliothèque'},
-      {label: 'Espace Commun', value: 'Espace Commun'},
-      {label: 'Salle de Lecture', value: 'Salle de Lecture'},
-      {label: 'Autre', value: 'Autre'},
+      this.cols = [
+        {field: 'nomLocal', header: 'Nom Local'},
+        {field: 'typeLocal', header: 'Type Local'},
+        {field: 'departement', header: 'Département'},
+        {field: 'nbrMateriel', header: 'Nombre de Matériels affectés'}
       ];
 
-    this.typesDepartement = [
-      {label: 'Choisir un type', value: ''},
-      {label: 'Département Informatique', value: 'Informatique'},
-      {label: 'Département Physique', value: 'Physique'},
-      {label: 'Département Chimie', value: 'Chimie'},
-      {label: 'Département Mathématique', value: 'Mathématique'},
-      {label: 'Département Biologie', value: 'Biologie'},
-      {label: 'Département Géologie', value: 'Géologie'},
-      {label: 'Département Tec', value: 'Tec'},
-      {label: 'Département Génie Civil', value: 'Génie Civil'},
-      {label: 'Autre', value: 'Autre'},
-    ];
+      this.typeslocal = [
+        {label: 'Choisir un type', value: ''},
+        {label: 'Amphi', value: 'Amphi'},
+        {label: 'Salle', value: 'Salle'},
+        {label: 'Laboratoire', value: 'Laboratoire'},
+        {label: 'Bibliothèque', value: 'Bibliothèque'},
+        {label: 'Espace Commun', value: 'Espace Commun'},
+        {label: 'Salle de Lecture', value: 'Salle de Lecture'},
+        {label: 'Autre', value: 'Autre'},
+      ];
+
+      this.typesDepartement = [
+        {label: 'Choisir un type', value: ''},
+        {label: 'Département Informatique', value: 'Informatique'},
+        {label: 'Département Physique', value: 'Physique'},
+        {label: 'Département Chimie', value: 'Chimie'},
+        {label: 'Département Mathématique', value: 'Mathématique'},
+        {label: 'Département Biologie', value: 'Biologie'},
+        {label: 'Département Géologie', value: 'Géologie'},
+        {label: 'Département Tec', value: 'Tec'},
+        {label: 'Département Génie Civil', value: 'Génie Civil'},
+        {label: 'Autre', value: 'Autre'},
+      ];
+    }
   }
 
   onSubmit(value: string) {

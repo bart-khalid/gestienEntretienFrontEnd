@@ -109,7 +109,7 @@ export class ActionsComponent implements OnInit {
     };
 
     this.dataUtilisateur = {
-      labels: ['Admin', 'Employé'],
+      labels: ['Administrateur', 'Utilisateur normal'],
       datasets: [
         {
           data : [this.accueilService.dataUsersAd, this.accueilService.dataUsersEmp],

@@ -43,32 +43,32 @@ export class VehiculeListComponent implements OnInit {
     });
   }
   ngOnInit() {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.userform = this.fb.group({
+        matricule: new FormControl('', Validators.required),
+        marque: new FormControl('', Validators.required),
+        dateachat: new FormControl('', Validators.required),
+        utilite: new FormControl('', Validators.required),
+        type: new FormControl('', Validators.required)
+      });
+
+      this.cols = [
+        { field: 'reference', header: 'Référence' },
+        { field: 'matricule', header: 'Matricule' },
+        { field: 'type', header: 'Type' },
+        { field: 'marque', header: 'Marque' },
+        { field: 'utilite', header: 'Utilité' },
+        { field: 'dateEntrerParc', header: 'Date affectation au parc' }
+      ];
+      this.type = [];
+      this.type.push({label: 'Choisir un Type', value: ''});
+      this.type.push({label: 'Automobile', value: 'Automobile'});
+      this.type.push({label: 'Bus', value: 'Bus'});
+
+      this.find();
     }
-
-    this.userform = this.fb.group({
-      matricule: new FormControl('', Validators.required),
-      marque: new FormControl('', Validators.required),
-      dateachat: new FormControl('', Validators.required),
-      utilite: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required)
-    });
-
-    this.cols = [
-      { field: 'reference', header: 'Réference' },
-      { field: 'matricule', header: 'Matricule' },
-      { field: 'type', header: 'Type' },
-      { field: 'marque', header: 'Marque' },
-      { field: 'utilite', header: 'Utilité' },
-      { field: 'dateEntrerParc', header: 'Date affectation au parc' }
-    ];
-    this.type = [];
-    this.type.push({label: 'Choisir un Type', value: ''});
-    this.type.push({label: 'Automobile', value: 'Automobile'});
-    this.type.push({label: 'Bus', value: 'Bus'});
-
-    this.find();
   }
 
   public find() {

@@ -45,62 +45,62 @@ export class BonrComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
-    }
+    } else {
+      this.userform = this.fb.group({
+        numbonR: new FormControl('', Validators.required),
+        vehiculeR: new FormControl('', Validators.required),
+        fournisseurR: new FormControl('', Validators.required),
+        descriptionR: new FormControl('', Validators.required),
+        prixunitaireR: new FormControl('', Validators.required),
+        quantiteR: new FormControl('', Validators.required),
+        datebonR: new FormControl('', Validators.required),
+        totalbrutR: new FormControl('', Validators.required),
+        montantvignetteR: new FormControl('', Validators.required),
+      });
+      this.colsR = [
+        {field: 'numbonR', header: 'Nº de Bon'},
+        {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
+        {field: 'fourniassooci', header: 'Fournisseur'},
+        {field: 'descriptionR', header: 'Désignation'},
+        {field: 'prixunitaireR', header: 'Prix Unitaire'},
+        {field: 'quantiteR', header: 'Quantité'},
+        {field: 'datebonR', header: 'Date Bon'},
+        {field: 'totalbrutR', header: 'Total Brut'},
+        {field: 'montantvignetteR', header: 'Montant Vignette'}
+      ];
+      this.vehicule = [
+        {label: 'Selectionnez une véhicule', value: ''},
+        {label: 'V1', value: 'v1'},
+        {label: 'V2', value: 'v2'},
+        {label: 'V3', value: 'v3'}
+      ];
 
-    this.userform = this.fb.group({
-      numbonR: new FormControl('', Validators.required),
-      vehiculeR: new FormControl('', Validators.required),
-      fournisseurR: new FormControl('', Validators.required),
-      descriptionR: new FormControl('', Validators.required),
-      prixunitaireR: new FormControl('', Validators.required),
-      quantiteR: new FormControl('', Validators.required),
-      datebonR: new FormControl('', Validators.required),
-      totalbrutR: new FormControl('', Validators.required),
-      montantvignetteR: new FormControl('', Validators.required),
-    });
-    this.colsR = [
-      {field: 'numbonR', header: 'Nº de Bon'},
-      {field: 'vehiculeassooci', header: 'Matricule Véhicule'},
-      {field: 'fourniassooci', header: 'Fournisseur'},
-      {field: 'descriptionR', header: 'Désignation'},
-      {field: 'prixunitaireR', header: 'Prix Unitaire'},
-      {field: 'quantiteR', header: 'Quantité'},
-      {field: 'datebonR', header: 'Date Bon'},
-      {field: 'totalbrutR', header: 'Total Brut'},
-      {field: 'montantvignetteR', header: 'Montant Vignette'}
-    ];
-    this.vehicule = [
-      {label: 'Selectionnez une véhicule', value: ''},
-      {label: 'V1', value: 'v1'},
-      {label: 'V2', value: 'v2'},
-      {label: 'V3', value: 'v3'}
-    ];
-
-    this.fourniss = [
-      {label: 'Selectionnez un fournisseur', value: ''},
-      {label: 'fournisseur 1', value: 'f1'},
-      {label: 'fournisseur 2', value: 'f2'},
-      {label: 'fournisseur 3', value: 'f3'}
-    ];
-    this.find();
-    this.fournisseurSVService.find().subscribe(
-      data => {
-        for (const f of data) {
-          if (f.typef === 'service') {
-            this.fournisseursfiltre.push(f);
+      this.fourniss = [
+        {label: 'Selectionnez un fournisseur', value: ''},
+        {label: 'fournisseur 1', value: 'f1'},
+        {label: 'fournisseur 2', value: 'f2'},
+        {label: 'fournisseur 3', value: 'f3'}
+      ];
+      this.find();
+      this.fournisseurSVService.find().subscribe(
+        data => {
+          for (const f of data) {
+            if (f.typef === 'service') {
+              this.fournisseursfiltre.push(f);
+            }
           }
+          this.fournisseurs = this.fournisseursfiltre;
+          console.log(this.fournisseurs.length + 'data');
         }
-        this.fournisseurs = this.fournisseursfiltre;
-        console.log(this.fournisseurs.length + 'data');
-      }
-    );
-    this.carService.findAll().subscribe(
-      data => {
-        this.cars = data;
-      }
-    );
+      );
+      this.carService.findAll().subscribe(
+        data => {
+          this.cars = data;
+        }
+      );
+    }
   }
 
   public find() {

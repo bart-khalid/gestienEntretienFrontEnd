@@ -45,30 +45,30 @@ export class AgentComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.userform = this.fb.group({
+        codeAgent: new FormControl('', Validators.required),
+        nomAgent: new FormControl('', Validators.required),
+        dateEntree: new FormControl('', Validators.required),
+        adresseDomicile: new FormControl('', Validators.required),
+        entrepriseLiee: new FormControl('', Validators.required),
+        telephone: new FormControl('', Validators.compose([Validators.required,
+          Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
+      });
+
+      this.cols = [
+        {field: 'reference', header: 'Référence'} ,
+        {field: 'codeAgent', header: 'Code Agent'} ,
+        {field: 'nomAgent', header: 'Nom Agent'},
+        {field: 'dateEntree', header: 'Date Entrée'},
+        {field: 'entrepriseliee', header: 'Entreprise Liée'},
+        {field: 'adresseDomicile', header: 'Adresse domicile'},
+        {field: 'tel', header: 'Télephone'}
+      ];
+      this.find();
     }
-
-    this.userform = this.fb.group({
-      codeAgent: new FormControl('', Validators.required),
-      nomAgent: new FormControl('', Validators.required),
-      dateEntree: new FormControl('', Validators.required),
-      adresseDomicile: new FormControl('', Validators.required),
-      entrepriseLiee: new FormControl('', Validators.required),
-      telephone: new FormControl('', Validators.compose([Validators.required,
-        Validators.pattern(/(\+212|0|212)([ \-_/]*)(\d[ \-_/]*){9}/)])),
-    });
-
-    this.cols = [
-      {field: 'reference', header: 'Réference'} ,
-      {field: 'codeAgent', header: 'Code Agent'} ,
-      {field: 'nomAgent', header: 'Nom Agent'},
-      {field: 'dateEntree', header: 'Date Entrée'},
-      {field: 'entrepriseliee', header: 'Entreprise Liée'},
-      {field: 'adresseDomicile', header: 'Adresse domicile'},
-      {field: 'tel', header: 'Télephone'}
-    ];
-    this.find();
   }
 
   public find() {

@@ -18,19 +18,19 @@ export class EntretienComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    if (this.typeuser === 'employé' ) {
+    if (this.typeuser === 'normal' ) {
       window.location.href = 'http://localhost:4200/accueil';
+    } else {
+      this.cols = [
+        { field: 'numFacture', header: 'Numéro Entretien' },
+        { field: 'nomMateriel', header: 'Nom Matériel' },
+        { field: 'prestataire', header: 'Prestataire de service' },
+        { field: 'nomLocale', header: 'Nom Local' },
+        { field: 'montant', header: 'Montant(DH)' },
+        { field: 'dateEntretien', header: 'Date Entretien' }
+      ];
+      this.find();
     }
-
-    this.cols = [
-      { field: 'numFacture', header: 'Numéro Facture' },
-      { field: 'nomMateriel', header: 'Nom Matériel' },
-      { field: 'prestataire', header: 'Prestataire de service' },
-      { field: 'nomLocale', header: 'Nom Local' },
-      { field: 'montant', header: 'Montant(DH)' },
-      { field: 'dateEntretien', header: 'Date Entretien' }
-    ];
-    this.find();
   }
   public find() {
     this.entretienService.findAll().subscribe(
