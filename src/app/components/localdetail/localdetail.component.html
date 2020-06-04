@@ -9,7 +9,7 @@
     <ng-template pTemplate="caption">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="h3" style="color: #004a80"><strong>Gestion Des Materiels</strong></h1>
+          <h1 class="h3" style="color: #004a80"><strong>Gestion Des Matériels</strong></h1>
         </div>
       </div>
       <div class="row">
@@ -42,12 +42,12 @@
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
       <div style="text-align:left">
-        <button type="button" pButton icon="pi pi-plus-circle" (click)="showDialogToAdd()" label="Ajouter un matériel à un locale"></button>
+        <button type="button" pButton icon="pi pi-plus-circle" (click)="showDialogToAdd()" label="Ajouter un matériel à un local"></button>
       </div>
     </ng-template>
   </p-table>
 
-  <p-dialog  header="Matériel-locale Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'700px',textAlign:'center'}">
+  <p-dialog  header="Matériel-local Détails"   [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width:'700px',textAlign:'center'}">
     <div class="ui-g ui-fluid" style="height: 400px" *ngIf="local">
 
 

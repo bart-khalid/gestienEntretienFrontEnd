@@ -10,7 +10,7 @@
   <ng-template pTemplate="caption">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="h3" style="color: #004a80"><strong>Gestion Famille De Materiels</strong></h1>
+        <h1 class="h3" style="color: #004a80"><strong>Gestion Famille De Matériels</strong></h1>
       </div>
     </div>
     <div class="row">
@@ -43,13 +43,13 @@
   <ng-template pTemplate="summary" let-rowData>
 
     <div style="text-align: left">
-    <button  class="btn" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter Un Materiel"  id="Materiel"></button>
+    <button  class="btn" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Ajouter Un Matériel"  id="Materiel"></button>
     </div>
   </ng-template>
 </p-table>
 
 <!-- dialog 1 -->
-<p-dialog header="Materiel Details" [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" [modal]="true" showEffect="fade"   [style]="{width: '700px', textAlign: 'center'}">
+<p-dialog header="Matériel Details" [(visible)]="displayDialog" [focusOnShow]="true" [responsive]="true" [modal]="true" showEffect="fade"   [style]="{width: '700px', textAlign: 'center'}">
   <div class="ui-g ui-fluid" *ngIf="materiel" style="height: 300px" >
 
 
