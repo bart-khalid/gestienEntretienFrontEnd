@@ -145,7 +145,7 @@ export class PrestationComponent implements OnInit {
         if (data === -2) {
           this.toast.warning('erreur vérifiez que tous les champs sont remplis');
         } else if (data === -3) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir le matériel');
         } else {
           this.displayDialog = false;
           this.prestataionInterne = null;
@@ -164,11 +164,11 @@ export class PrestationComponent implements OnInit {
     this.prestationExterneService.save(prestationE).subscribe(
       data => {
         if (data === -1) {
-          this.toast.warning('merci de choisir un locale');
+          this.toast.warning('merci de choisir un local');
         } else if (data === -2) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir le matériel');
         } else if (data === -3) {
-          this.toast.warning('merci de choisir la reclamation');
+          this.toast.warning('merci de choisir la réclamation');
         } else if (data === -4) {
           this.toast.warning('merci de remplir les champ du bon de commande');
         } else if (data === -5) {

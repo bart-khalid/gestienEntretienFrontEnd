@@ -71,7 +71,7 @@ export class PrestationExterneListeComponent implements OnInit {
         { field: 'typeEntretienE', header: 'Entretien' },
         { field: 'dateE', header: 'Date' },
         { field: 'nomLocale', header: 'Local' },
-        { field: 'nomMateriel', header: 'Materiel' },
+        { field: 'nomMateriel', header: 'Matériel' },
         { field: 'nomPrestataireE', header: 'Prestataire' },
         { field: 'numeroFacE', header: 'Numéro Facture' },
         { field: 'montantFacE', header: 'Montant' },
@@ -132,19 +132,19 @@ export class PrestationExterneListeComponent implements OnInit {
     this.prestationExterneService.update(prestationE).subscribe(
       data => {
         if (data === 0) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir un matériel');
         } else if (data === -1) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir un matériel');
         } else if (data === -2) {
-          this.toast.warning('merci de choisir le locale');
+          this.toast.warning('merci de choisir un local');
         } else if (data === -3) {
-          this.toast.warning('merci de choisir la reclamation');
+          this.toast.warning('merci de choisir une réclamation');
         } else if (data === -4) {
-          this.toast.warning('merci de completer les champs du bos de commande');
+          this.toast.warning('merci de completer les champs du bon de commande');
         } else if (data === -5) {
-          this.toast.warning('merci de completer les champs du bos de livraison');
+          this.toast.warning('merci de completer les champs du bon de livraison');
         } else if (data === -6) {
-          this.toast.warning('vous ne pouvez pas changer le type de la prestation à materiel ');
+          this.toast.warning('vous ne pouvez pas changer le type de la prestation à matériel ');
         } else if (data === -7) {
           this.toast.warning('vous ne pouvez pas changer le type de la prestation');
         } else if (data === -8) {
@@ -152,7 +152,7 @@ export class PrestationExterneListeComponent implements OnInit {
         } else if (data === -9) {
           this.toast.warning('vous ne pouvez pas retirer le bon livraison de cette prestation');
         } else if (data === -10) {
-          this.toast.warning('vous ne pouvez pas retirer la reclamation de cette prestation');
+          this.toast.warning('vous ne pouvez pas retirer la réclamation de cette prestation');
         } else {
           this.toast.success('Prestation Externe Modifiée');
           this.prestationExterneService.findAll();

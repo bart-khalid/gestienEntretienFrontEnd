@@ -153,13 +153,13 @@ export class PrestationInterneListeComponent implements OnInit {
     this.prestationInterneService.update(prestationI).subscribe(
       data => {
         if (data === -1) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir un matériel');
         } else if (data === -2) {
-          this.toast.warning('merci de choisir la reclamation');
+          this.toast.warning('merci de choisir une réclamation');
         } else if (data === -3) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir un matériel');
         } else if (data === -4) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir un matériel');
         } else {
           console.log('success prestationInterne updated');
           this.toast.info('Prestation Interne Modifiée');

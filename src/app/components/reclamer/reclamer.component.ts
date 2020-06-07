@@ -178,10 +178,10 @@ export class ReclamerComponent implements OnInit {
           this.toast.error('veuillez vous connecter à nouveau');
         } else if (data === -3) {
           console.log('locale undefined');
-          this.toast.warning('Veuillez choisir un locale');
+          this.toast.warning('Veuillez choisir un local');
         } else {
           console.log('reclamation saved');
-          this.toast.success('Reclamation enregistrée');
+          this.toast.success('Réclamation enregistrée');
           this.reclamation = null;
           this.displayDialog = false;
           this.displayDialogM = false;
@@ -199,12 +199,12 @@ export class ReclamerComponent implements OnInit {
       data => {
 
         if (data === -1) {
-          this.toast.warning('merci de choisir le materiel');
+          this.toast.warning('merci de choisir le matériel');
         } else if (data === -2) {
-          this.toast.warning('cette reclamation est bien traitée, vous pouvez pas la modifiée');
+          this.toast.warning('Cette réclamation est bien traitée, vous pouvez pas la modifiée');
         } else {
           console.log('reclamation updated');
-          this.toast.info('Reclamation modifiée');
+          this.toast.info('Réclamation modifiée');
           this.reclamation = null;
           this.displayDialog = false;
           this.displayDialogM = false;
@@ -224,7 +224,7 @@ export class ReclamerComponent implements OnInit {
           this.toast.error('erreur du serveur merci de recharger la page');
         } else {
           console.log('reclamation deleted');
-          this.toast.success('Reclamaton supprimée');
+          this.toast.success('Réclamaton supprimée');
           this.reclamationService.findbyreclament(localStorage.getItem('username'));
         }
       }, error => {

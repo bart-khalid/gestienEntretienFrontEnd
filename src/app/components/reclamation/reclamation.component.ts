@@ -109,9 +109,9 @@ export class ReclamationComponent implements OnInit {
 
   public reclamationSeen(reclamation: Reclamation) {
     if (reclamation.etat === 'Sous Traitement') {
-      this.toast.warning('la reclamation est deja vue');
+      this.toast.warning('la réclamation est déja vue');
     } else if (reclamation.etat === 'Bien Traitée') {
-      this.toast.warning('la reclamation est bien traitée, vous pouvez pas faire cette action');
+      this.toast.warning('la réclamation est bien traitée, vous pouvez pas faire cette action');
     } else {
       this.reclamationService.reclamationSeen(reclamation.reference);
       }
@@ -124,7 +124,7 @@ export class ReclamationComponent implements OnInit {
           this.toast.error('erreur du serveur merci de recharger la page');
         } else {
           console.log('reclamation deleted');
-          this.toast.success('Reclamaton supprimée');
+          this.toast.success('Réclamaton supprimée');
         }
       }, error => {
         console.log('error in the delete link');
