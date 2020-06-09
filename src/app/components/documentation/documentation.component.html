@@ -1,10 +1,41 @@
 <p-accordion [(activeIndex)]="index">
-  <p-accordionTab header="Utilisation Pour Un admin">
-    L' admin a tous  droits à gérer plusieurs actions; Un admin peut ajouter , modifier ou supprimer les différents choses suivantes: Matériel, Locale, Véhicule, ainsi qu'affecter un matériel à une locale, en plus de ça il peut sauvegarder et gérer les différents type des bons. Enfin un admin peut sauvegarder les prestations qui se déroulent au sein de la Facultés et de les gérer, aussi il a le droit de gérer les reclamations qui sont déclarer par les utilisateurs normals. Un admin est le seul responsable de la gestion des utilisateurs c-à-d il peut ajouter ou supprimer ou modifier un utilisateur.
+  <p-accordionTab header="Utilisation Pour Un Administrateur">
+    <div><em>Un administrateur dispose les privilèges suivants :</em></div><br>
+    <strong id="titre">Consultation des statistiques.</strong> <br>
+    <strong id="titre">Gestion des réclamations :</strong>
+    &nbsp;&nbsp;Matériels,
+    &nbsp;&nbsp;Locaux.<br>
+    <strong id="titre">Gestion des véhicules :</strong>
+    &nbsp;&nbsp;Autobus,
+    &nbsp;&nbsp;Voitures.<br>
+    <strong id="titre">Gestion des bons :</strong>
+    &nbsp;&nbsp;Carburants,
+    &nbsp;&nbsp;Vidanges,
+    &nbsp;&nbsp;Réparations.<br>
+    <strong id="titre">Gestion des locaux.</strong> <br>
+    <strong id="titre">Gestion des fournisseurs :</strong>
+    &nbsp;&nbsp;Services,
+    &nbsp;&nbsp;Matériels.<br>
+    <strong id="titre">Gestion des matériels :</strong>
+    &nbsp;&nbsp;Informatiques,
+    &nbsp;&nbsp;Enseignements.<br>
+    <strong id="titre">Gestion des prestations :</strong>
+    &nbsp;&nbsp;Internes,
+    &nbsp;&nbsp;Externes.<br>
+    <strong id="titre">Gestion des personnels :</strong>
+    &nbsp;&nbsp;Agents,
+    &nbsp;&nbsp;Utilisateurs.
+   <!-- à gérer plusieurs actions; Un admin peut ajouter , modifier ou supprimer les différents choses suivantes: Matériel, Locale, Véhicule, ainsi qu'affecter un matériel à une locale, en plus de ça il peut sauvegarder et gérer les différents type des bons. Enfin un admin peut sauvegarder les prestations qui se déroulent au sein de la Facultés et de les gérer, aussi il a le droit de gérer les reclamations qui sont déclarer par les utilisateurs normals. Un admin est le seul responsable de la gestion des utilisateurs c-à-d il peut ajouter ou supprimer ou modifier un utilisateur.
+    -->
   </p-accordionTab>
-  <p-accordionTab header="Utilisation Pour Un Employe">
-    Un employé peut seulement faire des reclamations, ainsi le suivre de l'état de ces reclamations.
-    Il a aussi le droit de modifier ou supprimer les reclamations qu'il a déjà faits. ainsi de modifier son nom d'utilisateur et son mot de passe/
+  <p-accordionTab header="Utilisation Pour Un Utilisateur Normal">
+    <div><em>Un utlisateur normal dispose les privilèges suivants :</em></div><br>
+    <strong id="titre">Consultation des statistiques.</strong> <br>
+    <strong id="titre">Ajouter des réclamations pour les :</strong>
+    &nbsp;&nbsp;Matériels,
+    &nbsp;&nbsp;Locaux.<br>
+    <strong id="titre">Modification ou suppression de ses réclamations.</strong> <br>
+    <strong id="titre">Modification de ses informations d'authentification.</strong> <br>
   </p-accordionTab>
   <p-accordionTab header="Source Application">
     Cette application Web est réalisé Par le binôme Zakaria Chakir et Khalid Bartaouch, en tant que projet de fin d'études.
