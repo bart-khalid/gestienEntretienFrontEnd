@@ -169,7 +169,7 @@
       </div>
       <div class="ui-g-5">
         <label for="refReclamationn" *ngIf="prestationExterne.reclamationE != null">{{prestationExterne.reclamationE.descreptionDropDownReclamation}}</label>
-        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" placeholder="choisir la nouvelle reclamation" [filter]="true" id="refReclamationn"></p-dropdown>
+        <p-dropdown [options]="foundedReclamations" [(ngModel)]="prestationExterne.reclamationE" optionLabel="descreptionDropDownReclamation" placeholder="choisir la nouvelle réclamation" [filter]="true" id="refReclamationn"></p-dropdown>
       </div>
       <div class="ui-g-4">
         <p-message severity="error" HIDDEN="true" text="Champ Obligatoire"></p-message>
