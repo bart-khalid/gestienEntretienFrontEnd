@@ -60,6 +60,10 @@ export class LocalService {
     );
   }
 
+  public findalll() {
+   return this.http.get<Array<Local>>(this.url);
+  }
+
   get foudedLocales(): Local[] {
     return this._foudedLocales;
   }

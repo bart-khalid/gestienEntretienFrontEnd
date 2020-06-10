@@ -65,7 +65,7 @@ export class AgentComponent implements OnInit {
         {field: 'dateEntree', header: 'Date Entrée'},
         {field: 'entrepriseliee', header: 'Entreprise Liée'},
         {field: 'adresseDomicile', header: 'Adresse domicile'},
-        {field: 'tel', header: 'Télephone'}
+        {field: 'tel', header: 'Téléphone'}
       ];
       this.find();
     }
