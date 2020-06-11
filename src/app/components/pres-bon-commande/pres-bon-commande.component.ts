@@ -21,7 +21,7 @@ export class PresBonCommandeComponent implements OnInit {
     } else {
       this.presBonCommandeService.findAll();
       this.cols = [
-        { field: 'numeroBonCommande', header: 'Numero Bon' },
+        { field: 'numeroBonCommande', header: 'Numéro Bon' },
         { field: 'dateBonCommande', header: 'Date' },
         { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
         { field: 'nomPrestataireC', header: 'Prestataire' },

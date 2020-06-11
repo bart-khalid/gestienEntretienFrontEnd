@@ -20,7 +20,7 @@ export class PresBonLivraisonComponent implements OnInit {
     } else {
       this.presBonLivraisonService.findAll();
       this.cols = [
-        { field: 'numeroBonLivraison', header: 'Numero Bon' },
+        { field: 'numeroBonLivraison', header: 'Numéro Bon' },
         { field: 'dateBonLivraison', header: 'Date' },
         { field: 'nomPrestationAssocie', header: 'Préstation Associée' },
         { field: 'nomPrestataireL', header: 'Prestataire' },

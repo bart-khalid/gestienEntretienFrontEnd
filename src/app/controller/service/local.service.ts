@@ -29,6 +29,7 @@ export class LocalService {
     this.http.put<number>(this.url + 'update', locale).subscribe(
       data => {
         console.log('success locale updated');
+        this.findAll();
       }, error => {
         console.log('error in the link');
         this.toast.error('erreur du serveur merci d\' actualiser la page');
