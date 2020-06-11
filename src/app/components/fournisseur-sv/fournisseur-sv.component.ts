@@ -70,7 +70,7 @@ export class FournisseurSVComponent implements OnInit {
         {field: 'nomf', header: 'Nom Fournisseur'},
         {field: 'adressef', header: 'Adresse'},
         {field: 'emailf', header: 'Adresse Mail'},
-        {field: 'telephonef', header: 'Numéro de Télephone'},
+        {field: 'telephonef', header: 'Numéro de Téléphone'},
         {field: 'typef', header: 'Type Fournisseur'},
       ];
       this.fournisseurService.findAll();

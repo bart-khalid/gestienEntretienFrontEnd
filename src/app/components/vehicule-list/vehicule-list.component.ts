@@ -55,10 +55,9 @@ export class VehiculeListComponent implements OnInit {
       });
 
       this.cols = [
-        { field: 'reference', header: 'Référence' },
         { field: 'matricule', header: 'Matricule' },
-        { field: 'type', header: 'Type' },
         { field: 'marque', header: 'Marque' },
+        { field: 'type', header: 'Type' },
         { field: 'utilite', header: 'Utilité' },
         { field: 'dateEntrerParc', header: 'Date affectation au parc' }
       ];

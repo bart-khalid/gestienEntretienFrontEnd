@@ -62,7 +62,6 @@ export class UsersComponent implements OnInit {
       });
 
       this.cols = [
-        {field: 'reference', header: 'Référence '} ,
         {field: 'nom', header: 'Nom '} ,
         {field: 'prenom', header: 'Prénom'},
         {field: 'telephone', header: 'Numéro de Téléphone'},

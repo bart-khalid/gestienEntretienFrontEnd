@@ -68,30 +68,30 @@
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="mat" style="color: #00aeef"><strong>Nom Matériel: </strong></label>
+          <label for="type" style="color: #00aeef"><strong>Nom Matériel: </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-          <p-dropdown  id="mat" formControlName="materiellocal" [options]="foundedMaterielToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.materiel" placeholder="Choisissez un materiel" [filter]="true"></p-dropdown>
+          <p-dropdown  id="type" formControlName="materiellocal" [options]="foundedMaterielToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.materiel" placeholder="Choisissez un matériel" [filter]="true" ></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='Choisissez un materiel')"
+          <p-message severity="error" *ngIf="(userform.controls['materiellocal'].touched &&!userform.controls['materiellocal'].dirty  || userform.controls['materiellocal'].value=='Choisissez un matériel')"
                      text="Champ Obligatoire"></p-message>
         </div>
       </div>
 
       <div class="ui-g-12">
         <div class="ui-g-3">
-          <label for="loc" style="color: #00aeef"><strong>Nom Local : </strong></label>
+          <label for="local" style="color: #00aeef" ><strong> Nom Local : </strong></label>
         </div>
         <div class="ui-g-5">
           <div class="form-group" [formGroup]="userform"  >
-            <p-dropdown id="loc" formControlName="localassocie" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" [(ngModel)]="local.locale" placeholder="Choisissez un locale" [filter]="true"></p-dropdown>
+            <p-dropdown id="local" formControlName="localassocie" [options]="foundedLocalToChoose" optionLabel="descriptionDropDown" placeholder="Choisissez un local" [(ngModel)]="local.locale" [filter]="true"></p-dropdown>
         </div>
         </div>
         <div class="ui-g-4">
-          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value=='Choisissez un locale')"
+          <p-message severity="error" *ngIf="(userform.controls['localassocie'].touched &&!userform.controls['localassocie'].dirty  || userform.controls['localassocie'].value=='Choisissez un local')"
                      text="Champ Obligatoire"></p-message>
         </div>
       </div>

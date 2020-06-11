@@ -29,7 +29,7 @@ export class LocaldetailService {
     this.http.delete<number>(this.url + 'deleteMateriel/' + reference ).subscribe(
       data => {
         console.log('success Materiel deleted');
-        this.toast.success('Materiel supprimé');
+        this.toast.success('Matériel supprimé');
       }, error => {
         console.log('error in the link');
         this.toast.error('erreur du serveur merci d\' actualiser la page');
